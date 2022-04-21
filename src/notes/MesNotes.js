@@ -2,44 +2,20 @@ import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
 import { useLocalStorage, getStorageInt } from "../useLocalStorage";
 import ChampDisciplinaire from './ChampDisciplinaire';
+import { moyennesAcademiques, ecartsAcademiques } from '../data/stats';
+import {champsDisciplinaires, coefficients} from '../data/affelnet';
 
 const MesNotes = (props) => {
-
-    const champsDisciplinaires = ['Mathématiques', 'Français', 'Histoire-Géo', 'Langues', 'Sciences', 'Arts', 'EPS'];
-    const moyennesAcademiques = new Map([
-        ['Mathématiques', 11.98500901],
-        ['Français', 12.44711943],
-        ['Histoire-Géo', 12.66793072],
-        ['Langues', 13.15870891],
-        ['Sciences', 13.02771284],
-        ['Arts', 14.51340559],
-        ['EPS', 14.63623002]
-    ]);
-    const ecartsAcademiques = new Map([
-        ['Mathématiques', 3.825987219],
-        ['Français', 3.153910849],
-        ['Histoire-Géo', 3.074715589],
-        ['Langues', 2.974862413],
-        ['Sciences', 2.669319406],
-        ['Arts', 1.901502187],
-        ['EPS', 1.83722212]
-    ]);
-    const coefficient = new Map([
-        ['Mathématiques', 50],
-        ['Français', 50],
-        ['Histoire-Géo', 40],
-        ['Langues', 40],
-        ['Sciences', 40],
-        ['Arts', 40],
-        ['EPS', 40]
-    ]);
 
     const [score, setScore] = useLocalStorage("score notes", 0);
     const [semestres, setSemestres] = useLocalStorage("semestres", false);
 
+    const moyennes = moyennesAcademiques.get('2021');
+    const ecarts = ecartsAcademiques.get('2021');
+
     const moyenneToScore = (champ, moyenne) => {
-        return coefficient.get(champ) *
-            (10 + (moyenne - moyennesAcademiques.get(champ)) / ecartsAcademiques.get(champ));
+        return coefficients.get(champ) *
+            (10 + (moyenne - moyennes.get(champ)) / ecarts.get(champ));
     }
 
     const computeScore = (champ, newMoyenne) => {
@@ -72,7 +48,7 @@ const MesNotes = (props) => {
     return (
         <Container>
             <Form.Group className="mb-3" >
-                        <Form.Switch id='semestres' label='semestres' defaultChecked={semestres} onChange={handleChangeCheck} />
+                <Form.Switch id='semestres' label='semestres' defaultChecked={semestres} onChange={handleChangeCheck} />
             </Form.Group>
             <div>Saisissez vos moyennes scolaires :</div>
             <div>&nbsp;</div>

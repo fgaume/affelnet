@@ -32,7 +32,7 @@ const MesCompetences = (props) => {
     }
 
     return (
-        <Container>
+        <Container fluid>
             {competences.map((value, index) => {
                 return <Competence key={index} label={value} onChange={handleChange} />
             })}
