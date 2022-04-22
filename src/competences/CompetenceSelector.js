@@ -4,7 +4,7 @@ import { useLocalStorage } from "../useLocalStorage";
 
 const CompetenceSelector = (props) => {
 
-    const [score, setScore] = useLocalStorage(props.label, 0);
+    const [score, setScore] = useLocalStorage('competence/' + props.label, 0);
 
     const handleChange = (event) => {
         setScore(event.target.value);

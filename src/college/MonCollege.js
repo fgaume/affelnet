@@ -1,47 +1,31 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Container from 'react-bootstrap/Container';
-import axios from 'axios';
 import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
-import Button from 'react-bootstrap/Button'
 import { useLocalStorage } from "../useLocalStorage";
-import BonusSelector from "./BonusSelector";
 import 'react-bootstrap-typeahead/css/Typeahead.css';
 import './MonCollege.css';
 import CollegeSelector from './CollegeSelector';
 
 const MonCollege = (props) => {
 
-    const [collegesMultiples, setCollegesMultiples] = useLocalStorage("collegesMultiples", false);
-    //const [college, setCollege] = useLocalStorage('college', []);
-    const [bonusCollege, setBonusCollege] = useLocalStorage('bonusCollege', 0);
-    const [nomCollege, setNomCollege] = useLocalStorage('nomCollege', '');
-    const [nomCollegeSecteur, setNomCollegeSecteur] = useLocalStorage('nomCollege', '');
-    //const [collegeSecteur, setCollegeSecteur] = useLocalStorage('collegeSecteur', '');
-    
-    //let [responseData, setResponseData] = React.useState('');
-    //let [loading, setLoading] = React.useState(false);
-    //let [options, setOptions] = React.useState([]);
-
-
-    /* const handleChange = (bonus) => {
-        setBonusIPS(parseInt(bonus));
-        props.onChange(parseInt(bonus));
-    } */
+    const [collegesMultiples, setCollegesMultiples] = useLocalStorage('MonCollege/collegesMultiples', false);
+    const [bonusCollege, setBonusCollege] = useLocalStorage('MonCollege/bonusCollege', 0);
+    const [nomCollege, setNomCollege] = useLocalStorage('MonCollege/nomCollege', '');
+    const [nomCollegeSecteur, setNomCollegeSecteur] = useLocalStorage('MonCollege/nomCollegeSecteur', '');
 
     const onCollegeScolarisationChange = (collegeUpdate) => {
         console.log('onCollegeScolarisationChange ' +  JSON.stringify(collegeUpdate));
         if (collegeUpdate != null) {
             if (collegeUpdate.bonus !== bonusCollege) {
-                props.onChange(collegeUpdate.bonus);
+                props.onBonusChange(collegeUpdate.bonus);
             }
             setNomCollege(collegeUpdate.nom);
             setBonusCollege(collegeUpdate.bonus);
             if (!collegesMultiples) {
                 setNomCollegeSecteur(collegeUpdate.nom);
+                props.onSecteurChange(collegeUpdate.nom);
             }
-            
         }
     }
 
@@ -49,11 +33,16 @@ const MonCollege = (props) => {
         console.log('onCollegeSectorisationChange ' +  JSON.stringify(collegeUpdate));
         if (collegeUpdate != null) {
             setNomCollegeSecteur(collegeUpdate.nom);
+            props.onSecteurChange(collegeUpdate.nom);
         }
     }
 
     const handleCollegesMultiples = (event) => {
         setCollegesMultiples(event.target.checked);
+        setNomCollegeSecteur(event.target.checked ? [] : nomCollege);
+        if (event.target.checked) {
+            props.onSecteurChange(nomCollege);
+        }
     }
 
     return (

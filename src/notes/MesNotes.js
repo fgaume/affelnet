@@ -25,7 +25,7 @@ const MesNotes = (props) => {
                 sum += moyenneToScore(achamp, newMoyenne);
             }
             else {
-                const note = getStorageInt('CD-' + achamp);
+                const note = getStorageInt('CD/' + achamp);
                 if (note !== 0) {
                     sum += moyenneToScore(achamp, note);
                 }

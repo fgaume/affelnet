@@ -137,4 +137,9 @@ const seuils = [
     }
   ];
 
-  export default seuils;
+const seuilsMap = new Map();
+seuils.forEach(item => {
+    seuilsMap.set(item.nom, item.seuil);
+});
+
+export default seuilsMap;

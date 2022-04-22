@@ -1,12 +1,7 @@
-import React, { useState } from 'react';
-import Container from 'react-bootstrap/Container';
-import axios from 'axios';
+import React from 'react';
 import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
-import Button from 'react-bootstrap/Button'
 import { useLocalStorage } from "../useLocalStorage";
-import BonusSelector from "./BonusSelector";
 import colleges from "../data/colleges";
 import { Typeahead } from 'react-bootstrap-typeahead';
 import 'react-bootstrap-typeahead/css/Typeahead.css';
@@ -14,12 +9,11 @@ import './MonCollege.css';
 
 const CollegeSelector = (props) => {
 
-    const [college, setCollege] = useLocalStorage('college-' + props.type, []);
+    const [college, setCollege] = useLocalStorage('CollegeSelector/college-' + props.type, []);
     const placeholder = 'Nom du collège de ' + props.type + '...';
     const labelCollege = 'Votre collège de ' + props.type + ':';
 
     const onCollegeChange = (collegeUpdate) => {
-        //console.log('onCollegeChange ' +  JSON.stringify(collegeUpdate))
         setCollege(collegeUpdate);
         props.onChange(collegeUpdate[0]);
     }

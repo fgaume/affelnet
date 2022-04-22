@@ -4,7 +4,7 @@ import { useLocalStorage, getStorageInt } from "../useLocalStorage";
 
 const ChampDisciplinaire = (props) => {
 
-    const [moyenne, setMoyenne] = useLocalStorage('CD-' + props.nom, 0);
+    const [moyenne, setMoyenne] = useLocalStorage('CD/' + props.nom, 0);
 
     const handleChange = (matiere, value) => {
         console.log('cd matiere updated : ' + matiere, value);
@@ -15,7 +15,7 @@ const ChampDisciplinaire = (props) => {
                 nbNotes++;
             }
             else {
-                const note = getStorageInt(amatiere);
+                const note = getStorageInt('matiere/' + amatiere);
                 if (note !== 0) {
                     sum += note;
                     nbNotes++;

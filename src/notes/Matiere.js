@@ -8,7 +8,7 @@ import { useLocalStorage, getStorageInt } from "../useLocalStorage";
 
 const Matiere = (props) => {
 
-    const [moyenne, setMoyenne] = useLocalStorage(props.nom, 0);
+    const [moyenne, setMoyenne] = useLocalStorage('matiere/' + props.nom, 0);
 
     const handleChange = (matiere, periode, value) => {
         console.log('matiere : ' + matiere, periode, value);
@@ -19,7 +19,7 @@ const Matiere = (props) => {
                 nbNotes++;
             }
             else {
-                const note = getStorageInt(matiere + index);
+                const note = getStorageInt('note/' + matiere + index);
                 if (note !== 0) {
                     sum += note;
                     nbNotes++;

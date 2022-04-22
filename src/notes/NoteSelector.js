@@ -4,7 +4,7 @@ import { useLocalStorage } from "../useLocalStorage";
 
 const NoteSelector = (props) => {
 
-    const [note, setNote] = useLocalStorage(props.matiere + props.periode, 0);
+    const [note, setNote] = useLocalStorage('note/' + props.matiere + props.periode, 0);
 
     const handleChange = (event) => {
         console.log('nouvelle note ' + props.matiere + props.periode + ' : ' + event.target.value);
