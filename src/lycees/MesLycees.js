@@ -34,7 +34,7 @@ const MesLycees = (props) => {
                 unmountOnExit={false}
                 title={
                 <React.Fragment>
-                    Secteur 1 &nbsp;
+                    Sect. 1 &nbsp;
                     <Badge pill variant='light' bg='success'>{lyceesSecteur1.length}</Badge>
                 </React.Fragment>
                 }
@@ -51,7 +51,7 @@ const MesLycees = (props) => {
                 unmountOnExit={false}
                 title={
                 <React.Fragment>
-                    Secteur 2 &nbsp;
+                    Sect. 2 &nbsp;
                     <Badge pill variant='light' bg='primary'>{lyceesSecteur2.length}</Badge>
                 </React.Fragment>
                 }
@@ -68,7 +68,7 @@ const MesLycees = (props) => {
                 unmountOnExit={false}
                 title={
                 <React.Fragment>
-                    Secteur 3 &nbsp;
+                    Sect. 3 &nbsp;
                     <Badge pill variant='light' bg='secondary'>{lyceesSecteur3.length}</Badge>
                 </React.Fragment>
                 }

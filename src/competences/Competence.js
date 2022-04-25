@@ -1,10 +1,20 @@
-import React from "react";
+import React, { useRef } from "react";
 import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import CompetenceSelector from './CompetenceSelector';
+import { forwardRef, useImperativeHandle } from "react";
 
-const Competence = (props) => {
+const Competence = (props, ref) => {
+
+    let competenceSelectorRef = useRef();
+
+    useImperativeHandle(ref, () => ({
+        setFromOutside (value) {
+            competenceSelectorRef.current.setFromOutside(value);
+        }
+      }), [])
+
     return (
         <Form.Group className="mb-3">
             <Row xs={2} md={4} lg={6}>
@@ -12,10 +22,14 @@ const Competence = (props) => {
                     <Form.Label>{props.label}</Form.Label>
                 </Col>
                 <Col>
-                    <CompetenceSelector label={props.label} onChange={props.onChange}/>
+                    <CompetenceSelector
+                        label={props.label}
+                        onChange={props.onChange}
+                        ref={competenceSelectorRef} />
                 </Col>
             </Row>
         </Form.Group>
     )
 }
-export default Competence;
+
+export default forwardRef(Competence);

@@ -5,10 +5,22 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import NoteSelector from './NoteSelector';
 import { useLocalStorage, getStorageInt } from "../useLocalStorage";
+import { useRef, forwardRef, useImperativeHandle } from "react";
 
-const Matiere = (props) => {
+const Matiere = (props, ref) => {
 
     const [moyenne, setMoyenne] = useLocalStorage('matiere/' + props.nom, 0);
+
+    let noteSelectorRefs = useRef([]);
+
+    useImperativeHandle(ref, () => ({
+        setFromOutside (value) {
+            noteSelectorRefs.current.forEach((ref, index) => {
+                ref.setFromOutside(value);
+            });
+            setMoyenne(value);
+        }
+      }), [setMoyenne])
 
     const handleChange = (matiere, periode, value) => {
         console.log('matiere : ' + matiere, periode, value);
@@ -42,11 +54,29 @@ const Matiere = (props) => {
                 </Col>
                 <Col>
                     <Stack gap="2">
-                        <NoteSelector matiere={props.nom} periode='1' onChange={handleChange} />
-                        <NoteSelector matiere={props.nom} periode='2' onChange={handleChange} />
+                        <NoteSelector
+                            matiere={props.nom}
+                            periode='1'
+                            onChange={handleChange}
+                            ref={(element) => {
+                                noteSelectorRefs.current[0] = element;
+                            }} />
+                        <NoteSelector
+                            matiere={props.nom}
+                            periode='2'
+                            onChange={handleChange}
+                            ref={(element) => {
+                                noteSelectorRefs.current[1] = element;
+                            }} />
                         {
                             !props.semestres && (
-                            <NoteSelector matiere={props.nom} periode='3' onChange={handleChange} />
+                                <NoteSelector
+                                matiere={props.nom}
+                                periode='3'
+                                onChange={handleChange}
+                                ref={(element) => {
+                                    noteSelectorRefs.current[2] = element;
+                                }} />
                             )
                         }
                     </Stack>
@@ -56,4 +86,4 @@ const Matiere = (props) => {
     )
 }
 
-export default Matiere;
+export default forwardRef(Matiere);

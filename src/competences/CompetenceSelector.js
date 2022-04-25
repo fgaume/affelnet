@@ -1,8 +1,9 @@
 import React from 'react';
 import Form from 'react-bootstrap/Form';
 import { useLocalStorage } from "../useLocalStorage";
+import { forwardRef, useImperativeHandle } from "react";
 
-const CompetenceSelector = (props) => {
+const CompetenceSelector = (props, ref) => {
 
     const [score, setScore] = useLocalStorage('competence/' + props.label, 0);
 
@@ -11,7 +12,13 @@ const CompetenceSelector = (props) => {
         props.onChange(props.label, parseInt(event.target.value));
     }
 
-    return (
+    useImperativeHandle(ref, () => ({
+        setFromOutside (value) {
+            setScore(value);
+        }
+      }), [setScore])
+
+      return (
         <Form.Select value={score} aria-label={props.label} onChange={handleChange}>
             <option value="0">Choisir ...</option>
             <option value="600">Très satisfaisant</option>
@@ -21,4 +28,4 @@ const CompetenceSelector = (props) => {
         </Form.Select>
     ) 
 }
-export default CompetenceSelector;
+export default forwardRef(CompetenceSelector);

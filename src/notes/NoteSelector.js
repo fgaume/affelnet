@@ -1,13 +1,19 @@
 import React from "react";
 import Form from 'react-bootstrap/Form';
 import { useLocalStorage } from "../useLocalStorage";
+import { forwardRef, useImperativeHandle } from "react";
 
-const NoteSelector = (props) => {
+const NoteSelector = (props, ref) => {
 
     const [note, setNote] = useLocalStorage('note/' + props.matiere + props.periode, 0);
 
+    useImperativeHandle(ref, () => ({
+        setFromOutside (value) {
+            setNote(value);
+        }
+      }), [setNote])
+
     const handleChange = (event) => {
-        console.log('nouvelle note ' + props.matiere + props.periode + ' : ' + event.target.value);
         setNote(event.target.value);
         props.onChange(props.matiere, parseInt(props.periode), parseInt(event.target.value));
     }
@@ -23,4 +29,4 @@ const NoteSelector = (props) => {
     ) 
 }
 
-export default NoteSelector;
+export default forwardRef(NoteSelector);

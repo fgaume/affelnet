@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import axios from 'axios';
-import { Container, Form, ListGroup } from 'react-bootstrap';
+import { Container, ListGroup } from 'react-bootstrap';
 import { useLocalStorage } from '../useLocalStorage';
 import seuilsMap from '../data/seuils';
 import { bonusSecteur } from "../data/affelnet";
@@ -57,7 +57,7 @@ const ListeLycees = (props) => {
                 console.log(error)
               })
               }
-      }, [props.inputLycees.nomCollegeSecteur]);
+      }, [cacheLyceeSecteur, props, setLycees]);
 
     useEffect(() => {
         console.log('ListeLycees.useEffect called: ' + props.inputLycees.nomCollegeSecteur);
