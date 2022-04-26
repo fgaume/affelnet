@@ -57,7 +57,7 @@ const ListeLycees = (props) => {
                 console.log(error)
               })
               }
-      }, [cacheLyceeSecteur, props, setLycees]);
+      }, [props.inputLycees.nomCollegeSecteur]);
 
     useEffect(() => {
         console.log('ListeLycees.useEffect called: ' + props.inputLycees.nomCollegeSecteur);
