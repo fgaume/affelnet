@@ -49,7 +49,7 @@ const App = () => {
       <div>&nbsp;</div>
       <ScoreSecteurs scoreGlobal={scoreGlobal} />
       <div>&nbsp;</div>
-      <Accordion defaultActiveKey="0">
+      <Accordion defaultActiveKey={nomCollegeSecteur === '' ? '0' : '3'} >
         <Accordion.Item eventKey="0">
           <Accordion.Header><span className='fw-bolder'>Mon collège</span></Accordion.Header>
           <Accordion.Body>
