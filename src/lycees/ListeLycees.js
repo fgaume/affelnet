@@ -1,14 +1,25 @@
-import React, { useEffect } from 'react';
+import React, { forwardRef, useEffect, useImperativeHandle, useState } from 'react';
 import axios from 'axios';
 import { Container, ListGroup } from 'react-bootstrap';
 import { useLocalStorage } from '../useLocalStorage';
 import seuilsMap from '../data/seuils';
 import { bonusSecteur } from "../data/affelnet";
+import './ListeLycees.css';
 
-const ListeLycees = (props) => {
+const ListeLycees = (props, ref) => {
 
-    const [lycees, setLycees] = useLocalStorage('lycees/secteur-' + props.secteur, []);
     const cacheLyceeSecteur = new Map();
+ 
+    const [lycees, setLycees] = useLocalStorage('lycees/secteur-' + props.secteur, []);
+    const [filtres, setFiltres] = useState([]);
+    const [lyceesBySpecialiteMap, setLyceesBySpecialiteMap] = useState(new Map());
+
+    useImperativeHandle(ref, () => ({
+        setFromOutside (newFiltres, newLyceesBySpecialiteMap) {
+            setFiltres(newFiltres);
+            setLyceesBySpecialiteMap(newLyceesBySpecialiteMap);
+        }
+    }), [setFiltres, setLyceesBySpecialiteMap])
  
     const fetchData = React.useCallback(() => {
         let key = props.inputLycees.nomCollegeSecteur + props.secteur;
@@ -54,51 +65,75 @@ const ListeLycees = (props) => {
                   }
               })
               .catch((error) => {
-                console.log(error)
-              })
+                console.log(error);
+              });
               }
       }, [props.inputLycees.nomCollegeSecteur]);
 
     useEffect(() => {
         console.log('ListeLycees.useEffect called: ' + props.inputLycees.nomCollegeSecteur);
         props.inputLycees.nomCollegeSecteur && fetchData();
-      }, [fetchData, props.inputLycees.nomCollegeSecteur, props.inputLycees.score])
+    }, [fetchData, props.inputLycees.nomCollegeSecteur, props.inputLycees.score])
 
-    const computeDiff = (lycee, seuil) => {
-        //console.log("secteur" + props.secteur + ", lycee = " + lycee + ", seuil = " + seuil);
+
+      const computeDiff = (lycee, seuil) => {
         let result = '?';
         if (seuil !== 0) {
             result =  parseInt((props.inputLycees.score + bonusSecteur.get(props.secteur)) - seuil);
-            if (result >= 0) result = '+'+result;
-            //console.log("result = " + result);    
+            if (result >= 0) {
+                result = ('+' + result);
+            }
         }
         return result;
     }  
 
-    const determineColor = (seuil) => {
-        let className = 'text-secondary';
+    const determineVariant = (lycee, seuil) => {
+        let className = 'light';
         if (seuil !== 0) {
-            className = 'text-body';
+            className = 'warning';
             let diff = props.inputLycees.score + bonusSecteur.get(props.secteur) - seuil;        
             if (diff >= 0) {
-                className = 'text-success';
+                className = 'success';
             } else if (diff < -50) {
-                className = 'text-danger';
+                className = 'danger';
             }
         }
         return className;
+    }
+
+    const hasSpecialite = (lycee, spe) => {
+        if (lyceesBySpecialiteMap && lyceesBySpecialiteMap.get(spe)) {
+            const lyceeSpes = lyceesBySpecialiteMap.get(spe);
+            return lyceeSpes.includes(lycee);
+        }
+        else {
+            return true;
+        }
+    }
+
+    const lyceeHasAllFilteredSpecialites = (lycee, thefiltres) => {
+        for (let spe of thefiltres) {
+            if (!hasSpecialite(lycee, spe)) return false;
+        }
+        return true;
+    }
+
+    const determineFiltered = (lycee, thefiltres) => {
+        return lyceeHasAllFilteredSpecialites(lycee, thefiltres) ? '' : 'filtered';
     }
 
     return (
         <Container fluid>
             <ListGroup>
                 {lycees.map(lycee => (
-                    <ListGroup.Item key={lycee.nom} className={determineColor(lycee.seuil)}>
-                        {lycee.nom}&nbsp;
-                        ({computeDiff(lycee.nom, lycee.seuil)})
+                    <ListGroup.Item key={lycee.nom} variant={determineVariant(lycee.nom, lycee.seuil)}>
+                        <span className={determineFiltered(lycee.nom, filtres)} >
+                            {lycee.nom}&nbsp;
+                            ({computeDiff(lycee.nom, lycee.seuil)})
+                        </span>
                     </ListGroup.Item>))}
             </ListGroup>
         </Container>
     )
 }
-export default ListeLycees;
+export default forwardRef(ListeLycees);

@@ -1,7 +1,6 @@
 import React from 'react';
 import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
-import Row from 'react-bootstrap/Row';
 import { useLocalStorage } from "../useLocalStorage";
 import 'react-bootstrap-typeahead/css/Typeahead.css';
 import './MonCollege.css';
@@ -47,9 +46,9 @@ const MonCollege = (props) => {
 
     return (
         <Container fluid>
-            <CollegeSelector type="scolarisation" onChange={onCollegeScolarisationChange} />
+            <CollegeSelector type="scolarisation" onChange={onCollegeScolarisationChange} />            
             <Form.Group className="mb-3" >
-            <Row>Bonus IPS : {bonusCollege}</Row>
+            Bonus IPS : {bonusCollege}
             </Form.Group>
             <Form.Group className="mb-3" >
                 <Form.Switch

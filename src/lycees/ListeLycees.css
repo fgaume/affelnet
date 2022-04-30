@@ -1,0 +1,5 @@
+span.filtered {
+    text-decoration: line-through;
+    font-style: italic;
+    color: gray;
+}
