@@ -10,37 +10,44 @@ import { useRef, forwardRef, useImperativeHandle } from "react";
 const Matiere = (props, ref) => {
 
     const [moyenne, setMoyenne] = useLocalStorage('matiere/' + props.nom, 0);
+    const [avancementMatiere, setAvancementMatiere] = useLocalStorage('matiere/avancement/' + props.nom, 0);
 
     let noteSelectorRefs = useRef([]);
 
     useImperativeHandle(ref, () => ({
-        setFromOutside (value) {
+        setNoteFromOutside(note) {
             noteSelectorRefs.current.forEach((ref, index) => {
-                ref.setFromOutside(value);
+                ref.setNoteFromOutside(note);
             });
-            setMoyenne(value);
+            setMoyenne(note);
+            setAvancementMatiere(props.semestres ? 2 : 3);
+        },
+        getMoyenne() {
+            return moyenne;
+        },
+        getAvancementMatiere() {
+            return avancementMatiere;
         }
-      }), [setMoyenne])
+    }), [moyenne, setMoyenne, avancementMatiere])
 
-    const handleChange = (matiere, periode, value) => {
-        console.log('matiere : ' + matiere, periode, value);
+    const handleChange = (matiere, periode, newNote) => {
+        console.log('matiere : ' + matiere, periode, newNote);
         let nbNotes = 0, sum = 0;
-        for (let index = 1; index <= 3; index++) {
-            if (index === periode) {
-                sum += value;
-                nbNotes++;
+        for (let index = 1; index <= (props.semestres ? 2 : 3); index++) {
+            let note = newNote;
+            if (index !== periode) {
+                //const note = getStorageInt('note/' + matiere + index);
+                note = parseInt(noteSelectorRefs.current[index-1].getNote());
             }
-            else {
-                const note = getStorageInt('note/' + matiere + index);
-                if (note !== 0) {
-                    sum += note;
-                    nbNotes++;
-                }
+            if (note !== 0) {
+                sum += note;
+                nbNotes++;
             }
         }
         let newMoyenne = (sum/nbNotes);
         setMoyenne(newMoyenne);
-        props.onChange(props.nom, newMoyenne);
+        setAvancementMatiere(nbNotes);
+        props.onChange(props.nom, newMoyenne, nbNotes);
     }
 
     return (

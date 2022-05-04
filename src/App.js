@@ -7,6 +7,7 @@ import MonCollege from './college/MonCollege';
 import ScoreSecteurs from "./ScoreSecteurs";
 import { useLocalStorage } from "./useLocalStorage";
 import MesLycees from './lycees/MesLycees';
+import { CheckCircle, ExclamationCircle } from 'react-bootstrap-icons';
 
 const App = () => {
 
@@ -16,18 +17,23 @@ const App = () => {
   const [bonusGlobal, setBonusGlobal] = useLocalStorage("Score/BonusGlobal", 0);
   const [nomCollegeSecteur, setNomCollegeSecteur] = useLocalStorage("Score/NomCollegeSecteur", '');
   const [inputLycees, setInputLycees] = useLocalStorage("Lycees/inputLycees", {});
+  const [avancementCompetences, setAvancementCompetences] = useLocalStorage("Score/avancementCompetences", 0);
+  const [avancementNotes, setAvancementNotes] = useLocalStorage("Score/avancementNotes", 0);
 
-  const handleChangeCompetence = (competenceUpdate) => {
+
+  const handleChangeCompetence = (competenceUpdate, avancement) => {
     setScoreCompetences(competenceUpdate);
     const score = Math.round(competenceUpdate + scoreNotes + bonusGlobal);
     setScoreGlobal(score);
+    setAvancementCompetences(avancement);
     setInputLycees({ 'nomCollegeSecteur' : nomCollegeSecteur, 'score' : score});
   }
 
-  const handleChangeNotes = (noteUpdate) => {
+  const handleChangeNotes = (noteUpdate, avancement) => {
     setScoreNotes(noteUpdate);
     const score = Math.round(noteUpdate + scoreCompetences + bonusGlobal);
     setScoreGlobal(score);
+    setAvancementNotes(avancement);
     setInputLycees({ 'nomCollegeSecteur' : nomCollegeSecteur, 'score' : score});
   }
 
@@ -51,24 +57,42 @@ const App = () => {
       <div>&nbsp;</div>
       <Accordion defaultActiveKey={nomCollegeSecteur === '' ? '0' : '3'} >
         <Accordion.Item eventKey="0">
-          <Accordion.Header><span className='fw-bolder'>Mon collège</span></Accordion.Header>
+          <Accordion.Header>
+            <span className='fw-bolder'>Mon collège&nbsp;</span>
+            { nomCollegeSecteur ?
+              (<CheckCircle color='green' width='20' height='20' />) :
+              (<ExclamationCircle color='red' width='20' height='20' />)
+            }
+            </Accordion.Header>
           <Accordion.Body>
             <MonCollege onBonusChange={handleChangeBonusIPS} onSecteurChange={handleChangeCollegeSecteur}/>
           </Accordion.Body>
         </Accordion.Item>
         <Accordion.Item eventKey="1">
-          <Accordion.Header><span className='fw-bolder'>Mes compétences</span></Accordion.Header>
+          <Accordion.Header>
+            <span className='fw-bolder'>Mes compétences&nbsp;</span>
+            { avancementCompetences === 100 ?
+              (<CheckCircle color='green' width='20' height='20' />) :
+              (<ExclamationCircle color='red' width='20' height='20' />)
+            }
+            </Accordion.Header>
           <Accordion.Body>
             <MesCompetences onChange={handleChangeCompetence} />
           </Accordion.Body>
         </Accordion.Item>
         <Accordion.Item eventKey="2">
-          <Accordion.Header><span className='fw-bolder'>Mes notes</span></Accordion.Header>
+          <Accordion.Header>
+            <span className='fw-bolder'>Mes notes&nbsp;</span>
+            { avancementNotes === 100 ?
+              (<CheckCircle color='green' width='20' height='20' />) :
+              (<ExclamationCircle color='red' width='20' height='20' />)
+            }
+          </Accordion.Header>
           <Accordion.Body>
             <MesNotes onChange={handleChangeNotes} />           
           </Accordion.Body>
         </Accordion.Item>
-        <Accordion.Item eventKey="3">
+        <Accordion.Item eventKey="3" hidden={!nomCollegeSecteur}>
           <Accordion.Header><span className='fw-bolder'>Mes lycées</span></Accordion.Header>
           <Accordion.Body>
             <MesLycees key={inputLycees} inputLycees={inputLycees} />           

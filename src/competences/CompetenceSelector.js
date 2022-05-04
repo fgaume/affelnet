@@ -7,24 +7,27 @@ const CompetenceSelector = (props, ref) => {
 
     const [score, setScore] = useLocalStorage('competence/' + props.label, 0);
 
+    useImperativeHandle(ref, () => ({
+        setScoreFromOutside (value) {
+            setScore(parseInt(value));
+        },
+        getScore() {
+            return parseInt(score);
+        }
+    }), [score, setScore])
+
     const handleChange = (event) => {
         setScore(event.target.value);
-        props.onChange(props.label, parseInt(event.target.value));
+        props.onChange(props.label, event.target.value);
     }
 
-    useImperativeHandle(ref, () => ({
-        setFromOutside (value) {
-            setScore(value);
-        }
-      }), [setScore])
-
-      return (
+    return (
         <Form.Select value={score} aria-label={props.label} onChange={handleChange}>
-            <option value="0">Choisir ...</option>
-            <option value="600">Très satisfaisant</option>
-            <option value="480">Satisfaisant</option>
+            <option value="0">Maitrise ...</option>
+            <option value="600">Très bonne</option>
+            <option value="480">Satisfaisante</option>
             <option value="300">Fragile</option>
-            <option value="120">Insuffisant</option>
+            <option value="120">Insuffisante</option>
         </Form.Select>
     ) 
 }

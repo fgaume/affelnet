@@ -76,12 +76,16 @@ const ListeLycees = (props, ref) => {
     }, [fetchData, props.inputLycees.nomCollegeSecteur, props.inputLycees.score])
 
 
-      const computeDiff = (lycee, seuil) => {
+    const computeDiff = (lycee, seuil) => {
         let result = '?';
         if (seuil !== 0) {
             result =  parseInt((props.inputLycees.score + bonusSecteur.get(props.secteur)) - seuil);
+            let formattedResult = result.toLocaleString();
             if (result >= 0) {
-                result = ('+' + result);
+                result = ('+' + formattedResult);
+            }
+            else {
+                result = formattedResult;
             }
         }
         return result;

@@ -1,5 +1,5 @@
 import React from "react";
-import { Container } from 'react-bootstrap';
+import { Container, OverlayTrigger, Tooltip } from 'react-bootstrap';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import { bonusSecteur } from "./data/affelnet";
@@ -23,13 +23,31 @@ const ScoreSecteurs = (props) => {
         </Row>
         <Row>
           <Col className='d-flex justify-content-center text-success'>
+          <OverlayTrigger placement="right" overlay={
+                props => (
+                    <Tooltip {...props}>Mon score pour les voeux de lycées en secteur 1</Tooltip>
+                  )
+            }>
             <h5>{(props.scoreGlobal + bonusSecteur.get('1')).toLocaleString()}</h5>
+            </OverlayTrigger>
           </Col>
           <Col className='d-flex justify-content-center text-primary'>
+          <OverlayTrigger placement="right" overlay={
+                props => (
+                    <Tooltip {...props}>Mon score pour les voeux de lycées en secteur 2</Tooltip>
+                  )
+            }>
             <h5>{(props.scoreGlobal + bonusSecteur.get('2')).toLocaleString()}</h5>
+            </OverlayTrigger>
           </Col>
           <Col className='d-flex justify-content-center text-secondary'>
+          <OverlayTrigger placement="right" overlay={
+                props => (
+                    <Tooltip {...props}>Mon score pour les voeux de lycées en secteur 3</Tooltip>
+                  )
+            }>
             <h5>{(props.scoreGlobal + bonusSecteur.get('3')).toLocaleString()}</h5>
+            </OverlayTrigger>
           </Col>
         </Row>
         <Row>

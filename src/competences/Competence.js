@@ -10,8 +10,11 @@ const Competence = (props, ref) => {
     let competenceSelectorRef = useRef();
 
     useImperativeHandle(ref, () => ({
-        setFromOutside (value) {
-            competenceSelectorRef.current.setFromOutside(value);
+        setScoreFromOutside (value) {
+            competenceSelectorRef.current.setScoreFromOutside(value);
+        },
+        getScore() {
+            return competenceSelectorRef.current.getScore();
         }
       }), [])
 

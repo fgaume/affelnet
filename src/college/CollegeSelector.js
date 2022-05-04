@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef, useEffect } from 'react';
 import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
 import { useLocalStorage } from "../useLocalStorage";
@@ -12,11 +12,19 @@ const CollegeSelector = (props) => {
     const [college, setCollege] = useLocalStorage('CollegeSelector/college-' + props.type, []);
     const placeholder = 'Nom du collège de ' + props.type + '...';
     const labelCollege = 'Votre collège de ' + props.type + ':';
+    const inputRef = useRef();
 
     const onCollegeChange = (collegeUpdate) => {
         setCollege(collegeUpdate);
         props.onChange(collegeUpdate[0]);
     }
+
+    useEffect(() => {
+        if (!college || (college.length === 0)) {
+            inputRef.current.focus();
+        } 
+    }, [college]);
+
 
     return (
         <Form.Group className="mb-3">
@@ -31,6 +39,7 @@ const CollegeSelector = (props) => {
                         options={colleges}
                         placeholder={placeholder}
                         selected={college}
+                        ref={inputRef}
                     />
             </Row>
         </Form.Group>

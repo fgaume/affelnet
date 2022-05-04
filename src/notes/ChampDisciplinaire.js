@@ -6,37 +6,47 @@ import { forwardRef, useImperativeHandle, useRef } from "react";
 const ChampDisciplinaire = (props, ref) => {
 
     const [moyenne, setMoyenne] = useLocalStorage('CD/' + props.nom, 0);
+    const [avancementChamp, setAvancementChamp] = useLocalStorage('CD/avancement/' + props.nom, 0);
 
     let matiereRefs = useRef([]);
 
     useImperativeHandle(ref, () => ({
-        setFromOutside (value) {
+        setNoteFromOutside(note) {
             matiereRefs.current.forEach((ref, index) => {
-                ref.setFromOutside(value);
+                ref.setNoteFromOutside(note);
             });
-            setMoyenne(value);
+            setMoyenne(note);
+            setAvancementChamp(props.matieres.length * (props.semestres ? 2 : 3));
+        },
+        getMoyenne() {
+            return moyenne;
+        },
+        getAvancementChamp() {
+            return avancementChamp;
         }
-      }), [setMoyenne])
+    }), [moyenne, setMoyenne, avancementChamp])
 
-      const handleChange = (matiere, value) => {
-        console.log('cd matiere updated : ' + matiere, value);
-        let nbNotes = 0, sum = 0;
-        for (const amatiere of props.matieres) {
-            if (amatiere === matiere) {
-                sum += value;
-                nbNotes++;
+    const handleChange = (matiere, newMoyenneMatiere, newNbNotesMatiere) => {
+        console.log('cd matiere updated : ' + matiere, newMoyenneMatiere);
+        let nbNotes = 0, sum = 0, newAvancementChamp = 0;
+        for (let index = 0; index < props.matieres.length; index++) {
+            let amatiere = props.matieres[index];
+            let moyenneMatiere = newMoyenneMatiere;
+            let avancementMatiere = newNbNotesMatiere;
+            if (amatiere !== matiere) {
+                moyenneMatiere = parseInt(matiereRefs.current[index].getMoyenne());
+                avancementMatiere = parseInt(matiereRefs.current[index].getAvancementMatiere());
             }
-            else {
-                const note = getStorageInt('matiere/' + amatiere);
-                if (note !== 0) {
-                    sum += note;
-                    nbNotes++;
-                }
+            if (moyenneMatiere !== 0) {
+                nbNotes++;
+                sum += moyenneMatiere;
+                newAvancementChamp += avancementMatiere;
             }
         }
         let newMoyenne = (sum/nbNotes);
         setMoyenne(newMoyenne);
-        props.onChange(props.nom, newMoyenne);
+        setAvancementChamp(newAvancementChamp);
+        props.onChange(props.nom, newMoyenne, newAvancementChamp);
     }
 
     return (

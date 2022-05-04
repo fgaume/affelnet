@@ -1,10 +1,11 @@
-import React, { useRef, useState } from 'react';
+import React from 'react';
 import { useLocalStorage } from '../useLocalStorage';
 import "bootstrap/dist/css/bootstrap.css";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
 import { specialitesMap } from '../data/specialites';
 import { Form } from 'react-bootstrap';
+import { Funnel } from 'react-bootstrap-icons';
 
 const FiltreSpecialite = (props) => {
 
@@ -26,7 +27,7 @@ const FiltreSpecialite = (props) => {
 
     return (
     <div>
-        Filtrage de spécialités : &nbsp;
+        <Funnel width='20' height='20' />&nbsp;Filtrage par spécialités : &nbsp;
         {
         specialites.map((value, index) => {
             return <OverlayTrigger key={index} placement="top" overlay={

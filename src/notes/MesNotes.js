@@ -4,16 +4,18 @@ import { useLocalStorage, getStorageInt } from "../useLocalStorage";
 import ChampDisciplinaire from './ChampDisciplinaire';
 import { moyennesAcademiques, ecartsAcademiques } from '../data/stats';
 import {champsDisciplinaires, coefficients} from '../data/affelnet';
-import { Button } from 'react-bootstrap';
+import { Button, ProgressBar } from 'react-bootstrap';
 import { Row, Col } from 'react-bootstrap';
 import { useRef } from 'react';
+import { ArrowDownCircle, ArrowUpCircle } from 'react-bootstrap-icons';
 
 const MesNotes = (props) => {
 
     let champRefs = useRef([]);
 
-    const [score, setScore] = useLocalStorage("score notes", 0);
+    const [score, setScore] = useLocalStorage("MesNotes/score notes", 0);
     const [semestres, setSemestres] = useLocalStorage("semestres", false);
+    const [avancementNotes, setAvancementNotes] = useLocalStorage("MesNotes/avancementNotes", 0);
 
     const moyennes = moyennesAcademiques.get('2021');
     const ecarts = ecartsAcademiques.get('2021');
@@ -25,16 +27,28 @@ const MesNotes = (props) => {
 
     const computeScore = (champ, newMoyenne) => {
         let sum = 0;
-        for (const achamp of champsDisciplinaires) {
-            if (achamp === champ) {
-                sum += moyenneToScore(achamp, newMoyenne);
+        for (let index = 0; index < champsDisciplinaires.length; index++) {
+            const achamp = champsDisciplinaires[index];
+            let ascore = newMoyenne;
+            if (achamp !== champ) {
+                ascore = parseInt(champRefs.current[index].getMoyenne());
             }
-            else {
-                const note = getStorageInt('CD/' + achamp);
-                if (note !== 0) {
-                    sum += moyenneToScore(achamp, note);
-                }
+            if (ascore !== 0) {
+                sum += moyenneToScore(achamp, ascore);
             }
+        }
+        return sum;
+    }
+
+    const computeAvancement = (champ, newAvancementChamp) => {
+        let sum = 0;
+        for (let index = 0; index < champsDisciplinaires.length; index++) {
+            const achamp = champsDisciplinaires[index];
+            let avc = newAvancementChamp;
+            if (achamp !== champ) {
+                avc = parseInt(champRefs.current[index].getAvancementChamp());
+            }
+            sum += avc;
         }
         return sum;
     }
@@ -47,11 +61,12 @@ const MesNotes = (props) => {
         return sum;
     }
 
-    const handleChange = (champ, newScore) => {
-        //console.log('Mes notes updated : ' + champ, newScore);
-        let newScoreNotes = computeScore(champ, newScore);
+    const handleChange = (champ, newScore, newAvancementChamp) => {
+        const newScoreNotes = computeScore(champ, newScore);
+        const newAvancementNotes = computeAvancement(champ, newAvancementChamp); 
         setScore(newScoreNotes);
-        props.onChange(newScoreNotes);
+        setAvancementNotes(newAvancementNotes);
+        props.onChange(newScoreNotes, ( 100 * newAvancementNotes / (semestres ? 22 : 33)));
     }
 
     const handleChangeCheck = (event) => {
@@ -61,37 +76,55 @@ const MesNotes = (props) => {
     const handleSetAllMin = (event) => {
         const noteMin = 3;
         champRefs.current.forEach((ref, index) => {
-            ref.setFromOutside(noteMin);
+            ref.setNoteFromOutside(noteMin);
         });
         let newScoreNotes = computeScoreMinMax(noteMin);
         setScore(newScoreNotes);
-        props.onChange(newScoreNotes);
+        setAvancementNotes(semestres ? 22 : 33);
+        props.onChange(newScoreNotes, 100);
     }
 
     const handleSetAllMax = (event) => {
         const noteMax = 16;
         champRefs.current.forEach((ref, index) => {
-            ref.setFromOutside(noteMax);
+            ref.setNoteFromOutside(noteMax);
         });
         let newScoreNotes = computeScoreMinMax(noteMax);
         setScore(newScoreNotes);
-        props.onChange(newScoreNotes);
+        setAvancementNotes(semestres ? 22 : 33);
+        props.onChange(newScoreNotes, 100);
     }
 
     return (
         <Container>
-            <Form.Group className="mb-3" >
-                <Form.Switch id='semestres' label='semestres' defaultChecked={semestres} onChange={handleChangeCheck} />
-            </Form.Group>
-            <div>Saisissez vos moyennes scolaires :</div>
-            <div>&nbsp;</div>
             <Row>
-                <Col className='d-flex justify-content-center text-success'>
-                    <Button variant="outline-primary" onClick={handleSetAllMin}>Tout au minimum</Button>
-                    &nbsp;
-                    <Button variant="outline-primary" onClick={handleSetAllMax}>Tout au maximum</Button>
+                <Col>
+                    <ProgressBar min='0' max={semestres ? 22 : 33} variant='success' now={avancementNotes} />
                 </Col>
-                <Col className='d-flex justify-content-center text-success'>
+            </Row>
+            <Row>
+                <Col>&nbsp;</Col>
+            </Row>
+            <Row>
+                <Col>Saisissez ici vos moyennes {semestres ? 'semestrielles' : 'trimestrielles'} :</Col>
+            </Row>
+            <Row>
+                <Col>&nbsp;</Col>
+            </Row>
+            <Row>
+                <Col>
+                    <Form.Switch id='semestres' label='Collège en semestres' defaultChecked={semestres} onChange={handleChangeCheck} />
+                </Col>
+            </Row>
+            <Row>
+                <Col>&nbsp;</Col>
+            </Row>
+            <Row>
+                <Col>
+                    <Button variant="outline-primary" size='sm' onClick={handleSetAllMin}><ArrowDownCircle height='20' width='20' />&nbsp;Tout au minimum</Button>
+                </Col>
+                <Col>
+                <Button variant="outline-primary" size='sm' onClick={handleSetAllMax}><ArrowUpCircle height='20' width='20' />&nbsp;Tout au maximum</Button>
                 </Col>
             </Row>
             <div>&nbsp;</div>
