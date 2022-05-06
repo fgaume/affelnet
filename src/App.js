@@ -7,7 +7,7 @@ import MonCollege from './college/MonCollege';
 import ScoreSecteurs from "./ScoreSecteurs";
 import { useLocalStorage } from "./useLocalStorage";
 import MesLycees from './lycees/MesLycees';
-import { CheckCircle, ExclamationCircle } from 'react-bootstrap-icons';
+import { CheckLg, ExclamationLg } from 'react-bootstrap-icons';
 
 const App = () => {
 
@@ -37,17 +37,18 @@ const App = () => {
     setInputLycees({ 'nomCollegeSecteur' : nomCollegeSecteur, 'score' : score});
   }
 
-  const handleChangeBonusIPS = (bonusUpdate) => {
-    setBonusGlobal(bonusUpdate);
-    const score = Math.round(bonusUpdate + scoreNotes + scoreCompetences);
-    setScoreGlobal(score);
-    setInputLycees({ 'nomCollegeSecteur' : nomCollegeSecteur, 'score' : score});
-  }
-
-  const handleChangeCollegeSecteur = (newCollegeSecteur) => {
-    console.log('newCollegeSecteur : ' + newCollegeSecteur);
-    setNomCollegeSecteur(newCollegeSecteur);
-    setInputLycees({ 'nomCollegeSecteur' : newCollegeSecteur, 'score' : scoreGlobal});
+  const handleChangeCollege = (newCollege) => {
+    console.log('newCollege : ' + JSON.stringify(newCollege));
+    let newScoreGlobal = scoreGlobal;
+    if (nomCollegeSecteur !== newCollege.nom) {
+      setNomCollegeSecteur(newCollege.nom);
+    }
+    if (bonusGlobal !== newCollege.bonus) {
+      setBonusGlobal(newCollege.bonus);
+      newScoreGlobal = Math.round(scoreNotes + scoreCompetences + newCollege.bonus);
+      setScoreGlobal(newScoreGlobal);
+    }
+    setInputLycees({ 'nomCollegeSecteur' : newCollege.nom, 'score' : newScoreGlobal });
   }
 
   return (
@@ -60,20 +61,23 @@ const App = () => {
           <Accordion.Header>
             <span className='fw-bolder'>Mon collège&nbsp;</span>
             { nomCollegeSecteur ?
-              (<CheckCircle color='green' width='20' height='20' />) :
-              (<ExclamationCircle color='red' width='20' height='20' />)
+              (<CheckLg color='green' width='20' height='20' />) :
+              (<ExclamationLg color='red' width='20' height='20' />)
             }
             </Accordion.Header>
           <Accordion.Body>
-            <MonCollege onBonusChange={handleChangeBonusIPS} onSecteurChange={handleChangeCollegeSecteur}/>
+            <MonCollege onChange={handleChangeCollege} />
           </Accordion.Body>
         </Accordion.Item>
         <Accordion.Item eventKey="1">
           <Accordion.Header>
             <span className='fw-bolder'>Mes compétences&nbsp;</span>
+            { avancementCompetences === 100 &&
+            (<span className='fw-bolder'>({scoreCompetences.toLocaleString()} pts)&nbsp;</span>)
+            }
             { avancementCompetences === 100 ?
-              (<CheckCircle color='green' width='20' height='20' />) :
-              (<ExclamationCircle color='red' width='20' height='20' />)
+              (<CheckLg color='green' width='20' height='20' />) :
+              (<ExclamationLg color='red' width='20' height='20' />)
             }
             </Accordion.Header>
           <Accordion.Body>
@@ -83,9 +87,12 @@ const App = () => {
         <Accordion.Item eventKey="2">
           <Accordion.Header>
             <span className='fw-bolder'>Mes notes&nbsp;</span>
+            { avancementNotes === 100 &&
+            (<span className='fw-bolder'>({Math.round(scoreNotes).toLocaleString()} pts)&nbsp;</span>)
+            }
             { avancementNotes === 100 ?
-              (<CheckCircle color='green' width='20' height='20' />) :
-              (<ExclamationCircle color='red' width='20' height='20' />)
+              (<CheckLg color='green' width='20' height='20' />) :
+              (<ExclamationLg color='red' width='20' height='20' />)
             }
           </Accordion.Header>
           <Accordion.Body>

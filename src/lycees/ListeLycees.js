@@ -5,14 +5,14 @@ import { useLocalStorage } from '../useLocalStorage';
 import seuilsMap from '../data/seuils';
 import { bonusSecteur } from "../data/affelnet";
 import './ListeLycees.css';
+import { Check, Check2, Check2All, CheckLg, Exclamation, ExclamationLg, Question, X } from 'react-bootstrap-icons';
 
 const ListeLycees = (props, ref) => {
-
-    const cacheLyceeSecteur = new Map();
  
     const [lycees, setLycees] = useLocalStorage('lycees/secteur-' + props.secteur, []);
     const [filtres, setFiltres] = useState([]);
     const [lyceesBySpecialiteMap, setLyceesBySpecialiteMap] = useState(new Map());
+    const [cacheLyceeSecteur, setCacheLyceeSecteur] = useState(new Map());
 
     useImperativeHandle(ref, () => ({
         setFromOutside (newFiltres, newLyceesBySpecialiteMap) {
@@ -61,7 +61,9 @@ const ListeLycees = (props, ref) => {
                       setLycees(newLycees);
                       props.onChange(props.secteur, newLycees);
                       let key = props.inputLycees.nomCollegeSecteur + props.secteur;
-                      cacheLyceeSecteur.set(key, newLycees);
+                      let newCacheLyceeSecteur = new Map(cacheLyceeSecteur);
+                      newCacheLyceeSecteur.set(key, newLycees);
+                      setCacheLyceeSecteur(newCacheLyceeSecteur);
                   }
               })
               .catch((error) => {
@@ -77,7 +79,7 @@ const ListeLycees = (props, ref) => {
 
 
     const computeDiff = (lycee, seuil) => {
-        let result = '?';
+        let result = '';
         if (seuil !== 0) {
             result =  parseInt((props.inputLycees.score + bonusSecteur.get(props.secteur)) - seuil);
             let formattedResult = result.toLocaleString();
@@ -87,6 +89,7 @@ const ListeLycees = (props, ref) => {
             else {
                 result = formattedResult;
             }
+            result = '(' + result + ') ';
         }
         return result;
     }  
@@ -96,9 +99,9 @@ const ListeLycees = (props, ref) => {
         if (seuil !== 0) {
             className = 'warning';
             let diff = props.inputLycees.score + bonusSecteur.get(props.secteur) - seuil;        
-            if (diff >= 0) {
+            if (diff >= 100) {
                 className = 'success';
-            } else if (diff < -50) {
+            } else if (diff < -100) {
                 className = 'danger';
             }
         }
@@ -133,7 +136,24 @@ const ListeLycees = (props, ref) => {
                     <ListGroup.Item key={lycee.nom} variant={determineVariant(lycee.nom, lycee.seuil)}>
                         <span className={determineFiltered(lycee.nom, filtres)} >
                             {lycee.nom}&nbsp;
-                            ({computeDiff(lycee.nom, lycee.seuil)})
+                            {computeDiff(lycee.nom, lycee.seuil)}
+                            {(() => {
+                                if (lycee.seuil !== 0) {
+                                    let diff = parseInt((props.inputLycees.score + bonusSecteur.get(props.secteur)) - lycee.seuil);
+                                    if (diff > 400) {
+                                        return <Check2All color='green' width='20' height='20' />
+                                    } else if (diff > 50) {
+                                        return <Check2 color='green' width='20' height='20'/>
+                                    } else if (diff > -150) {
+                                        return <ExclamationLg color='orange' width='20' height='20'/>
+                                    } else {
+                                        return <X color='red' width='20' height='20'/>
+                                    }
+                                }
+                                else {
+                                    return <Question color='gray' width='20' height='20'/>
+                                }
+                            })()}
                         </span>
                     </ListGroup.Item>))}
             </ListGroup>

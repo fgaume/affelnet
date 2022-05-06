@@ -10,8 +10,8 @@ import './MonCollege.css';
 const CollegeSelector = (props) => {
 
     const [college, setCollege] = useLocalStorage('CollegeSelector/college-' + props.type, []);
-    const placeholder = 'Nom du collège de ' + props.type + '...';
-    const labelCollege = 'Votre collège de ' + props.type + ':';
+    const placeholder = 'Saisir le collège de ' + props.type + '...';
+    const labelCollege = 'Collège de ' + props.type + ' :';
     const inputRef = useRef();
 
     const onCollegeChange = (collegeUpdate) => {

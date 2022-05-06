@@ -28,7 +28,7 @@ const ScoreSecteurs = (props) => {
                     <Tooltip {...props}>Mon score pour les voeux de lycées en secteur 1</Tooltip>
                   )
             }>
-            <h5>{(props.scoreGlobal + bonusSecteur.get('1')).toLocaleString()}</h5>
+            <h5>{(props.scoreGlobal + bonusSecteur.get('1')).toLocaleString()} pts</h5>
             </OverlayTrigger>
           </Col>
           <Col className='d-flex justify-content-center text-primary'>
@@ -37,7 +37,7 @@ const ScoreSecteurs = (props) => {
                     <Tooltip {...props}>Mon score pour les voeux de lycées en secteur 2</Tooltip>
                   )
             }>
-            <h5>{(props.scoreGlobal + bonusSecteur.get('2')).toLocaleString()}</h5>
+            <h5>{(props.scoreGlobal + bonusSecteur.get('2')).toLocaleString()} pts</h5>
             </OverlayTrigger>
           </Col>
           <Col className='d-flex justify-content-center text-secondary'>
@@ -46,7 +46,7 @@ const ScoreSecteurs = (props) => {
                     <Tooltip {...props}>Mon score pour les voeux de lycées en secteur 3</Tooltip>
                   )
             }>
-            <h5>{(props.scoreGlobal + bonusSecteur.get('3')).toLocaleString()}</h5>
+            <h5>{(props.scoreGlobal + bonusSecteur.get('3')).toLocaleString()} pts</h5>
             </OverlayTrigger>
           </Col>
         </Row>

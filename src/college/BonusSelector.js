@@ -2,6 +2,7 @@ import React from 'react';
 import Form from 'react-bootstrap/Form';
 import { useLocalStorage } from "../useLocalStorage";
 
+// not used
 const BonusSelector = (props) => {
 
     const [bonus, setBonus] = useLocalStorage('bonusIPS', 0);

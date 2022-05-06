@@ -15,32 +15,38 @@ const MonCollege = (props) => {
 
     const onCollegeScolarisationChange = (collegeUpdate) => {
         console.log('onCollegeScolarisationChange ' +  JSON.stringify(collegeUpdate));
-        if (collegeUpdate != null) {
-            if (collegeUpdate.bonus !== bonusCollege) {
-                props.onBonusChange(collegeUpdate.bonus);
-            }
+        if (collegeUpdate && collegeUpdate.nom !== nomCollege) {
             setNomCollege(collegeUpdate.nom);
             setBonusCollege(collegeUpdate.bonus);
             if (!collegesMultiples) {
                 setNomCollegeSecteur(collegeUpdate.nom);
-                props.onSecteurChange(collegeUpdate.nom);
+                props.onChange(collegeUpdate);
+            }
+            else {
+                if (nomCollegeSecteur && (bonusCollege !== collegeUpdate.bonus)) {
+                    props.onChange({ nom: nomCollegeSecteur, bonus: collegeUpdate.bonus});
+                }
             }
         }
     }
 
     const onCollegeSecteurChange = (collegeUpdate) => {
         console.log('onCollegeSectorisationChange ' +  JSON.stringify(collegeUpdate));
-        if (collegeUpdate != null) {
+        if (collegeUpdate && collegeUpdate.nom !== nomCollegeSecteur) {
             setNomCollegeSecteur(collegeUpdate.nom);
-            props.onSecteurChange(collegeUpdate.nom);
+            props.onChange({ nom: collegeUpdate.nom, bonus: bonusCollege});
         }
     }
 
     const handleCollegesMultiples = (event) => {
         setCollegesMultiples(event.target.checked);
         setNomCollegeSecteur(event.target.checked ? [] : nomCollege);
-        if (event.target.checked) {
-            props.onSecteurChange(nomCollege);
+        if (event.target.checked && nomCollegeSecteur && bonusCollege) {
+            props.onChange({ nom: nomCollegeSecteur, bonus: bonusCollege});
+        }
+
+        else if (!event.target.checked && nomCollege && bonusCollege) {
+            props.onChange({ nom: nomCollege, bonus: bonusCollege});
         }
     }
 

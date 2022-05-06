@@ -88,12 +88,7 @@ const MesLycees = (props) => {
         <FiltreSpecialite filterAdded={handleFilterAdded} filterRemoved={handleFilterRemoved}/>
         <div>&nbsp;</div>
         <Tabs defaultActiveKey="secteur1" id="lycees" className="mb-3">
-            <Tab
-                eventKey="secteur1"
-                mountOnEnter
-                unmountOnExit={false}
-                title='Secteur 1'
-            >
+            <Tab eventKey="secteur1" title='Secteur 1'>
                 <ListeLycees
                     ref={(element) => {
                         secteurRefs.current[0] = element;
@@ -104,12 +99,7 @@ const MesLycees = (props) => {
                     onChange={onNewLyceesReceived}
                  />
             </Tab>
-            <Tab
-                eventKey="secteur2"
-                mountOnEnter
-                unmountOnExit={false}
-                title='Secteur 2'
-            >
+            <Tab eventKey="secteur2" title='Secteur 2'>
                 <ListeLycees
                     ref={(element) => {
                         secteurRefs.current[1] = element;
@@ -120,12 +110,7 @@ const MesLycees = (props) => {
                     onChange={onNewLyceesReceived}
                 />
             </Tab>
-            <Tab
-                eventKey="secteur3"
-                mountOnEnter
-                unmountOnExit={false}
-                title='Secteur 3'               
-            >
+            <Tab eventKey="secteur3" title='Secteur 3'>
                 <ListeLycees
                     ref={(element) => {
                         secteurRefs.current[2] = element;

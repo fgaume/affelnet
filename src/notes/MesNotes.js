@@ -7,7 +7,7 @@ import {champsDisciplinaires, coefficients} from '../data/affelnet';
 import { Button, ProgressBar } from 'react-bootstrap';
 import { Row, Col } from 'react-bootstrap';
 import { useRef } from 'react';
-import { ArrowDownCircle, ArrowUpCircle } from 'react-bootstrap-icons';
+import { ChevronBarDown, ChevronBarUp } from 'react-bootstrap-icons';
 
 const MesNotes = (props) => {
 
@@ -97,11 +97,15 @@ const MesNotes = (props) => {
 
     return (
         <Container>
-            <Row>
-                <Col>
-                    <ProgressBar min='0' max={semestres ? 22 : 33} variant='success' now={avancementNotes} />
-                </Col>
-            </Row>
+            {
+                (avancementNotes !== (semestres ? 22 : 33)) && (
+                    <Row>
+                        <Col>
+                            <ProgressBar min='0' max={semestres ? 22 : 33} variant={avancementNotes === (semestres ? 22 : 33) ? 'success' : 'primary'} now={avancementNotes} />
+                        </Col>
+                    </Row>
+                )
+            }
             <Row>
                 <Col>&nbsp;</Col>
             </Row>
@@ -121,10 +125,16 @@ const MesNotes = (props) => {
             </Row>
             <Row>
                 <Col>
-                    <Button variant="outline-primary" size='sm' onClick={handleSetAllMin}><ArrowDownCircle height='20' width='20' />&nbsp;Tout au minimum</Button>
+                    <Button variant="outline-primary" size='sm' onClick={handleSetAllMin}>
+                        <ChevronBarDown height='20' width='20' />
+                        &nbsp;Tout au minimum
+                    </Button>
                 </Col>
                 <Col>
-                <Button variant="outline-primary" size='sm' onClick={handleSetAllMax}><ArrowUpCircle height='20' width='20' />&nbsp;Tout au maximum</Button>
+                    <Button variant="outline-primary" size='sm' onClick={handleSetAllMax}>
+                        <ChevronBarUp height='20' width='20' />
+                        &nbsp;Tout au maximum
+                    </Button>
                 </Col>
             </Row>
             <div>&nbsp;</div>

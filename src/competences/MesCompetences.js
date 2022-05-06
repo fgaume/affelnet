@@ -6,7 +6,7 @@ import {competences} from '../data/affelnet';
 import { Button, ProgressBar } from 'react-bootstrap';
 import { Row, Col } from 'react-bootstrap';
 import Competence from './Competence';
-import { ArrowDownCircle, ArrowUpCircle } from 'react-bootstrap-icons';
+import { ArrowDownCircle, ArrowUpCircle, ChevronBarDown, ChevronBarUp } from 'react-bootstrap-icons';
 
 const MesCompetences = (props) => {
     
@@ -67,11 +67,15 @@ const MesCompetences = (props) => {
 
     return (
         <Container fluid>
-            <Row>
-                <Col>
-                    <ProgressBar min='0' max='100' variant='success' now={avancementCompetences} />
-                </Col>
-            </Row>
+                {
+                    (avancementCompetences !== 100) && (
+                        <Row>
+                        <Col>
+                            <ProgressBar min='0' max='100' variant={avancementCompetences === 100 ? 'success' : 'primary'} now={avancementCompetences} />
+                        </Col>
+                    </Row>
+                    )
+                }
             <Row>
                 <Col>&nbsp;</Col>
             </Row>
@@ -84,12 +88,12 @@ const MesCompetences = (props) => {
             <Row>
                 <Col className='d-flex justify-content-center text-success'>
                     <Button size='sm' variant="outline-primary" onClick={handleSetAllMin}>
-                        <ArrowDownCircle height='20' width='20' />&nbsp;Tout au minimum
+                        <ChevronBarDown height='20' width='20' />&nbsp;Tout au minimum
                     </Button>
                 </Col>
                 <Col>
                     <Button size='sm' variant="outline-primary" onClick={handleSetAllMax}>
-                        <ArrowUpCircle height='20' width='20' />&nbsp;Tout au maximum
+                        <ChevronBarUp height='20' width='20' />&nbsp;Tout au maximum
                     </Button>
                 </Col>
             </Row>
