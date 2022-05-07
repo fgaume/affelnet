@@ -66,7 +66,7 @@ const MesCompetences = (props) => {
     }
 
     return (
-        <Container fluid>
+        <Container>
                 {
                     (avancementCompetences !== 100) && (
                         <Row>
@@ -86,13 +86,11 @@ const MesCompetences = (props) => {
                 <Col>&nbsp;</Col>
             </Row>
             <Row>
-                <Col className='d-flex justify-content-center text-success'>
-                    <Button size='sm' variant="outline-primary" onClick={handleSetAllMin}>
-                        <ChevronBarDown height='20' width='20' />&nbsp;Tout au minimum
-                    </Button>
-                </Col>
                 <Col>
-                    <Button size='sm' variant="outline-primary" onClick={handleSetAllMax}>
+                    <Button size='sm' variant="outline-danger" onClick={handleSetAllMin}>
+                        <ChevronBarDown height='20' width='20' />&nbsp;Tout au minimum
+                    </Button>&nbsp;
+                    <Button size='sm' variant="outline-success" onClick={handleSetAllMax}>
                         <ChevronBarUp height='20' width='20' />&nbsp;Tout au maximum
                     </Button>
                 </Col>

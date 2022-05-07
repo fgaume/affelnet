@@ -4,7 +4,7 @@ import Stack from 'react-bootstrap/Stack';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import NoteSelector from './NoteSelector';
-import { useLocalStorage, getStorageInt } from "../useLocalStorage";
+import { useLocalStorage } from "../useLocalStorage";
 import { useRef, forwardRef, useImperativeHandle } from "react";
 
 const Matiere = (props, ref) => {
@@ -16,9 +16,9 @@ const Matiere = (props, ref) => {
 
     useImperativeHandle(ref, () => ({
         setNoteFromOutside(note) {
-            noteSelectorRefs.current.forEach((ref, index) => {
-                ref.setNoteFromOutside(note);
-            });
+            for (let index = 1; index <= (props.semestres ? 2 : 3); index++) {
+                noteSelectorRefs.current[index-1].setNoteFromOutside(note);
+            }
             setMoyenne(note);
             setAvancementMatiere(props.semestres ? 2 : 3);
         },

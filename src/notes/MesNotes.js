@@ -1,6 +1,6 @@
 import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
-import { useLocalStorage, getStorageInt } from "../useLocalStorage";
+import { useLocalStorage } from "../useLocalStorage";
 import ChampDisciplinaire from './ChampDisciplinaire';
 import { moyennesAcademiques, ecartsAcademiques } from '../data/stats';
 import {champsDisciplinaires, coefficients} from '../data/affelnet';
@@ -125,13 +125,11 @@ const MesNotes = (props) => {
             </Row>
             <Row>
                 <Col>
-                    <Button variant="outline-primary" size='sm' onClick={handleSetAllMin}>
+                    <Button variant="outline-danger" size='sm' onClick={handleSetAllMin}>
                         <ChevronBarDown height='20' width='20' />
                         &nbsp;Tout au minimum
-                    </Button>
-                </Col>
-                <Col>
-                    <Button variant="outline-primary" size='sm' onClick={handleSetAllMax}>
+                    </Button>&nbsp;
+                    <Button variant="outline-success" size='sm' onClick={handleSetAllMax}>
                         <ChevronBarUp height='20' width='20' />
                         &nbsp;Tout au maximum
                     </Button>

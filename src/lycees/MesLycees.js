@@ -4,6 +4,7 @@ import { Container, Tab, Tabs } from 'react-bootstrap';
 import { useLocalStorage } from '../useLocalStorage';
 import ListeLycees from './ListeLycees';
 import { specialitesMap } from '../data/specialites';
+import { nomLyceesMap } from '../data/lycees';
 import FiltreSpecialite from './FiltreSpecialite';
 import "bootstrap/dist/css/bootstrap.css";
 
@@ -18,8 +19,8 @@ const MesLycees = (props) => {
     const secteurRefs = useRef([]);
 
     const handleFilterAdded = (newFiltre, spe) => {
-        console.log("handleFilterAdded: " + spe);
-        console.log(newFiltre);
+        console.log("handleFilterAdded: new spe=" + spe);
+        console.log("handleFilterAdded: updated filtre=" + newFiltre);
 
         const found = lyceesBySpecialiteMap.get(spe);
         if (!found) {
@@ -38,13 +39,21 @@ const MesLycees = (props) => {
                     const payload = response.data.features;
                     if (payload) {
                         const lyceesWithSpe = payload.map((item) => {
-                            return item.attributes.ETABLISSEMENT;
+                            return nomLyceesMap.get(item.attributes.ETABLISSEMENT);
                         });
                         let newMap = new Map(lyceesBySpecialiteMap);
                         newMap.set(spe, lyceesWithSpe);
                         setLyceesBySpecialiteMap(newMap);
+                        let filteredMap = new Map();
+                        if (newFiltre && newFiltre.length !== 0) {
+                            newFiltre.forEach((spec) => {
+                                filteredMap.set(spec, newMap.get(spec));
+                            });
+                        }
                         secteurRefs.current.forEach((ref) => {
-                            ref.setFromOutside(newFiltre, newMap);
+                            console.log("handleFilterAdded propagates : " + newFiltre + " ...");
+                            console.log(filteredMap);
+                            ref.setFilter(filteredMap);
                         });                
                     }
                 })
@@ -53,8 +62,14 @@ const MesLycees = (props) => {
                 }); 
         }
         else {
+            console.log("handleFilterAdded: no call, map connue : ...");
+            console.log(lyceesBySpecialiteMap);
+            let filteredMap = new Map();
+            newFiltre.forEach((spec) => {
+                filteredMap.set(spec, lyceesBySpecialiteMap.get(spec));
+            });
             secteurRefs.current.forEach((ref) => {
-                ref.setFromOutside(newFiltre, lyceesBySpecialiteMap);
+                ref.setFilter(newFiltre, filteredMap);
             });    
         }
     }
@@ -62,9 +77,15 @@ const MesLycees = (props) => {
     const handleFilterRemoved = (newFiltre, spe) => {
         console.log("handleFilterRemoved: " + spe);
         console.log(newFiltre);
+        let filteredMap = new Map();
+        if (newFiltre && newFiltre.length !== 0) {
+            newFiltre.forEach((spec) => {
+                filteredMap.set(spec, lyceesBySpecialiteMap.get(spec));
+            });
+        }
         secteurRefs.current.forEach((ref) => {
-            ref.setFromOutside(newFiltre, lyceesBySpecialiteMap);
-        });
+            ref.setFilter(newFiltre, filteredMap);
+        });    
     }
 
     const onNewLyceesReceived = (secteur, lycees) => {
@@ -96,6 +117,7 @@ const MesLycees = (props) => {
                     secteur='1'
                     key={props.inputLycees}
                     inputLycees={props.inputLycees}
+                    filter={lyceesBySpecialiteMap}
                     onChange={onNewLyceesReceived}
                  />
             </Tab>
@@ -107,6 +129,7 @@ const MesLycees = (props) => {
                     secteur='2'
                     key={props.inputLycees}
                     inputLycees={props.inputLycees}
+                    filter={lyceesBySpecialiteMap}
                     onChange={onNewLyceesReceived}
                 />
             </Tab>
@@ -118,6 +141,7 @@ const MesLycees = (props) => {
                     secteur='3'
                     key={props.inputLycees}
                     inputLycees={props.inputLycees}
+                    filter={lyceesBySpecialiteMap}
                     onChange={onNewLyceesReceived}
                 />
             </Tab>

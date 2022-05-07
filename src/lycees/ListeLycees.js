@@ -4,22 +4,25 @@ import { Container, ListGroup } from 'react-bootstrap';
 import { useLocalStorage } from '../useLocalStorage';
 import seuilsMap from '../data/seuils';
 import { bonusSecteur } from "../data/affelnet";
+import { lyceesTousSecteurs } from '../data/lycees';
 import './ListeLycees.css';
-import { Check, Check2, Check2All, CheckLg, Exclamation, ExclamationLg, Question, X } from 'react-bootstrap-icons';
+import { Check2, Check2All , ExclamationLg, Question, X } from 'react-bootstrap-icons';
 
 const ListeLycees = (props, ref) => {
  
-    const [lycees, setLycees] = useLocalStorage('lycees/secteur-' + props.secteur, []);
-    const [filtres, setFiltres] = useState([]);
-    const [lyceesBySpecialiteMap, setLyceesBySpecialiteMap] = useState(new Map());
+    //const [lycees, setLycees] = useLocalStorage('lycees/secteur-' + props.secteur, []);
+    //const [filtres, setFiltres] = useState([]);
+    const [lycees, setLycees] = useState([]);
+    const [lyceesBySpecialiteMap, setLyceesBySpecialiteMap] = useState(props.filter);
     const [cacheLyceeSecteur, setCacheLyceeSecteur] = useState(new Map());
 
     useImperativeHandle(ref, () => ({
-        setFromOutside (newFiltres, newLyceesBySpecialiteMap) {
-            setFiltres(newFiltres);
+        setFilter(newLyceesBySpecialiteMap) {
+            console.log("sect " + props.secteur + " received: specMap = ....");
+            console.log(newLyceesBySpecialiteMap);
             setLyceesBySpecialiteMap(newLyceesBySpecialiteMap);
         }
-    }), [setFiltres, setLyceesBySpecialiteMap])
+    }), [setLyceesBySpecialiteMap])
  
     const fetchData = React.useCallback(() => {
         let key = props.inputLycees.nomCollegeSecteur + props.secteur;
@@ -44,11 +47,16 @@ const ListeLycees = (props, ref) => {
                   const payload = response.data.features;
                   //console.log(payload);
                   if (payload) {
-                      const newLycees = payload.map((item) => {
+                      let newLycees = payload.map((item) => {
                           return {
                             'nom' : item.attributes.Nom,
                             'seuil' : seuilsMap.get(item.attributes.Nom) ? seuilsMap.get(item.attributes.Nom) : 0};
                       });
+                      if (props.secteur === '1') {
+                         lyceesTousSecteurs.forEach((lycee) => {
+                            newLycees.push({ 'nom': lycee, 'seuil' : 0});
+                         });
+                      }
                       newLycees.sort((fa,fb) => {
                         if (fa.seuil < fb.seuil) {
                             return 1;
@@ -97,11 +105,12 @@ const ListeLycees = (props, ref) => {
     const determineVariant = (lycee, seuil) => {
         let className = 'light';
         if (seuil !== 0) {
-            className = 'warning';
-            let diff = props.inputLycees.score + bonusSecteur.get(props.secteur) - seuil;        
-            if (diff >= 100) {
+            let diff = parseInt(props.inputLycees.score + bonusSecteur.get(props.secteur) - seuil);        
+            if (diff > 50) {
                 className = 'success';
-            } else if (diff < -100) {
+            } else if (diff > -150) {
+                className = 'warning';
+            } else {
                 className = 'danger';
             }
         }
@@ -118,15 +127,20 @@ const ListeLycees = (props, ref) => {
         }
     }
 
-    const lyceeHasAllFilteredSpecialites = (lycee, thefiltres) => {
-        for (let spe of thefiltres) {
-            if (!hasSpecialite(lycee, spe)) return false;
+    const lyceeHasAllFilteredSpecialites = (lycee) => {
+        if (lyceesBySpecialiteMap && lyceesBySpecialiteMap.size !== 0) {
+            for (let spe of lyceesBySpecialiteMap.keys()) {
+                if (!hasSpecialite(lycee, spe)) {
+                    //console.log(lycee + " no " + spe);
+                    return false;
+                }
+            }
         }
         return true;
     }
 
-    const determineFiltered = (lycee, thefiltres) => {
-        return lyceeHasAllFilteredSpecialites(lycee, thefiltres) ? '' : 'filtered';
+    const determineFiltered = (lycee) => {
+        return lyceeHasAllFilteredSpecialites(lycee) ? '' : 'filtered';
     }
 
     return (
@@ -134,7 +148,7 @@ const ListeLycees = (props, ref) => {
             <ListGroup>
                 {lycees.map(lycee => (
                     <ListGroup.Item key={lycee.nom} variant={determineVariant(lycee.nom, lycee.seuil)}>
-                        <span className={determineFiltered(lycee.nom, filtres)} >
+                        <span className={determineFiltered(lycee.nom)} >
                             {lycee.nom}&nbsp;
                             {computeDiff(lycee.nom, lycee.seuil)}
                             {(() => {
