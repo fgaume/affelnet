@@ -31,8 +31,8 @@ const FiltreSpecialite = (props) => {
         <Popover id="popover-basic">
           <Popover.Header as="h3">Filtrage par spécialités</Popover.Header>
           <Popover.Body>
-            Permet d'exclure les lycées ne proposant pas les spécialités sélectionnées.
-            Les spécialités Mathématiques et SVT sont absentes des filtres car tous les lycées parisiens les proposent.
+            Permet d'exclure les lycées proposant les spécialités sélectionnées.
+            Les spécialités Mathématiques et SVT sont absentes des filtres car tous les lycées parisiens les proposent.   
           </Popover.Body>
         </Popover>
       );
