@@ -1,7 +1,7 @@
 import React from 'react';
+import { forwardRef, useImperativeHandle } from "react";
 import Form from 'react-bootstrap/Form';
 import { useLocalStorage } from "../useLocalStorage";
-import { forwardRef, useImperativeHandle } from "react";
 
 const CompetenceSelector = (props, ref) => {
 

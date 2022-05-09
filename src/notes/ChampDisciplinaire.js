@@ -1,7 +1,8 @@
-import Container from 'react-bootstrap/Container';
-import Matiere from "./Matiere";
-import { useLocalStorage, getStorageInt } from "../useLocalStorage";
 import { forwardRef, useImperativeHandle, useRef } from "react";
+import Container from 'react-bootstrap/Container';
+
+import { useLocalStorage } from "../useLocalStorage";
+import Matiere from "./Matiere";
 
 const ChampDisciplinaire = (props, ref) => {
 
@@ -27,7 +28,7 @@ const ChampDisciplinaire = (props, ref) => {
     }), [moyenne, setMoyenne, avancementChamp])
 
     const handleChange = (matiere, newMoyenneMatiere, newNbNotesMatiere) => {
-        console.log('cd matiere updated : ' + matiere, newMoyenneMatiere);
+        //console.log('cd matiere updated : ' + matiere, newMoyenneMatiere);
         let nbNotes = 0, sum = 0, newAvancementChamp = 0;
         for (let index = 0; index < props.matieres.length; index++) {
             let amatiere = props.matieres[index];

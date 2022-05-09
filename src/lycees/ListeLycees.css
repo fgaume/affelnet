@@ -3,3 +3,7 @@ span.filtered {
     font-style: italic;
     color: gray;
 }
+
+.popover {
+    background: tomato;
+}

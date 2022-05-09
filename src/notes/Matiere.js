@@ -1,11 +1,13 @@
 import React from "react";
+import { useRef, forwardRef, useImperativeHandle } from "react";
 import Form from 'react-bootstrap/Form';
 import Stack from 'react-bootstrap/Stack';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import NoteSelector from './NoteSelector';
+
 import { useLocalStorage } from "../useLocalStorage";
-import { useRef, forwardRef, useImperativeHandle } from "react";
+import NoteSelector from './NoteSelector';
+
 
 const Matiere = (props, ref) => {
 

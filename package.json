@@ -1,6 +1,6 @@
 {
-  "name": "affelnet",
-  "version": "0.1.0",
+"name": "simulateu_affelnet",
+  "version": "6.3.1",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.3",

@@ -1,11 +1,14 @@
 import axios from 'axios';
 import React, { useRef, useState } from 'react';
 import { Container, Tab, Tabs } from 'react-bootstrap';
+
 import { useLocalStorage } from '../useLocalStorage';
 import ListeLycees from './ListeLycees';
+import FiltreSpecialite from './FiltreSpecialite';
+
 import { specialitesMap } from '../data/specialites';
 import { nomLyceesMap } from '../data/lycees';
-import FiltreSpecialite from './FiltreSpecialite';
+
 import "bootstrap/dist/css/bootstrap.css";
 
 const MesLycees = (props) => {
@@ -22,70 +25,49 @@ const MesLycees = (props) => {
         console.log("handleFilterAdded: new spe=" + spe);
         console.log("handleFilterAdded: updated filtre=" + newFiltre);
 
-        const found = lyceesBySpecialiteMap.get(spe);
-        if (!found) {
-            axios({
-                "method": "GET",
-                "url": "https://services9.arcgis.com/ekT8MJFiVh8nvlV5/arcgis/rest/services/LES_ENSEIGNEMENTS_DE_SPECIALITE_EN_CLASSE_DE_PREMIERE_RS_2021/FeatureServer/0/query",
-                "headers": {},
-                "params": {
-                    outFields : 'ETABLISSEMENT',
-                    returnGeometry : 'false',
-                    f : 'pjson',
-                    where : `ENSEIGNEMENT_DE_SPECIALITE='${specialitesMap.get(spe)}'`
-                }
-                })
-                .then((response) => {
-                    const payload = response.data.features;
-                    if (payload) {
-                        const lyceesWithSpe = payload.map((item) => {
-                            return nomLyceesMap.get(item.attributes.ETABLISSEMENT);
+        axios({
+            "method": "GET",
+            "url": "https://services9.arcgis.com/ekT8MJFiVh8nvlV5/arcgis/rest/services/LES_ENSEIGNEMENTS_DE_SPECIALITE_EN_CLASSE_DE_PREMIERE_RS_2021/FeatureServer/0/query",
+            "headers": {},
+            "params": {
+                outFields : 'ETABLISSEMENT',
+                returnGeometry : 'false',
+                f : 'pjson',
+                where : `ENSEIGNEMENT_DE_SPECIALITE='${specialitesMap.get(spe)}'`
+            }
+            })
+            .then((response) => {
+                const payload = response.data.features;
+                if (payload) {
+                    const lyceesWithSpe = payload.map((item) => {
+                        return nomLyceesMap.get(item.attributes.ETABLISSEMENT);
+                    });
+                    let newMap = new Map(lyceesBySpecialiteMap);
+                    newMap.set(spe, lyceesWithSpe);
+                    setLyceesBySpecialiteMap(newMap);
+                    let filteredMap = new Map();
+                    if (newFiltre && newFiltre.length !== 0) {
+                        newFiltre.forEach((spec) => {
+                            filteredMap.set(spec, newMap.get(spec));
                         });
-                        let newMap = new Map(lyceesBySpecialiteMap);
-                        newMap.set(spe, lyceesWithSpe);
-                        setLyceesBySpecialiteMap(newMap);
-                        let filteredMap = new Map();
-                        if (newFiltre && newFiltre.length !== 0) {
-                            newFiltre.forEach((spec) => {
-                                filteredMap.set(spec, newMap.get(spec));
-                            });
-                        }
-                        secteurRefs.current.forEach((ref) => {
-                            console.log("handleFilterAdded propagates : " + newFiltre + " ...");
-                            console.log(filteredMap);
-                            ref.setFilter(filteredMap);
-                        });                
                     }
-                })
-                .catch((error) => {
-                    console.log(error);
-                }); 
-        }
-        else {
-            console.log("handleFilterAdded: no call, map connue : ...");
-            console.log(lyceesBySpecialiteMap);
-            let filteredMap = new Map();
-            newFiltre.forEach((spec) => {
-                filteredMap.set(spec, lyceesBySpecialiteMap.get(spec));
-            });
-            secteurRefs.current.forEach((ref) => {
-                ref.setFilter(newFiltre, filteredMap);
-            });    
-        }
+                    secteurRefs.current.forEach((ref) => {
+                        console.log("handleFilterAdded propagates : " + newFiltre + " ...");
+                        console.log(filteredMap);
+                        ref.setFilter(filteredMap);
+                    });                
+                }
+            })
+            .catch((error) => {
+                console.log(error);
+            }); 
     }
 
     const handleFilterRemoved = (newFiltre, spe) => {
-        /* console.log("handleFilterRemoved: " + spe);
-        console.log(newFiltre);
-        console.log("lyceesBySpecialiteMap = ...")
-        console.log(lyceesBySpecialiteMap) */
+        console.log("handleFilterRemoved: no more spe " + spe);
+        console.log("handleFilterRemoved: updated filtre=" + newFiltre);
         let filteredMap = new Map(lyceesBySpecialiteMap);
         filteredMap.delete(spe);
-        /* if (newFiltre && newFiltre.length !== 0) {
-            newFiltre.forEach((spec) => {
-                filteredMap.set(spec, lyceesBySpecialiteMap.get(spec));
-            });
-        } */
         setLyceesBySpecialiteMap(filteredMap);
         secteurRefs.current.forEach((ref) => {
             ref.setFilter(filteredMap);

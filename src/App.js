@@ -11,6 +11,7 @@ import { CheckLg, ExclamationLg } from 'react-bootstrap-icons';
 
 const App = () => {
 
+  const version = "v6.3.0 09/05/2022 15:00";
   const [scoreGlobal, setScoreGlobal] = useLocalStorage("Score/Score global", 0);
   const [scoreCompetences, setScoreCompetences] = useLocalStorage("Score/Score compétences global", 0);
   const [scoreNotes, setScoreNotes] = useLocalStorage("Score/Score notes global", 0);
@@ -19,7 +20,6 @@ const App = () => {
   const [inputLycees, setInputLycees] = useLocalStorage("Lycees/inputLycees", {});
   const [avancementCompetences, setAvancementCompetences] = useLocalStorage("Score/avancementCompetences", 0);
   const [avancementNotes, setAvancementNotes] = useLocalStorage("Score/avancementNotes", 0);
-
 
   const handleChangeCompetence = (competenceUpdate, avancement) => {
     setScoreCompetences(competenceUpdate);
@@ -107,9 +107,8 @@ const App = () => {
         </Accordion.Item>
       </Accordion>
       <p>&nbsp;</p>
-      <p class='text-end text-muted'><h6><small>v6.3 09/05/2022 12:07</small></h6></p>
+      <p class='text-end text-muted'><h6><small>{version}&nbsp;</small></h6></p>
     </Form>
-    
   );
 };
 

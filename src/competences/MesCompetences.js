@@ -1,12 +1,13 @@
 import React from 'react';
 import { useRef } from 'react';
-import { useLocalStorage } from "../useLocalStorage";
 import Container from 'react-bootstrap/Container';
-import {competences} from '../data/affelnet';
 import { Button, ProgressBar } from 'react-bootstrap';
 import { Row, Col } from 'react-bootstrap';
+import { ChevronBarDown, ChevronBarUp } from 'react-bootstrap-icons';
+
+import { useLocalStorage } from "../useLocalStorage";
+import {competences} from '../data/affelnet';
 import Competence from './Competence';
-import { ArrowDownCircle, ArrowUpCircle, ChevronBarDown, ChevronBarUp } from 'react-bootstrap-icons';
 
 const MesCompetences = (props) => {
     
@@ -67,15 +68,15 @@ const MesCompetences = (props) => {
 
     return (
         <Container>
-                {
-                    (avancementCompetences !== 100) && (
-                        <Row>
-                        <Col>
-                            <ProgressBar min='0' max='100' variant={avancementCompetences === 100 ? 'success' : 'primary'} now={avancementCompetences} />
-                        </Col>
-                    </Row>
-                    )
-                }
+            {
+                (avancementCompetences !== 100) && (
+                    <Row>
+                    <Col>
+                        <ProgressBar min='0' max='100' variant={avancementCompetences === 100 ? 'success' : 'primary'} now={avancementCompetences} />
+                    </Col>
+                </Row>
+                )
+            }
             <Row>
                 <Col>&nbsp;</Col>
             </Row>

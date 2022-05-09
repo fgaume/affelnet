@@ -1,17 +1,16 @@
 import React, { forwardRef, useEffect, useImperativeHandle, useState } from 'react';
 import axios from 'axios';
 import { Container, ListGroup } from 'react-bootstrap';
-import { useLocalStorage } from '../useLocalStorage';
+import { Check2, Check2All , ExclamationLg, Question, X } from 'react-bootstrap-icons';
+
 import seuilsMap from '../data/seuils';
 import { bonusSecteur } from "../data/affelnet";
 import { lyceesTousSecteurs } from '../data/lycees';
+
 import './ListeLycees.css';
-import { Check2, Check2All , ExclamationLg, Question, X } from 'react-bootstrap-icons';
 
 const ListeLycees = (props, ref) => {
  
-    //const [lycees, setLycees] = useLocalStorage('lycees/secteur-' + props.secteur, []);
-    //const [filtres, setFiltres] = useState([]);
     const [lycees, setLycees] = useState([]);
     const [lyceesBySpecialiteMap, setLyceesBySpecialiteMap] = useState(props.filter);
     const [cacheLyceeSecteur, setCacheLyceeSecteur] = useState(new Map());
@@ -45,7 +44,6 @@ const ListeLycees = (props, ref) => {
               })
               .then((response) => {
                   const payload = response.data.features;
-                  //console.log(payload);
                   if (payload) {
                       let newLycees = payload.map((item) => {
                           return {
@@ -77,7 +75,7 @@ const ListeLycees = (props, ref) => {
               .catch((error) => {
                 console.log(error);
               });
-              }
+            }
       }, [props.inputLycees.nomCollegeSecteur]);
 
     useEffect(() => {
@@ -116,15 +114,6 @@ const ListeLycees = (props, ref) => {
         }
         return className;
     }
-
-    /* const hasSpecialite = (lycee, lyceeSpes) => {
-        if ((lyceeSpes !== undefined) && (lyceeSpes.size !== 0)) {
-            return lyceeSpes.includes(lycee);
-        }
-        else {
-            return true;
-        }
-    } */
 
     const lyceeHasAllFilteredSpecialites = (lycee) => {
         if (lyceesBySpecialiteMap && lyceesBySpecialiteMap.size > 0) {
@@ -174,4 +163,5 @@ const ListeLycees = (props, ref) => {
         </Container>
     )
 }
+
 export default forwardRef(ListeLycees);

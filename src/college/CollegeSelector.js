@@ -1,9 +1,11 @@
 import React, { useRef, useEffect } from 'react';
 import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
+import { Typeahead } from 'react-bootstrap-typeahead';
+
 import { useLocalStorage } from "../useLocalStorage";
 import colleges from "../data/colleges";
-import { Typeahead } from 'react-bootstrap-typeahead';
+
 import 'react-bootstrap-typeahead/css/Typeahead.css';
 import './MonCollege.css';
 

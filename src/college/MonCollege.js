@@ -2,9 +2,10 @@ import React from 'react';
 import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
 import { useLocalStorage } from "../useLocalStorage";
+import CollegeSelector from './CollegeSelector';
+
 import 'react-bootstrap-typeahead/css/Typeahead.css';
 import './MonCollege.css';
-import CollegeSelector from './CollegeSelector';
 
 const MonCollege = (props) => {
 
@@ -71,4 +72,5 @@ const MonCollege = (props) => {
         </Container>
     )
 }
+
 export default MonCollege;

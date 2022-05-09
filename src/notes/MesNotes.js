@@ -1,13 +1,15 @@
+import { useRef } from 'react';
 import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
-import { useLocalStorage } from "../useLocalStorage";
-import ChampDisciplinaire from './ChampDisciplinaire';
-import { moyennesAcademiques, ecartsAcademiques } from '../data/stats';
-import {champsDisciplinaires, coefficients} from '../data/affelnet';
 import { Button, ProgressBar } from 'react-bootstrap';
 import { Row, Col } from 'react-bootstrap';
-import { useRef } from 'react';
 import { ChevronBarDown, ChevronBarUp } from 'react-bootstrap-icons';
+
+import { useLocalStorage } from "../useLocalStorage";
+import ChampDisciplinaire from './ChampDisciplinaire';
+
+import { moyennesAcademiques, ecartsAcademiques } from '../data/stats';
+import {champsDisciplinaires, coefficients} from '../data/affelnet';
 
 const MesNotes = (props) => {
 

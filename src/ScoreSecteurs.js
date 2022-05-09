@@ -32,7 +32,7 @@ const ScoreSecteurs = (props) => {
             </OverlayTrigger>
           </Col>
           <Col className='d-flex justify-content-center text-primary'>
-          <OverlayTrigger placement="right" overlay={
+          <OverlayTrigger placement="bottom" overlay={
                 props => (
                     <Tooltip {...props}>Mon score pour les voeux de lycées en secteur 2</Tooltip>
                   )
@@ -41,7 +41,7 @@ const ScoreSecteurs = (props) => {
             </OverlayTrigger>
           </Col>
           <Col className='d-flex justify-content-center text-secondary'>
-          <OverlayTrigger placement="right" overlay={
+          <OverlayTrigger placement="left" overlay={
                 props => (
                     <Tooltip {...props}>Mon score pour les voeux de lycées en secteur 3</Tooltip>
                   )
