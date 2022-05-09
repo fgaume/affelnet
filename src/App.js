@@ -106,7 +106,10 @@ const App = () => {
           </Accordion.Body>
         </Accordion.Item>
       </Accordion>
+      <p>&nbsp;</p>
+      <p class='text-end text-muted'><h6><small>v6.3 09/05/2022 12:07</small></h6></p>
     </Form>
+    
   );
 };
 

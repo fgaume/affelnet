@@ -117,22 +117,22 @@ const ListeLycees = (props, ref) => {
         return className;
     }
 
-    const hasSpecialite = (lycee, spe) => {
-        if (lyceesBySpecialiteMap && lyceesBySpecialiteMap.get(spe)) {
-            const lyceeSpes = lyceesBySpecialiteMap.get(spe);
+    /* const hasSpecialite = (lycee, lyceeSpes) => {
+        if ((lyceeSpes !== undefined) && (lyceeSpes.size !== 0)) {
             return lyceeSpes.includes(lycee);
         }
         else {
             return true;
         }
-    }
+    } */
 
     const lyceeHasAllFilteredSpecialites = (lycee) => {
-        if (lyceesBySpecialiteMap && lyceesBySpecialiteMap.size !== 0) {
-            for (let spe of lyceesBySpecialiteMap.keys()) {
-                if (!hasSpecialite(lycee, spe)) {
-                    //console.log(lycee + " no " + spe);
-                    return false;
+        if (lyceesBySpecialiteMap && lyceesBySpecialiteMap.size > 0) {
+            const keys = lyceesBySpecialiteMap.keys();
+            if (keys) {
+                for (let spe of keys) {
+                    const lyceeSpes = lyceesBySpecialiteMap.get(spe);
+                    if (lyceeSpes && !lyceeSpes.includes(lycee)) return false;
                 }
             }
         }

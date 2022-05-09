@@ -75,16 +75,20 @@ const MesLycees = (props) => {
     }
 
     const handleFilterRemoved = (newFiltre, spe) => {
-        console.log("handleFilterRemoved: " + spe);
+        /* console.log("handleFilterRemoved: " + spe);
         console.log(newFiltre);
-        let filteredMap = new Map();
-        if (newFiltre && newFiltre.length !== 0) {
+        console.log("lyceesBySpecialiteMap = ...")
+        console.log(lyceesBySpecialiteMap) */
+        let filteredMap = new Map(lyceesBySpecialiteMap);
+        filteredMap.delete(spe);
+        /* if (newFiltre && newFiltre.length !== 0) {
             newFiltre.forEach((spec) => {
                 filteredMap.set(spec, lyceesBySpecialiteMap.get(spec));
             });
-        }
+        } */
+        setLyceesBySpecialiteMap(filteredMap);
         secteurRefs.current.forEach((ref) => {
-            ref.setFilter(newFiltre, filteredMap);
+            ref.setFilter(filteredMap);
         });    
     }
 
