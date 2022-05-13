@@ -52,7 +52,7 @@ const ListeLycees = (props, ref) => {
                       });
                       if (props.secteur === '1') {
                          lyceesTousSecteurs.forEach((lycee) => {
-                            newLycees.push({ 'nom': lycee, 'seuil' : 0});
+                            newLycees.push({ 'nom': lycee, 'seuil' : seuilsMap.get(lycee) ? seuilsMap.get(lycee) : 0});
                          });
                       }
                       newLycees.sort((fa,fb) => {

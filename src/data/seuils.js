@@ -64,7 +64,7 @@ const seuils = [
       "seuil": 40371.575
     },
     {
-      "nom": "JULES FERRY",
+      "nom": "J. FERRY",
       "seuil": 40332.292
     },
     {
@@ -134,6 +134,30 @@ const seuils = [
     {
       "nom": "BERGSON",
       "seuil": 6796.35
+    },
+    {
+      "nom": "P.G. DE GENNES",
+      "seuil": 7222.187
+    },
+    {
+      "nom": "EMILE DUBOIS",
+      "seuil": 38094.583
+    },
+    {
+      "nom": "VILLON",
+      "seuil": 24090.145
+    },
+    {
+      "nom": "G.FAURE",
+      "seuil": 23180.853
+    },
+    {
+      "nom": "COLBERT",
+      "seuil": 22588.564
+    },
+    {
+      "nom": "E. QUINET",
+      "seuil": 24129.843
     }
   ];
 

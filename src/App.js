@@ -11,7 +11,7 @@ import { CheckLg, ExclamationLg } from 'react-bootstrap-icons';
 
 const App = () => {
 
-  const version = "v6.3.0 09/05/2022 15:00";
+  const version = "v6.3.1 13/05/2022 17:03";
   const [scoreGlobal, setScoreGlobal] = useLocalStorage("Score/Score global", 0);
   const [scoreCompetences, setScoreCompetences] = useLocalStorage("Score/Score compétences global", 0);
   const [scoreNotes, setScoreNotes] = useLocalStorage("Score/Score notes global", 0);
