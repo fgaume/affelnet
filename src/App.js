@@ -1,4 +1,5 @@
 import React from 'react';
+import { useState, useEffect } from 'react';
 import Form from 'react-bootstrap/Form';
 import Accordion from 'react-bootstrap/Accordion';
 import MesCompetences from './competences/MesCompetences';
@@ -8,10 +9,11 @@ import ScoreSecteurs from "./ScoreSecteurs";
 import { useLocalStorage } from "./useLocalStorage";
 import MesLycees from './lycees/MesLycees';
 import { CheckLg, ExclamationLg } from 'react-bootstrap-icons';
+import LoadingScreen from './LoadingScreen';
 
 const App = () => {
 
-  const version = "v6.3.1 13/05/2022 17:03";
+  const version = "v6.3.3 16/05/2022 16:41";
   const [scoreGlobal, setScoreGlobal] = useLocalStorage("Score/Score global", 0);
   const [scoreCompetences, setScoreCompetences] = useLocalStorage("Score/Score compétences global", 0);
   const [scoreNotes, setScoreNotes] = useLocalStorage("Score/Score notes global", 0);
@@ -20,6 +22,11 @@ const App = () => {
   const [inputLycees, setInputLycees] = useLocalStorage("Lycees/inputLycees", {});
   const [avancementCompetences, setAvancementCompetences] = useLocalStorage("Score/avancementCompetences", 0);
   const [avancementNotes, setAvancementNotes] = useLocalStorage("Score/avancementNotes", 0);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    setTimeout(() => setLoading(false), 1000)
+  }, []);
 
   const handleChangeCompetence = (competenceUpdate, avancement) => {
     setScoreCompetences(competenceUpdate);
@@ -52,6 +59,8 @@ const App = () => {
   }
 
   return (
+    <>
+    {loading === false ? (
     <Form>
       <div>&nbsp;</div>
       <ScoreSecteurs scoreGlobal={scoreGlobal} />
@@ -109,6 +118,10 @@ const App = () => {
       <p>&nbsp;</p>
       <p class='text-end text-muted'><h6><small>{version}&nbsp;</small></h6></p>
     </Form>
+    ) : (
+      <LoadingScreen />
+    )}
+    </>
   );
 };
 
