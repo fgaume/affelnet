@@ -6,16 +6,15 @@ import { useLocalStorage } from '../useLocalStorage';
 import ListeLycees from './ListeLycees';
 import FiltreSpecialite from './FiltreSpecialite';
 
-import { specialitesMap } from '../data/specialites';
-import { nomLyceesMap } from '../data/lycees';
+import { codesSpecialitesMap } from '../data/specialites';
 
 import "bootstrap/dist/css/bootstrap.css";
 
 const MesLycees = (props) => {
  
-    const [lyceesSecteur1, setLyceesSecteur1] = useLocalStorage('lycees/Secteur1', []);
-    const [lyceesSecteur2, setLyceesSecteur2] = useLocalStorage('lycees/Secteur2', []);
-    const [lyceesSecteur3, setLyceesSecteur3] = useLocalStorage('lycees/Secteur3', []);
+    const [lyceesSecteur1, setLyceesSecteur1] = useState([]);
+    const [lyceesSecteur2, setLyceesSecteur2] = useState([]);
+    const [lyceesSecteur3, setLyceesSecteur3] = useState([]);
 
     const [lyceesBySpecialiteMap, setLyceesBySpecialiteMap] = useState(new Map());
 
@@ -30,17 +29,17 @@ const MesLycees = (props) => {
             "url": "https://services9.arcgis.com/ekT8MJFiVh8nvlV5/arcgis/rest/services/LES_ENSEIGNEMENTS_DE_SPECIALITE_EN_CLASSE_DE_PREMIERE_RS_2021/FeatureServer/0/query",
             "headers": {},
             "params": {
-                outFields : 'ETABLISSEMENT',
+                outFields : 'UAI',
                 returnGeometry : 'false',
                 f : 'pjson',
-                where : `ENSEIGNEMENT_DE_SPECIALITE='${specialitesMap.get(spe)}'`
+                where : `ENSEIGNEMENT_DE_SPECIALITE='${codesSpecialitesMap.get(spe)}'`
             }
             })
             .then((response) => {
                 const payload = response.data.features;
                 if (payload) {
                     const lyceesWithSpe = payload.map((item) => {
-                        return nomLyceesMap.get(item.attributes.ETABLISSEMENT);
+                        return item.attributes.UAI;
                     });
                     let newMap = new Map(lyceesBySpecialiteMap);
                     newMap.set(spe, lyceesWithSpe);

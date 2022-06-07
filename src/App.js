@@ -2,18 +2,23 @@ import React from 'react';
 import { useState, useEffect } from 'react';
 import Form from 'react-bootstrap/Form';
 import Accordion from 'react-bootstrap/Accordion';
-import MesCompetences from './competences/MesCompetences';
-import MesNotes from "./notes/MesNotes";
-import MonCollege from './college/MonCollege';
-import ScoreSecteurs from "./ScoreSecteurs";
+import { CheckLg, ExclamationLg } from 'react-bootstrap-icons';
 import { useLocalStorage } from "./useLocalStorage";
 import MesLycees from './lycees/MesLycees';
-import { CheckLg, ExclamationLg } from 'react-bootstrap-icons';
-import LoadingScreen from './LoadingScreen';
+import MesNotes from "./notes/MesNotes";
+import MonCollege from './college/MonCollege';
+import ScoreSecteurs from './main/ScoreSecteurs';
+import LoadingScreen from './main/LoadingScreen';
+import ContribSeuils from './contrib/ContribSeuils';
+import MesCompetences from './competences/MesCompetences';
+import ListeSeuils from './seuils/ListeSeuils';
+import { Alert, Container } from 'react-bootstrap';
+import SeuilEditor from './seuils/SeuilEditor';
 
 const App = () => {
 
   const version = "v6.3.3 16/05/2022 16:41";
+  const contrib = true;
   const [scoreGlobal, setScoreGlobal] = useLocalStorage("Score/Score global", 0);
   const [scoreCompetences, setScoreCompetences] = useLocalStorage("Score/Score compétences global", 0);
   const [scoreNotes, setScoreNotes] = useLocalStorage("Score/Score notes global", 0);
@@ -61,11 +66,11 @@ const App = () => {
   return (
     <>
     {loading === false ? (
-    <Form>
+    <div>
       <div>&nbsp;</div>
       <ScoreSecteurs scoreGlobal={scoreGlobal} />
       <div>&nbsp;</div>
-      <Accordion defaultActiveKey={nomCollegeSecteur === '' ? '0' : '3'} >
+      <Accordion defaultActiveKey={nomCollegeSecteur === '' ? '0' : '4'} >
         <Accordion.Item eventKey="0">
           <Accordion.Header>
             <span className='fw-bolder'>Mon collège&nbsp;</span>
@@ -114,10 +119,26 @@ const App = () => {
             <MesLycees key={inputLycees} inputLycees={inputLycees} />           
           </Accordion.Body>
         </Accordion.Item>
+        <Accordion.Item eventKey="4" hidden={!contrib}>
+          <Accordion.Header><span className='fw-bolder'>Seuils d'admission 2022</span></Accordion.Header>
+          <Accordion.Body>
+            <div>
+              <Alert variant='success'>
+  Afin d'en faire profiter la communauté, ajoutez ici les seuils d'admission des lycées que vous avez demandés
+  cette année.
+  <br /> Il s'agit du score du dernier admis, fourni dans la dernière colonne de la fiche barème
+  à demander au Rectorat dès le 1er juillet à l'adresse email : <b>ce.dve@ac-paris.fr</b>
+              </Alert>
+              <SeuilEditor />
+              <hr />
+              <ListeSeuils />
+            </div>
+          </Accordion.Body>
+        </Accordion.Item>
       </Accordion>
       <p>&nbsp;</p>
-      <p class='text-end text-muted'><h6><small>{version}&nbsp;</small></h6></p>
-    </Form>
+      <p className='text-end text-muted'><small>{version}&nbsp;</small></p>
+    </div>
     ) : (
       <LoadingScreen />
     )}

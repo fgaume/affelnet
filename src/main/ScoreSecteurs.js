@@ -2,7 +2,7 @@ import React from "react";
 import { Container, OverlayTrigger, Tooltip } from 'react-bootstrap';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import { bonusSecteur } from "./data/affelnet";
+import { bonusSecteur } from "../data/affelnet";
 
 const ScoreSecteurs = (props) => {
     return (

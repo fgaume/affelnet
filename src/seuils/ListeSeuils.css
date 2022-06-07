@@ -1,0 +1,30 @@
+table {
+    width: 100%;
+}
+th.rang {
+    width: 3%;
+    text-align:center;
+}
+th.lycee {
+    text-align:left;
+}
+th.seuil {
+    width: 20%;
+    text-align:center;
+}
+th.variation {
+    width: 20%;
+    text-align:center;
+}
+td.rang {
+    width: 2%
+}
+td.seuil {
+    width: 20%;
+    text-align:center;
+}
+td.variation {
+    width: 20%;
+    text-align:center;
+}
+

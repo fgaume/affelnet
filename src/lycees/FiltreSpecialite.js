@@ -5,13 +5,13 @@ import Tooltip from "react-bootstrap/Tooltip";
 import { Form, Popover } from 'react-bootstrap';
 import { Funnel, QuestionCircleFill } from 'react-bootstrap-icons';
 
-import { specialitesMap } from '../data/specialites';
+import { specialites } from '../data/specialites';
 
 import "bootstrap/dist/css/bootstrap.css";
 
 const FiltreSpecialite = (props) => {
 
-    const specialites = [...specialitesMap.keys()];
+    //const specialites = [...specialitesMap.keys()];
 
     const [filtres, setFiltres] = useState([]);
 
@@ -30,7 +30,7 @@ const FiltreSpecialite = (props) => {
         <Popover id="popover-basic">
           <Popover.Header as="h3">Filtrage par spécialités</Popover.Header>
           <Popover.Body>
-            Permet d'exclure les lycées proposant les spécialités sélectionnées.
+            Permet d'exclure les lycées ne proposant pas les spécialités sélectionnées.
             Les spécialités Mathématiques et SVT sont absentes des filtres car tous les lycées parisiens les proposent.   
           </Popover.Body>
         </Popover>
@@ -41,19 +41,19 @@ const FiltreSpecialite = (props) => {
             <Funnel width='20' height='20' />&nbsp;Filtrage par spécialités <OverlayTrigger trigger="click" placement="top" overlay={popover}>
             <QuestionCircleFill /></OverlayTrigger> : &nbsp;
             {
-            specialites.map((value, index) => {
-                return <OverlayTrigger key={index} placement="top" trigger='click' rootCloseEvent="mousedown" overlay={
+            specialites.map((spe, index) => {
+                return <OverlayTrigger key={spe.acronyme} placement="top" trigger='click' rootCloseEvent="mousedown" overlay={
                     props => (
-                        <Tooltip {...props}>{specialitesMap.get(value)}</Tooltip>
+                        <Tooltip {...props}>{spe.nom}</Tooltip>
                     )
                 } rootClose='true'>
                 <Form.Switch inline
                     type='checkbox'
-                    id={value}
-                    key={value}
-                    label={value}
+                    id={spe.acronyme}
+                    key={spe.acronyme}
+                    label={spe.acronyme}
                     onChange={onFiltreChange}
-                    defaultChecked={filtres.includes(value)}
+                    defaultChecked={filtres.includes(spe.acronyme)}
                 />
             </OverlayTrigger>
             })

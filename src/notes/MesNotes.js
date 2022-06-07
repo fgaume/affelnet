@@ -129,11 +129,11 @@ const MesNotes = (props) => {
                 <Col>
                     <Button variant="outline-danger" size='sm' onClick={handleSetAllMin}>
                         <ChevronBarDown height='20' width='20' />
-                        &nbsp;Tout au minimum
+                        &nbsp;Tout minimum
                     </Button>&nbsp;
                     <Button variant="outline-success" size='sm' onClick={handleSetAllMax}>
                         <ChevronBarUp height='20' width='20' />
-                        &nbsp;Tout au maximum
+                        &nbsp;Tout maximum
                     </Button>
                 </Col>
             </Row>

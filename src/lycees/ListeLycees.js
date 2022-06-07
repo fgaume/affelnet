@@ -3,9 +3,9 @@ import axios from 'axios';
 import { Container, ListGroup } from 'react-bootstrap';
 import { Check2, Check2All , ExclamationLg, Question, X } from 'react-bootstrap-icons';
 
-import seuilsMap from '../data/seuils';
 import { bonusSecteur } from "../data/affelnet";
-import { lyceesTousSecteurs } from '../data/lycees';
+
+import {nomsLyceesMap, seuilsLyceesMap, tousSecteurs} from '../data/lycees';
 
 import './ListeLycees.css';
 
@@ -36,7 +36,7 @@ const ListeLycees = (props, ref) => {
                 "url": "https://services9.arcgis.com/ekT8MJFiVh8nvlV5/arcgis/rest/services/Affectation_Lyc%C3%A9es/FeatureServer/0/query",
                 "headers": {},
                 "params": {
-                  outFields : 'Nom',
+                  outFields : 'UAI',
                   returnGeometry : 'false',
                   f : 'pjson',
                   where : `secteur='${props.secteur}' and Nom_tete='${props.inputLycees.nomCollegeSecteur}'`
@@ -46,13 +46,20 @@ const ListeLycees = (props, ref) => {
                   const payload = response.data.features;
                   if (payload) {
                       let newLycees = payload.map((item) => {
+                          const codelycee = item.attributes.UAI;
                           return {
-                            'nom' : item.attributes.Nom,
-                            'seuil' : seuilsMap.get(item.attributes.Nom) ? seuilsMap.get(item.attributes.Nom) : 0};
+                            'code' : codelycee,
+                            'nom' : nomsLyceesMap.get(codelycee),
+                            'seuil' : seuilsLyceesMap.get(codelycee)
+                        };
                       });
                       if (props.secteur === '1') {
-                         lyceesTousSecteurs.forEach((lycee) => {
-                            newLycees.push({ 'nom': lycee, 'seuil' : seuilsMap.get(lycee) ? seuilsMap.get(lycee) : 0});
+                        tousSecteurs.forEach((codelycee) => {
+                            newLycees.push({
+                                'code' : codelycee,
+                                'nom': nomsLyceesMap.get(codelycee),
+                                'seuil' : seuilsLyceesMap.get(codelycee)
+                            });
                          });
                       }
                       newLycees.sort((fa,fb) => {
@@ -84,7 +91,7 @@ const ListeLycees = (props, ref) => {
     }, [fetchData, props.inputLycees.nomCollegeSecteur, props.inputLycees.score])
 
 
-    const computeDiff = (lycee, seuil) => {
+    const computeDiff = (seuil) => {
         let result = '';
         if (seuil !== 0) {
             result =  parseInt((props.inputLycees.score + bonusSecteur.get(props.secteur)) - seuil);
@@ -100,7 +107,7 @@ const ListeLycees = (props, ref) => {
         return result;
     }  
 
-    const determineVariant = (lycee, seuil) => {
+    const determineVariant = (seuil) => {
         let className = 'light';
         if (seuil !== 0) {
             let diff = parseInt(props.inputLycees.score + bonusSecteur.get(props.secteur) - seuil);        
@@ -136,10 +143,10 @@ const ListeLycees = (props, ref) => {
         <Container fluid>
             <ListGroup>
                 {lycees.map(lycee => (
-                    <ListGroup.Item key={lycee.nom} variant={determineVariant(lycee.nom, lycee.seuil)}>
-                        <span className={determineFiltered(lycee.nom)} >
+                    <ListGroup.Item key={lycee.code} variant={determineVariant(lycee.seuil)}>
+                        <span className={determineFiltered(lycee.code)} >
                             {lycee.nom}&nbsp;
-                            {computeDiff(lycee.nom, lycee.seuil)}
+                            {computeDiff(lycee.seuil)}
                             {(() => {
                                 if (lycee.seuil !== 0) {
                                     let diff = parseInt((props.inputLycees.score + bonusSecteur.get(props.secteur)) - lycee.seuil);
