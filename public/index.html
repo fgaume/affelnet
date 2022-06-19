@@ -25,6 +25,44 @@
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
     <title>Simulateur Affelnet 2022</title>
+    <style> 
+  
+      .e-accordion {
+          border-radius: 6px 6px 6px 6px;
+          border: none !important;
+      } 
+  
+          /* header custom css*/
+          .e-accordion .e-acrdn-item .e-acrdn-header {
+              background-color: rgb(255, 204, 255);
+              border-radius: 6px 6px 6px 6px;
+          } 
+  
+              /*header on hover custom css*/
+              .e-accordion .e-acrdn-item .e-acrdn-header:hover {
+                  background-color: rgb(255, 51, 255);
+              } 
+  
+          /*header on selected and expanded custom css*/
+          .e-accordion .e-acrdn-item.e-select.e-expand-state > .e-acrdn-header {
+              background: rgb(255, 204, 255);
+          } 
+    
+          .e-accordion .e-acrdn-item.e-select.e-selected.e-expand-state > .e-acrdn-header {
+              background: rgb(255, 128, 255);
+          } 
+    
+          .e-accordion .e-acrdn-item.e-expand-state.e-select:not(.e-selected) > .e-acrdn-header:focus {
+              background: rgb(255, 204, 255);
+          } 
+    
+          /*content custom css*/
+          .e-accordion .e-acrdn-item .e-acrdn-panel .e-acrdn-content {
+              background-color: rgb(222,238,172);
+              border-radius: 6px 6px 6px 6px;
+          } 
+    
+  </style> 
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>

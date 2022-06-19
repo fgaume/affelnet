@@ -1,0 +1,23 @@
+/* .bg {
+    background-image: url(./images/background.png) ;
+    background-repeat: repeat-x;
+    background-size: cover;    
+} */
+
+/* .accordion-button {
+    background-color: transparent !important;
+  }
+  
+  
+  .accordion-button:not(.collapsed) {
+    background-color: transparent !important;
+  }
+
+.transparent {
+    background-color: transparent !important;
+} */
+
+.accordion-button:focus {
+  box-shadow: none;
+}
+

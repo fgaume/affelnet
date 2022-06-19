@@ -1,0 +1,17 @@
+span.filtered {
+    text-decoration: line-through;
+    font-style: italic;
+    color: #adb5bd;
+}
+
+span.admissible {
+    color: green;
+}
+
+span.elimine {
+    color: #dc3545;
+}
+
+span.inconnu {
+    color: #343a40;
+}
