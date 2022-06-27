@@ -40,7 +40,7 @@ const CompetenceEditor = (props) => {
           onChange={handleChange}
           className={getClassName(props.nom)}
         >
-          <option value="0">Maitrise ...</option>
+          <option value="0">Maîtrise ...</option>
           <option value="600">Très bonne</option>
           <option value="480">Satisfaisante</option>
           <option value="300">Fragile</option>
