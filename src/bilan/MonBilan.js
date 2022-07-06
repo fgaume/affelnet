@@ -17,13 +17,12 @@ import AffichageScores from "../main/AffichageScores";
 
 /* returns scoreBilanPrevious and scoreBilanNext */
 const MonBilan = (props) => {
-  const [semestres, setSemestres] = useLocalStorage("semestres", false);
 
+  const [semestres, setSemestres] = useLocalStorage("semestres", false);
   const [matieres, setMatieres] = useLocalStorage(
     "bilan_periodique/matieres",
     listeMatieres
   );
-
   const [scoreBilanPrevious, setScoreBilanPrevious] = useState(0);
   const [scoreBilanNext, setScoreBilanNext] = useState(0);
 

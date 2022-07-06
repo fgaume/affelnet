@@ -118,6 +118,28 @@ const allMatiereSetTo = (newNote, semestres) => {
   return updatedMatieres;
 };
 
+// migration from <v7
+const possibleSemestres = localStorage.getItem("semestres");
+if (possibleSemestres !== null) {
+  const semestres = JSON.parse(possibleSemestres);
+  const nbNotes = semestres === true ? [1,2] : [1,2,3];
+  listeMatieres.forEach((matiere, index) => {
+    let migratedNotes = [];
+    nbNotes.forEach((trimestre) => {
+      const possibleNote = localStorage.getItem("note/" + matiere.nom + trimestre);
+      const note = JSON.parse(possibleNote);
+      if (note) migratedNotes.push(note);
+    });
+    if (migratedNotes.length > 0) {
+      listeMatieres[index] = {
+        nom: matiere.nom,
+        notes: migratedNotes,
+        order: matiere.order,
+      }
+    }
+  });  
+}
+
 export {
   listeMatieres,
   computeNoteCDs,

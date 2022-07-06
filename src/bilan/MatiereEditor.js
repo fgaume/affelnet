@@ -1,10 +1,10 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Stack } from "react-bootstrap";
 import Form from "react-bootstrap/Form";
 
 const MatiereEditor = (props) => {
 
-  const nombreEditeurs = props.semestres ? [0,1] : [0,1,2];
+  const editeurs = props.semestres ? [0,1] : [0,1,2];
 
   const handleChange = (event) => {
     props.onChange(
@@ -37,7 +37,7 @@ const MatiereEditor = (props) => {
       <td>{props.nom}</td>
       <td>
         <Stack gap="2">
-          {nombreEditeurs.map((index) => {
+          {editeurs.map((index) => {
             return (
             <Form.Select
             type="number"

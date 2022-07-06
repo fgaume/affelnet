@@ -1,4 +1,4 @@
-const listeCompetences = [
+let listeCompetences = [
   { nom: "Langue française", score: 0, order: 0 },
   { nom: "Scientifique", score: 0, order: 1 },
   { nom: "Langues étrangères", score: 0, order: 2 },
@@ -38,6 +38,23 @@ const allCompetencesSetTo = (score) => {
   });
   return updatedCompetences;
 };
+
+// migration from <v7
+const possibleSemestres = localStorage.getItem("semestres");
+if (possibleSemestres !== null) {
+  listeCompetences.forEach((competence, index) => {
+      const possibleNote = localStorage.getItem("competence/" + competence.nom);
+      const score = JSON.parse(possibleNote);
+      if (score) {
+        listeCompetences[index] = {
+        nom: competence.nom,
+        score: score,
+        order: competence.order,
+        }
+    }
+  });  
+}
+
 
 export {
   listeCompetences,

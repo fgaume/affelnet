@@ -135,7 +135,7 @@ const App = () => {
             </Accordion.Item>
             <Accordion.Item eventKey="3" hidden={!contrib}>
               <Accordion.Header>
-                <span className="fw-bolder">Seuils d'admission 2022</span>
+                <span className="fw-bolder">Seuils d'admission</span>
               </Accordion.Header>
               <Accordion.Body>
                 <div className="col-md-6 mx-auto">
