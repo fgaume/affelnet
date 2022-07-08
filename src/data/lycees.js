@@ -2,7 +2,7 @@ const listeLycees = [
     {
       "code": "0750680G",
       "nom": "ARAGO",
-      "seuils": [40386.517, 0, 0]
+      "seuils": [40386.517, 0]
     },
     {
       "code": "0750693W",
@@ -27,7 +27,7 @@ const listeLycees = [
     {
       "code": "0750652B",
       "nom": "CHARLEMAGNE",
-      "seuils": [40735.851, 40954.267]
+      "seuils": [40735.851, 40685.023]
     },
     {
       "code": "0750698B",
@@ -77,7 +77,7 @@ const listeLycees = [
     {
       "code": "0750660K",
       "nom": "FENELON",
-      "seuils": [40582.043, 0]
+      "seuils": [40582.043, 40608.709]
     },
     {
       "code": "0750690T",
@@ -92,7 +92,7 @@ const listeLycees = [
     {
       "code": "0750714U",
       "nom": "HELENE BOUCHER",
-      "seuils": [40724.259, 0]
+      "seuils": [40724.259, 40633.911]
     },
     {
       "code": "0750711R",
@@ -137,12 +137,12 @@ const listeLycees = [
     {
       "code": "0750670W",
       "nom": "LAMARTINE",
-      "seuils": [0, 0]
+      "seuils": [39587.952, 0]
     },
     {
       "code": "0750656F",
       "nom": "LAVOISIER",
-      "seuils": [40559.383, 0]
+      "seuils": [40559.383, 40600.589]
     },
     {
       "code": "0751708Z",
@@ -167,7 +167,7 @@ const listeLycees = [
     {
       "code": "0750657G",
       "nom": "MONTAIGNE",
-      "seuils": [40398.65, 0]
+      "seuils": [40398.65, 40180.670]
     },
     {
       "code": "0750685M",
@@ -187,7 +187,7 @@ const listeLycees = [
     {
         "code": "0750688R",
         "nom": "RABELAIS",
-        "seuils": [0, 0]
+        "seuils": [7707.827, 0]
     },
     {
       "code": "0750664P",
@@ -202,17 +202,17 @@ const listeLycees = [
     {
       "code": "0750651A",
       "nom": "SIMONE WEIL",
-      "seuils": [40170.521, 0]
+      "seuils": [40170.521, 39790.504]
     },
     {
       "code": "0750653C",
       "nom": "SOPHIE GERMAIN",
-      "seuils": [40925.103, 0]
+      "seuils": [40925.103, 40624.178]
     },
     {
       "code": "0750647W",
       "nom": "TURGOT",
-      "seuils": [41090.421, 0]
+      "seuils": [41090.421, 41031.602]
     },
     {
       "code": "0750662M",
@@ -222,12 +222,12 @@ const listeLycees = [
     {
       "code": "0750648X",
       "nom": "VICTOR HUGO",
-      "seuils": [40713.103, 0]
+      "seuils": [40713.103, 40656.495]
     },
     {
       "code": "0750675B",
       "nom": "VOLTAIRE",
-      "seuils": [25715.64, 0]
+      "seuils": [25715.64, 39095.508]
     }
    ];
 

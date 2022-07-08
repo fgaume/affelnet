@@ -4,7 +4,7 @@ import {
   Button,
   Image
 } from "react-bootstrap";
-import { BoxArrowUpRight, ExclamationCircle, InfoCircleFill } from "react-bootstrap-icons";
+import { BoxArrowUpRight, ExclamationCircle, InfoCircleFill, Tools } from "react-bootstrap-icons";
 import parent from "../images/parent.png";
 import { useLocalStorage } from "../services/useLocalStorage";
 
@@ -19,7 +19,7 @@ const Title = (props) => {
           <Image src={parent} width="48" />
         </div>
         <div>
-          <h4>Simulateur Affelnet</h4>
+          <h4><span><Tools />&nbsp;&nbsp;Boîte à outils Affelnet</span></h4>
         </div>
         <div>
           <a href="#" onClick={() => setShow('true')}>
@@ -31,7 +31,7 @@ const Title = (props) => {
       <div className="mx-2 my-2">
         <Alert show={show === 'true'} variant="success">
           <Alert.Heading>Bienvenue !</Alert.Heading>
-          Voici le mode d'emploi :
+          Voici le mode d'emploi de cette "boîte à outils" Affelnet :
           <ul>
             <li>
               Saisir son collège de scolarisation (et éventuellement de secteur
@@ -40,34 +40,34 @@ const Title = (props) => {
               de secteur et donc activera la section <b>"Mes lycées"</b>.
             </li>
             <li>
+              Saisir ses évaluations de socle de compétences dans la section{" "}
+              <b>"Mes compétences"</b>.
+            </li>
+            <li>
               Saisir ses moyennes de matières dans la section <b>"Mes notes"</b>
               .
             </li>
             <li>
-              Saisir ses évaluations de socle de compétences dans la section{" "}
-              <b>"Mon socle"</b>.
-            </li>
-            <li>
-              Profitez de la section{" "}
+              Profiter de la section{" "}
               <b>"Mes lycées"</b>.
             </li>
           </ul>
-          Pour plus de contexte sur Affelnet et ce simulateur : <a href="https://fgaume.medium.com" target="affelnet-medium"><BoxArrowUpRight width="24" height="24" /></a>.
+          Pour plus de contexte sur Affelnet et cet outil : <a href="https://fgaume.medium.com/simulateur-affelnet-2022-aa3e7393f5cb" target="affelnet-medium"><BoxArrowUpRight width="24" height="24" /></a>.
           <hr />
           <p className="mb-0">
-            Une fois la procédure Affelnet terminée (le 1er juillet), vous êtes
-            chaudement invités à saisir les seuils d'admission que vous avez
+            Une fois la procédure Affelnet terminée, vous êtes
+            chaudement invités à partager dans la
+            section <b>"Seuils d'admission"</b> les seuils d'admission que vous avez
             reçus de votre <em>fiche-barème</em>
-            &nbsp;(fiche qu'il faut demander auprès du rectorat dès le 1er
+            &nbsp;(qu'il faut demander au  rectorat dès le 1er
             juillet par mail à{" "}
-            <a href="mailto:cv.dve@ac-paris.fr">cv.dve@ac-paris.fr</a>) dans la
-            section <b>"Seuils d'admission"</b>.
+            <a href="mailto:ce.dve@ac-paris.fr">ce.dve@ac-paris.fr</a>).
           </p>
         </Alert>
         <Alert show={show === 'true'} variant="warning">
-          <ExclamationCircle width="24" height="24"/>&nbsp;Ce simulateur ne gère pas les collégiens boursiers
+          <ExclamationCircle width="24" height="24"/>&nbsp;Cet outil ne gère pas les collégiens boursiers
           (car <a href="https://fgaume.medium.com/la-m%C3%A9canique-daffelnet-79de9f0fe70a" target="affelnet-medium">les boursiers
-          sont traités à part</a>).
+          sont traités à part par Affelnet</a>).
         </Alert>
         { (show === 'true') && <div className="d-flex justify-content-end">
             <Button onClick={() => setShow('false')} variant="outline-primary">

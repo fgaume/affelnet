@@ -4,6 +4,7 @@ import Accordion from "react-bootstrap/Accordion";
 import LoadingScreen from "./main/LoadingScreen";
 import ListeSeuils from "./seuils/ListeSeuils";
 import { Alert, Tab, Tabs } from "react-bootstrap";
+import { CheckLg, ExclamationLg } from 'react-bootstrap-icons';
 import SeuilEditor from "./seuils/SeuilEditor";
 import MonBilan from "./bilan/MonBilan";
 import MonSocle from "./socle/MonSocle";
@@ -20,7 +21,7 @@ import {
 } from "./services/specialites";
 
 const App = () => {
-  const version = "v7.0.0 01/07/2022";
+  const version = "v7.0.0 08/07/2022";
   const contrib = true;
 
   const [loading, setLoading] = useState(true);
@@ -34,19 +35,25 @@ const App = () => {
   const [scoreGlobalPrevious, setScoreGlobalPrevious] = useState(0);
   const [scoreGlobalNext, setScoreGlobalNext] = useState(0);
   const [filtreSpecialites, setFiltreSpecialites] = useState([]);
+  const [avancementCompetences, setAvancementCompetences] = useState(0);
+  const [avancementNotes, setAvancementNotes] = useState(0);
+  const [numberSeuils, setNumberSeuils] = useState(0);
 
-  const handleBilanChange = (previous, next) => {
+
+  const handleBilanChange = (previous, next, newAvancement) => {
+    setAvancementNotes(newAvancement);
     setScoreBilanPrevious(previous);
     setScoreBilanNext(next);
     setScoreGlobalPrevious(bonusCollege + scoreSocle + scoreBilanPrevious);
-    setScoreGlobalNext(bonusCollege + scoreSocle + scoreBilanNext);
+    setScoreGlobalNext(scoreBilanNext > 0 ? bonusCollege + scoreSocle + scoreBilanNext : 0);
   };
 
-  const handleSocleChange = (socle) => {
+  const handleSocleChange = (newScore, newAvancement) => {
     //console.log(JSON.stringify(socle));
-    setScoreSocle(socle);
+    setAvancementCompetences(newAvancement);
+    setScoreSocle(newScore);
     setScoreGlobalPrevious(bonusCollege + scoreSocle + scoreBilanPrevious);
-    setScoreGlobalNext(bonusCollege + scoreSocle + scoreBilanNext);
+    setScoreGlobalNext(scoreBilanNext > 0 ? bonusCollege + scoreSocle + scoreBilanNext : 0);
   };
 
   const handleCollegeChange = (college) => {
@@ -54,12 +61,17 @@ const App = () => {
     setBonusCollege(college.bonus);
     setCollegeSecteur(college.nom);
     setScoreGlobalPrevious(bonusCollege + scoreSocle + scoreBilanPrevious);
-    setScoreGlobalNext(bonusCollege + scoreSocle + scoreBilanNext);
+    setScoreGlobalNext(scoreBilanNext > 0 ? bonusCollege + scoreSocle + scoreBilanNext : 0);
   };
 
   const handleFiltreChange = (newFiltres) => {
     //console.log("newfiltre : " + JSON.stringify(newFiltres));
     setFiltreSpecialites(newFiltres);
+  };
+
+  const handleSeuilChange = (newNumberSeuils) => {
+    console.log("newNumberSeuils : " + newNumberSeuils);
+    setNumberSeuils(newNumberSeuils);
   };
 
   useEffect(() => {
@@ -72,12 +84,12 @@ const App = () => {
           if (filtreSpecialites && filtreSpecialites.length > 0) {
             filtreSpecialites.forEach((spe) => {
               fetchLyceesHavingSpecialite(spe).then((lyceesWithSpe) => {
-                console.log(
+                /* console.log(
                   "lycees with spe " +
                     spe +
                     " : " +
                     JSON.stringify(lyceesWithSpe)
-                );
+                ); */
                 newLycees.forEach((lycees) => {
                   setExclu(lycees, lyceesWithSpe);
                 });
@@ -97,12 +109,16 @@ const App = () => {
       {loading === false ? (
         <div className="mx-2">
           <Title />
-          <Accordion defaultActiveKey="4">
+          <Accordion defaultActiveKey="3">
             <Accordion.Item eventKey="0">
               <Accordion.Header>
                 <span className="fw-bolder">
-                  Mon collège : {bonusCollege.toLocaleString()} pts
+                  Mon collège ({bonusCollege.toLocaleString()} pts)
                 </span>
+                { collegeSecteur ?
+                    (<CheckLg color='green' width='20' height='20' />) :
+                    (<ExclamationLg color='red' width='20' height='20' />)
+                }
               </Accordion.Header>
               <Accordion.Body>
                 <MesColleges onChange={handleCollegeChange} />
@@ -111,31 +127,43 @@ const App = () => {
             <Accordion.Item eventKey="1">
               <Accordion.Header>
                 <span className="fw-bolder">
-                  Mes notes :{" "}
-                  {(scoreBilanNext
-                    ? scoreBilanNext
-                    : scoreBilanPrevious
-                  ).toLocaleString()}{" "}
-                  pts
+                  Mes compétences&nbsp;
                 </span>
-              </Accordion.Header>
-              <Accordion.Body>
-                <MonBilan onChange={handleBilanChange} />
-              </Accordion.Body>
-            </Accordion.Item>
-            <Accordion.Item eventKey="2">
-              <Accordion.Header>
-                <span className="fw-bolder">
-                  Mon socle : {scoreSocle.toLocaleString()} pts
-                </span>
+                { avancementCompetences === 100 ?
+                    (<span className='fw-bolder'>({scoreSocle.toLocaleString()} pts)&nbsp;</span>) : (<span className='fw-bolder'>({avancementCompetences} %)&nbsp;</span>)
+                }
+                { avancementCompetences === 100 ?
+                    (<CheckLg color='green' width='20' height='20' />) :
+                    (<ExclamationLg color='red' width='20' height='20' />)
+                }
               </Accordion.Header>
               <Accordion.Body>
                 <MonSocle onChange={handleSocleChange} />
               </Accordion.Body>
             </Accordion.Item>
+            <Accordion.Item eventKey="2">
+              <Accordion.Header>
+                <span className="fw-bolder">
+                  Mes notes&nbsp;
+                </span>
+                { avancementNotes === 100 ?
+                (<span className='fw-bolder'>({(scoreBilanNext
+                        ? scoreBilanNext
+                        : scoreBilanPrevious
+                ).toLocaleString()} pts)&nbsp;</span>) : (<span className='fw-bolder'>({avancementNotes} %)&nbsp;</span>)
+                }
+                { avancementNotes === 100 ?
+                    (<CheckLg color='green' width='20' height='20' />) :
+                    (<ExclamationLg color='red' width='20' height='20' />)
+                }
+              </Accordion.Header>
+              <Accordion.Body>
+                <MonBilan onChange={handleBilanChange} />
+              </Accordion.Body>
+            </Accordion.Item>
             <Accordion.Item eventKey="3" hidden={!contrib}>
               <Accordion.Header>
-                <span className="fw-bolder">Seuils d'admission</span>
+                <span className="fw-bolder">Seuils d'admission ({numberSeuils}/46)</span>
               </Accordion.Header>
               <Accordion.Body>
                 <div className="col-md-6 mx-auto">
@@ -146,7 +174,7 @@ const App = () => {
                     <br /> Il s'agit du score du dernier entrant non boursier,
                     fourni dans la dernière colonne de votre fiche barème à
                     demander au Rectorat dès le 1er juillet à l'adresse email :{" "}
-                    <b>ce.dve@ac-paris.fr</b>
+                    <a href="mailto:ce.dve@ac-paris.fr">ce.dve@ac-paris.fr</a>
                   </Alert>
                 </div>
                 <div className="col-md-6 mx-auto">
@@ -154,11 +182,11 @@ const App = () => {
                 </div>
                 <hr />
                 <div className="col-md-6 mx-auto">
-                  <ListeSeuils />
+                  <ListeSeuils onChange={handleSeuilChange}/>
                 </div>
               </Accordion.Body>
             </Accordion.Item>
-            <Accordion.Item eventKey="4" hidden={!lyceesSecteur}>
+            <Accordion.Item eventKey="4" hidden={!(lyceesSecteur.length > 0)}>
               <Accordion.Header>
                 <span className="fw-bolder">Mes lycées</span>
               </Accordion.Header>

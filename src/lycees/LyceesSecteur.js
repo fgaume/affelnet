@@ -21,6 +21,7 @@ const LyceesSecteur = (props) => {
   }; */
 
   const determineColor = (result, lycee) => {
+    if (result === null) return "text-muted";
     if (lycee.exclu) return "filtered";
     if (result) {
       return result >= 0 ? "text-success" : "text-danger";
@@ -48,7 +49,7 @@ const LyceesSecteur = (props) => {
       <div className="my-3">
         <AffichageScores
           scorePrevious={props.scorePrevious + bonusGeo}
-          scoreNext={props.scoreNext + bonusGeo}
+          scoreNext={props.scoreNext > 0 ? bonusGeo + props.scoreNext : 0}
         />
       </div>
       <div className="col-md-6 mx-auto">
@@ -69,7 +70,7 @@ const LyceesSecteur = (props) => {
                     ? parseInt(props.scorePrevious + bonusGeo - lycee.seuils[0])
                     : null;
                 const nextResult =
-                  lycee.seuils[1] > 0
+                  lycee.seuils[1] > 0 && props.scoreNext > 0
                     ? parseInt(props.scoreNext + bonusGeo - lycee.seuils[1])
                     : null;
                 const status = getStatus(lycee, prevResult, nextResult);
@@ -93,7 +94,7 @@ const LyceesSecteur = (props) => {
                     </td>
                     <td className="seuil">
                       <span className={determineColor(nextResult, lycee)}>
-                        {lycee.seuils[1] > 0
+                        {lycee.seuils[1] > 0 && nextResult
                           ? formatVariation(nextResult)
                           : "?"}
                       </span>

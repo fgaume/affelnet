@@ -19,23 +19,23 @@ const ecartsAcademiques2021 = new Map([
 ]);
 
 const moyennesAcademiques2022 = new Map([
-    ['Mathématiques', 12.03],
-    ['Français', 12.45],
-    ['Histoire-Géo', 12.7],
-    ['Langues', 13.2],
-    ['Sciences', 13.1],
-    ['Arts', 14.5],
-    ['EPS', 14.6]
+    ['Mathématiques', 11.81755691],
+    ['Français', 12.35774014],
+    ['Histoire-Géo', 12.47907026],
+    ['Langues', 13.06765105],
+    ['Sciences', 12.96659087],
+    ['Arts', 14.50615026],
+    ['EPS', 14.57907232]
 ]);
 
 const ecartsAcademiques2022 = new Map([
-    ['Mathématiques', 8.8],
-    ['Français', 8.1],
-    ['Histoire-Géo', 3.05],
-    ['Langues', 2.95],
-    ['Sciences', 2.6],
-    ['Arts', 1.9],
-    ['EPS', 1.83]
+    ['Mathématiques', 3.919267778],
+    ['Français', 3.216123499],
+    ['Histoire-Géo', 3.155237695],
+    ['Langues', 3.013409673],
+    ['Sciences', 2.712359916],
+    ['Arts', 1.892386299],
+    ['EPS', 1.826150475]
 ]);
 
 const moyennesAcademiques = new Map([

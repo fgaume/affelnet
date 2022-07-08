@@ -27,7 +27,7 @@ const AffichageScores = (props) => {
               <h6>{formatFloat(props.scoreNext)}</h6>
             </td>
             <td className="text-primary variation">
-              <h6>{formatVariation(props.scoreNext - props.scorePrevious)}</h6>
+              <h6>{props.scoreNext > 0 ? formatVariation(props.scoreNext - props.scorePrevious) : '?'}</h6>
             </td>
           </tr>
         </tbody>

@@ -1,5 +1,7 @@
 const formatFloat = (mynumber) => {
-    return parseFloat(mynumber.toFixed(3)).toLocaleString();
+    if (mynumber > 0)
+        return parseFloat(mynumber.toFixed(3)).toLocaleString();
+        else return '?';
 };
 
 const formatInt = (mynumber) => {

@@ -13,17 +13,17 @@ const listeMatieres = [
 ];
 
 const CDs = [
-  { nom: "Mathématiques", coefficient: 50, matieres: ["Mathématiques"] },
-  { nom: "Français", coefficient: 50, matieres: ["Français"] },
-  { nom: "Histoire-Géo", coefficient: 40, matieres: ["Histoire-Géo"] },
-  { nom: "Langues", coefficient: 40, matieres: ["Langue 1", "Langue 2"] },
+  { nom: "Mathématiques", coefficient: 5, matieres: ["Mathématiques"] },
+  { nom: "Français", coefficient: 5, matieres: ["Français"] },
+  { nom: "Histoire-Géo", coefficient: 4, matieres: ["Histoire-Géo"] },
+  { nom: "Langues", coefficient: 4, matieres: ["Langue 1", "Langue 2"] },
   {
     nom: "Sciences",
-    coefficient: 40,
+    coefficient: 4,
     matieres: ["Physique-Chimie", "SVT", "Technologie"],
   },
-  { nom: "Arts", coefficient: 40, matieres: ["Arts Plastiques", "Musique"] },
-  { nom: "EPS", coefficient: 40, matieres: ["EPS"] },
+  { nom: "Arts", coefficient: 4, matieres: ["Arts Plastiques", "Musique"] },
+  { nom: "EPS", coefficient: 4, matieres: ["EPS"] },
 ];
 
 const computeAverage = (values, semestres) => {
@@ -55,11 +55,32 @@ const computeNoteCDs = (matieres, semestres) => {
     const scoreCD = computeAverage(scoresMatieres, semestres);
     scoresCDs.push({
       nom: cd.nom,
-      score: scoreCD,
+      score: scoreCD.toFixed(2),
       coefficient: cd.coefficient,
     });
   });
   return scoresCDs;
+};
+
+// matieres : nom, notes[]
+const computeAvancementNotes = (matieres, semestres) => {
+  let avancement = 0;
+  CDs.forEach((cd) => {
+    let avancementCD = 0;
+    cd.matieres.forEach((cdmatiere) => {
+      const foundMatiere = matieres.find(
+          (matiere) => matiere.nom === cdmatiere
+      );
+      if (foundMatiere) {
+        const notes = foundMatiere.notes;
+        const notZeroNotes = notes.filter((value => value > 0));
+        avancementCD += notZeroNotes.length;
+      }
+    });
+    avancement += avancementCD;
+  });
+  let nbExpectedNotes = semestres ? 22 : 33;
+  return Math.round(100 * avancement / nbExpectedNotes);
 };
 
 const computeBilanPeriodique = (
@@ -67,16 +88,21 @@ const computeBilanPeriodique = (
   moyennesAcademiques,
   ecartsAcademiques
 ) => {
+  if (!moyennesAcademiques) return 0;
   let score = 0;
   scoresCD.forEach((cd) => {
     const cdscore =
-      cd.coefficient *
-      (10 +
+      10*(10 +
         (cd.score - moyennesAcademiques.get(cd.nom)) /
           ecartsAcademiques.get(cd.nom));
-    score += cdscore;
+    //console.log("cd " + cd.nom + cdscore);      
+    //console.log("cd " + cd.nom + cdscore.toFixed(3));      
+    score += cd.coefficient * cdscore.toFixed(3);
   });
-  return parseFloat(score.toFixed(3));
+  //console.log("bilan : " + score);
+  const result = parseFloat(score);
+  //console.log("bilan : " + result);
+  return result;
 };
 
 /* const testcomputeNoteCDs = () => {
@@ -146,4 +172,5 @@ export {
   computeBilanPeriodique,
   updateMatieres,
   allMatiereSetTo,
+  computeAvancementNotes
 };

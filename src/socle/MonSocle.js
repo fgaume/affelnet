@@ -7,7 +7,7 @@ import {
   listeCompetences,
   computeSocleCompetences,
   updateCompetences,
-  allCompetencesSetTo,
+  allCompetencesSetTo, computeAvancementSocle,
 } from "../services/socle";
 import CompetenceEditor from "./CompetenceEditor";
 
@@ -36,7 +36,8 @@ const MonSocle = (props) => {
 
   useEffect(() => {
     const newScore = computeSocleCompetences(competences);
-    props.onChange(newScore);
+    const newAvancement = computeAvancementSocle(competences);
+    props.onChange(newScore, newAvancement);
   }, [competences, props]);
 
   return (

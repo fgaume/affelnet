@@ -50,7 +50,7 @@ function useSeuils(sorting = "byLycee") {
   return lycees;
 }
 
-const ListeSeuils = () => {
+const ListeSeuils = (props) => {
   const [sorting, setSorting] = useState("byLycee");
 
   /* const handleClick = () => {
@@ -68,6 +68,14 @@ const ListeSeuils = () => {
   };
 
   const lycees = useSeuils(sorting);
+
+  useEffect(() => {
+    let newNumberSeuils = 0;
+    lycees.forEach((item) => {
+      if (item.seuil > 0) newNumberSeuils++;
+    })
+    props.onChange(newNumberSeuils);
+  }, [props, lycees]);
 
   return (
     <div>

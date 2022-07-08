@@ -2,6 +2,7 @@ import axios from "axios";
 import { nomsLyceesMap, seuilsLyceesMap, tousSecteurs } from "../data/lycees";
 
 const cacheKey = "cache/lycees-secteur";
+const cacheActivated = false;
 
 const fetchLycees = async (nomCollegeSecteur) => {
   if (nomCollegeSecteur) {
@@ -76,13 +77,15 @@ const fetchLycees = async (nomCollegeSecteur) => {
         ];
 
         // add a day
-        let date = new Date();
-        date.setDate(date.getDate() + 1);
-        console.log("expire in : " + date);
-        localStorage.setItem(
-          cacheKey,
-          JSON.stringify({ expires: date, data: lyceeArray })
-        );
+        if (cacheActivated) {
+          let date = new Date();
+          date.setDate(date.getDate());
+          console.log("expire in : " + date);
+          localStorage.setItem(
+            cacheKey,
+            JSON.stringify({ expires: date, data: lyceeArray })
+          );
+        }
 
         return lyceeArray;
       }

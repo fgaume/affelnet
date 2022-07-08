@@ -8,7 +8,7 @@ import {
   computeNoteCDs,
   computeBilanPeriodique,
   updateMatieres,
-  allMatiereSetTo,
+  allMatiereSetTo, computeAvancementNotes,
 } from "../services/bilan";
 import { moyennesAcademiques, ecartsAcademiques } from "../data/stats";
 import MatiereEditor from "./MatiereEditor";
@@ -50,6 +50,7 @@ const MonBilan = (props) => {
 
   useEffect(() => {
     const scoreCDs = computeNoteCDs(matieres, semestres);
+    const avancement = computeAvancementNotes(matieres, semestres);
     //console.log(JSON.stringify(scoreCDs));
     const scoreBPprevious = computeBilanPeriodique(
       scoreCDs,
@@ -65,7 +66,7 @@ const MonBilan = (props) => {
     );
     //console.log("score BP = " + formatFloat(scoreBPnext));
     setScoreBilanNext(scoreBPnext);
-    props.onChange(scoreBPprevious, scoreBPnext);
+    props.onChange(scoreBPprevious, scoreBPnext, avancement);
   }, [matieres, semestres, props]);
 
   return (

@@ -1,7 +1,7 @@
 import React, { useState, useRef } from "react";
 import { doc, updateDoc } from "firebase/firestore";
 import { firestore } from "../services/firebase";
-import { Button, Card, Col, Container, Form, Row } from "react-bootstrap";
+import { Alert, Button, Card, Col, Container, Form, Row } from "react-bootstrap";
 
 import { listeLycees as lycees } from "../data/lycees";
 
@@ -11,11 +11,10 @@ const SeuilEditor = () => {
   const typeaheadRef = useRef(null);
   const [lyceeSeuil, setLyceeSeuil] = useState("");
   const [seuilLycee, setSeuilLycee] = useState(0);
+  const [showConfirm, setShowConfirm] = useState(false);
 
   const updateSeuil = (codeLycee, seuil) => {
     const docRef = doc(firestore, "seuils", codeLycee);
-
-
     updateDoc(docRef, {
       seuil: parseFloat(seuil.replace(',','.')),
     });
@@ -34,6 +33,8 @@ const SeuilEditor = () => {
     updateSeuil(lyceeSeuil.code, seuilLycee);
     typeaheadRef.current.clear();
     document.getElementById("seuilLycee").value = "";
+    setShowConfirm(true);
+    setTimeout(() => setShowConfirm(false), 3000);
   };
 
   return (
@@ -57,13 +58,17 @@ const SeuilEditor = () => {
               onChange={onSeuilLyceeChange}
             />
           </div>
-          <div className="p-2">
-            <Button
+          <div className="d-flex justify-content-between align-items-center p-2">
+            <Button className="my-2"
               type="submit"
               disabled={seuilLycee < 1000 || seuilLycee > 42000}
             >
               Ajouter
-            </Button>
+            </Button>&nbsp;{showConfirm && (
+              <Alert key="confirm" variant="success" className="my-0">
+              Le seuil du lycée a été ajouté. Merci de votre contribution !
+              </Alert>
+            )}
           </div>
         </Form>
       </Card>
