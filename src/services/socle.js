@@ -58,7 +58,7 @@ if (possibleSemestres !== null) {
       if (score) {
         listeCompetences[index] = {
         nom: competence.nom,
-        score: score,
+        score: parseInt(score),
         order: competence.order,
         }
     }
