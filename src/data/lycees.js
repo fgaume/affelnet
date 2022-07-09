@@ -7,22 +7,22 @@ const listeLycees = [
     {
       "code": "0750693W",
       "nom": "BUFFON",
-      "seuils": [40582.466, 0]
+      "seuils": [40582.466, 40439.889]
     },
     {
       "code": "0750694X",
       "nom": "CAMILLE SEE",
-      "seuils": [39436.35, 0]
+      "seuils": [39436.35, 38766.489]
     },
     {
       "code": "0750704H",
       "nom": "CARNOT",
-      "seuils": [40547, 0]
+      "seuils": [40547, 40400.777]
     },
     {
       "code": "0750663N",
       "nom": "CHAPTAL",
-      "seuils": [40729.127, 0]
+      "seuils": [40729.127, 40716.791]
     },
     {
       "code": "0750652B",
@@ -37,7 +37,7 @@ const listeLycees = [
     {
       "code": "0750683K",
       "nom": "CLAUDE MONET",
-      "seuils": [40569.767, 0]
+      "seuils": [40569.767, 40593]
     },
     {
       "code": "0750673Z",
@@ -47,7 +47,7 @@ const listeLycees = [
     {
       "code": "0750667T",
       "nom": "CONDORCET",
-      "seuils": [41095.851, 0]
+      "seuils": [41095.851, 41098.058]
     },
     {
       "code": "0750712S",
@@ -57,22 +57,22 @@ const listeLycees = [
     {
       "code": "0750676C",
       "nom": "DORIAN",
-      "seuils": [25185.901, 0]
+      "seuils": [25185.901, 23065.83]
     },
     {
       "code": "0750671X",
       "nom": "EDGAR QUINET",
-      "seuils": [24129.843, 0]
+      "seuils": [24129.843, 39047.581]
     },
     {
       "code": "0750677D",
       "nom": "ELISA LEMONNIER",
-      "seuils": [23861.234, 0]
+      "seuils": [23861.234, 5709.842]
     },
     {
       "code": "0750692V",
       "nom": "EMILE DUBOIS",
-      "seuils": [38094.583, 0]
+      "seuils": [38094.583, 32640]
     },
     {
       "code": "0750660K",
@@ -82,12 +82,12 @@ const listeLycees = [
     {
       "code": "0750690T",
       "nom": "FRANCOIS VILLON",
-      "seuils": [24090.145, 0]
+      "seuils": [24090.145, 22363.395]
     },
     {
       "code": "0750684L",
       "nom": "GABRIEL FAURE",
-      "seuils": [23180.853, 0]
+      "seuils": [23180.853, 24402.417]
     },
     {
       "code": "0750714U",
@@ -107,17 +107,17 @@ const listeLycees = [
     {
       "code": "0750705J",
       "nom": "HONORE DE BALZAC",
-      "seuils": [40269.556, 0]
+      "seuils": [40269.556, 39935.372]
     },
     {
       "code": "0750668U",
       "nom": "JACQUES DECOUR",
-      "seuils": [25480.702, 0]
+      "seuils": [25480.702, 32640]
     },
     {
       "code": "0750699C",
       "nom": "JANSON DE SAILLY",
-      "seuils": [40371.575, 0]
+      "seuils": [40371.575, 40170.93]
     },
     {
       "code": "0750702F",
@@ -127,17 +127,17 @@ const listeLycees = [
     {
       "code": "0750700D",
       "nom": "JEAN-BAPTISTE SAY",
-      "seuils": [40172.502, 0]
+      "seuils": [40172.502, 40016.898]
     },
     {
       "code": "0750669V",
       "nom": "JULES FERRY",
-      "seuils": [40332.292, 0]
+      "seuils": [40332.292, 40253.169]
     },
     {
       "code": "0750670W",
       "nom": "LAMARTINE",
-      "seuils": [39587.952, 0]
+      "seuils": [39587.952, 40146.603]
     },
     {
       "code": "0750656F",
@@ -172,32 +172,32 @@ const listeLycees = [
     {
       "code": "0750685M",
       "nom": "P.G. DE GENNES",
-      "seuils": [7222.187, 0]
+      "seuils": [7222.187, 32640]
     },
     {
       "code": "0750689S",
       "nom": "PAUL BERT",
-      "seuils": [39605.27, 0]
+      "seuils": [39605.27, 39634.293]
     },
     {
       "code": "0750679F",
       "nom": "PAUL VALERY",
-      "seuils": [22268.841, 0]
+      "seuils": [22268.841, 17760]
     },
     {
         "code": "0750688R",
         "nom": "RABELAIS",
-        "seuils": [7707.827, 0]
+        "seuils": [7707.827, 22132.527]
     },
     {
       "code": "0750664P",
       "nom": "RACINE",
-      "seuils": [40549.926, 0]
+      "seuils": [40549.926, 40462.993]
     },
     {
       "code": "0750682J",
       "nom": "RODIN",
-      "seuils": [25216.998, 0]
+      "seuils": [25216.998, 7886.202]
     },
     {
       "code": "0750651A",
@@ -217,7 +217,7 @@ const listeLycees = [
     {
       "code": "0750662M",
       "nom": "VICTOR DURUY",
-      "seuils": [40120.867, 0]
+      "seuils": [40120.867, 40037.442]
     },
     {
       "code": "0750648X",

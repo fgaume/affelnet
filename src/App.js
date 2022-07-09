@@ -21,7 +21,7 @@ import {
 } from "./services/specialites";
 
 const App = () => {
-  const version = "v7.0.1 08/07/2022";
+  const version = "v7.0.2 09/07/2022";
   const contrib = true;
 
   const [loading, setLoading] = useState(true);
