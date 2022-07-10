@@ -1,5 +1,10 @@
 # Boite à outils Affelnet
 
+## License
+
+Le code de l'application est libre, sous licence [GNU GPL v3](http://www.gnu.org/licenses/gpl-3.0.html)
+Elle est ouverte aux améliorations (pull requests GitHub), n'hésitez pas !
+
 ## Stockage des données saisies
 
 A part les seuils d'admission qui sont poussés dans le backend Firebase ([Firestore](https://firebase.google.com/products/firestore)) afin que tout le monde en profite instantanément, toutes les autres données saisies sont stockées localement dans le navigateur. 
