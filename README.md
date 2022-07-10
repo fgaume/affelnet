@@ -1,8 +1,8 @@
 # Boite à outils Affelnet
 
-## License
+## Licence
 
-Le code de l'application est libre, sous licence [GNU GPL v3](http://www.gnu.org/licenses/gpl-3.0.html)
+Le code de l'application est complètement libre, sous licence [GNU GPL v3](http://www.gnu.org/licenses/gpl-3.0.html)
 Elle est ouverte aux améliorations (pull requests GitHub), n'hésitez pas !
 
 ## Stockage des données saisies
