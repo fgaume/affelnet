@@ -2,7 +2,7 @@ const listeLycees = [
     {
       "code": "0750680G",
       "nom": "ARAGO",
-      "seuils": [40386.517, 0]
+      "seuils": [40386.517, 40467.318]
     },
     {
       "code": "0750693W",
@@ -147,7 +147,7 @@ const listeLycees = [
     {
       "code": "0751708Z",
       "nom": "LOUIS ARMAND",
-      "seuils": [7565.549, 0]
+      "seuils": [7565.549, 23591.625]
     },
     {
       "code": "0750655E",
@@ -162,7 +162,7 @@ const listeLycees = [
     {
       "code": "0750703G",
       "nom": "MOLIERE",
-      "seuils": [39139.363, 0]
+      "seuils": [39139.363, 38884.118]
     },
     {
       "code": "0750657G",
