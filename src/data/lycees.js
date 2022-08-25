@@ -42,7 +42,7 @@ const listeLycees = [
     {
       "code": "0750673Z",
       "nom": "COLBERT",
-      "seuils": [22588.564, 0]
+      "seuils": [22588.564, 22280]
     },
     {
       "code": "0750667T",
@@ -52,7 +52,7 @@ const listeLycees = [
     {
       "code": "0750712S",
       "nom": "DIDEROT",
-      "seuils": [25316.545, 0]
+      "seuils": [25316.545, 23470]
     },
     {
       "code": "0750676C",
@@ -97,7 +97,7 @@ const listeLycees = [
     {
       "code": "0750711R",
       "nom": "HENRI BERGSON",
-      "seuils": [6796.35, 0]
+      "seuils": [6796.35, 24162.852]
     },
     {
       "code": "0750654D",
@@ -122,7 +122,7 @@ const listeLycees = [
     {
       "code": "0750702F",
       "nom": "JEAN DE LA FONTAINE",
-      "seuils": [0, 0]
+      "seuils": [0, 39758.988]
     },
     {
       "code": "0750700D",
@@ -157,7 +157,7 @@ const listeLycees = [
     {
       "code": "0750715V",
       "nom": "MAURICE RAVEL",
-      "seuils": [39610.883, 0]
+      "seuils": [39610.883, 39266.478]
     },
     {
       "code": "0750703G",
