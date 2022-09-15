@@ -1,5 +1,8 @@
 // Override default variables before the import
 //$body-bg: #263238;
 
+//$font-family-base: Oswald;
+$font-family-base: 'Product Sans', sans-serif;
+
 // Import Bootstrap and its default variables
 @import '~bootstrap/scss/bootstrap.scss';
