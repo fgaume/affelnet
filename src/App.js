@@ -3,9 +3,8 @@ import { useState, useEffect } from "react";
 import Accordion from "react-bootstrap/Accordion";
 import LoadingScreen from "./main/LoadingScreen";
 import ListeSeuils from "./seuils/ListeSeuils";
-import { Alert, Tab, Tabs } from "react-bootstrap";
+import { Tab, Tabs } from "react-bootstrap";
 import { CheckLg, ExclamationLg } from 'react-bootstrap-icons';
-import SeuilEditor from "./seuils/SeuilEditor";
 import MonBilan from "./bilan/MonBilan";
 import MonSocle from "./socle/MonSocle";
 import MesColleges from "./college/MesColleges";
@@ -19,10 +18,11 @@ import {
   fetchLyceesHavingSpecialite,
   resetExclu,
 } from "./services/specialites";
+import ContribSeuils from "./seuils/ContribSeuils";
 
 const App = () => {
-  const version = "v7.0.5 15/09/2022";
-  const contrib = true;
+  const version = "v7.0.6 30/09/2022";
+  const contrib = false;
 
   const [loading, setLoading] = useState(true);
 
@@ -161,32 +161,7 @@ const App = () => {
                 <MonBilan onChange={handleBilanChange} />
               </Accordion.Body>
             </Accordion.Item>
-            <Accordion.Item eventKey="3" hidden={!contrib}>
-              <Accordion.Header>
-                <span className="fw-bolder">Seuils d'admission ({numberSeuils}/46)</span>
-              </Accordion.Header>
-              <Accordion.Body>
-                <div className="col-md-6 mx-auto">
-                  <Alert variant="success">
-                    Afin d'en faire profiter la communauté, ajoutez ici les
-                    seuils d'admission des lycées que vous avez demandés cette
-                    année.
-                    <br /> Il s'agit du score du dernier entrant non boursier,
-                    fourni dans la dernière colonne de votre fiche barème à
-                    demander au Rectorat dès le 1er juillet à l'adresse email :{" "}
-                    <a href="mailto:ce.dve@ac-paris.fr">ce.dve@ac-paris.fr</a>
-                  </Alert>
-                </div>
-                <div className="col-md-6 mx-auto">
-                  <SeuilEditor />
-                </div>
-                <hr />
-                <div className="col-md-6 mx-auto">
-                  <ListeSeuils onChange={handleSeuilChange}/>
-                </div>
-              </Accordion.Body>
-            </Accordion.Item>
-            <Accordion.Item eventKey="4" hidden={!(lyceesSecteur.length > 0)}>
+            <Accordion.Item eventKey="3" hidden={!collegeSecteur}>
               <Accordion.Header>
                 <span className="fw-bolder">Mes lycées</span>
               </Accordion.Header>
@@ -222,6 +197,17 @@ const App = () => {
                     />
                   </Tab>
                 </Tabs>
+              </Accordion.Body>
+            </Accordion.Item>
+            <Accordion.Item eventKey="4">
+              <Accordion.Header>
+                <span className="fw-bolder">Seuils d'admission ({numberSeuils}/46)</span>
+              </Accordion.Header>
+              <Accordion.Body>
+                <ContribSeuils contrib={contrib} />
+                <div className="col-md-6 mx-auto">
+                  <ListeSeuils onChange={handleSeuilChange}/>
+                </div>
               </Accordion.Body>
             </Accordion.Item>
           </Accordion>
