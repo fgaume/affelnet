@@ -21,7 +21,7 @@ import {
 import ContribSeuils from "./seuils/ContribSeuils";
 
 const App = () => {
-  const version = "v7.0.6 30/09/2022";
+  const version = "v7.0.7 23/10/2022";
   const contrib = false;
 
   const [loading, setLoading] = useState(true);

@@ -37,7 +37,7 @@ const listeLycees = [
     {
       "code": "0750683K",
       "nom": "CLAUDE MONET",
-      "seuils": [40569.767, 40593]
+      "seuils": [40569.767, 40593.618]
     },
     {
       "code": "0750673Z",
@@ -102,7 +102,7 @@ const listeLycees = [
     {
       "code": "0750654D",
       "nom": "HENRI IV",
-      "seuils": [0, 0]
+      "seuils": [0, 40734.331]
     },
     {
       "code": "0750705J",
