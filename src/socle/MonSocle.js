@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import { useEffect } from "react";
 import { Button, Card, Table } from "react-bootstrap";
 import { Lightning } from "react-bootstrap-icons";
@@ -18,6 +18,8 @@ const MonSocle = (props) => {
     listeCompetences
   );
 
+  const inputRef = useRef([]);
+
   const handleCompetenceChange = (nom, newNote) => {
     //console.log("handleCompetenceChange: " + nom + "/" + newNote);
     const newCompetences = updateCompetences(competences, nom, newNote);
@@ -27,10 +29,7 @@ const MonSocle = (props) => {
 
   const setAllNotes = (event) => {
     const note = parseInt(event.target.value);
-    //console.log("score = " + note);
-    listeCompetences.forEach((competence) => {
-      document.getElementById(competence.nom).value = note;
-    });
+    inputRef.current.forEach((elem) => { elem.setScore(note)});
     setCompetences(allCompetencesSetTo(note));
   };
 
@@ -72,16 +71,17 @@ const MonSocle = (props) => {
         </Button>
       </div>
       <div className="col-md-6 mx-auto">
-        <Card className="mb-0">
-          <Table striped borderless hover className="mb-0">
+        <Card>
+          <Table striped borderless hover className="align-middle mb-0">
             <tbody>
-              {competences.map((competence) => {
+              {competences.map((competence, index) => {
                 return (
                   <CompetenceEditor
                     key={competence.nom}
                     nom={competence.nom}
                     score={competence.score}
                     onChange={handleCompetenceChange}
+                    ref={el => inputRef.current[index] = el}
                   />
                 );
               })}

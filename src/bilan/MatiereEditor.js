@@ -1,10 +1,18 @@
-import React, { useEffect } from "react";
+import React, { forwardRef, useImperativeHandle, useRef, useState } from "react";
 import { Stack } from "react-bootstrap";
-import Form from "react-bootstrap/Form";
+import TrancheEditor from "./TrancheEditor";
 
-const MatiereEditor = (props) => {
+const MatiereEditor = forwardRef((props, ref) => {
 
   const editeurs = props.semestres ? [0,1] : [0,1,2];
+
+  const inputRef = useRef([]);
+
+  useImperativeHandle(ref, () => ({
+    setScore(score) {
+      inputRef.current.forEach((elem) => { elem.setScore(score)});
+    }
+  }));
 
   const handleChange = (event) => {
     props.onChange(
@@ -14,24 +22,6 @@ const MatiereEditor = (props) => {
     );
   };
 
-  const getClassName = (id) => {
-    if (document.getElementById(id) && document.getElementById(id).value) {
-      const value = document.getElementById(id).value;
-      switch (value) {
-        case "3":
-          return "text-danger";
-        case "8":
-          return "text-danger";
-        case "13":
-          return "text-primary";
-        case "16":
-          return "text-success";
-        default:
-          return "text-body";
-      }
-    } else return "text-body";
-  };
-
   return (
     <tr>
       <td>{props.nom}</td>
@@ -39,27 +29,19 @@ const MatiereEditor = (props) => {
         <Stack gap="2">
           {editeurs.map((index) => {
             return (
-            <Form.Select
-            type="number"
-            id={props.nom + index}
-            key={props.nom + index}
-            size="sm"
-            defaultValue={props.notes[index]}
-            aria-label={props.nom}
-            onChange={handleChange}
-            className={getClassName(props.nom + index)}
-          >
-            <option value="0">Moyenne ...</option>
-            <option value="16">15 ou +</option>
-            <option value="13">Entre 10 et 14,99</option>
-            <option value="8">Entre 5 et 9,99</option>
-            <option value="3">Moins de 5</option>
-          </Form.Select>)
+              <TrancheEditor
+                id={props.nom + index}
+                key={props.nom + index}
+                initValue={props.notes[index]}
+                onChange={handleChange}
+                ref={el => inputRef.current[index] = el}
+              >
+            </TrancheEditor>)
           })}
         </Stack>
       </td>
     </tr>
   );
-};
+});
 
 export default MatiereEditor;

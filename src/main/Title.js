@@ -35,7 +35,7 @@ const Title = (props) => {
           <ul>
             <li>
               Saisir son collège de scolarisation (et éventuellement de secteur
-              si différent) dans la section{" "}
+              s'il est différent) dans la section{" "}
               <b>"Mon collège"</b> ci-dessous. Cela permet de déduire les lycées
               de secteur et donc activera la section <b>"Mes lycées"</b>.
             </li>
@@ -52,7 +52,7 @@ const Title = (props) => {
               <b>"Mes lycées"</b>.
             </li>
           </ul>
-          Pour plus de contexte sur Affelnet et cet outil : <a href="https://fgaume.medium.com/simulateur-affelnet-2022-aa3e7393f5cb" target="affelnet-medium"><BoxArrowUpRight width="24" height="24" /></a>.
+          Pour plus de contexte sur Affelnet et cet outil (en particulier les sources de données) : <a href="https://fgaume.medium.com/simulateur-affelnet-2022-aa3e7393f5cb" target="affelnet-medium"><BoxArrowUpRight width="24" height="24" /></a>.
           <hr />
           <p className="mb-0">
             Une fois la procédure Affelnet terminée, vous êtes

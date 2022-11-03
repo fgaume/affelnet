@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import { useState, useEffect } from "react";
 import { Button, Card, Form, Table } from "react-bootstrap";
 import { Lightning } from "react-bootstrap-icons";
@@ -26,6 +26,9 @@ const MonBilan = (props) => {
   const [scoreBilanPrevious, setScoreBilanPrevious] = useState(0);
   const [scoreBilanNext, setScoreBilanNext] = useState(0);
 
+  const inputRef = useRef([]);
+
+
   const handleMatiereChange = (nom, periode, newNote) => {
     //console.log("handleMatiereChange: " + nom + "/" + periode + "/" + newNote);
     const newMatieres = updateMatieres(matieres, nom, periode, newNote);
@@ -40,11 +43,13 @@ const MonBilan = (props) => {
   const setAllNotes = (event) => {
     const note = parseInt(event.target.value);
     //console.log("note = " + note);
-    listeMatieres.forEach((matiere) => {
+    /* listeMatieres.forEach((matiere) => {
       document.getElementById(matiere.nom + "0").value = note;
       document.getElementById(matiere.nom + "1").value = note;
       if (!semestres) document.getElementById(matiere.nom + "2").value = note;
-    });
+    }); */
+
+    inputRef.current.forEach((elem) => { elem.setScore(note)});
     setMatieres(allMatiereSetTo(note, semestres));
   };
 
@@ -91,7 +96,7 @@ const MonBilan = (props) => {
           value="3"
           onClick={setAllNotes}
         >
-          <Lightning width="20" height="20" /> minimum
+          <Lightning width="20" height="20" /> min
         </Button>
         &nbsp;
         <Button
@@ -109,14 +114,14 @@ const MonBilan = (props) => {
           value="16"
           onClick={setAllNotes}
         >
-          <Lightning width="20" height="20" /> maximum
+          <Lightning width="20" height="20" /> max
         </Button>
       </div>
       <div className="col-md-6 mx-auto">
-        <Card className="mb-0">
-          <Table striped borderless className="mb-0">
+        <Card>
+          <Table striped borderless className="align-middle mb-0">
             <tbody>
-              {matieres.map((matiere) => {
+              {matieres.map((matiere, index) => {
                 return (
                   <MatiereEditor
                     key={matiere.nom}
@@ -124,6 +129,7 @@ const MonBilan = (props) => {
                     notes={matiere.notes}
                     semestres={semestres}
                     onChange={handleMatiereChange}
+                    ref={el => inputRef.current[index] = el}
                   />
                 );
               })}
