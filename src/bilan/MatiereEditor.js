@@ -1,5 +1,5 @@
 import React, { forwardRef, useImperativeHandle, useRef, useState } from "react";
-import { Stack } from "react-bootstrap";
+import { Table } from "react-bootstrap";
 import TrancheEditor from "./TrancheEditor";
 
 const MatiereEditor = forwardRef((props, ref) => {
@@ -14,31 +14,32 @@ const MatiereEditor = forwardRef((props, ref) => {
     }
   }));
 
-  const handleChange = (event) => {
-    props.onChange(
-      props.nom,
-      parseInt(event.target.id.slice(-1)),
-      parseInt(event.target.value)
-    );
+  const handleChange = (nom, periode, newNote) => {
+    props.onChange(nom, periode, newNote);
   };
 
   return (
     <tr>
       <td>{props.nom}</td>
       <td>
-        <Stack gap="2">
+        <Table className="align-middle mb-0">
+            <tbody>
           {editeurs.map((index) => {
             return (
               <TrancheEditor
                 id={props.nom + index}
                 key={props.nom + index}
-                initValue={props.notes[index]}
+                value={props.notes[index]}
+                nom={props.nom}
+                periode={1+index}
+                semestres={props.semestres}
                 onChange={handleChange}
                 ref={el => inputRef.current[index] = el}
-              >
-            </TrancheEditor>)
+              />
+            )
           })}
-        </Stack>
+          </tbody>
+        </Table>
       </td>
     </tr>
   );

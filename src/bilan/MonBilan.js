@@ -1,6 +1,6 @@
 import React, { useRef } from "react";
 import { useState, useEffect } from "react";
-import { Button, Card, Form, Table } from "react-bootstrap";
+import { Button, Card, Form, Stack, Table } from "react-bootstrap";
 import { Lightning } from "react-bootstrap-icons";
 import { useLocalStorage } from "../services/useLocalStorage";
 import {
@@ -14,6 +14,14 @@ import { moyennesAcademiques, ecartsAcademiques } from "../data/stats";
 import MatiereEditor from "./MatiereEditor";
 import "./MonBilan.css";
 import AffichageScores from "../main/AffichageScores";
+
+const valueMap = new Map([
+  [0, 0],
+  [1, 3],
+  [2, 8],
+  [3, 13],
+  [4, 16]
+]);
 
 /* returns scoreBilanPrevious and scoreBilanNext */
 const MonBilan = (props) => {
@@ -30,7 +38,7 @@ const MonBilan = (props) => {
 
 
   const handleMatiereChange = (nom, periode, newNote) => {
-    //console.log("handleMatiereChange: " + nom + "/" + periode + "/" + newNote);
+    console.log("handleMatiereChange: " + nom + "/" + periode + "/" + newNote);
     const newMatieres = updateMatieres(matieres, nom, periode, newNote);
     //console.log(JSON.stringify(newMatieres));
     setMatieres(newMatieres);
@@ -41,8 +49,10 @@ const MonBilan = (props) => {
   };
 
   const setAllNotes = (event) => {
-    const note = parseInt(event.target.value);
-    //console.log("note = " + note);
+    const value = parseInt(event.target.value);
+    console.log("value = " + value);
+    const note = valueMap.get(value);
+    console.log("note = " + value);
     /* listeMatieres.forEach((matiere) => {
       document.getElementById(matiere.nom + "0").value = note;
       document.getElementById(matiere.nom + "1").value = note;
@@ -89,37 +99,30 @@ const MonBilan = (props) => {
         />
       </div>
       <div className="col-md-6 mx-auto my-3">
-        <span>Saisie rapide : </span>
-        <Button
-          variant="outline-danger"
-          size="sm"
-          value="3"
-          onClick={setAllNotes}
-        >
-          <Lightning width="20" height="20" /> min
-        </Button>
-        &nbsp;
-        <Button
-          variant="outline-primary"
-          size="sm"
-          value="13"
-          onClick={setAllNotes}
-        >
-          <Lightning width="20" height="20" /> moyen
-        </Button>
-        &nbsp;
-        <Button
-          variant="outline-success"
-          size="sm"
-          value="16"
-          onClick={setAllNotes}
-        >
-          <Lightning width="20" height="20" /> max
-        </Button>
+        <Table borderless className="xy-0">
+          <tbody>
+            <tr>
+              <td >Saisie rapide : </td>
+              <td>
+                <Form.Range
+                  //id={props.id}
+                  //key={props.key}
+                  //aria-label={props.key}
+                  className="align-middle xy-0 form-range"
+                  min="0"
+                  max="4"
+                  step="1"
+                  //value={tranche ? tranche.value : 0}
+                  defaultValue="0"
+                  onChange={setAllNotes} />
+              </td>
+            </tr>
+          </tbody>
+        </Table>
       </div>
       <div className="col-md-6 mx-auto">
         <Card>
-          <Table striped borderless className="align-middle mb-0">
+          <Table striped borderless className="align-middle xy-0">
             <tbody>
               {matieres.map((matiere, index) => {
                 return (

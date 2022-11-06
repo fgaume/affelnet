@@ -9,25 +9,33 @@ const listeCompetences = [
   {value: 600, label: 'Très bonne', style: 'text-success'}
 ];
 
+/* const listeCompetences = [
+  {value:0, score: 0, label: 'Maitrise...', style: 'text-body'},
+  {value:0, score: 120, label: 'Insuffisante', style: 'text-danger'},
+  {value:0, score: 300, label: 'Fragile', style: 'text-danger'},
+  {value:0, score: 480, label: 'Satisfaisante', style: 'text-primary'},
+  {value:0, score: 600, label: 'Très bonne', style: 'text-success'}
+]; */
+
 const findCompetenceFromValue = (score) => {
-  console.log("score", score);
+  //console.log("score", score);
   const found = listeCompetences.find((obj) => { return obj.value === parseInt(score)});
   return (found) ? found : listeCompetences[0];
 }
 
 const nextCompetence = (currentCompetence) => {
-  console.log("currentCompetence", currentCompetence);
+  //console.log("currentCompetence", currentCompetence);
   let currentIndex = listeCompetences.findIndex((obj) => { return obj === currentCompetence});
   if (currentIndex === listeCompetences.length - 1) currentIndex--;
-  console.log("currentIndex", currentIndex);
+  //console.log("currentIndex", currentIndex);
   return listeCompetences[currentIndex + 1];
 }
 
 const previousCompetence = (currentCompetence) => {
-  console.log("currentCompetence", currentCompetence);
+  //console.log("currentCompetence", currentCompetence);
   let currentIndex = listeCompetences.findIndex((obj) => { return obj === currentCompetence});
   if (currentIndex === 0) currentIndex++;
-  console.log("currentIndex", currentIndex);
+  //console.log("currentIndex", currentIndex);
   return listeCompetences[currentIndex - 1];
 }
 
