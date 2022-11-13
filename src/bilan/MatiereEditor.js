@@ -29,7 +29,7 @@ const MatiereEditor = forwardRef((props, ref) => {
               <TrancheEditor
                 id={props.nom + index}
                 key={props.nom + index}
-                value={props.notes[index]}
+                score={props.notes[index]}
                 nom={props.nom}
                 periode={1+index}
                 semestres={props.semestres}

@@ -1,0 +1,19 @@
+table {
+    width: 100%;
+}
+td.low {
+    width: 50%;
+    text-align:left;
+}
+td.middle {
+    width: 50%;
+    text-align:center;
+}
+td.high {
+    width: 50%;
+    text-align:right;
+}
+td.header {
+    width: 40%;
+    text-align:right;
+}

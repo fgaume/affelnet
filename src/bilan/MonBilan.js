@@ -1,7 +1,8 @@
 import React, { useRef } from "react";
 import { useState, useEffect } from "react";
-import { Button, Card, Form, Stack, Table } from "react-bootstrap";
+import { Card, Form, Table } from "react-bootstrap";
 import { Lightning } from "react-bootstrap-icons";
+
 import { useLocalStorage } from "../services/useLocalStorage";
 import {
   listeMatieres,
@@ -33,12 +34,14 @@ const MonBilan = (props) => {
   );
   const [scoreBilanPrevious, setScoreBilanPrevious] = useState(0);
   const [scoreBilanNext, setScoreBilanNext] = useState(0);
+  const [quickScore, setQuickScore] = useState(0);
 
   const inputRef = useRef([]);
 
 
   const handleMatiereChange = (nom, periode, newNote) => {
     console.log("handleMatiereChange: " + nom + "/" + periode + "/" + newNote);
+    setQuickScore(0);
     const newMatieres = updateMatieres(matieres, nom, periode, newNote);
     //console.log(JSON.stringify(newMatieres));
     setMatieres(newMatieres);
@@ -51,6 +54,7 @@ const MonBilan = (props) => {
   const setAllNotes = (event) => {
     const value = parseInt(event.target.value);
     console.log("value = " + value);
+    setQuickScore(value);
     const note = valueMap.get(value);
     console.log("note = " + value);
     /* listeMatieres.forEach((matiere) => {
@@ -102,18 +106,15 @@ const MonBilan = (props) => {
         <Table borderless className="xy-0">
           <tbody>
             <tr>
-              <td >Saisie rapide : </td>
-              <td>
+              <td><Lightning width="24" height="24" /> Saisie multiple :</td>
+              <td>{'  '}</td>
+              <td className='titre'>
                 <Form.Range
-                  //id={props.id}
-                  //key={props.key}
-                  //aria-label={props.key}
                   className="align-middle xy-0 form-range"
                   min="0"
                   max="4"
                   step="1"
-                  //value={tranche ? tranche.value : 0}
-                  defaultValue="0"
+                  value={quickScore}
                   onChange={setAllNotes} />
               </td>
             </tr>

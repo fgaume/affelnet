@@ -1,79 +1,70 @@
 import React, { forwardRef, useImperativeHandle, useState } from "react";
-import { Button, ButtonGroup } from "react-bootstrap";
+import { Form } from "react-bootstrap";
+import "./CompetenceEditor.css";
 
 const listeCompetences = [
-  {value: 0, label: 'Maitrise...', style: 'text-body'},
-  {value: 120, label: 'Insuffisante', style: 'text-danger'},
-  {value: 300, label: 'Fragile', style: 'text-danger'},
-  {value: 480, label: 'Satisfaisante', style: 'text-primary'},
-  {value: 600, label: 'Très bonne', style: 'text-success'}
+  {value:0, score: 0, label: 'Maitrise...', style: 'low text-body'},
+  {value:1, score: 120, label: 'Insuffisante', style: 'low text-danger'},
+  {value:2, score: 300, label: 'Fragile', style: 'middle text-danger'},
+  {value:3, score: 480, label: 'Satisfaisante', style: 'middle text-primary'},
+  {value:4, score: 600, label: 'Très bonne', style: 'high text-success'}
 ];
 
-/* const listeCompetences = [
-  {value:0, score: 0, label: 'Maitrise...', style: 'text-body'},
-  {value:0, score: 120, label: 'Insuffisante', style: 'text-danger'},
-  {value:0, score: 300, label: 'Fragile', style: 'text-danger'},
-  {value:0, score: 480, label: 'Satisfaisante', style: 'text-primary'},
-  {value:0, score: 600, label: 'Très bonne', style: 'text-success'}
-]; */
+const findCompetenceFromScore = (score) => {
+  //console.log("findCompetenceFromScore", score);
+  const found = listeCompetences.find((obj) => { return obj.score === parseInt(score)});
+  const theCompetence = (found) ? found : listeCompetences[0];
+  //console.log("theCompetence", theCompetence);
+  return theCompetence;
+}
 
-const findCompetenceFromValue = (score) => {
-  //console.log("score", score);
-  const found = listeCompetences.find((obj) => { return obj.value === parseInt(score)});
+const findCompetenceFromValue = (value) => {
+  const found = listeCompetences.find((obj) => { return obj.value === parseInt(value)});
   return (found) ? found : listeCompetences[0];
 }
 
-const nextCompetence = (currentCompetence) => {
-  //console.log("currentCompetence", currentCompetence);
-  let currentIndex = listeCompetences.findIndex((obj) => { return obj === currentCompetence});
-  if (currentIndex === listeCompetences.length - 1) currentIndex--;
-  //console.log("currentIndex", currentIndex);
-  return listeCompetences[currentIndex + 1];
-}
-
-const previousCompetence = (currentCompetence) => {
-  //console.log("currentCompetence", currentCompetence);
-  let currentIndex = listeCompetences.findIndex((obj) => { return obj === currentCompetence});
-  if (currentIndex === 0) currentIndex++;
-  //console.log("currentIndex", currentIndex);
-  return listeCompetences[currentIndex - 1];
-}
 
 const CompetenceEditor = forwardRef((props, ref) => {
 
-  const [competence, setCompetence] = useState(findCompetenceFromValue(props.score));
+  const [competence, setCompetence] = useState(findCompetenceFromScore(props.score));
 
-  const handleMore = () => {
-    const newCompetence = nextCompetence(competence);
-    setCompetence(newCompetence);
-    props.onChange(props.nom, parseInt(newCompetence.value));
-  };
-
-  const handleLess = () => {
-    const newCompetence = previousCompetence(competence);
+  const handleChange = (event) => {
+    const newValue = event.target.value;
+    //console.log("new range value = ", newValue);
+    const newCompetence = findCompetenceFromValue(newValue);
+    //console.log("newCompetence : ", newCompetence);
     setCompetence(newCompetence);
     props.onChange(props.nom, parseInt(newCompetence.value));
   };
 
   useImperativeHandle(ref, () => ({
     setScore(score) {
-      setCompetence(findCompetenceFromValue(score));
+      setCompetence(findCompetenceFromScore(score));
     }
   }));
 
   return (
     <tr>
       <td>{props.nom}</td>
-      <td className={competence ? competence.style: 'text-body'}>{competence ? competence.label: '?'}</td>
       <td>
-      <ButtonGroup aria-label="edit-competence">
-        <Button size="sm" variant="outline-primary" onClick={handleMore} disabled={competence && competence.value === 600}>
-          <div className="fs-2">+</div>
-        </Button>
-        <Button size="sm" variant="outline-primary" onClick={handleLess} disabled={competence && competence.value <= 120}>
-          <div className="fs-2">-</div>
-        </Button>
-      </ButtonGroup>
+        <table>
+          <tbody>
+          <tr>
+            <td>
+          <Form.Range
+            className="form-range"
+            min="0"
+            max="4"
+            step="1"
+            value={competence ? competence.value : 0}
+            onChange={handleChange} />
+            </td>
+          </tr>
+          <tr>  
+          <td className={competence ? competence.style : 'low text-body'}>{competence ? competence.label: '?'}</td>
+          </tr>
+          </tbody>
+        </table>
       </td>
     </tr>
   );
