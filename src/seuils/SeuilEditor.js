@@ -1,7 +1,7 @@
 import React, { useState, useRef } from "react";
 import { doc, updateDoc } from "firebase/firestore";
 import { firestore } from "../services/firebase";
-import { Alert, Button, Card, Col, Container, Form, Row } from "react-bootstrap";
+import { Alert, Button, Card, Form} from "react-bootstrap";
 
 import { listeLycees as lycees } from "../data/lycees";
 
