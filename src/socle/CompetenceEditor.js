@@ -34,7 +34,7 @@ const CompetenceEditor = forwardRef((props, ref) => {
     const newCompetence = findCompetenceFromValue(newValue);
     //console.log("newCompetence : ", newCompetence);
     setCompetence(newCompetence);
-    props.onChange(props.nom, parseInt(newCompetence.value));
+    props.onChange(props.nom, newCompetence.score);
   };
 
   useImperativeHandle(ref, () => ({
