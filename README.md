@@ -7,7 +7,7 @@ Elle est ouverte aux améliorations (pull requests GitHub), n'hésitez pas !
 
 ## Stockage des données saisies
 
-A part les seuils d'admission qui sont poussés dans le backend Firebase ([Firestore](https://firebase.google.com/products/firestore)) afin que tout le monde en profite instantanément, toutes les autres données saisies sont stockées localement dans le navigateur. 
+A part les seuils d'admission (collaboratifs) qui sont stockés dans le backend Firebase ([Firestore](https://firebase.google.com/products/firestore)) afin que tout le monde en profite instantanément, toutes les autres données saisies sont stockées localement dans le navigateur. 
 
 ## Sources de données
 
@@ -44,7 +44,7 @@ Les libraires utilisées : React ([Hooks](https://fr.reactjs.org/docs/hooks-intr
 
 A date, ce package est exposé par un hosting Firebase. Donc pour déployer :
 
-`firebase deploy` : déploie sur http://affelnet2022.web.app
+`firebase deploy` : déploie sur https://affelnet75.web.app
 
 ---------------------------------------------------------------------------------------------
 
