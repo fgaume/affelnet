@@ -29,7 +29,7 @@ Elles se trouvent dans src/data :
 
 ## Technologies utilisées
 
-C'est une SPA ([Single Page Application](https://fr.wikipedia.org/wiki/Application_web_monopage)) dévelopée en Javascript, conçue pour un environnement mobile (smartphone, tablette etc.).
+C'est une PWA ([Progressive web app](https://fr.wikipedia.org/wiki/Progressive_web_app)) dévelopée en Javascript, conçue en particulier pour un environnement mobile (smartphone, tablette etc.).
 
 Les libraires utilisées : React ([Hooks](https://fr.reactjs.org/docs/hooks-intro.html)), [React-Bootstrap](https://react-bootstrap.github.io/), [react-bootstrap-typeahead](https://ericgio.github.io/react-bootstrap-typeahead/) et [Firebase](https://firebase.google.com/).
 
