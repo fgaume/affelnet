@@ -16,7 +16,7 @@ const Title = (props) => {
       <div className="d-flex justify-content-between align-items-center p-2"
         >
         <div>
-          <Image src={parent} width="48" />
+          <Image src={parent} width="36" />
         </div>
         <div>
           <h4><span><Tools />&nbsp;&nbsp;Boîte à outils Affelnet</span></h4>
@@ -31,7 +31,7 @@ const Title = (props) => {
       <div className="mx-2 my-2">
         <Alert show={show === 'true'} variant="success">
           <Alert.Heading>Bienvenue !</Alert.Heading>
-          Voici le mode d'emploi de cette "boîte à outils" Affelnet :
+          Voici le mode d'emploi de cette "boîte à outils" Affelnet (académie de <strong>Paris</strong>):
           <ul>
             <li>
               Saisir son collège de scolarisation (et éventuellement de secteur
@@ -65,9 +65,10 @@ const Title = (props) => {
           </p>
         </Alert>
         <Alert show={show === 'true'} variant="warning">
-          <ExclamationCircle width="24" height="24"/>&nbsp;Cet outil ne gère pas les collégiens boursiers
-          (car <a href="https://fgaume.medium.com/la-m%C3%A9canique-daffelnet-79de9f0fe70a" target="affelnet-medium">les boursiers
-          sont traités à part par Affelnet</a>).
+          <ExclamationCircle width="24" height="24"/>&nbsp;
+          Les seuils d'admission ne sont valables que pour les collégiens <strong>non-boursiers</strong>
+          &nbsp;(car <a href="https://fgaume.medium.com/la-m%C3%A9canique-daffelnet-79de9f0fe70a" target="affelnet-medium">
+            les boursiers sont traités dans un coucours séparé par Affelnet</a>).
         </Alert>
         { (show === 'true') && <div className="d-flex justify-content-end">
             <Button onClick={() => setShow('false')} variant="outline-primary">
