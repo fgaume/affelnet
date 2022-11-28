@@ -9,8 +9,7 @@ import {
   updateCompetences,
   allCompetencesSetTo, computeAvancementSocle,
 } from "../services/socle";
-import CompetenceEditor from "./CompetenceEditor";
-import "./CompetenceEditor.css";
+import RangeInput from "../components/RangeInput";
 
 const valueMap = new Map([
   [0, 0],
@@ -19,6 +18,14 @@ const valueMap = new Map([
   [3, 480],
   [4, 600]
 ]);
+ 
+const tranchesCompetences = [
+  {value:0, score: 0, label: 'Maitrise...', style: 'low text-body'},
+  {value:1, score: 120, label: 'Insuffisante', style: 'low text-danger'},
+  {value:2, score: 300, label: 'Fragile', style: 'middle text-danger'},
+  {value:3, score: 480, label: 'Satisfaisante', style: 'middle text-primary'},
+  {value:4, score: 600, label: 'Très bonne', style: 'high text-success'}
+];
 
 
 /* returns scoreSocle */
@@ -85,10 +92,13 @@ const MonSocle = (props) => {
             <tbody>
               {competences.map((competence, index) => {
                 return (
-                  <CompetenceEditor
+                  <RangeInput
+                    id={competence.nom}
                     key={competence.nom}
                     nom={competence.nom}
+                    label={competence.nom}
                     score={competence.score}
+                    listeTranches={tranchesCompetences}
                     onChange={handleCompetenceChange}
                     ref={el => inputRef.current[index] = el}
                   />

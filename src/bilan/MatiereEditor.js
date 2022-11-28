@@ -1,6 +1,14 @@
 import React, { forwardRef, useImperativeHandle, useRef} from "react";
 import { Table } from "react-bootstrap";
-import TrancheEditor from "./TrancheEditor";
+import RangeInput from "../components/RangeInput";
+
+const listeTranches = [
+  {value: 0, score: 0, label: 'Moyenne...', style: 'low text-body'},
+  {value: 1, score: 3, label: 'Moins de 5', style: 'low text-danger'},
+  {value: 2, score: 8, label: 'Entre 5 et 9,99', style: 'middle text-danger'},
+  {value: 3, score: 13, label: 'Entre 10 et 14,99', style: 'middle text-primary'},
+  {value: 4, score: 16, label: '15 ou +', style: 'high text-success'}
+];
 
 const MatiereEditor = forwardRef((props, ref) => {
 
@@ -14,8 +22,8 @@ const MatiereEditor = forwardRef((props, ref) => {
     }
   }));
 
-  const handleChange = (nom, periode, newNote) => {
-    props.onChange(nom, periode, newNote);
+  const handleChange = (nom, newNote, periode) => {
+    props.onChange(nom, newNote, periode);
   };
 
   return (
@@ -26,13 +34,13 @@ const MatiereEditor = forwardRef((props, ref) => {
             <tbody>
           {editeurs.map((index) => {
             return (
-              <TrancheEditor
+              <RangeInput
                 id={props.nom + index}
                 key={props.nom + index}
                 score={props.notes[index]}
                 nom={props.nom}
-                periode={1+index}
-                semestres={props.semestres}
+                listeTranches={listeTranches}
+                label={(props.semestres ? 'S' : 'T') + (1+index).toString()}
                 onChange={handleChange}
                 ref={el => inputRef.current[index] = el}
               />

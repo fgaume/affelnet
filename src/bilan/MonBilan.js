@@ -38,8 +38,7 @@ const MonBilan = (props) => {
 
   const inputRef = useRef([]);
 
-
-  const handleMatiereChange = (nom, periode, newNote) => {
+  const handleMatiereChange = (nom, newNote, periode) => {
     console.log("handleMatiereChange: " + nom + "/" + periode + "/" + newNote);
     setQuickScore(0);
     const newMatieres = updateMatieres(matieres, nom, periode, newNote);
@@ -53,16 +52,10 @@ const MonBilan = (props) => {
 
   const setAllNotes = (event) => {
     const value = parseInt(event.target.value);
-    console.log("value = " + value);
+    //console.log("value = " + value);
     setQuickScore(value);
     const note = valueMap.get(value);
-    console.log("note = " + value);
-    /* listeMatieres.forEach((matiere) => {
-      document.getElementById(matiere.nom + "0").value = note;
-      document.getElementById(matiere.nom + "1").value = note;
-      if (!semestres) document.getElementById(matiere.nom + "2").value = note;
-    }); */
-
+    //console.log("note = " + value);
     inputRef.current.forEach((elem) => { elem.setScore(note)});
     setMatieres(allMatiereSetTo(note, semestres));
   };

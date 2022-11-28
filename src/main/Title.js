@@ -68,7 +68,7 @@ const Title = (props) => {
           <ExclamationCircle width="24" height="24"/>&nbsp;
           Les seuils d'admission ne sont valables que pour les collégiens <strong>non-boursiers</strong>
           &nbsp;(car <a href="https://fgaume.medium.com/la-m%C3%A9canique-daffelnet-79de9f0fe70a" target="affelnet-medium">
-            les boursiers sont traités dans un coucours séparé par Affelnet</a>).
+            les boursiers sont traités dans un concours séparé par Affelnet</a>).
         </Alert>
         { (show === 'true') && <div className="d-flex justify-content-end">
             <Button onClick={() => setShow('false')} variant="outline-primary">

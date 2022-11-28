@@ -4,7 +4,7 @@ import { formatFloat, formatVariation } from "../services/helper";
 
 const AffichageScores = (props) => {
   return (
-    <div className="col-md-6 mx-auto py-3">
+    <div className="col-xl-6 col-lg-6 col-md-6 col-sm-8 mx-auto py-3">
       <Card className="mb-0">
       <Table striped borderless hover size="xl" className="mb-0">
         <tbody>

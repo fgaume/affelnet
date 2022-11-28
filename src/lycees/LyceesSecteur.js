@@ -52,9 +52,9 @@ const LyceesSecteur = (props) => {
           scoreNext={props.scoreNext > 0 ? bonusGeo + props.scoreNext : 0}
         />
       </div>
-      <div className="col-md-6 mx-auto">
+      <div className="col-xl-6 col-lg-6 col-md-6 col-sm-8 mx-auto">
         <Card className="mb-0">
-          <Table striped borderless hover className="mb-0">
+          <Table striped borderless hover responsive="xl" className="mb-0">
             <thead>
               <tr>
                 <th className="lycee">Lycée</th>

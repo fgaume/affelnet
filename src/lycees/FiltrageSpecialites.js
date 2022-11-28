@@ -53,6 +53,7 @@ const FiltrageSpecialites = (props) => {
       <div className="p-2">
         {specialites.map((spe, index) => {
           return (
+            <span key={index}>
             <OverlayTrigger
               key={spe.acronyme}
               placement="top"
@@ -70,7 +71,8 @@ const FiltrageSpecialites = (props) => {
                 onChange={onFiltreChange}
                 defaultChecked={filtres.includes(spe.acronyme)}
               />
-            </OverlayTrigger>
+            </OverlayTrigger><span>&nbsp;&nbsp;&nbsp;</span>
+            </span>
           );
         })}
       </div>

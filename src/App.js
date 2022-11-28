@@ -21,7 +21,7 @@ import {
 import ContribSeuils from "./seuils/ContribSeuils";
 
 const App = () => {
-  const version = "v8.0.2 15/11/2022";
+  const version = "v8.0.3 27/11/2022";
   const contrib = false;
 
   const [loading, setLoading] = useState(true);
@@ -70,7 +70,7 @@ const App = () => {
   };
 
   const handleSeuilChange = (newNumberSeuils) => {
-    console.log("newNumberSeuils : " + newNumberSeuils);
+    // console.log("newNumberSeuils : " + newNumberSeuils);
     setNumberSeuils(newNumberSeuils);
   };
 
@@ -172,7 +172,7 @@ const App = () => {
                   id="lycees"
                   className="mx-0 my-0"
                 >
-                  <Tab eventKey="secteur1" title="Sect. 1">
+                  <Tab eventKey="secteur1" title="Secteur 1">
                     <LyceesSecteur
                       lycees={lyceesSecteur[0]}
                       scorePrevious={scoreGlobalPrevious}
