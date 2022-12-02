@@ -1,6 +1,6 @@
 {
-  "name": "simulateur_affelnet",
-  "version": "8.0.1",
+  "name": "affelnet75",
+  "version": "8.0.4",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.5",
