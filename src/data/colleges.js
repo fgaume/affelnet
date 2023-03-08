@@ -244,15 +244,15 @@ const colleges = [
     "bonus": 0
   },
   {
-    "nom": "JEAN BAPTISTE CLEMENT",
+    "nom": "JEAN-BAPTISTE CLEMENT",
     "bonus": 1200
   },
   {
-    "nom": "JEAN BAPTISTE POQUELIN",
+    "nom": "JEAN-BAPTISTE POQUELIN",
     "bonus": 600
   },
   {
-    "nom": "JEAN BAPTISTE SAY",
+    "nom": "JEAN-BAPTISTE SAY",
     "bonus": 0
   },
   {
@@ -260,7 +260,7 @@ const colleges = [
     "bonus": 0
   },
   {
-    "nom": "JEAN FRANCOIS OEBEN",
+    "nom": "JEAN-FRANCOIS OEBEN",
     "bonus": 600
   },
   {
@@ -380,7 +380,7 @@ const colleges = [
     "bonus": 0
   },
   {
-    "nom": "PIERRE JEAN DE BERANGER",
+    "nom": "PIERRE-JEAN DE BERANGER",
     "bonus": 0
   },
   {
@@ -404,15 +404,11 @@ const colleges = [
     "bonus": 0
   },
   {
-    "nom": "ROGNONI",
-    "bonus": 0
-  },
-  {
     "nom": "ROLAND DORGELES",
     "bonus": 600
   },
   {
-    "nom": "SAINT EXUPERY",
+    "nom": "SAINT-EXUPERY",
     "bonus": 0
   },
   {
@@ -448,7 +444,7 @@ const colleges = [
     "bonus": 600
   },
   {
-    "nom": "WOLFGANG AMADEUS MOZART",
+    "nom": "W. A. MOZART",
     "bonus": 1200
   },
   {
