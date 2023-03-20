@@ -1,0 +1,232 @@
+[
+  {
+    "id": "0750680G",
+    "nom": "ARAGO",
+    "seuils": [40386.517, 40467.318]
+  },
+  {
+    "id": "0750693W",
+    "nom": "BUFFON",
+    "seuils": [40582.466, 40439.889]
+  },
+  {
+    "id": "0750694X",
+    "nom": "CAMILLE SEE",
+    "seuils": [39436.35, 38766.489]
+  },
+  {
+    "id": "0750704H",
+    "nom": "CARNOT",
+    "seuils": [40547, 40400.777]
+  },
+  {
+    "id": "0750663N",
+    "nom": "CHAPTAL",
+    "seuils": [40729.127, 40716.791]
+  },
+  {
+    "id": "0750652B",
+    "nom": "CHARLEMAGNE",
+    "seuils": [40735.851, 40685.023]
+  },
+  {
+    "id": "0750698B",
+    "nom": "CLAUDE BERNARD",
+    "seuils": [0, 0]
+  },
+  {
+    "id": "0750683K",
+    "nom": "CLAUDE MONET",
+    "seuils": [40569.767, 40593.618]
+  },
+  {
+    "id": "0750673Z",
+    "nom": "COLBERT",
+    "seuils": [22588.564, 22280]
+  },
+  {
+    "id": "0750667T",
+    "nom": "CONDORCET",
+    "seuils": [41095.851, 41098.058]
+  },
+  {
+    "id": "0750712S",
+    "nom": "DIDEROT",
+    "seuils": [25316.545, 23470]
+  },
+  {
+    "id": "0750676C",
+    "nom": "DORIAN",
+    "seuils": [25185.901, 23065.83]
+  },
+  {
+    "id": "0750671X",
+    "nom": "EDGAR QUINET",
+    "seuils": [24129.843, 39047.581]
+  },
+  {
+    "id": "0750677D",
+    "nom": "ELISA LEMONNIER",
+    "seuils": [23861.234, 5709.842]
+  },
+  {
+    "id": "0750692V",
+    "nom": "EMILE DUBOIS",
+    "seuils": [38094.583, 32640]
+  },
+  {
+    "id": "0750660K",
+    "nom": "FENELON",
+    "seuils": [40582.043, 40608.709]
+  },
+  {
+    "id": "0750690T",
+    "nom": "FRANCOIS VILLON",
+    "seuils": [24090.145, 22363.395]
+  },
+  {
+    "id": "0750684L",
+    "nom": "GABRIEL FAURE",
+    "seuils": [23180.853, 24402.417]
+  },
+  {
+    "id": "0750714U",
+    "nom": "HELENE BOUCHER",
+    "seuils": [40724.259, 40633.911]
+  },
+  {
+    "id": "0750711R",
+    "nom": "HENRI BERGSON",
+    "seuils": [6796.35, 24162.852]
+  },
+  {
+    "id": "0750654D",
+    "nom": "HENRI IV",
+    "seuils": [0, 40734.331]
+  },
+  {
+    "id": "0750705J",
+    "nom": "HONORE DE BALZAC",
+    "seuils": [40269.556, 39935.372]
+  },
+  {
+    "id": "0750668U",
+    "nom": "JACQUES DECOUR",
+    "seuils": [25480.702, 32640]
+  },
+  {
+    "id": "0750699C",
+    "nom": "JANSON DE SAILLY",
+    "seuils": [40371.575, 40170.93]
+  },
+  {
+    "id": "0750702F",
+    "nom": "JEAN DE LA FONTAINE",
+    "seuils": [0, 39758.988]
+  },
+  {
+    "id": "0750700D",
+    "nom": "JEAN-BAPTISTE SAY",
+    "seuils": [40172.502, 40016.898]
+  },
+  {
+    "id": "0750669V",
+    "nom": "JULES FERRY",
+    "seuils": [40332.292, 40253.169]
+  },
+  {
+    "id": "0750670W",
+    "nom": "LAMARTINE",
+    "seuils": [39587.952, 40146.603]
+  },
+  {
+    "id": "0750656F",
+    "nom": "LAVOISIER",
+    "seuils": [40559.383, 40600.589]
+  },
+  {
+    "id": "0751708Z",
+    "nom": "LOUIS ARMAND",
+    "seuils": [7565.549, 23591.625]
+  },
+  {
+    "id": "0750655E",
+    "nom": "LOUIS LE GRAND",
+    "seuils": [0, 0]
+  },
+  {
+    "id": "0750715V",
+    "nom": "MAURICE RAVEL",
+    "seuils": [39610.883, 39266.478]
+  },
+  {
+    "id": "0750703G",
+    "nom": "MOLIERE",
+    "seuils": [39139.363, 38884.118]
+  },
+  {
+    "id": "0750657G",
+    "nom": "MONTAIGNE",
+    "seuils": [40398.65, 40180.670]
+  },
+  {
+    "id": "0750685M",
+    "nom": "P.G. DE GENNES",
+    "seuils": [7222.187, 32640]
+  },
+  {
+    "id": "0750689S",
+    "nom": "PAUL BERT",
+    "seuils": [39605.27, 39634.293]
+  },
+  {
+    "id": "0750679F",
+    "nom": "PAUL VALERY",
+    "seuils": [22268.841, 17760]
+  },
+  {
+    "id": "0750688R",
+    "nom": "RABELAIS",
+    "seuils": [7707.827, 22132.527]
+  },
+  {
+    "id": "0750664P",
+    "nom": "RACINE",
+    "seuils": [40549.926, 40462.993]
+  },
+  {
+    "id": "0750682J",
+    "nom": "RODIN",
+    "seuils": [25216.998, 7886.202]
+  },
+  {
+    "id": "0750651A",
+    "nom": "SIMONE WEIL",
+    "seuils": [40170.521, 39790.504]
+  },
+  {
+    "id": "0750653C",
+    "nom": "SOPHIE GERMAIN",
+    "seuils": [40925.103, 40624.178]
+  },
+  {
+    "id": "0750647W",
+    "nom": "TURGOT",
+    "seuils": [41090.421, 41031.602]
+  },
+  {
+    "id": "0750662M",
+    "nom": "VICTOR DURUY",
+    "seuils": [40120.867, 40037.442]
+  },
+  {
+    "id": "0750648X",
+    "nom": "VICTOR HUGO",
+    "seuils": [40713.103, 40656.495]
+  },
+  {
+    "id": "0750675B",
+    "nom": "VOLTAIRE",
+    "seuils": [25715.64, 39095.508]
+  }
+]
