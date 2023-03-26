@@ -1,324 +1,416 @@
 [
   {
     "annee": 2022,
-    "lycee_id": "0750680G",
-    "capacite": 245,
-    "ips_moyen": 118.3,
-    "score_admission": 40467.316
-  },
-  {
-    "annee": 2022,
-    "lycee_id": "0750693W",
-    "capacite": 353,
-    "ips_moyen": 126.9,
-    "score_admission": 40439.89
-  },
-  {
-    "annee": 2022,
-    "lycee_id": "0750694X",
-    "capacite": 213,
-    "ips_moyen": 128,
-    "score_admission": 38766.49
-  },
-  {
-    "annee": 2022,
-    "lycee_id": "0750704H",
-    "capacite": 303,
-    "ips_moyen": 128.3,
-    "score_admission": 40400.777
-  },
-  {
-    "annee": 2022,
-    "lycee_id": "0750663N",
-    "capacite": 177,
-    "ips_moyen": 128.8,
-    "score_admission": 40716.79
-  },
-  {
-    "annee": 2022,
-    "lycee_id": "0750652B",
-    "capacite": 244,
-    "ips_moyen": 130.9,
-    "score_admission": 40685.023
-  },
-  {
-    "annee": 2022,
-    "lycee_id": "0750698B",
-    "capacite": 198,
-    "ips_moyen": 127.3,
-    "score_admission": 0
-  },
-  {
-    "annee": 2022,
-    "lycee_id": "0750683K",
-    "capacite": 347,
-    "ips_moyen": 122.7,
-    "score_admission": 40593.617
-  },
-  {
-    "annee": 2022,
-    "lycee_id": "0750673Z",
-    "capacite": 284,
-    "ips_moyen": 110.6,
-    "score_admission": 22280
-  },
-  {
-    "annee": 2022,
-    "lycee_id": "0750667T",
-    "capacite": 177,
-    "ips_moyen": 123.6,
-    "score_admission": 41098.06
-  },
-  {
-    "annee": 2022,
-    "lycee_id": "0750712S",
-    "capacite": 206,
-    "ips_moyen": 102.3,
-    "score_admission": 23470
-  },
-  {
-    "annee": 2022,
-    "lycee_id": "0750676C",
-    "capacite": 113,
-    "ips_moyen": 113.8,
-    "score_admission": 23065.83
-  },
-  {
-    "annee": 2022,
-    "lycee_id": "0750671X",
-    "capacite": 168,
-    "ips_moyen": 121.6,
-    "score_admission": 39047.582
-  },
-  {
-    "annee": 2022,
-    "lycee_id": "0750677D",
-    "capacite": 126,
-    "ips_moyen": 111.9,
-    "score_admission": 5709.842
-  },
-  {
-    "annee": 2022,
-    "lycee_id": "0750692V",
-    "capacite": 86,
-    "ips_moyen": 109,
-    "score_admission": 32640
-  },
-  {
-    "annee": 2022,
-    "lycee_id": "0750660K",
-    "capacite": 174,
-    "ips_moyen": 134.2,
-    "score_admission": 40608.71
-  },
-  {
-    "annee": 2022,
-    "lycee_id": "0750690T",
-    "capacite": 64,
-    "ips_moyen": 100.4,
-    "score_admission": 22363.395
-  },
-  {
-    "annee": 2022,
-    "lycee_id": "0750684L",
-    "capacite": 242,
-    "ips_moyen": 112,
-    "score_admission": 24402.418
-  },
-  {
-    "annee": 2022,
-    "lycee_id": "0750714U",
-    "capacite": 409,
-    "ips_moyen": 125.9,
-    "score_admission": 40633.91
-  },
-  {
-    "annee": 2022,
-    "lycee_id": "0750711R",
-    "capacite": 128,
-    "ips_moyen": 99.8,
-    "score_admission": 24162.852
-  },
-  {
-    "annee": 2022,
-    "lycee_id": "0750654D",
-    "capacite": 0,
-    "ips_moyen": 0,
-    "score_admission": 40734.332
-  },
-  {
-    "annee": 2022,
-    "lycee_id": "0750705J",
-    "capacite": 304,
-    "ips_moyen": 119.7,
-    "score_admission": 39935.37
-  },
-  {
-    "annee": 2022,
-    "lycee_id": "0750668U",
-    "capacite": 426,
-    "ips_moyen": 117.6,
-    "score_admission": 32640
-  },
-  {
-    "annee": 2022,
-    "lycee_id": "0750699C",
-    "capacite": 346,
-    "ips_moyen": 134,
-    "score_admission": 40170.93
-  },
-  {
-    "annee": 2022,
-    "lycee_id": "0750702F",
-    "capacite": 241,
-    "ips_moyen": 132.3,
-    "score_admission": 39758.99
-  },
-  {
-    "annee": 2022,
-    "lycee_id": "0750700D",
-    "capacite": 279,
-    "ips_moyen": 138.9,
-    "score_admission": 40016.9
-  },
-  {
-    "annee": 2022,
-    "lycee_id": "0750669V",
-    "capacite": 276,
-    "ips_moyen": 114.9,
-    "score_admission": 40253.168
-  },
-  {
-    "annee": 2022,
-    "lycee_id": "0750670W",
-    "capacite": 239,
-    "ips_moyen": 120.2,
-    "score_admission": 40146.6
-  },
-  {
-    "annee": 2022,
-    "lycee_id": "0750656F",
-    "capacite": 199,
-    "ips_moyen": 139.7,
-    "score_admission": 40600.59
-  },
-  {
-    "annee": 2022,
-    "lycee_id": "0751708Z",
-    "capacite": 71,
-    "ips_moyen": 108.4,
-    "score_admission": 23591.625
-  },
-  {
-    "annee": 2022,
-    "lycee_id": "0750655E",
-    "capacite": 0,
-    "ips_moyen": 0,
-    "score_admission": 0
-  },
-  {
-    "annee": 2022,
-    "lycee_id": "0750715V",
-    "capacite": 400,
-    "ips_moyen": 118.2,
-    "score_admission": 39266.477
-  },
-  {
-    "annee": 2022,
-    "lycee_id": "0750703G",
-    "capacite": 241,
-    "ips_moyen": 125.9,
-    "score_admission": 38884.117
-  },
-  {
-    "annee": 2022,
-    "lycee_id": "0750657G",
-    "capacite": 348,
-    "ips_moyen": 130.2,
-    "score_admission": 40180.67
-  },
-  {
-    "annee": 2022,
-    "lycee_id": "0750685M",
-    "capacite": 196,
-    "ips_moyen": 121,
-    "score_admission": 32640
-  },
-  {
-    "annee": 2022,
-    "lycee_id": "0750689S",
-    "capacite": 170,
-    "ips_moyen": 121,
-    "score_admission": 39634.293
-  },
-  {
-    "annee": 2022,
-    "lycee_id": "0750679F",
-    "capacite": 123,
-    "ips_moyen": 108.3,
-    "score_admission": 17760
-  },
-  {
-    "annee": 2022,
-    "lycee_id": "0750688R",
-    "capacite": 110,
-    "ips_moyen": 91.6,
-    "score_admission": 22132.527
-  },
-  {
-    "annee": 2022,
-    "lycee_id": "0750664P",
-    "capacite": 349,
-    "ips_moyen": 129.6,
-    "score_admission": 40462.992
-  },
-  {
-    "annee": 2022,
-    "lycee_id": "0750682J",
-    "capacite": 265,
-    "ips_moyen": 127.3,
-    "score_admission": 7886.202
-  },
-  {
-    "annee": 2022,
-    "lycee_id": "0750651A",
-    "capacite": 90,
-    "ips_moyen": 125.4,
-    "score_admission": 39790.504
-  },
-  {
-    "annee": 2022,
-    "lycee_id": "0750653C",
-    "capacite": 278,
-    "ips_moyen": 134.2,
-    "score_admission": 40624.18
-  },
-  {
-    "annee": 2022,
     "lycee_id": "0750647W",
     "capacite": 239,
     "ips_moyen": 124.3,
-    "score_admission": 41031.6
-  },
-  {
-    "annee": 2022,
-    "lycee_id": "0750662M",
-    "capacite": 348,
-    "ips_moyen": 139.8,
-    "score_admission": 40037.44
+    "score_admission": 41031.6,
+    "taux_premier_voeu": 5.3,
+    "taux_pression": 2.5
   },
   {
     "annee": 2022,
     "lycee_id": "0750648X",
     "capacite": 172,
     "ips_moyen": 137.9,
-    "score_admission": 40656.496
+    "score_admission": 40656.496,
+    "taux_premier_voeu": 2.2,
+    "taux_pression": 2.9
+  },
+  {
+    "annee": 2022,
+    "lycee_id": "0750651A",
+    "capacite": 90,
+    "ips_moyen": 125.4,
+    "score_admission": 39790.504,
+    "taux_premier_voeu": 0.3,
+    "taux_pression": 1
+  },
+  {
+    "annee": 2022,
+    "lycee_id": "0750652B",
+    "capacite": 244,
+    "ips_moyen": 130.9,
+    "score_admission": 40685.023,
+    "taux_premier_voeu": 3.2,
+    "taux_pression": 2
+  },
+  {
+    "annee": 2022,
+    "lycee_id": "0750653C",
+    "capacite": 278,
+    "ips_moyen": 134.2,
+    "score_admission": 40624.18,
+    "taux_premier_voeu": 3.5,
+    "taux_pression": 1.7
+  },
+  {
+    "annee": 2022,
+    "lycee_id": "0750654D",
+    "capacite": 0,
+    "ips_moyen": 0,
+    "score_admission": 40734.332,
+    "taux_premier_voeu": null,
+    "taux_pression": null
+  },
+  {
+    "annee": 2022,
+    "lycee_id": "0750655E",
+    "capacite": 0,
+    "ips_moyen": 0,
+    "score_admission": 0,
+    "taux_premier_voeu": null,
+    "taux_pression": null
+  },
+  {
+    "annee": 2022,
+    "lycee_id": "0750656F",
+    "capacite": 199,
+    "ips_moyen": 139.7,
+    "score_admission": 40600.59,
+    "taux_premier_voeu": 1.8,
+    "taux_pression": 1.8
+  },
+  {
+    "annee": 2022,
+    "lycee_id": "0750657G",
+    "capacite": 348,
+    "ips_moyen": 130.2,
+    "score_admission": 40180.67,
+    "taux_premier_voeu": 3.4,
+    "taux_pression": 1.2
+  },
+  {
+    "annee": 2022,
+    "lycee_id": "0750660K",
+    "capacite": 174,
+    "ips_moyen": 134.2,
+    "score_admission": 40608.71,
+    "taux_premier_voeu": 2,
+    "taux_pression": 2.5
+  },
+  {
+    "annee": 2022,
+    "lycee_id": "0750662M",
+    "capacite": 348,
+    "ips_moyen": 139.8,
+    "score_admission": 40037.44,
+    "taux_premier_voeu": 3.9,
+    "taux_pression": 0.9
+  },
+  {
+    "annee": 2022,
+    "lycee_id": "0750663N",
+    "capacite": 177,
+    "ips_moyen": 128.8,
+    "score_admission": 40716.79,
+    "taux_premier_voeu": 3.1,
+    "taux_pression": 2.8
+  },
+  {
+    "annee": 2022,
+    "lycee_id": "0750664P",
+    "capacite": 349,
+    "ips_moyen": 129.6,
+    "score_admission": 40462.992,
+    "taux_premier_voeu": 4,
+    "taux_pression": 1.6
+  },
+  {
+    "annee": 2022,
+    "lycee_id": "0750667T",
+    "capacite": 177,
+    "ips_moyen": 123.6,
+    "score_admission": 41098.06,
+    "taux_premier_voeu": 3.4,
+    "taux_pression": 3.3
+  },
+  {
+    "annee": 2022,
+    "lycee_id": "0750668U",
+    "capacite": 426,
+    "ips_moyen": 117.6,
+    "score_admission": 32640,
+    "taux_premier_voeu": 1.6,
+    "taux_pression": 0.3
+  },
+  {
+    "annee": 2022,
+    "lycee_id": "0750669V",
+    "capacite": 276,
+    "ips_moyen": 114.9,
+    "score_admission": 40253.168,
+    "taux_premier_voeu": 4.2,
+    "taux_pression": 1.4
+  },
+  {
+    "annee": 2022,
+    "lycee_id": "0750670W",
+    "capacite": 239,
+    "ips_moyen": 120.2,
+    "score_admission": 40146.6,
+    "taux_premier_voeu": 2.5,
+    "taux_pression": 1.3
+  },
+  {
+    "annee": 2022,
+    "lycee_id": "0750671X",
+    "capacite": 168,
+    "ips_moyen": 121.6,
+    "score_admission": 39047.582,
+    "taux_premier_voeu": 0.8,
+    "taux_pression": 0.4
+  },
+  {
+    "annee": 2022,
+    "lycee_id": "0750673Z",
+    "capacite": 284,
+    "ips_moyen": 110.6,
+    "score_admission": 22280,
+    "taux_premier_voeu": 1.4,
+    "taux_pression": 0
   },
   {
     "annee": 2022,
     "lycee_id": "0750675B",
     "capacite": 402,
     "ips_moyen": 119,
-    "score_admission": 39095.508
+    "score_admission": 39095.508,
+    "taux_premier_voeu": 3.1,
+    "taux_pression": 0.3
+  },
+  {
+    "annee": 2022,
+    "lycee_id": "0750676C",
+    "capacite": 113,
+    "ips_moyen": 113.8,
+    "score_admission": 23065.83,
+    "taux_premier_voeu": 0.5,
+    "taux_pression": 0
+  },
+  {
+    "annee": 2022,
+    "lycee_id": "0750677D",
+    "capacite": 126,
+    "ips_moyen": 111.9,
+    "score_admission": 5709.842,
+    "taux_premier_voeu": 0.7,
+    "taux_pression": 0
+  },
+  {
+    "annee": 2022,
+    "lycee_id": "0750679F",
+    "capacite": 123,
+    "ips_moyen": 108.3,
+    "score_admission": 17760,
+    "taux_premier_voeu": 0.5,
+    "taux_pression": 0
+  },
+  {
+    "annee": 2022,
+    "lycee_id": "0750680G",
+    "capacite": 245,
+    "ips_moyen": 118.3,
+    "score_admission": 40467.316,
+    "taux_premier_voeu": 4.1,
+    "taux_pression": 1.5
+  },
+  {
+    "annee": 2022,
+    "lycee_id": "0750682J",
+    "capacite": 265,
+    "ips_moyen": 127.3,
+    "score_admission": 7886.202,
+    "taux_premier_voeu": 1.1,
+    "taux_pression": 0
+  },
+  {
+    "annee": 2022,
+    "lycee_id": "0750683K",
+    "capacite": 347,
+    "ips_moyen": 122.7,
+    "score_admission": 40593.617,
+    "taux_premier_voeu": 4.4,
+    "taux_pression": 1
+  },
+  {
+    "annee": 2022,
+    "lycee_id": "0750684L",
+    "capacite": 242,
+    "ips_moyen": 112,
+    "score_admission": 24402.418,
+    "taux_premier_voeu": 1.9,
+    "taux_pression": 0.1
+  },
+  {
+    "annee": 2022,
+    "lycee_id": "0750685M",
+    "capacite": 196,
+    "ips_moyen": 121,
+    "score_admission": 32640,
+    "taux_premier_voeu": 1.5,
+    "taux_pression": 0
+  },
+  {
+    "annee": 2022,
+    "lycee_id": "0750688R",
+    "capacite": 110,
+    "ips_moyen": 91.6,
+    "score_admission": 22132.527,
+    "taux_premier_voeu": 0.4,
+    "taux_pression": 0
+  },
+  {
+    "annee": 2022,
+    "lycee_id": "0750689S",
+    "capacite": 170,
+    "ips_moyen": 121,
+    "score_admission": 39634.293,
+    "taux_premier_voeu": 1.6,
+    "taux_pression": 0.9
+  },
+  {
+    "annee": 2022,
+    "lycee_id": "0750690T",
+    "capacite": 64,
+    "ips_moyen": 100.4,
+    "score_admission": 22363.395,
+    "taux_premier_voeu": 0.2,
+    "taux_pression": 0
+  },
+  {
+    "annee": 2022,
+    "lycee_id": "0750692V",
+    "capacite": 86,
+    "ips_moyen": 109,
+    "score_admission": 32640,
+    "taux_premier_voeu": 0.7,
+    "taux_pression": 0.1
+  },
+  {
+    "annee": 2022,
+    "lycee_id": "0750693W",
+    "capacite": 353,
+    "ips_moyen": 126.9,
+    "score_admission": 40439.89,
+    "taux_premier_voeu": 5.5,
+    "taux_pression": 1.4
+  },
+  {
+    "annee": 2022,
+    "lycee_id": "0750694X",
+    "capacite": 213,
+    "ips_moyen": 128,
+    "score_admission": 38766.49,
+    "taux_premier_voeu": 0.6,
+    "taux_pression": 0.3
+  },
+  {
+    "annee": 2022,
+    "lycee_id": "0750698B",
+    "capacite": 198,
+    "ips_moyen": 127.3,
+    "score_admission": 0,
+    "taux_premier_voeu": 0.6,
+    "taux_pression": 0
+  },
+  {
+    "annee": 2022,
+    "lycee_id": "0750699C",
+    "capacite": 346,
+    "ips_moyen": 134,
+    "score_admission": 40170.93,
+    "taux_premier_voeu": 3.9,
+    "taux_pression": 1.4
+  },
+  {
+    "annee": 2022,
+    "lycee_id": "0750700D",
+    "capacite": 279,
+    "ips_moyen": 138.9,
+    "score_admission": 40016.9,
+    "taux_premier_voeu": 2.7,
+    "taux_pression": 0.9
+  },
+  {
+    "annee": 2022,
+    "lycee_id": "0750702F",
+    "capacite": 241,
+    "ips_moyen": 132.3,
+    "score_admission": 39758.99,
+    "taux_premier_voeu": 1.3,
+    "taux_pression": 1.6
+  },
+  {
+    "annee": 2022,
+    "lycee_id": "0750703G",
+    "capacite": 241,
+    "ips_moyen": 125.9,
+    "score_admission": 38884.117,
+    "taux_premier_voeu": 1.1,
+    "taux_pression": 0.5
+  },
+  {
+    "annee": 2022,
+    "lycee_id": "0750704H",
+    "capacite": 303,
+    "ips_moyen": 128.3,
+    "score_admission": 40400.777,
+    "taux_premier_voeu": 4.4,
+    "taux_pression": 1.3
+  },
+  {
+    "annee": 2022,
+    "lycee_id": "0750705J",
+    "capacite": 304,
+    "ips_moyen": 119.7,
+    "score_admission": 39935.37,
+    "taux_premier_voeu": 2.2,
+    "taux_pression": 1.4
+  },
+  {
+    "annee": 2022,
+    "lycee_id": "0750711R",
+    "capacite": 128,
+    "ips_moyen": 99.8,
+    "score_admission": 24162.852,
+    "taux_premier_voeu": 0.4,
+    "taux_pression": 0
+  },
+  {
+    "annee": 2022,
+    "lycee_id": "0750712S",
+    "capacite": 206,
+    "ips_moyen": 102.3,
+    "score_admission": 23470,
+    "taux_premier_voeu": 1.3,
+    "taux_pression": 0
+  },
+  {
+    "annee": 2022,
+    "lycee_id": "0750714U",
+    "capacite": 409,
+    "ips_moyen": 125.9,
+    "score_admission": 40633.91,
+    "taux_premier_voeu": 5.9,
+    "taux_pression": 1.1
+  },
+  {
+    "annee": 2022,
+    "lycee_id": "0750715V",
+    "capacite": 400,
+    "ips_moyen": 118.2,
+    "score_admission": 39266.477,
+    "taux_premier_voeu": 2.6,
+    "taux_pression": 0.5
+  },
+  {
+    "annee": 2022,
+    "lycee_id": "0751708Z",
+    "capacite": 71,
+    "ips_moyen": 108.4,
+    "score_admission": 23591.625,
+    "taux_premier_voeu": 0.3,
+    "taux_pression": 0
   }
 ]
