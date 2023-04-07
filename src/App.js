@@ -19,9 +19,10 @@ import {
   resetExclu,
 } from "./services/specialites";
 import ContribSeuils from "./seuils/ContribSeuils";
+import Secteurs from "./secteurs/Secteurs";
 
 const App = () => {
-  const version = "v8.0.6 20/03/2023";
+  const version = "v8.0.7 07/04/2023";
   const contrib = false;
 
   const [loading, setLoading] = useState(true);
@@ -208,6 +209,14 @@ const App = () => {
                 <div className="col-md-6 mx-auto">
                   <ListeSeuils onChange={handleSeuilChange}/>
                 </div>
+              </Accordion.Body>
+            </Accordion.Item>
+            <Accordion.Item eventKey="5">
+              <Accordion.Header>
+                <span className="fw-bolder">Secteurs</span>
+              </Accordion.Header>
+              <Accordion.Body>
+                <Secteurs />
               </Accordion.Body>
             </Accordion.Item>
           </Accordion>
