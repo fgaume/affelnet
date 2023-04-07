@@ -1,10 +1,12 @@
-import React, { useRef, useEffect } from "react";
-import { Card, ListGroup, Row } from "react-bootstrap";
+import React  from "react";
+import { Card, Row } from "react-bootstrap";
 
 const CollegeGroup = (props) => {
 
+  const bg = (props.bonus === 1200 ? 'success' : (props.bonus === 600 ? 'primary' : 'danger'))
+
   return (
-    <Card className="p-1 bg-success bg-opacity-10 my-3">
+    <Card className={"p-1 bg-opacity-10 my-3 bg-" + bg}>
     <div className="p-2 mx-3">
 
       <Row>
@@ -13,13 +15,13 @@ const CollegeGroup = (props) => {
       <Row>
         &nbsp;
       </Row>
-      <ListGroup variant="flush" as="ol" numbered >
+      <ol className="bg-transparent">
       {props.colleges.map((college, index) => {
           return (
-            <ListGroup.Item key={index}>{college.nom} ({college.dnb_admis})</ListGroup.Item>
+            <li key={index}>{college.nom} ({college.dnb_admis})</li>
           )
         })}
-      </ListGroup>
+      </ol>
     </div>
     </Card>
   );

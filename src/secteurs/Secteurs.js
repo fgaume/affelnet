@@ -27,7 +27,6 @@ const Secteurs = (props) => {
           setCollegesArray(collegesSecteur);
         }
       });
-        //props.onChange({ nom: collegeUpdate.nom, bonus: bonusCollege });
     }
   };
 
@@ -40,7 +39,7 @@ const Secteurs = (props) => {
       <div className="mb-3">
         (les effectifs des collèges sont estimés via leur nombre d'admis au DNB 2022)
       </div>
-      <Card className="p-1 bg-primary bg-opacity-10">
+      <Card className="p-1 bg-light bg-opacity-10">
         <div className="p-2 w-100">
           <LyceeSelector
             onChange={onLyceeChange}
