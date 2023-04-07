@@ -18,7 +18,7 @@ const MatiereEditor = forwardRef((props, ref) => {
 
   useImperativeHandle(ref, () => ({
     setScore(score) {
-      inputRef.current.forEach((elem) => { elem.setScore(score)});
+      inputRef.current.forEach((elem) => { if (elem != null) elem.setScore(score)});
     }
   }));
 

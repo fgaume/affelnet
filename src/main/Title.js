@@ -51,6 +51,9 @@ const Title = (props) => {
               Profiter de la section{" "}
               <b>"Mes lycées"</b>.
             </li>
+            <li>
+              La section <b>"Secteurs"</b> permet d'avoir la répartition des collègiens ayant un lycée donné en secteur 1
+            </li>
           </ul>
           Pour plus de contexte sur Affelnet et cet outil (en particulier les sources de données) : <a href="https://fgaume.medium.com/simulateur-affelnet-2022-aa3e7393f5cb" target="affelnet-medium"><BoxArrowUpRight width="24" height="24" /></a>.
           <hr />
