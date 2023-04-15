@@ -1,0 +1,686 @@
+[
+    {
+      "college_id": "0755433Y",
+      "annee": 2022,
+      "ips_moyen": 85.5,
+      "ips_bonus": 1200
+    },
+    {
+      "college_id": "0750607C",
+      "annee": 2022,
+      "ips_moyen": 118,
+      "ips_bonus": 600
+    },
+    {
+      "college_id": "0750445B",
+      "annee": 2022,
+      "ips_moyen": 100.1,
+      "ips_bonus": 1200
+    },
+    {
+      "college_id": "0751705W",
+      "annee": 2022,
+      "ips_moyen": 104.6,
+      "ips_bonus": 1200
+    },
+    {
+      "college_id": "0754305X",
+      "annee": 2022,
+      "ips_moyen": 106.8,
+      "ips_bonus": 1200
+    },
+    {
+      "college_id": "0752387M",
+      "annee": 2022,
+      "ips_moyen": 132.6,
+      "ips_bonus": 0
+    },
+    {
+      "college_id": "0750608D",
+      "annee": 2022,
+      "ips_moyen": 125.1,
+      "ips_bonus": 600
+    },
+    {
+      "college_id": "0752319N",
+      "annee": 2022,
+      "ips_moyen": 112.9,
+      "ips_bonus": 600
+    },
+    {
+      "college_id": "0750362L",
+      "annee": 2022,
+      "ips_moyen": 127.8,
+      "ips_bonus": 600
+    },
+    {
+      "college_id": "0752829T",
+      "annee": 2022,
+      "ips_moyen": 126.6,
+      "ips_bonus": 600
+    },
+    {
+      "college_id": "0752958H",
+      "annee": 2022,
+      "ips_moyen": 93.8,
+      "ips_bonus": 1200
+    },
+    {
+      "college_id": "0752545J",
+      "annee": 2022,
+      "ips_moyen": 132.8,
+      "ips_bonus": 0
+    },
+    {
+      "college_id": "0752694W",
+      "annee": 2022,
+      "ips_moyen": 91.3,
+      "ips_bonus": 1200
+    },
+    {
+      "college_id": "0752546K",
+      "annee": 2022,
+      "ips_moyen": 132.1,
+      "ips_bonus": 600
+    },
+    {
+      "college_id": "0752552S",
+      "annee": 2022,
+      "ips_moyen": 140.4,
+      "ips_bonus": 0
+    },
+    {
+      "college_id": "0752248L",
+      "annee": 2022,
+      "ips_moyen": 131.9,
+      "ips_bonus": 0
+    },
+    {
+      "college_id": "0752529S",
+      "annee": 2022,
+      "ips_moyen": 143.9,
+      "ips_bonus": 0
+    },
+    {
+      "college_id": "0752525M",
+      "annee": 2022,
+      "ips_moyen": 130,
+      "ips_bonus": 0
+    },
+    {
+      "college_id": "0751706X",
+      "annee": 2022,
+      "ips_moyen": 111.9,
+      "ips_bonus": 600
+    },
+    {
+      "college_id": "0752547L",
+      "annee": 2022,
+      "ips_moyen": 114.3,
+      "ips_bonus": 600
+    },
+    {
+      "college_id": "0750360J",
+      "annee": 2022,
+      "ips_moyen": 122.2,
+      "ips_bonus": 600
+    },
+    {
+      "college_id": "0752317L",
+      "annee": 2022,
+      "ips_moyen": 129.8,
+      "ips_bonus": 600
+    },
+    {
+      "college_id": "0752539C",
+      "annee": 2022,
+      "ips_moyen": 126.2,
+      "ips_bonus": 600
+    },
+    {
+      "college_id": "0755241P",
+      "annee": 2022,
+      "ips_moyen": 102.5,
+      "ips_bonus": 1200
+    },
+    {
+      "college_id": "0751791P",
+      "annee": 2022,
+      "ips_moyen": 144.1,
+      "ips_bonus": 0
+    },
+    {
+      "college_id": "0755030K",
+      "annee": 2022,
+      "ips_moyen": 74.4,
+      "ips_bonus": 1200
+    },
+    {
+      "college_id": "0751563S",
+      "annee": 2022,
+      "ips_moyen": 109.6,
+      "ips_bonus": 600
+    },
+    {
+      "college_id": "0755095F",
+      "annee": 2022,
+      "ips_moyen": 108.4,
+      "ips_bonus": 1200
+    },
+    {
+      "college_id": "0753345D",
+      "annee": 2022,
+      "ips_moyen": 96.4,
+      "ips_bonus": 1200
+    },
+    {
+      "college_id": "0751707Y",
+      "annee": 2022,
+      "ips_moyen": 104.6,
+      "ips_bonus": 1200
+    },
+    {
+      "college_id": "0752385K",
+      "annee": 2022,
+      "ips_moyen": 101.5,
+      "ips_bonus": 1200
+    },
+    {
+      "college_id": "0753937X",
+      "annee": 2022,
+      "ips_moyen": 92.8,
+      "ips_bonus": 1200
+    },
+    {
+      "college_id": "0753046D",
+      "annee": 2022,
+      "ips_moyen": 102.7,
+      "ips_bonus": 1200
+    },
+    {
+      "college_id": "0752693V",
+      "annee": 2022,
+      "ips_moyen": 128.7,
+      "ips_bonus": 0
+    },
+    {
+      "college_id": "0752544H",
+      "annee": 2022,
+      "ips_moyen": 92.4,
+      "ips_bonus": 1200
+    },
+    {
+      "college_id": "0750552T",
+      "annee": 2022,
+      "ips_moyen": 116.5,
+      "ips_bonus": 600
+    },
+    {
+      "college_id": "0755778Y",
+      "annee": 2022,
+      "ips_moyen": 98.2,
+      "ips_bonus": 1200
+    },
+    {
+      "college_id": "0752540D",
+      "annee": 2022,
+      "ips_moyen": 108.3,
+      "ips_bonus": 600
+    },
+    {
+      "college_id": "0752316K",
+      "annee": 2022,
+      "ips_moyen": 112.3,
+      "ips_bonus": 600
+    },
+    {
+      "college_id": "0752957G",
+      "annee": 2022,
+      "ips_moyen": 116.7,
+      "ips_bonus": 600
+    },
+    {
+      "college_id": "0750507U",
+      "annee": 2022,
+      "ips_moyen": 102.5,
+      "ips_bonus": 1200
+    },
+    {
+      "college_id": "0750546L",
+      "annee": 2022,
+      "ips_moyen": 80,
+      "ips_bonus": 1200
+    },
+    {
+      "college_id": "0750444A",
+      "annee": 2022,
+      "ips_moyen": 123.6,
+      "ips_bonus": 600
+    },
+    {
+      "college_id": "0752192A",
+      "annee": 2022,
+      "ips_moyen": 125.8,
+      "ips_bonus": 600
+    },
+    {
+      "college_id": "0752606A",
+      "annee": 2022,
+      "ips_moyen": 88.3,
+      "ips_bonus": 1200
+    },
+    {
+      "college_id": "0753938Y",
+      "annee": 2022,
+      "ips_moyen": 90,
+      "ips_bonus": 1200
+    },
+    {
+      "college_id": "0752195D",
+      "annee": 2022,
+      "ips_moyen": 96.5,
+      "ips_bonus": 1200
+    },
+    {
+      "college_id": "0753936W",
+      "annee": 2022,
+      "ips_moyen": 99.4,
+      "ips_bonus": 1200
+    },
+    {
+      "college_id": "0752190Y",
+      "annee": 2022,
+      "ips_moyen": 99.5,
+      "ips_bonus": 1200
+    },
+    {
+      "college_id": "0752695X",
+      "annee": 2022,
+      "ips_moyen": 93.5,
+      "ips_bonus": 1200
+    },
+    {
+      "college_id": "0753518S",
+      "annee": 2022,
+      "ips_moyen": 108.8,
+      "ips_bonus": 600
+    },
+    {
+      "college_id": "0752189X",
+      "annee": 2022,
+      "ips_moyen": 118.3,
+      "ips_bonus": 600
+    },
+    {
+      "college_id": "0752252R",
+      "annee": 2022,
+      "ips_moyen": 100,
+      "ips_bonus": 1200
+    },
+    {
+      "college_id": "0752556W",
+      "annee": 2022,
+      "ips_moyen": 117.4,
+      "ips_bonus": 600
+    },
+    {
+      "college_id": "0752555V",
+      "annee": 2022,
+      "ips_moyen": 102.2,
+      "ips_bonus": 1200
+    },
+    {
+      "college_id": "0752526N",
+      "annee": 2022,
+      "ips_moyen": 151.1,
+      "ips_bonus": 0
+    },
+    {
+      "college_id": "0750591K",
+      "annee": 2022,
+      "ips_moyen": 118.2,
+      "ips_bonus": 600
+    },
+    {
+      "college_id": "0752553T",
+      "annee": 2022,
+      "ips_moyen": 125.5,
+      "ips_bonus": 600
+    },
+    {
+      "college_id": "0752532V",
+      "annee": 2022,
+      "ips_moyen": 126.6,
+      "ips_bonus": 600
+    },
+    {
+      "college_id": "0752187V",
+      "annee": 2022,
+      "ips_moyen": 119.8,
+      "ips_bonus": 600
+    },
+    {
+      "college_id": "0752548M",
+      "annee": 2022,
+      "ips_moyen": 128.9,
+      "ips_bonus": 0
+    },
+    {
+      "college_id": "0752550P",
+      "annee": 2022,
+      "ips_moyen": 135.3,
+      "ips_bonus": 0
+    },
+    {
+      "college_id": "0750611G",
+      "annee": 2022,
+      "ips_moyen": 122.8,
+      "ips_bonus": 600
+    },
+    {
+      "college_id": "0753939Z",
+      "annee": 2022,
+      "ips_moyen": 81.1,
+      "ips_bonus": 1200
+    },
+    {
+      "college_id": "0750478M",
+      "annee": 2022,
+      "ips_moyen": 105.6,
+      "ips_bonus": 1200
+    },
+    {
+      "college_id": "0751703U",
+      "annee": 2022,
+      "ips_moyen": 125.8,
+      "ips_bonus": 600
+    },
+    {
+      "college_id": "0752549N",
+      "annee": 2022,
+      "ips_moyen": 147.5,
+      "ips_bonus": 0
+    },
+    {
+      "college_id": "0752542F",
+      "annee": 2022,
+      "ips_moyen": 118.6,
+      "ips_bonus": 600
+    },
+    {
+      "college_id": "0752533W",
+      "annee": 2022,
+      "ips_moyen": 127.1,
+      "ips_bonus": 600
+    },
+    {
+      "college_id": "0752249M",
+      "annee": 2022,
+      "ips_moyen": 127.6,
+      "ips_bonus": 0
+    },
+    {
+      "college_id": "0750610F",
+      "annee": 2022,
+      "ips_moyen": 105.2,
+      "ips_bonus": 1200
+    },
+    {
+      "college_id": "0753047E",
+      "annee": 2022,
+      "ips_moyen": 114.2,
+      "ips_bonus": 600
+    },
+    {
+      "college_id": "0755779Z",
+      "annee": 2022,
+      "ips_moyen": 111.2,
+      "ips_bonus": 600
+    },
+    {
+      "college_id": "0752534X",
+      "annee": 2022,
+      "ips_moyen": 138.4,
+      "ips_bonus": 0
+    },
+    {
+      "college_id": "0752531U",
+      "annee": 2022,
+      "ips_moyen": 148.5,
+      "ips_bonus": 0
+    },
+    {
+      "college_id": "0752696Y",
+      "annee": 2022,
+      "ips_moyen": 106.1,
+      "ips_bonus": 1200
+    },
+    {
+      "college_id": "0752251P",
+      "annee": 2022,
+      "ips_moyen": 125.4,
+      "ips_bonus": 600
+    },
+    {
+      "college_id": "0750465Y",
+      "annee": 2022,
+      "ips_moyen": 118.3,
+      "ips_bonus": 600
+    },
+    {
+      "college_id": "0750550R",
+      "annee": 2022,
+      "ips_moyen": 105.4,
+      "ips_bonus": 1200
+    },
+    {
+      "college_id": "0754706H",
+      "annee": 2022,
+      "ips_moyen": 103.1,
+      "ips_bonus": 1200
+    },
+    {
+      "college_id": "0752196E",
+      "annee": 2022,
+      "ips_moyen": 88.3,
+      "ips_bonus": 1200
+    },
+    {
+      "college_id": "0752557X",
+      "annee": 2022,
+      "ips_moyen": 117.8,
+      "ips_bonus": 600
+    },
+    {
+      "college_id": "0751793S",
+      "annee": 2022,
+      "ips_moyen": 87.1,
+      "ips_bonus": 1200
+    },
+    {
+      "college_id": "0752318M",
+      "annee": 2022,
+      "ips_moyen": 105.1,
+      "ips_bonus": 1200
+    },
+    {
+      "college_id": "0752551R",
+      "annee": 2022,
+      "ips_moyen": 115.6,
+      "ips_bonus": 600
+    },
+    {
+      "college_id": "0752527P",
+      "annee": 2022,
+      "ips_moyen": 139.4,
+      "ips_bonus": 0
+    },
+    {
+      "college_id": "0752523K",
+      "annee": 2022,
+      "ips_moyen": 120.3,
+      "ips_bonus": 600
+    },
+    {
+      "college_id": "0750525N",
+      "annee": 2022,
+      "ips_moyen": 121.1,
+      "ips_bonus": 600
+    },
+    {
+      "college_id": "0752530T",
+      "annee": 2022,
+      "ips_moyen": 139.8,
+      "ips_bonus": 0
+    },
+    {
+      "college_id": "0752543G",
+      "annee": 2022,
+      "ips_moyen": 129.8,
+      "ips_bonus": 0
+    },
+    {
+      "college_id": "0752250N",
+      "annee": 2022,
+      "ips_moyen": 134.5,
+      "ips_bonus": 0
+    },
+    {
+      "college_id": "0752537A",
+      "annee": 2022,
+      "ips_moyen": 109,
+      "ips_bonus": 1200
+    },
+    {
+      "college_id": "0750609E",
+      "annee": 2022,
+      "ips_moyen": 121.2,
+      "ips_bonus": 600
+    },
+    {
+      "college_id": "0751790N",
+      "annee": 2022,
+      "ips_moyen": 145.9,
+      "ips_bonus": 0
+    },
+    {
+      "college_id": "0752107H",
+      "annee": 2022,
+      "ips_moyen": 127.8,
+      "ips_bonus": 0
+    },
+    {
+      "college_id": "0752198G",
+      "annee": 2022,
+      "ips_moyen": 87.5,
+      "ips_bonus": 1200
+    },
+    {
+      "college_id": "0750387N",
+      "annee": 2022,
+      "ips_moyen": 140.3,
+      "ips_bonus": 0
+    },
+    {
+      "college_id": "0754528P",
+      "annee": 2022,
+      "ips_moyen": 114,
+      "ips_bonus": 600
+    },
+    {
+      "college_id": "0752186U",
+      "annee": 2022,
+      "ips_moyen": 137.2,
+      "ips_bonus": 0
+    },
+    {
+      "college_id": "0754355B",
+      "annee": 2022,
+      "ips_moyen": 97.4,
+      "ips_bonus": 1200
+    },
+    {
+      "college_id": "0752538B",
+      "annee": 2022,
+      "ips_moyen": 134.4,
+      "ips_bonus": 0
+    },
+    {
+      "college_id": "0750407K",
+      "annee": 2022,
+      "ips_moyen": 157.7,
+      "ips_bonus": 0
+    },
+    {
+      "college_id": "0750429J",
+      "annee": 2022,
+      "ips_moyen": 125,
+      "ips_bonus": 600
+    },
+    {
+      "college_id": "0754253R",
+      "annee": 2022,
+      "ips_moyen": 135.9,
+      "ips_bonus": 0
+    },
+    {
+      "college_id": "0750575T",
+      "annee": 2022,
+      "ips_moyen": 92.4,
+      "ips_bonus": 1200
+    },
+    {
+      "college_id": "0752554U",
+      "annee": 2022,
+      "ips_moyen": 124,
+      "ips_bonus": 600
+    },
+    {
+      "college_id": "0755747P",
+      "annee": 2022,
+      "ips_moyen": 93.6,
+      "ips_bonus": 1200
+    },
+    {
+      "college_id": "0755000C",
+      "annee": 2022,
+      "ips_moyen": 98.3,
+      "ips_bonus": 1200
+    },
+    {
+      "college_id": "0750584C",
+      "annee": 2022,
+      "ips_moyen": 113.3,
+      "ips_bonus": 600
+    },
+    {
+      "college_id": "0752528R",
+      "annee": 2022,
+      "ips_moyen": 150.1,
+      "ips_bonus": 0
+    },
+    {
+      "college_id": "0752524L",
+      "annee": 2022,
+      "ips_moyen": 130.5,
+      "ips_bonus": 0
+    },
+    {
+      "college_id": "0752536Z",
+      "annee": 2022,
+      "ips_moyen": 124.3,
+      "ips_bonus": 600
+    },
+    {
+      "college_id": "0750484U",
+      "annee": 2022,
+      "ips_moyen": 95.4,
+      "ips_bonus": 1200
+    },
+    {
+      "college_id": "0752108J",
+      "annee": 2022,
+      "ips_moyen": 140.4,
+      "ips_bonus": 0
+    }
+   ]
