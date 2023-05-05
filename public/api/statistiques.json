@@ -1,0 +1,44 @@
+[
+ {
+   "annee": 2022,
+   "champs": "Maths",
+   "moyenne": 11.81732654,
+   "ecart-type": 3.92003136
+ },
+ {
+   "annee": 2022,
+   "champs": "Français",
+   "moyenne": 12.35774014,
+   "ecart-type": 3.216123499
+ },
+ {
+   "annee": 2022,
+   "champs": "Histoire-Géo",
+   "moyenne": 12.47907026,
+   "ecart-type": 3.155237695
+ },
+ {
+   "annee": 2022,
+   "champs": "Langues",
+   "moyenne": 13.06765105,
+   "ecart-type": 3.013409673
+ },
+ {
+   "annee": 2022,
+   "champs": "Sciences",
+   "moyenne": 12.96649939,
+   "ecart-type": 2.712600027
+ },
+ {
+   "annee": 2022,
+   "champs": "Arts",
+   "moyenne": 14.5092,
+   "ecart-type": 1.88857
+ },
+ {
+   "annee": 2022,
+   "champs": "EPS",
+   "moyenne": 14.57907232,
+   "ecart-type": 1.826150475
+ }
+]
