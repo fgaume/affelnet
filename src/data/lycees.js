@@ -32,7 +32,7 @@ const listeLycees = [
     {
       "code": "0750698B",
       "nom": "CLAUDE BERNARD",
-      "seuils": [0, 0]
+      "seuils": [7150.874, 21767.262]
     },
     {
       "code": "0750683K",
@@ -122,7 +122,7 @@ const listeLycees = [
     {
       "code": "0750702F",
       "nom": "JEAN DE LA FONTAINE",
-      "seuils": [0, 39758.988]
+      "seuils": [39731.743, 39758.988]
     },
     {
       "code": "0750700D",
