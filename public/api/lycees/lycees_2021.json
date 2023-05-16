@@ -310,7 +310,7 @@
     "lycee_id": "0750698B",
     "capacite": 222,
     "ips_moyen": 124.2,
-    "score_admission": 0,
+    "score_admission": 7150.874,
     "taux_premier_voeu": 0.5,
     "taux_pression": 0
   },
@@ -337,7 +337,7 @@
     "lycee_id": "0750702F",
     "capacite": 247,
     "ips_moyen": 133.8,
-    "score_admission": 0,
+    "score_admission": 39731.743,
     "taux_premier_voeu": 1,
     "taux_pression": 1.9
   },
