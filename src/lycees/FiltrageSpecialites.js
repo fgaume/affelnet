@@ -8,6 +8,7 @@ import { specialites } from "../data/specialites";
 
 import "bootstrap/dist/css/bootstrap.css";
 import { useLocalStorage } from "../services/useLocalStorage";
+import "./FiltrageSpecialites.css";
 
 // remonte une liste à jour des specialités filtrées
 const FiltrageSpecialites = (props) => {
@@ -26,12 +27,17 @@ const FiltrageSpecialites = (props) => {
   };
 
   const popover = (
-    <Popover id="popover-basic">
+    <Popover id="popover-specialite">
       <Popover.Header as="h3">Filtrage par spécialités</Popover.Header>
       <Popover.Body>
         Permet d'exclure les lycées ne proposant pas les spécialités
         sélectionnées. Les spécialités Mathématiques et SVT sont absentes des
         filtres car tous les lycées parisiens les proposent.
+        La source de données est la <a
+          target="_blank"
+          rel="noreferrer"
+          href="https://rectoratparis.maps.arcgis.com/apps/webappviewer/index.html?id=47c86e32215248a0a6846e098890e13c"
+        >carte des spécialités du Rectorat</a>
       </Popover.Body>
     </Popover>
   );
@@ -45,7 +51,7 @@ const FiltrageSpecialites = (props) => {
       <div className="p-2">
         <Funnel width="20" height="20" />
         &nbsp;Filtrage par spécialités{" "}
-        <OverlayTrigger trigger="click" placement="top" overlay={popover}>
+        <OverlayTrigger trigger="click" placement="bottom" overlay={popover} rootCloseEvent="mousedown" rootClose="true">
           <QuestionCircleFill width="20" height="20" />
         </OverlayTrigger>{" "}
         :

@@ -5,6 +5,7 @@ import { Card, Form, Table } from "react-bootstrap";
 import { nomsLyceesMap, seuilsLyceesMap, urlsLyceesMap } from "../data/lycees";
 import {
   ArrowDownRight,
+  ArrowReturnRight,
   ArrowUpRight,
   CheckLg,
   ExclamationLg,
@@ -59,9 +60,10 @@ const ListeSeuils = (props) => {
     } */
 
   const determineVariationStyle = (prev, next) => {
-    if (next > 0 && prev > 0) {
+    /* if (next > 0 && prev > 0) {
       return next > prev ? "variation text-danger" : "variation text-success";
-    } else return "variation";
+    } else */
+    return "text-primary";
   };
 
   const handleSortChange = (event) => {
@@ -80,6 +82,11 @@ const ListeSeuils = (props) => {
 
   return (
     <div>
+      <div className="mx-3 my-3 mt-3 mb-3"><ArrowReturnRight /> Cette section liste les scores d'admission de chaque lycée parisien lors des 2 dernières session,
+      ainsi que l'évolution par rapport à 2021.
+      La source de ces seuils est l'ensemble des fiches-barème reçues du Rectorat et ensuite partagées par les parents.
+      Figure également un lien vers la fiche descriptive du lycée produite par la FCPE.
+    </div>
       <div className="w-50">
         <Form.Select size="sm" value={sorting} onChange={handleSortChange}>
           <option value="byLycee">trier par lycée</option>
@@ -114,7 +121,7 @@ const ListeSeuils = (props) => {
                 <td className="seuil text-muted">
                   {lycee.seuil_prev > 0 ? formatInt(lycee.seuil_prev) : "?"}
                 </td>
-                <td className="seuil text-primary">
+                <td className="seuil text-success">
                   {lycee.seuil > 0 ? formatFloat(lycee.seuil) : "?"}
                 </td>
                 <td

@@ -1,7 +1,7 @@
 import React, { useRef } from "react";
 import { useState, useEffect } from "react";
-import { Card, Form, Table } from "react-bootstrap";
-import { Lightning } from "react-bootstrap-icons";
+import { Card, Form, OverlayTrigger, Table, Tooltip } from "react-bootstrap";
+import { ArrowReturnRight, Lightning, QuestionCircleFill } from "react-bootstrap-icons";
 
 import { useLocalStorage } from "../services/useLocalStorage";
 import {
@@ -83,9 +83,14 @@ const MonBilan = (props) => {
 
   return (
     <div>
+      <ArrowReturnRight /> Saisir ici vos moyennes de chaque matière pour chaque {semestres ? 'se' : 'tri'}mestre. Seuls les <strong>intervalles</strong> de notes comptent pour
+      votre score Affelnet, il est donc inutile de saisir les notes précises.
       <AffichageScores
         scorePrevious={scoreBilanPrevious}
         scoreNext={scoreBilanNext}
+        tipPrevious="Score de votre bilan périodique en 2021"
+        tipNext="Score de votre bilan périodique en 2022"
+        tipDelta="Evolution de votre bilan périodique entre 2021 et 2022"
       />
       <div className="col-md-6 mx-auto my-3">
         <Form.Switch
@@ -99,7 +104,16 @@ const MonBilan = (props) => {
         <Table borderless className="xy-0">
           <tbody>
             <tr>
-              <td><Lightning width="24" height="24" /> Saisie multiple :</td>
+              <td><Lightning width="24" height="24" />
+              Saisie rapide <OverlayTrigger
+                    trigger="click"
+                    placement="top"
+                    overlay={(propss) => <Tooltip {...propss}>{"Ce curseur permet de renseigner toutes les moyennes en même temps."}</Tooltip>}
+                    rootCloseEvent="mousedown"
+                    rootClose="true">
+                    <QuestionCircleFill width="20" height="20" />
+                  </OverlayTrigger>
+              </td>
               <td>{'  '}</td>
               <td className='titre'>
                 <Form.Range

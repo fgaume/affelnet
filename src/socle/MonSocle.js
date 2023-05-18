@@ -1,7 +1,7 @@
 import React, { useRef, useState } from "react";
 import { useEffect } from "react";
-import { Card, Form, Table } from "react-bootstrap";
-import { Lightning } from "react-bootstrap-icons";
+import { Card, Form, OverlayTrigger, Table, Tooltip } from "react-bootstrap";
+import { ArrowReturnRight, ArrowRight, Lightning, QuestionCircleFill } from "react-bootstrap-icons";
 import { useLocalStorage } from "../services/useLocalStorage";
 import {
   listeCompetences,
@@ -68,11 +68,39 @@ const MonSocle = (props) => {
 
   return (
     <div>
+      <ArrowReturnRight /> Estimez ici les 8 compétences de socle (qui comptent également pour le Brevet). Rappel :
+      <Card className="col-md-3 mx-auto mt-3">
+        <ul className="mb-2 mt-2">
+          <li className="text-success">
+            Très bonne <ArrowRight /> 600 pts
+          </li>
+          <li className="text-primary">
+            Satisfaisante <ArrowRight /> 480 pts
+            </li>
+          <li className="text-danger">
+            Fragile <ArrowRight /> 300 pts
+            </li>
+          <li className="text-danger">
+            Insuffisante <ArrowRight /> 180 pts
+          </li>
+        </ul>
+      </Card>
+
       <div className="col-md-6 mx-auto my-3">
         <Table borderless className="xy-0">
           <tbody>
             <tr>
-              <td><Lightning width="24" height="24" /> Saisie multiple :</td>
+              <td>
+                <Lightning width="24" height="24" /> Saisie multiple{" "}
+                <OverlayTrigger
+                    trigger="click"
+                    placement="top"
+                    overlay={(propss) => <Tooltip {...propss}>{"Ce curseur permet de renseigner toutes les compétences à la fois."}</Tooltip>}
+                    rootCloseEvent="mousedown"
+                    rootClose="true">
+                    <QuestionCircleFill width="20" height="20" />
+                  </OverlayTrigger> :
+              </td>
               <td className='header'>
                 <Form.Range
                   className="align-middle xy-0 form-range"

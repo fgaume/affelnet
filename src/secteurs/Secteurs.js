@@ -5,6 +5,7 @@ import { Card } from "react-bootstrap";
 import LyceeSelector from "./LyceeSelector";
 import fetchCollegesSecteur from "../services/secteurs";
 import CollegeGroup from "./CollegeGroup";
+import { ArrowReturnRight } from "react-bootstrap-icons";
 
 /* returns list colleges secteur 1 */
 const Secteurs = (props) => {
@@ -34,12 +35,12 @@ const Secteurs = (props) => {
   return (
     <div className="col-md-6 mx-auto p-0">
       <div className="mb-3">
-        Cette section liste le nombre d'élèves de chaque collège ayant un lycée donné en secteur 1.
+      <ArrowReturnRight /> Cette section liste le nombre d'élèves de chaque collège ayant un lycée donné en secteur 1.
       </div>
       <div className="mb-3">
-        (les effectifs des collèges sont estimés via leur nombre d'admis au DNB 2022)
+      <ArrowReturnRight /> Les effectifs des collèges sont estimés via leur nombre d'admis au DNB 2022
       </div>
-      <Card className="p-1 bg-light bg-opacity-10">
+      <Card className="p-1 bg-light bg-opacity-30">
         <div className="p-2 w-100">
           <LyceeSelector
             onChange={onLyceeChange}

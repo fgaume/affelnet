@@ -1,9 +1,11 @@
 import React from "react";
-import { Card, Table } from "react-bootstrap";
+import { Card, OverlayTrigger, Table, Tooltip } from "react-bootstrap";
 import {
   ArrowDownRight,
+  ArrowReturnRight,
   ArrowUpRight,
   CheckLg,
+  QuestionCircleFill,
   X,
 } from "react-bootstrap-icons";
 
@@ -46,10 +48,21 @@ const LyceesSecteur = (props) => {
 
   return (
     <>
+    <div className="mx-3 my-3 mt-3 mb-3"><ArrowReturnRight /> Cette section indique les lycées de <strong>secteur {props.secteur}</strong> que vous auriez obtenus,
+    ou pas, dans les conditions de 2021 et 2022,
+    et compte tenu des résultats scolaires actuels. Les lycées où votre score aurait été suffisant sont en vert.
+    </div>
+    <div className="mx-3 my-3 mt-3 mb-3"><ArrowReturnRight /> Si
+    vous imposez des spécialités (switches plus haut), les lycées ne proposant pas l'ensemble des spécialités demandées seront barrés.
+    Recoupez avec la fiche descriptive le cas échéant en cliquant sur le nom du lycée pour être certains des spécialités proposées, ainsi que de leur combinatoire autorisée.
+    </div>
       <div className="my-3">
         <AffichageScores
           scorePrevious={props.scorePrevious + bonusGeo}
           scoreNext={props.scoreNext > 0 ? bonusGeo + props.scoreNext : 0}
+          tipPrevious={"Votre score affelnet pour un voeu de lycée de secteur " + props.secteur + " en 2021"}
+          tipNext={"Votre score affelnet pour un voeu de lycée de secteur " + props.secteur + " en 2022"}
+          tipDelta={"Différence de score affelnet pour un voeu de lycée de secteur " + props.secteur + " entre 2021 et 2022"}  
         />
       </div>
       <div className="col-xl-6 col-lg-6 col-md-6 col-sm-8 mx-auto">
@@ -57,10 +70,46 @@ const LyceesSecteur = (props) => {
           <Table striped borderless hover responsive="xl" className="mb-0">
             <thead>
               <tr>
-                <th className="lycee">Lycée</th>
-                <th className="seuil">En 2021</th>
-                <th className="seuil">En 2022</th>
-                <th className="variation">+/-</th>
+                <th className="lycee">Lycée{" "}
+                  <OverlayTrigger
+                    trigger="click"
+                    placement="top"
+                    overlay={(propss) => <Tooltip {...propss}>{"Lycée de secteur " + props.secteur + " avec le lien vers sa fiche descriptive"}</Tooltip>}
+                    rootCloseEvent="mousedown"
+                    rootClose="true">
+                    <QuestionCircleFill width="20" height="20" />
+                  </OverlayTrigger>
+                </th>
+                <th className="seuil">En 2021{" "}
+                  <OverlayTrigger
+                    trigger="click"
+                    placement="top"
+                    overlay={(propss) => <Tooltip {...propss}>{"Différence entre mon score et le seuil d'admission au lycée en 2021"}</Tooltip>}
+                    rootCloseEvent="mousedown"
+                    rootClose="true">
+                    <QuestionCircleFill width="20" height="20" />
+                  </OverlayTrigger>
+                </th>
+                <th className="seuil">En 2022{" "}
+                  <OverlayTrigger
+                    trigger="click"
+                    placement="top"
+                    overlay={(propss) => <Tooltip {...propss}>{"Différence entre mon score et le seuil d'admission au lycée en 2022"}</Tooltip>}
+                    rootCloseEvent="mousedown"
+                    rootClose="true">
+                    <QuestionCircleFill width="20" height="20" />
+                  </OverlayTrigger>
+                </th>
+                <th className="variation">+/-{" "}
+                  <OverlayTrigger
+                    trigger="click"
+                    placement="top"
+                    overlay={(propss) => <Tooltip {...propss}>{"Evolution de la différence entre mon score et le seuil d'admission au lycée entre 2021 et 2022"}</Tooltip>}
+                    rootCloseEvent="mousedown"
+                    rootClose="true">
+                    <QuestionCircleFill width="20" height="20" />
+                  </OverlayTrigger>
+                </th>
               </tr>
             </thead>
             <tbody>
@@ -101,10 +150,7 @@ const LyceesSecteur = (props) => {
                     </td>
                     <td className="variation">
                       <span
-                        className={determineColor(
-                          nextResult - prevResult,
-                          lycee
-                        )}
+                        className={determineColor(nextResult - prevResult, lycee)}
                       >
                         {prevResult &&
                           nextResult &&

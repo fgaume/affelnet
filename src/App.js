@@ -179,6 +179,7 @@ const App = () => {
                       scorePrevious={scoreGlobalPrevious}
                       scoreNext={scoreGlobalNext}
                       bonusGeo="32640"
+                      secteur="1"
                     />
                   </Tab>
                   <Tab eventKey="secteur2" title="Sect. 2">
@@ -187,6 +188,7 @@ const App = () => {
                       scorePrevious={scoreGlobalPrevious}
                       scoreNext={scoreGlobalNext}
                       bonusGeo="17760"
+                      secteur="2"
                     />
                   </Tab>
                   <Tab eventKey="secteur3" title="Sect. 3">
@@ -195,6 +197,7 @@ const App = () => {
                       scorePrevious={scoreGlobalPrevious}
                       scoreNext={scoreGlobalNext}
                       bonusGeo="16800"
+                      secteur="3"
                     />
                   </Tab>
                 </Tabs>

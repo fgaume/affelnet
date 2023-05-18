@@ -1,8 +1,10 @@
 import React from "react";
-import { Card, Table } from "react-bootstrap";
+import { Card, OverlayTrigger, Table, Tooltip } from "react-bootstrap";
 import { formatFloat, formatVariation } from "../services/helper";
+import { QuestionCircleFill } from "react-bootstrap-icons";
 
 const AffichageScores = (props) => {
+
   return (
     <div className="col-xl-6 col-lg-6 col-md-6 col-sm-8 mx-auto py-3">
       <Card className="mb-0">
@@ -10,13 +12,41 @@ const AffichageScores = (props) => {
         <tbody>
           <tr>
             <td className="text-muted score">
-              <h6>Score 2021</h6>
+              <h6>Score 2021 {" "}
+              <OverlayTrigger
+                trigger="click"
+                placement="top"
+                overlay={(propss) => <Tooltip {...propss}>{props.tipPrevious}</Tooltip>}
+                rootCloseEvent="mousedown"
+                rootClose="true">
+                <QuestionCircleFill width="20" height="20" />
+            </OverlayTrigger>
+              </h6>
             </td>
-            <td className="text-primary score">
-              <h6>Score 2022</h6>
+            <td className="text-primary score" >
+              <h6>Score 2022 {" "}
+              <OverlayTrigger
+                trigger="click"
+                placement="top"
+                overlay={(propss) => <Tooltip {...propss}>{props.tipNext}</Tooltip>}
+                rootCloseEvent="mousedown"
+                rootClose="true">
+                <QuestionCircleFill width="20" height="20" />
+            </OverlayTrigger>
+            </h6>
             </td>
             <td className="text-primary variation">
-              <h6>+/-</h6>
+              <h6>+/-
+              {" "}
+              <OverlayTrigger
+                trigger="click"
+                placement="top"
+                overlay={(propss) => <Tooltip {...propss}>{props.tipDelta}</Tooltip>}
+                rootCloseEvent="mousedown"
+                rootClose="true">
+                <QuestionCircleFill width="20" height="20" />
+            </OverlayTrigger>
+              </h6>
             </td>
           </tr>
           <tr>

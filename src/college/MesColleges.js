@@ -4,8 +4,8 @@ import { useLocalStorage } from "../services/useLocalStorage";
 import CollegeSelector from "./CollegeSelector";
 
 import "react-bootstrap-typeahead/css/Typeahead.css";
-import { CheckLg } from "react-bootstrap-icons";
-import { Card } from "react-bootstrap";
+import { CheckLg, QuestionCircleFill } from "react-bootstrap-icons";
+import { Card, OverlayTrigger, Popover, Stack } from "react-bootstrap";
 
 /* returns bonusIPS et college de secteur (pour avoir les lycées de secteur) */
 const MesColleges = (props) => {
@@ -24,6 +24,17 @@ const MesColleges = (props) => {
   const [nomCollegeSecteur, setNomCollegeSecteur] = useLocalStorage(
     "MonCollege/nomCollegeSecteur",
     ""
+  );
+  const popover = (
+    <Popover id="popover-college">
+      <Popover.Header as="h3">Collège de secteur</Popover.Header>
+      <Popover.Body>
+        Le collège de secteur est déduit de votre adresse. S'il est différent du collège où vous êtes réellement scolarisé, il faut donc
+        il faut le spécifier ici car il conditionne la liste de vos lycées de secteur 1.
+        Si vous venez d'un collège privé, il faut saisir ici le collège de secteur publique lié à votre adresse.
+        Pour connaitre son collège de secteur, <a rel="noreferrer" href="https://capgeo.sig.paris.fr/Apps/SecteursScolaires/Colleges/" target="_blank">se rendre ici.</a>
+      </Popover.Body>
+    </Popover>
   );
 
   const onCollegeScolarisationChange = (collegeUpdate) => {
@@ -82,12 +93,17 @@ const MesColleges = (props) => {
         />
         <Form.Group className="mb-3">Bonus IPS : {bonusCollege} { nomCollegeSecteur && <CheckLg color="green" width="28" height="28" />}</Form.Group>
         <Form.Group className="mb-3">
+        <Stack direction="horizontal" gap={2}>
           <Form.Switch
             id="collegesMultiples"
             label="collège de secteur différent"
             defaultChecked={collegesMultiples}
             onChange={handleCollegesMultiples}
           />
+          <OverlayTrigger trigger="click" placement="top" overlay={popover} rootCloseEvent="mousedown" rootClose="true">
+            <QuestionCircleFill width="20" height="20" />
+          </OverlayTrigger>{" "}
+          </Stack>
         </Form.Group>
         {collegesMultiples && (
           <CollegeSelector
