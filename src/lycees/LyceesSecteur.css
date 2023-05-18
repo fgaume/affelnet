@@ -15,3 +15,79 @@ span.elimine {
 span.inconnu {
     color: #343a40;
 }
+
+a.filtered:link {
+    text-decoration: line-through;
+    font-style: italic;
+    color: #adb5bd;
+}
+a.filtered:hover {
+    text-decoration: underline;
+    font-style: italic;
+    font-weight: bolder;
+    color: #adb5bd;
+}
+a.filtered:visited {
+    text-decoration: line-through;
+    font-style: italic;
+    color: #adb5bd;
+}
+a.filtered:active {
+    text-decoration: line-through;
+    font-style: italic;
+    color: #adb5bd;
+}
+
+a.admissible:link {
+    color: green;
+    text-decoration: solid;
+}
+a.admissible:hover {
+    color: green;
+    text-decoration: underline;
+    font-weight: bolder;
+}
+a.admissible:visited {
+    color: green;
+    text-decoration: solid;
+}
+a.admissible:active {
+    color: green;
+    text-decoration: solid;
+}
+
+a.elimine:link {
+    color: #dc3545;
+    text-decoration: solid;
+}
+a.elimine:hover {
+    color: #dc3545;
+    text-decoration: underline;
+    font-weight: bolder;
+}
+a.elimine:visited {
+    color: #dc3545;
+    text-decoration: solid;
+}
+a.elimine:active {
+    color: #dc3545;
+    text-decoration: solid;
+}
+
+a.inconnu:link {
+    color: #343a40;
+    text-decoration: solid;
+}
+a.inconnu:hover {
+    color: #343a40;
+    text-decoration: underline;
+    font-weight: bolder;
+}
+a.inconnu:visited {
+    color: #343a40;
+    text-decoration: solid;
+}
+a.inconnu:active {
+    color: #343a40;
+    text-decoration: solid;
+}

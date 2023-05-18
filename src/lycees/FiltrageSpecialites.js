@@ -54,24 +54,24 @@ const FiltrageSpecialites = (props) => {
         {specialites.map((spe, index) => {
           return (
             <span key={index}>
-            <OverlayTrigger
-              key={spe.acronyme}
-              placement="top"
-              trigger="click"
-              rootCloseEvent="mousedown"
-              overlay={(props) => <Tooltip {...props}>{spe.nom}</Tooltip>}
-              rootClose="true"
-            >
-              <Form.Switch
-                inline
-                type="checkbox"
-                id={spe.acronyme}
+              <OverlayTrigger
                 key={spe.acronyme}
-                label={spe.acronyme}
-                onChange={onFiltreChange}
-                defaultChecked={filtres.includes(spe.acronyme)}
-              />
-            </OverlayTrigger><span>&nbsp;&nbsp;&nbsp;</span>
+                placement="top"
+                trigger="click"
+                rootCloseEvent="mousedown"
+                overlay={(props) => <Tooltip {...props}>{spe.nom}</Tooltip>}
+                rootClose="true"
+              >
+                <Form.Switch
+                  inline
+                  type="checkbox"
+                  id={spe.acronyme}
+                  key={spe.acronyme}
+                  label={spe.acronyme}
+                  onChange={onFiltreChange}
+                  defaultChecked={filtres.includes(spe.acronyme)}
+                />
+              </OverlayTrigger>
             </span>
           );
         })}

@@ -77,7 +77,7 @@ const LyceesSecteur = (props) => {
                 return (
                   <tr key={lycee.code + index}>
                     <td>
-                      <span className={status}>{lycee.nom}</span>
+                      <a className={status} target="_blank" rel="noreferrer" href={lycee.url}>{lycee.nom}</a>
                       {status === "admissible" && (
                         <CheckLg color="green" width="20" height="20" />
                       )}

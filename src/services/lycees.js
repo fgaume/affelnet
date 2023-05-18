@@ -1,5 +1,5 @@
 import axios from "axios";
-import { nomsLyceesMap, seuilsLyceesMap, tousSecteurs } from "../data/lycees";
+import { nomsLyceesMap, seuilsLyceesMap, urlsLyceesMap, tousSecteurs } from "../data/lycees";
 
 const cacheKey = "cache/lycees-secteur";
 const cacheActivated = false;
@@ -39,6 +39,7 @@ const fetchLycees = async (nomCollegeSecteur) => {
             secteur: parseInt(item.attributes.secteur),
             nom: nomsLyceesMap.get(codelycee),
             seuils: seuilsLyceesMap.get(codelycee),
+            url: urlsLyceesMap.get(codelycee),
           };
         });
 
@@ -48,6 +49,7 @@ const fetchLycees = async (nomCollegeSecteur) => {
             secteur: 1,
             nom: nomsLyceesMap.get(codelycee),
             seuils: seuilsLyceesMap.get(codelycee),
+            url: urlsLyceesMap.get(codelycee),
           });
         });
 

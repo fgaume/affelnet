@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { firestore } from "../services/firebase";
 import { collection, onSnapshot } from "firebase/firestore";
 import { Card, Form, Table } from "react-bootstrap";
-import { nomsLyceesMap, seuilsLyceesMap } from "../data/lycees";
+import { nomsLyceesMap, seuilsLyceesMap, urlsLyceesMap } from "../data/lycees";
 import {
   ArrowDownRight,
   ArrowUpRight,
@@ -23,6 +23,7 @@ function useSeuils(sorting = "byLycee") {
           id: doc.id,
           nom: nomsLyceesMap.get(doc.id),
           seuil_prev: seuilsLyceesMap.get(doc.id)[0],
+          url: urlsLyceesMap.get(doc.id),
           ...doc.data(),
         }));
         switch (sorting) {
@@ -102,8 +103,8 @@ const ListeSeuils = (props) => {
             {lycees.map((lycee, index) => (
               <tr key={lycee.id}>
                 <td className="lycee">
-                  {lycee.nom}&nbsp;
-                  {lycee.seuil > 0 && (
+                <a target="_blank" rel="noreferrer" href={lycee.url}>{lycee.nom}</a>&nbsp;
+                  {lycee.seuil > 1000000 && (
                     <CheckLg color="green" width="20" height="20" />
                   )}
                   {lycee.seuil === 0 && (

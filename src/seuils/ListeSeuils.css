@@ -25,3 +25,16 @@ td.seuil {
     text-align:center;
 }
 
+a:link {
+    text-decoration: solid;
+}
+a:hover {
+    text-decoration: underline;
+    font-weight: bolder;
+}
+a:visited {
+    text-decoration: solid;
+}
+a:active {
+    text-decoration: solid;
+}
