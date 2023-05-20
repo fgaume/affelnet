@@ -22,8 +22,8 @@ import ContribSeuils from "./seuils/ContribSeuils";
 import Secteurs from "./secteurs/Secteurs";
 
 const App = () => {
-  const version = "v8.2.2 20/05/2023";
-  const contrib = true;
+  const version = "v8.2.3 20/05/2023";
+  const contrib = false;
 
   const [loading, setLoading] = useState(true);
 
@@ -208,10 +208,10 @@ const App = () => {
                 <span className="fw-bolder">Seuils d'admission ({numberSeuils}/46)</span>
               </Accordion.Header>
               <Accordion.Body>
-                <ContribSeuils contrib={contrib} />
                 <div className="col-md-6 mx-auto">
                   <ListeSeuils onChange={handleSeuilChange}/>
                 </div>
+                <ContribSeuils contrib={contrib} />
               </Accordion.Body>
             </Accordion.Item>
             <Accordion.Item eventKey="5">
