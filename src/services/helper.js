@@ -11,7 +11,7 @@ const formatInt = (mynumber) => {
 
 const formatVariation = (mynumber) => {
     const formatted = Math.round(mynumber).toLocaleString();
-    return (mynumber < 0) ? mynumber : "+" + formatted;
+    return (mynumber < 0) ? formatted : "+" + formatted;
 };
 
 export { formatInt, formatFloat, formatVariation};
