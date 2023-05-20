@@ -82,7 +82,7 @@ const ListeSeuils = (props) => {
 
   return (
     <div>
-      <div className="mx-3 my-3 mt-3 mb-3"><ArrowReturnRight /> Cette section liste les scores d'admission de chaque lycée parisien lors des 2 dernières session,
+      <div className="mx-3 my-3 mt-3 mb-3"><ArrowReturnRight /> Cette section liste les scores d'admission de chaque lycée parisien lors des 2 dernières sessions,
       ainsi que l'évolution par rapport à 2021.
       La source de ces seuils est l'ensemble des fiches-barème reçues du Rectorat et ensuite partagées par les parents.
       Figure également un lien vers la fiche descriptive du lycée produite par la FCPE.

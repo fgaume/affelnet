@@ -24,6 +24,7 @@ const LyceesSecteur = (props) => {
 
   const determineColor = (result, lycee) => {
     if (result === null) return "text-muted";
+    if (result === 0) return "text-success";
     if (lycee.exclu) return "filtered";
     if (result) {
       return result >= 0 ? "text-success" : "text-danger";
@@ -54,7 +55,7 @@ const LyceesSecteur = (props) => {
     </div>
     <div className="mx-3 my-3 mt-3 mb-3"><ArrowReturnRight /> Si
     vous imposez des spécialités (switches plus haut), les lycées ne proposant pas l'ensemble des spécialités demandées seront barrés.
-    Recoupez avec la fiche descriptive le cas échéant en cliquant sur le nom du lycée pour être certains des spécialités proposées, ainsi que de leur combinatoire autorisée.
+    Recoupez avec la fiche descriptive le cas échéant en cliquant sur le nom du lycée pour être certain des spécialités proposées, ainsi que de leur combinatoire autorisée.
     </div>
       <div className="my-3">
         <AffichageScores
@@ -142,26 +143,24 @@ const LyceesSecteur = (props) => {
                       </span>
                     </td>
                     <td className="seuil">
-                      <span className={determineColor(nextResult, lycee)}>
-                        {lycee.seuils[1] > 0 && nextResult
+                      <span className={determineColor(nextResult, lycee)}>{lycee.seuils[1] > 0 ? formatVariation(nextResult) : "?"}
+{/*                         {lycee.seuils[1] > 0 && nextResult
                           ? formatVariation(nextResult)
                           : "?"}
-                      </span>
+ */}                      </span>
                     </td>
                     <td className="variation">
                       <span
                         className={determineColor(nextResult - prevResult, lycee)}
                       >
-                        {prevResult &&
-                          nextResult &&
-                          formatVariation(nextResult - prevResult)}{" "}
-                        {prevResult &&
-                          nextResult &&
+                        {prevResult != null  && nextResult!= null ?
+                          formatVariation(nextResult - prevResult) : "?"}{" "}
+                        {(prevResult  != null && nextResult != null) ?
                           (nextResult > prevResult ? (
                             <ArrowUpRight />
                           ) : (
                             <ArrowDownRight />
-                          ))}
+                          )) : ""}
                       </span>
                     </td>
                   </tr>

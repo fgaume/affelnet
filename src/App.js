@@ -22,7 +22,7 @@ import ContribSeuils from "./seuils/ContribSeuils";
 import Secteurs from "./secteurs/Secteurs";
 
 const App = () => {
-  const version = "v8.2.0 18/05/2023";
+  const version = "v8.2.1 20/05/2023";
   const contrib = false;
 
   const [loading, setLoading] = useState(true);
