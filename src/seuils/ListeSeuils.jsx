@@ -63,7 +63,7 @@ const ListeSeuils = (props) => {
     /* if (next > 0 && prev > 0) {
       return next > prev ? "variation text-danger" : "variation text-success";
     } else */
-    return "text-primary";
+    return "variation text-primary";
   };
 
   const handleSortChange = (event) => {
