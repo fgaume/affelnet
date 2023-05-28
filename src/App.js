@@ -22,7 +22,7 @@ import ContribSeuils from "./seuils/ContribSeuils";
 import Secteurs from "./secteurs/Secteurs";
 
 const App = () => {
-  const version = "v8.2.5 28/05/2023";
+  const version = "v8.2.6 29/05/2023";
   const contrib = false;
 
   const [loading, setLoading] = useState(true);
@@ -66,7 +66,7 @@ const App = () => {
   };
 
   const handleFiltreChange = (newFiltres) => {
-    //console.log("newfiltre : " + JSON.stringify(newFiltres));
+    console.log("newfiltre : " + JSON.stringify(newFiltres));
     setFiltreSpecialites(newFiltres);
   };
 
@@ -76,7 +76,7 @@ const App = () => {
   };
 
   useEffect(() => {
-    //console.log("useffect App.js");
+    console.log("useffect App.js");
     setTimeout(() => setLoading(false), 500);
     if (collegeSecteur) {
       fetchLycees(collegeSecteur).then((newLycees) => {
@@ -85,12 +85,12 @@ const App = () => {
           if (filtreSpecialites && filtreSpecialites.length > 0) {
             filtreSpecialites.forEach((spe) => {
               fetchLyceesHavingSpecialite(spe).then((lyceesWithSpe) => {
-                /* console.log(
+                console.log(
                   "lycees with spe " +
                     spe +
                     " : " +
                     JSON.stringify(lyceesWithSpe)
-                ); */
+                );
                 newLycees.forEach((lycees) => {
                   setExclu(lycees, lyceesWithSpe);
                 });

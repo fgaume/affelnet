@@ -19,10 +19,10 @@ const fetchLyceesHavingSpecialite = async (spe) => {
   if (spe) {
     const cacheKey = baseCacheKey + spe;
     const fromCache = localStorage.getItem(cacheKey);
-    const cacheData = fromCache ? JSON.parse(fromCache) : null;
+    const cacheData = fromCache !== null ? JSON.parse(fromCache) : null;
     const cacheExpires = cacheData ? new Date(cacheData.expires) : null;
 
-    if (cacheExpires && cacheExpires > new Date()) {
+    if (cacheData != null && cacheData.length > 0 && cacheExpires && cacheExpires > new Date()) {
       console.log(
         "fetchLyceesHavingSpecialite found cache expires at : " + cacheExpires
       );

@@ -26,7 +26,7 @@ const specialites = [
     },
     {
       "acronyme": "LLCE",
-      "code": "LLCE (hors AMC)",
+      "code": "LLCE",
       "nom": "Langues, littératures et cultures étrangères"
     },
     {
@@ -36,17 +36,17 @@ const specialites = [
     },
     {
       "acronyme": "AMC",
-      "code": "LLCE - Anglais Monde Contemporain (AMC)",
+      "code": "LLCE ANGLAIS MONDE CONTEMPORAIN (AMC)",
       "nom": "Anglais Monde Contemporain"
     },
     {
       "acronyme": "SI",
-      "code": "SCIENCES DE L INGENIEUR",
+      "code": "SCIENCES DE L''INGENIEUR",
       "nom": "Sciences de l'ingénieur"
     },
     {
       "acronyme": "LLCA",
-      "code": "LITTERATURE LANGUES ET CULTURES DE L ANTIQUITE",
+      "code": "LITTERATURE LANGUES ET CULTURES DE L''ANTIQUITE",
       "nom": "Langues, littératures et cultures de l'Antiquité"
     },
     {
