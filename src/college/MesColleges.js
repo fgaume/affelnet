@@ -32,7 +32,7 @@ const MesColleges = (props) => {
         Le collège de secteur est déduit de votre adresse. S'il est différent du collège où vous êtes réellement scolarisé, il faut donc
         il faut le spécifier ici car il conditionne la liste de vos lycées de secteur 1.
         Si vous venez d'un collège privé, il faut saisir ici le collège de secteur publique lié à votre adresse.
-        Pour connaitre son collège de secteur, <a rel="noreferrer" href="https://capgeo.sig.paris.fr/Apps/SecteursScolaires/Colleges/" target="_blank">se rendre ici.</a>
+        Pour connaitre son collège de secteur, <a rel="noreferrer" href="https://capgeo.sig.paris.fr/Apps/SecteursScolaires" target="_blank">se rendre ici.</a>
       </Popover.Body>
     </Popover>
   );

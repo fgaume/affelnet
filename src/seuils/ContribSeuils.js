@@ -7,7 +7,7 @@ const ContribSeuils = (props) => {
     <>
       {props.contrib === true && (
         <>
-          <div className="col-md-6 mx-auto">
+          <div className="col-md-6 mx-auto mt-3">
             <Alert variant="success">
               Afin d'en faire profiter la communauté, ajoutez ici les seuils
               d'admission des lycées que vous avez demandés cette année.
