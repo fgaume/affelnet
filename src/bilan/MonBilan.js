@@ -83,16 +83,20 @@ const MonBilan = (props) => {
 
   return (
     <div>
-      <ArrowReturnRight /> Saisir ici vos moyennes de chaque matière pour chaque {semestres ? 'se' : 'tri'}mestre. Seuls les <strong>intervalles</strong> de notes comptent pour
-      votre score Affelnet, il est donc inutile de saisir les notes précises.
-      <AffichageScores
-        scorePrevious={scoreBilanPrevious}
-        scoreNext={scoreBilanNext}
-        tipPrevious="Score de votre bilan périodique en 2021"
-        tipNext="Score de votre bilan périodique en 2022"
-        tipDelta="Evolution de votre bilan périodique entre 2021 et 2022"
-      />
-      <div className="col-md-6 mx-auto my-3">
+      <div className="mx-auto mb-3">
+        <ArrowReturnRight /> Saisir ici vos moyennes de chaque matière pour chaque {semestres ? 'se' : 'tri'}mestre. Seuls les <strong>intervalles</strong> de notes comptent pour
+        votre score Affelnet, il est donc inutile de saisir les notes précises.
+      </div>
+      <div className="col-12 mx-auto mb-3">
+        <AffichageScores
+          scorePrevious={scoreBilanPrevious}
+          scoreNext={scoreBilanNext}
+          tipPrevious="Score de votre bilan périodique en 2021"
+          tipNext="Score de votre bilan périodique en 2022"
+          tipDelta="Evolution de votre bilan périodique entre 2021 et 2022"
+        />
+      </div>
+      <div className="mx-auto my-3">
         <Form.Switch
           id="semestres"
           label="Collège en semestres"
@@ -100,8 +104,8 @@ const MonBilan = (props) => {
           onChange={handleChangeCheck}
         />
       </div>
-      <div className="col-md-6 mx-auto my-3">
-        <Table borderless className="xy-0">
+      <div className="mx-auto my-3">
+        <Table borderless className="ms-0">
           <tbody>
             <tr>
               <td><Lightning width="24" height="24" />
@@ -128,7 +132,7 @@ const MonBilan = (props) => {
           </tbody>
         </Table>
       </div>
-      <div className="col-md-6 mx-auto">
+      <div className="mx-auto">
         <Card>
           <Table striped borderless className="align-middle xy-0">
             <tbody>

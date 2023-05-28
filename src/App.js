@@ -22,7 +22,7 @@ import ContribSeuils from "./seuils/ContribSeuils";
 import Secteurs from "./secteurs/Secteurs";
 
 const App = () => {
-  const version = "v8.2.4 28/05/2023";
+  const version = "v8.2.5 28/05/2023";
   const contrib = false;
 
   const [loading, setLoading] = useState(true);
@@ -108,7 +108,7 @@ const App = () => {
   return (
     <>
       {loading === false ? (
-        <div className="mx-2">
+        <div className="mx-2 col-12 col-sm-10 col-md-10 col-lg-10 col-xl-8 col-xxl-6 mx-auto">
           <Title />
           <Accordion defaultActiveKey="3">
             <Accordion.Item eventKey="0">
@@ -167,6 +167,7 @@ const App = () => {
                 <span className="fw-bolder">Mes lycées</span>
               </Accordion.Header>
               <Accordion.Body>
+                <div>
                 <FiltrageSpecialites onChange={handleFiltreChange} />
                 <Tabs
                   defaultActiveKey="secteur1"
@@ -201,6 +202,7 @@ const App = () => {
                     />
                   </Tab>
                 </Tabs>
+                </div>
               </Accordion.Body>
             </Accordion.Item>
             <Accordion.Item eventKey="4">
@@ -208,10 +210,10 @@ const App = () => {
                 <span className="fw-bolder">Seuils d'admission ({numberSeuils}/46)</span>
               </Accordion.Header>
               <Accordion.Body>
-                <div className="col-md-6 mx-auto">
+                <div>
                   <ListeSeuils onChange={handleSeuilChange}/>
+                  <ContribSeuils contrib={contrib} />
                 </div>
-                <ContribSeuils contrib={contrib} />
               </Accordion.Body>
             </Accordion.Item>
             <Accordion.Item eventKey="5">

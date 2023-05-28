@@ -7,9 +7,10 @@ const ContribSeuils = (props) => {
     <>
       {props.contrib === true && (
         <>
-          <div className="col-md-6 mx-auto mt-3">
+          <div className="mx-auto mt-3">
+          <hr />
             <Alert variant="success">
-              Afin d'en faire profiter la communauté, ajoutez ici les seuils
+              Afin d'en faire profiter la communauté, ajoutez ci-dessous les seuils
               d'admission des lycées que vous avez demandés cette année.
               <br /> Il s'agit du score du dernier entrant non boursier, fourni
               dans la dernière colonne de votre fiche barème à demander au
@@ -17,10 +18,9 @@ const ContribSeuils = (props) => {
               <a href="mailto:ce.dve@ac-paris.fr">ce.dve@ac-paris.fr</a>
             </Alert>
           </div>
-          <div className="col-md-6 mx-auto">
+          <div className="mx-auto">
             <SeuilEditor />
           </div>
-          <hr />
         </>
       )}
     </>

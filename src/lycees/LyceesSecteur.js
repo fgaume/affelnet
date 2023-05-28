@@ -48,7 +48,7 @@ const LyceesSecteur = (props) => {
   };
 
   return (
-    <>
+    <div>
     <div className="mx-3 my-3 mt-3 mb-3"><ArrowReturnRight /> Cette section indique les lycées de <strong>secteur {props.secteur}</strong> que vous auriez obtenus,
     ou pas, dans les conditions de 2021 et 2022,
     et compte tenu des résultats scolaires actuels. Les lycées où votre score aurait été suffisant sont en vert.
@@ -57,7 +57,7 @@ const LyceesSecteur = (props) => {
     vous imposez des spécialités (switches plus haut), les lycées ne proposant pas l'ensemble des spécialités demandées seront barrés.
     Recoupez avec la fiche descriptive le cas échéant en cliquant sur le nom du lycée pour être certain des spécialités proposées, ainsi que de leur combinatoire autorisée.
     </div>
-      <div className="my-3">
+      <div className="mx-auto mb-3">
         <AffichageScores
           scorePrevious={props.scorePrevious + bonusGeo}
           scoreNext={props.scoreNext > 0 ? bonusGeo + props.scoreNext : 0}
@@ -66,7 +66,7 @@ const LyceesSecteur = (props) => {
           tipDelta={"Différence de score affelnet pour un voeu de lycée de secteur " + props.secteur + " entre 2021 et 2022"}  
         />
       </div>
-      <div className="col-xl-6 col-lg-6 col-md-6 col-sm-8 mx-auto">
+      <div className="mx-auto">
         <Card className="mb-0">
           <Table striped borderless hover responsive="xl" className="mb-0">
             <thead>
@@ -170,7 +170,7 @@ const LyceesSecteur = (props) => {
           </Table>
         </Card>
       </div>
-    </>
+      </div>
   );
 };
 

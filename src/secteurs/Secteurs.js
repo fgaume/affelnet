@@ -33,7 +33,7 @@ const Secteurs = (props) => {
 
 
   return (
-    <div className="col-md-6 mx-auto p-0">
+    <div className="mx-auto p-0">
       <div className="mb-3">
       <ArrowReturnRight /> Cette section liste le nombre d'élèves de chaque collège ayant un lycée donné en secteur 1.
       </div>
