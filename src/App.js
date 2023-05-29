@@ -244,7 +244,7 @@ const App = () => {
             </Accordion.Item>
           </Accordion>
           <p className="text-end text-muted">
-            <small>{version}</small>
+            <small><a href="https://github.com/fgaume/affelnet" rel="noreferrer" target="_blank">{version}</a></small>
           </p>
         </div>
       ) : (
