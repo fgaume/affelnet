@@ -1,5 +1,10 @@
 import axios from "axios";
-import { nomsLyceesMap, seuilsLyceesMap, urlsLyceesMap, tousSecteurs } from "../data/lycees";
+import {
+  nomsLyceesMap,
+  seuilsLyceesMap,
+  urlsLyceesMap,
+  tousSecteurs,
+} from "../data/lycees";
 
 const cacheKey = "cache/lycees-secteur";
 const cacheActivated = false;

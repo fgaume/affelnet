@@ -22,17 +22,21 @@ const fetchLyceesHavingSpecialite = async (spe) => {
     const cacheData = fromCache !== null ? JSON.parse(fromCache) : null;
     const cacheExpires = cacheData ? new Date(cacheData.expires) : null;
 
-    if (cacheData != null && cacheData.length > 0 && cacheExpires && cacheExpires > new Date()) {
-      console.log(
-        "fetchLyceesHavingSpecialite found cache expires at : " + cacheExpires
-      );
+    if (
+      cacheData != null &&
+      cacheData.length > 0 &&
+      cacheExpires &&
+      cacheExpires > new Date()
+    ) {
+      // console.log("fetchLyceesHavingSpecialite found cache expires at : " + cacheExpires);
       return cacheData.data;
     } else {
-      if (cacheExpires)
+      if (cacheExpires) {
         console.log(
           "fetchLyceesHavingSpecialite cache expiré, appel API lycees secteur: " +
             cacheExpires
         );
+      }
       const response = await axios({
         method: "GET",
         url: "https://services9.arcgis.com/ekT8MJFiVh8nvlV5/arcgis/rest/services/LES_ENSEIGNEMENTS_DE_SPECIALITE_EN_CLASSE_DE_PREMIERE_RS_2021/FeatureServer/0/query",

@@ -4,7 +4,7 @@ import Accordion from "react-bootstrap/Accordion";
 import LoadingScreen from "./main/LoadingScreen";
 import ListeSeuils from "./seuils/ListeSeuils";
 import { Tab, Tabs } from "react-bootstrap";
-import { CheckLg, ExclamationLg } from 'react-bootstrap-icons';
+import { CheckLg, ExclamationLg } from "react-bootstrap-icons";
 import MonBilan from "./bilan/MonBilan";
 import MonSocle from "./socle/MonSocle";
 import MesColleges from "./college/MesColleges";
@@ -22,7 +22,7 @@ import ContribSeuils from "./seuils/ContribSeuils";
 import Secteurs from "./secteurs/Secteurs";
 
 const App = () => {
-  const version = "v8.2.6 29/05/2023";
+  const version = "v8.2.7 29/05/2023";
   const contrib = false;
 
   const [loading, setLoading] = useState(true);
@@ -40,13 +40,14 @@ const App = () => {
   const [avancementNotes, setAvancementNotes] = useState(0);
   const [numberSeuils, setNumberSeuils] = useState(0);
 
-
   const handleBilanChange = (previous, next, newAvancement) => {
     setAvancementNotes(newAvancement);
     setScoreBilanPrevious(previous);
     setScoreBilanNext(next);
     setScoreGlobalPrevious(bonusCollege + scoreSocle + scoreBilanPrevious);
-    setScoreGlobalNext(scoreBilanNext > 0 ? bonusCollege + scoreSocle + scoreBilanNext : 0);
+    setScoreGlobalNext(
+      scoreBilanNext > 0 ? bonusCollege + scoreSocle + scoreBilanNext : 0
+    );
   };
 
   const handleSocleChange = (newScore, newAvancement) => {
@@ -54,7 +55,9 @@ const App = () => {
     setAvancementCompetences(newAvancement);
     setScoreSocle(newScore);
     setScoreGlobalPrevious(bonusCollege + scoreSocle + scoreBilanPrevious);
-    setScoreGlobalNext(scoreBilanNext > 0 ? bonusCollege + scoreSocle + scoreBilanNext : 0);
+    setScoreGlobalNext(
+      scoreBilanNext > 0 ? bonusCollege + scoreSocle + scoreBilanNext : 0
+    );
   };
 
   const handleCollegeChange = (college) => {
@@ -62,7 +65,9 @@ const App = () => {
     setBonusCollege(college.bonus);
     setCollegeSecteur(college.nom);
     setScoreGlobalPrevious(bonusCollege + scoreSocle + scoreBilanPrevious);
-    setScoreGlobalNext(scoreBilanNext > 0 ? bonusCollege + scoreSocle + scoreBilanNext : 0);
+    setScoreGlobalNext(
+      scoreBilanNext > 0 ? bonusCollege + scoreSocle + scoreBilanNext : 0
+    );
   };
 
   const handleFiltreChange = (newFiltres) => {
@@ -116,10 +121,11 @@ const App = () => {
                 <span className="fw-bolder">
                   Mon collège ({bonusCollege.toLocaleString()} pts)
                 </span>
-                { collegeSecteur ?
-                    (<CheckLg color='green' width='20' height='20' />) :
-                    (<ExclamationLg color='red' width='20' height='20' />)
-                }
+                {collegeSecteur ? (
+                  <CheckLg color="green" width="20" height="20" />
+                ) : (
+                  <ExclamationLg color="red" width="20" height="20" />
+                )}
               </Accordion.Header>
               <Accordion.Body>
                 <MesColleges onChange={handleCollegeChange} />
@@ -127,16 +133,21 @@ const App = () => {
             </Accordion.Item>
             <Accordion.Item eventKey="1">
               <Accordion.Header>
-                <span className="fw-bolder">
-                  Mes compétences&nbsp;
-                </span>
-                { avancementCompetences === 100 ?
-                    (<span className='fw-bolder'>({scoreSocle.toLocaleString()} pts)&nbsp;</span>) : (<span className='fw-bolder'>({avancementCompetences} %)&nbsp;</span>)
-                }
-                { avancementCompetences === 100 ?
-                    (<CheckLg color='green' width='20' height='20' />) :
-                    (<ExclamationLg color='red' width='20' height='20' />)
-                }
+                <span className="fw-bolder">Mes compétences&nbsp;</span>
+                {avancementCompetences === 100 ? (
+                  <span className="fw-bolder">
+                    ({scoreSocle.toLocaleString()} pts)&nbsp;
+                  </span>
+                ) : (
+                  <span className="fw-bolder">
+                    ({avancementCompetences} %)&nbsp;
+                  </span>
+                )}
+                {avancementCompetences === 100 ? (
+                  <CheckLg color="green" width="20" height="20" />
+                ) : (
+                  <ExclamationLg color="red" width="20" height="20" />
+                )}
               </Accordion.Header>
               <Accordion.Body>
                 <MonSocle onChange={handleSocleChange} />
@@ -144,19 +155,24 @@ const App = () => {
             </Accordion.Item>
             <Accordion.Item eventKey="2">
               <Accordion.Header>
-                <span className="fw-bolder">
-                  Mes notes&nbsp;
-                </span>
-                { avancementNotes === 100 ?
-                (<span className='fw-bolder'>({(scoreBilanNext
-                        ? scoreBilanNext
-                        : scoreBilanPrevious
-                ).toLocaleString()} pts)&nbsp;</span>) : (<span className='fw-bolder'>({avancementNotes} %)&nbsp;</span>)
-                }
-                { avancementNotes === 100 ?
-                    (<CheckLg color='green' width='20' height='20' />) :
-                    (<ExclamationLg color='red' width='20' height='20' />)
-                }
+                <span className="fw-bolder">Mes notes&nbsp;</span>
+                {avancementNotes === 100 ? (
+                  <span className="fw-bolder">
+                    (
+                    {(scoreBilanNext
+                      ? scoreBilanNext
+                      : scoreBilanPrevious
+                    ).toLocaleString()}{" "}
+                    pts)&nbsp;
+                  </span>
+                ) : (
+                  <span className="fw-bolder">({avancementNotes} %)&nbsp;</span>
+                )}
+                {avancementNotes === 100 ? (
+                  <CheckLg color="green" width="20" height="20" />
+                ) : (
+                  <ExclamationLg color="red" width="20" height="20" />
+                )}
               </Accordion.Header>
               <Accordion.Body>
                 <MonBilan onChange={handleBilanChange} />
@@ -168,50 +184,52 @@ const App = () => {
               </Accordion.Header>
               <Accordion.Body>
                 <div>
-                <FiltrageSpecialites onChange={handleFiltreChange} />
-                <Tabs
-                  defaultActiveKey="secteur1"
-                  id="lycees"
-                  className="mx-0 my-0"
-                >
-                  <Tab eventKey="secteur1" title="Secteur 1">
-                    <LyceesSecteur
-                      lycees={lyceesSecteur[0]}
-                      scorePrevious={scoreGlobalPrevious}
-                      scoreNext={scoreGlobalNext}
-                      bonusGeo="32640"
-                      secteur="1"
-                    />
-                  </Tab>
-                  <Tab eventKey="secteur2" title="Sect. 2">
-                    <LyceesSecteur
-                      lycees={lyceesSecteur[1]}
-                      scorePrevious={scoreGlobalPrevious}
-                      scoreNext={scoreGlobalNext}
-                      bonusGeo="17760"
-                      secteur="2"
-                    />
-                  </Tab>
-                  <Tab eventKey="secteur3" title="Sect. 3">
-                    <LyceesSecteur
-                      lycees={lyceesSecteur[2]}
-                      scorePrevious={scoreGlobalPrevious}
-                      scoreNext={scoreGlobalNext}
-                      bonusGeo="16800"
-                      secteur="3"
-                    />
-                  </Tab>
-                </Tabs>
+                  <FiltrageSpecialites onChange={handleFiltreChange} />
+                  <Tabs
+                    defaultActiveKey="secteur1"
+                    id="lycees"
+                    className="mx-0 my-0"
+                  >
+                    <Tab eventKey="secteur1" title="Secteur 1">
+                      <LyceesSecteur
+                        lycees={lyceesSecteur[0]}
+                        scorePrevious={scoreGlobalPrevious}
+                        scoreNext={scoreGlobalNext}
+                        bonusGeo="32640"
+                        secteur="1"
+                      />
+                    </Tab>
+                    <Tab eventKey="secteur2" title="Sect. 2">
+                      <LyceesSecteur
+                        lycees={lyceesSecteur[1]}
+                        scorePrevious={scoreGlobalPrevious}
+                        scoreNext={scoreGlobalNext}
+                        bonusGeo="17760"
+                        secteur="2"
+                      />
+                    </Tab>
+                    <Tab eventKey="secteur3" title="Sect. 3">
+                      <LyceesSecteur
+                        lycees={lyceesSecteur[2]}
+                        scorePrevious={scoreGlobalPrevious}
+                        scoreNext={scoreGlobalNext}
+                        bonusGeo="16800"
+                        secteur="3"
+                      />
+                    </Tab>
+                  </Tabs>
                 </div>
               </Accordion.Body>
             </Accordion.Item>
             <Accordion.Item eventKey="4">
               <Accordion.Header>
-                <span className="fw-bolder">Seuils d'admission ({numberSeuils}/46)</span>
+                <span className="fw-bolder">
+                  Seuils d'admission ({numberSeuils}/46)
+                </span>
               </Accordion.Header>
               <Accordion.Body>
                 <div>
-                  <ListeSeuils onChange={handleSeuilChange}/>
+                  <ListeSeuils onChange={handleSeuilChange} />
                   <ContribSeuils contrib={contrib} />
                 </div>
               </Accordion.Body>

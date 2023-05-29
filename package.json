@@ -8,6 +8,7 @@
     "@testing-library/user-event": "^13.5.0",
     "axios": "^0.26.1",
     "bootstrap": "^5.2.2",
+    "bootstrap-icons": "^1.10.5",
     "caniuse-lite": "^1.0.30001431",
     "firebase": "^9.14.0",
     "react": "^18.2.0",

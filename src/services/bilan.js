@@ -69,18 +69,18 @@ const computeAvancementNotes = (matieres, semestres) => {
     let avancementCD = 0;
     cd.matieres.forEach((cdmatiere) => {
       const foundMatiere = matieres.find(
-          (matiere) => matiere.nom === cdmatiere
+        (matiere) => matiere.nom === cdmatiere
       );
       if (foundMatiere) {
         const notes = foundMatiere.notes;
-        const notZeroNotes = notes.filter((value => value > 0));
+        const notZeroNotes = notes.filter((value) => value > 0);
         avancementCD += notZeroNotes.length;
       }
     });
     avancement += avancementCD;
   });
   let nbExpectedNotes = semestres ? 22 : 33;
-  return Math.round(100 * avancement / nbExpectedNotes);
+  return Math.round((100 * avancement) / nbExpectedNotes);
 };
 
 const computeBilanPeriodique = (
@@ -92,11 +92,12 @@ const computeBilanPeriodique = (
   let score = 0;
   scoresCD.forEach((cd) => {
     const cdscore =
-      10*(10 +
+      10 *
+      (10 +
         (cd.score - moyennesAcademiques.get(cd.nom)) /
           ecartsAcademiques.get(cd.nom));
-    //console.log("cd " + cd.nom + cdscore);      
-    //console.log("cd " + cd.nom + cdscore.toFixed(3));      
+    //console.log("cd " + cd.nom + cdscore);
+    //console.log("cd " + cd.nom + cdscore.toFixed(3));
     score += cd.coefficient * cdscore.toFixed(3);
   });
   //console.log("bilan : " + score);
@@ -148,11 +149,13 @@ const allMatiereSetTo = (newNote, semestres) => {
 const possibleSemestres = localStorage.getItem("semestres");
 if (possibleSemestres !== null) {
   const semestres = JSON.parse(possibleSemestres);
-  const nbNotes = semestres === true ? [1,2] : [1,2,3];
+  const nbNotes = semestres === true ? [1, 2] : [1, 2, 3];
   listeMatieres.forEach((matiere, index) => {
     let migratedNotes = [];
     nbNotes.forEach((trimestre) => {
-      const possibleNote = localStorage.getItem("note/" + matiere.nom + trimestre);
+      const possibleNote = localStorage.getItem(
+        "note/" + matiere.nom + trimestre
+      );
       const note = JSON.parse(possibleNote);
       if (note) migratedNotes.push(note);
     });
@@ -161,9 +164,9 @@ if (possibleSemestres !== null) {
         nom: matiere.nom,
         notes: migratedNotes,
         order: matiere.order,
-      }
+      };
     }
-  });  
+  });
 }
 
 export {
@@ -172,5 +175,5 @@ export {
   computeBilanPeriodique,
   updateMatieres,
   allMatiereSetTo,
-  computeAvancementNotes
+  computeAvancementNotes,
 };

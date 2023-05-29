@@ -1,7 +1,11 @@
 import React, { useRef } from "react";
 import { useState, useEffect } from "react";
 import { Card, Form, OverlayTrigger, Table, Tooltip } from "react-bootstrap";
-import { ArrowReturnRight, Lightning, QuestionCircleFill } from "react-bootstrap-icons";
+import {
+  ArrowReturnRight,
+  Lightning,
+  QuestionCircleFill,
+} from "react-bootstrap-icons";
 
 import { useLocalStorage } from "../services/useLocalStorage";
 import {
@@ -9,7 +13,8 @@ import {
   computeNoteCDs,
   computeBilanPeriodique,
   updateMatieres,
-  allMatiereSetTo, computeAvancementNotes,
+  allMatiereSetTo,
+  computeAvancementNotes,
 } from "../services/bilan";
 import { moyennesAcademiques, ecartsAcademiques } from "../data/stats";
 import MatiereEditor from "./MatiereEditor";
@@ -21,12 +26,11 @@ const valueMap = new Map([
   [1, 3],
   [2, 8],
   [3, 13],
-  [4, 16]
+  [4, 16],
 ]);
 
 /* returns scoreBilanPrevious and scoreBilanNext */
 const MonBilan = (props) => {
-
   const [semestres, setSemestres] = useLocalStorage("semestres", false);
   const [matieres, setMatieres] = useLocalStorage(
     "bilan_periodique/matieres",
@@ -56,7 +60,9 @@ const MonBilan = (props) => {
     setQuickScore(value);
     const note = valueMap.get(value);
     //console.log("note = " + value);
-    inputRef.current.forEach((elem) => { elem.setScore(note)});
+    inputRef.current.forEach((elem) => {
+      elem.setScore(note);
+    });
     setMatieres(allMatiereSetTo(note, semestres));
   };
 
@@ -84,8 +90,10 @@ const MonBilan = (props) => {
   return (
     <div>
       <div className="mx-auto mb-3">
-        <ArrowReturnRight /> Saisir ici vos moyennes de chaque matière pour chaque {semestres ? 'se' : 'tri'}mestre. Seuls les <strong>intervalles</strong> de notes comptent pour
-        votre score Affelnet, il est donc inutile de saisir les notes précises.
+        <ArrowReturnRight /> Saisir ici vos moyennes de chaque matière pour
+        chaque {semestres ? "se" : "tri"}mestre. Seuls les{" "}
+        <strong>intervalles</strong> de notes comptent pour votre score
+        Affelnet, il est donc inutile de saisir les notes précises.
       </div>
       <div className="col-12 mx-auto mb-3">
         <AffichageScores
@@ -108,25 +116,35 @@ const MonBilan = (props) => {
         <Table borderless className="ms-0">
           <tbody>
             <tr>
-              <td><Lightning width="24" height="24" />
-              Saisie rapide <OverlayTrigger
-                    trigger="click"
-                    placement="top"
-                    overlay={(propss) => <Tooltip {...propss}>{"Ce curseur permet de renseigner toutes les moyennes en même temps."}</Tooltip>}
-                    rootCloseEvent="mousedown"
-                    rootClose="true">
-                    <QuestionCircleFill width="20" height="20" />
-                  </OverlayTrigger>
+              <td>
+                <Lightning width="24" height="24" />
+                Saisie rapide{" "}
+                <OverlayTrigger
+                  trigger="click"
+                  placement="top"
+                  overlay={(propss) => (
+                    <Tooltip {...propss}>
+                      {
+                        "Ce curseur permet de renseigner toutes les moyennes en même temps."
+                      }
+                    </Tooltip>
+                  )}
+                  rootCloseEvent="mousedown"
+                  rootClose="true"
+                >
+                  <QuestionCircleFill width="20" height="20" />
+                </OverlayTrigger>
               </td>
-              <td>{'  '}</td>
-              <td className='titre'>
+              <td>{"  "}</td>
+              <td className="titre">
                 <Form.Range
                   className="align-middle xy-0 form-range"
                   min="0"
                   max="4"
                   step="1"
                   value={quickScore}
-                  onChange={setAllNotes} />
+                  onChange={setAllNotes}
+                />
               </td>
             </tr>
           </tbody>
@@ -144,7 +162,7 @@ const MonBilan = (props) => {
                     notes={matiere.notes}
                     semestres={semestres}
                     onChange={handleMatiereChange}
-                    ref={el => inputRef.current[index] = el}
+                    ref={(el) => (inputRef.current[index] = el)}
                   />
                 );
               })}

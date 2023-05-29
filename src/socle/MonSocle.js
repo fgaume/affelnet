@@ -1,13 +1,19 @@
 import React, { useRef, useState } from "react";
 import { useEffect } from "react";
 import { Card, Form, OverlayTrigger, Table, Tooltip } from "react-bootstrap";
-import { ArrowReturnRight, ArrowRight, Lightning, QuestionCircleFill } from "react-bootstrap-icons";
+import {
+  ArrowReturnRight,
+  ArrowRight,
+  Lightning,
+  QuestionCircleFill,
+} from "react-bootstrap-icons";
 import { useLocalStorage } from "../services/useLocalStorage";
 import {
   listeCompetences,
   computeSocleCompetences,
   updateCompetences,
-  allCompetencesSetTo, computeAvancementSocle,
+  allCompetencesSetTo,
+  computeAvancementSocle,
 } from "../services/socle";
 import RangeInput from "../components/RangeInput";
 
@@ -16,17 +22,21 @@ const valueMap = new Map([
   [1, 120],
   [2, 300],
   [3, 480],
-  [4, 600]
+  [4, 600],
 ]);
- 
-const tranchesCompetences = [
-  {value:0, score: 0, label: 'Maitrise...', style: 'low text-body'},
-  {value:1, score: 120, label: 'Insuffisante', style: 'low text-danger'},
-  {value:2, score: 300, label: 'Fragile', style: 'middle text-danger'},
-  {value:3, score: 480, label: 'Satisfaisante', style: 'middle text-primary'},
-  {value:4, score: 600, label: 'Très bonne', style: 'high text-success'}
-];
 
+const tranchesCompetences = [
+  { value: 0, score: 0, label: "Maitrise...", style: "low text-body" },
+  { value: 1, score: 120, label: "Insuffisante", style: "low text-danger" },
+  { value: 2, score: 300, label: "Fragile", style: "middle text-danger" },
+  {
+    value: 3,
+    score: 480,
+    label: "Satisfaisante",
+    style: "middle text-primary",
+  },
+  { value: 4, score: 600, label: "Très bonne", style: "high text-success" },
+];
 
 /* returns scoreSocle */
 const MonSocle = (props) => {
@@ -49,14 +59,16 @@ const MonSocle = (props) => {
 
   const setAllNotes = (event) => {
     //const note = parseInt(event.target.value);
-    
+
     const value = parseInt(event.target.value);
     console.log("value = " + value);
     setQuickScore(value);
     const note = valueMap.get(value);
     console.log("note = " + value);
 
-    inputRef.current.forEach((elem) => { elem.setScore(note)});
+    inputRef.current.forEach((elem) => {
+      elem.setScore(note);
+    });
     setCompetences(allCompetencesSetTo(note));
   };
 
@@ -69,7 +81,8 @@ const MonSocle = (props) => {
   return (
     <div>
       <div className="mx-auto mb-3">
-      <ArrowReturnRight /> Estimez ici les 8 compétences de socle (qui comptent également pour le Brevet). Rappel :
+        <ArrowReturnRight /> Estimez ici les 8 compétences de socle (qui
+        comptent également pour le Brevet). Rappel :
       </div>
       <Card className="mx-auto mt-3">
         <ul className="mb-2 mt-2">
@@ -78,10 +91,10 @@ const MonSocle = (props) => {
           </li>
           <li className="text-primary">
             Satisfaisante <ArrowRight /> 480 pts
-            </li>
+          </li>
           <li className="text-danger">
             Fragile <ArrowRight /> 300 pts
-            </li>
+          </li>
           <li className="text-danger">
             Insuffisante <ArrowRight /> 180 pts
           </li>
@@ -95,22 +108,31 @@ const MonSocle = (props) => {
               <td>
                 <Lightning width="24" height="24" /> Saisie multiple{" "}
                 <OverlayTrigger
-                    trigger="click"
-                    placement="top"
-                    overlay={(propss) => <Tooltip {...propss}>{"Ce curseur permet de renseigner toutes les compétences à la fois."}</Tooltip>}
-                    rootCloseEvent="mousedown"
-                    rootClose="true">
-                    <QuestionCircleFill width="20" height="20" />
-                  </OverlayTrigger> :
+                  trigger="click"
+                  placement="top"
+                  overlay={(propss) => (
+                    <Tooltip {...propss}>
+                      {
+                        "Ce curseur permet de renseigner toutes les compétences à la fois."
+                      }
+                    </Tooltip>
+                  )}
+                  rootCloseEvent="mousedown"
+                  rootClose="true"
+                >
+                  <QuestionCircleFill width="20" height="20" />
+                </OverlayTrigger>{" "}
+                :
               </td>
-              <td className='header'>
+              <td className="header">
                 <Form.Range
                   className="align-middle xy-0 form-range"
                   min="0"
                   max="4"
                   step="1"
                   value={quickScore}
-                  onChange={setAllNotes} />
+                  onChange={setAllNotes}
+                />
               </td>
             </tr>
           </tbody>
@@ -130,7 +152,7 @@ const MonSocle = (props) => {
                     score={competence.score}
                     listeTranches={tranchesCompetences}
                     onChange={handleCompetenceChange}
-                    ref={el => inputRef.current[index] = el}
+                    ref={(el) => (inputRef.current[index] = el)}
                   />
                 );
               })}

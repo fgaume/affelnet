@@ -84,7 +84,7 @@ registerRoute(
 
 // firebase webConfig init call
 registerRoute(
-  ({ request }) => request.url.endsWith('webConfig'),
+  ({ request }) => request.url.endsWith("webConfig"),
   new CacheFirst({
     cacheName: "firebaseWebConfig",
     plugins: [

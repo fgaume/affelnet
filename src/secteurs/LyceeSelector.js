@@ -37,7 +37,6 @@ const LyceeSelector = (props) => {
             onChange={onLyceeChange}
             options={listeLycees}
             placeholder={placeholder}
-            //defaultSelected={[{ nom: props.lycee, bonus: 0 }]}
             ref={inputRef}
           />
         </Col>

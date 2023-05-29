@@ -1,13 +1,14 @@
 import { useState, useEffect } from "react";
 import { firestore } from "../services/firebase";
 import { collection, onSnapshot } from "firebase/firestore";
-import { Card, Form, Table } from "react-bootstrap";
+import { Alert, Card, Figure, Form, Image, Table } from "react-bootstrap";
 import { nomsLyceesMap, seuilsLyceesMap, urlsLyceesMap } from "../data/lycees";
 import {
   ArrowDownRight,
   ArrowReturnRight,
   ArrowUpRight,
   CheckLg,
+  ExclamationCircle,
   ExclamationLg,
 } from "react-bootstrap-icons";
 import "./ListeSeuils.css";
@@ -76,17 +77,20 @@ const ListeSeuils = (props) => {
     let newNumberSeuils = 0;
     lycees.forEach((item) => {
       if (item.seuil > 0) newNumberSeuils++;
-    })
+    });
     props.onChange(newNumberSeuils);
   }, [props, lycees]);
 
   return (
     <div>
-      <div className="mb-3"><ArrowReturnRight /> Cette section liste les scores d'admission de chaque lycée parisien lors des 2 dernières sessions,
-      ainsi que l'évolution par rapport à 2021.
-      La source de ces seuils est l'ensemble des fiches-barème reçues du Rectorat et ensuite partagées par les parents.
-      Figure également un lien vers la fiche descriptive du lycée produite par la FCPE.
-    </div>
+      <div className="mb-3">
+        <ArrowReturnRight /> Cette section liste les scores d'admission{" "}
+        <strong>non-boursiers</strong> de chaque lycée parisien lors des 2
+        dernières sessions, ainsi que l'évolution par rapport à 2021. La source
+        de ces seuils est l'ensemble des fiches-barème reçues du Rectorat et
+        ensuite partagées par les parents. Figure également un lien vers la
+        fiche descriptive du lycée produite par la FCPE.
+      </div>
       <div className="w-50">
         <Form.Select size="sm" value={sorting} onChange={handleSortChange}>
           <option value="byLycee">trier par lycée</option>
@@ -110,7 +114,10 @@ const ListeSeuils = (props) => {
             {lycees.map((lycee, index) => (
               <tr key={lycee.id}>
                 <td className="lycee">
-                <a target="_blank" rel="noreferrer" href={lycee.url}>{lycee.nom}</a>&nbsp;
+                  <a target="_blank" rel="noreferrer" href={lycee.url}>
+                    {lycee.nom}
+                  </a>
+                  &nbsp;
                   {lycee.seuil > 1000000 && (
                     <CheckLg color="green" width="20" height="20" />
                   )}
@@ -146,6 +153,37 @@ const ListeSeuils = (props) => {
           </tbody>
         </Table>
       </Card>
+      <div className="mt-5 mb-3">
+        <Alert show="true" variant="warning">
+          <div className="mb-2">
+            <ExclamationCircle width="24" height="24" /> Les seuils d'admission
+            sont des scores Affelnet, donc ils prennent en compte les{" "}
+            <strong>bonus IPS</strong>. Ils ne constituent donc absolument{" "}
+            <strong>pas un indicateur du niveau scolaire</strong> du collégien
+            et donc du lycée. Un seuil élevé indique une forte pression des
+            collégiens bénéficiant de bonus IPS (tels Turgot, Condorcet ou
+            Hélène Boucher par exemple). La section "Secteurs" plus bas permet
+            de se faire une idée du poids des 2 groupes de collégiens avec bonus
+            sur un lycée donné.
+          </div>
+          <div> </div>
+          <div>
+            De plus, comme le montre la figure ci-dessous, le domaine de valeur
+            des scores Affelnet est loin d'être continu, donc une variation de
+            seuil d'une année sur l'autre ne doit pas être sur-interpreté non
+            plus (par exemple on voit ici qu'aucun collégien ne peut avoir un
+            score entre 27 000 et 37 000).
+          </div>
+        </Alert>
+        <div className="col-12 col-sm-10 col-md-8 col-lg-6 col-xl-8 col-xxl-8 mx-auto">
+          <Figure>
+            <Image src="/score-discontinu.png" className="img-fluid" />
+            <Figure.Caption className="text-center">
+              Valeurs possibles pour un score Affelnet
+            </Figure.Caption>
+          </Figure>
+        </div>
+      </div>
     </div>
   );
 };

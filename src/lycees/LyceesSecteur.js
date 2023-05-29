@@ -49,21 +49,39 @@ const LyceesSecteur = (props) => {
 
   return (
     <div>
-    <div className="mx-3 my-3 mt-3 mb-3"><ArrowReturnRight /> Cette section indique les lycées de <strong>secteur {props.secteur}</strong> que vous auriez obtenus,
-    ou pas, dans les conditions de 2021 et 2022,
-    et compte tenu des résultats scolaires actuels. Les lycées où votre score aurait été suffisant sont en vert.
-    </div>
-    <div className="mx-3 my-3 mt-3 mb-3"><ArrowReturnRight /> Si
-    vous imposez des spécialités (switches plus haut), les lycées ne proposant pas l'ensemble des spécialités demandées seront barrés.
-    Recoupez avec la fiche descriptive le cas échéant en cliquant sur le nom du lycée pour être certain des spécialités proposées, ainsi que de leur combinatoire autorisée.
-    </div>
+      <div className="mx-3 my-3 mt-3 mb-3">
+        <ArrowReturnRight /> Cette section indique les lycées de{" "}
+        <strong>secteur {props.secteur}</strong> que vous auriez obtenus, ou
+        pas, dans les conditions de 2021 et 2022, et compte tenu des résultats
+        scolaires actuels. Les lycées où votre score aurait été suffisant sont
+        en vert.
+      </div>
+      <div className="mx-3 my-3 mt-3 mb-3">
+        <ArrowReturnRight /> Si vous imposez des spécialités (switches plus
+        haut), les lycées ne proposant pas l'ensemble des spécialités demandées
+        seront barrés. Recoupez avec la fiche descriptive le cas échéant en
+        cliquant sur le nom du lycée pour être certain des spécialités
+        proposées, ainsi que de leur combinatoire autorisée.
+      </div>
       <div className="mx-auto mb-3">
         <AffichageScores
           scorePrevious={props.scorePrevious + bonusGeo}
           scoreNext={props.scoreNext > 0 ? bonusGeo + props.scoreNext : 0}
-          tipPrevious={"Votre score affelnet pour un voeu de lycée de secteur " + props.secteur + " en 2021"}
-          tipNext={"Votre score affelnet pour un voeu de lycée de secteur " + props.secteur + " en 2022"}
-          tipDelta={"Différence de score affelnet pour un voeu de lycée de secteur " + props.secteur + " entre 2021 et 2022"}  
+          tipPrevious={
+            "Votre score affelnet pour un voeu de lycée de secteur " +
+            props.secteur +
+            " en 2021"
+          }
+          tipNext={
+            "Votre score affelnet pour un voeu de lycée de secteur " +
+            props.secteur +
+            " en 2022"
+          }
+          tipDelta={
+            "Différence de score affelnet pour un voeu de lycée de secteur " +
+            props.secteur +
+            " entre 2021 et 2022"
+          }
         />
       </div>
       <div className="mx-auto">
@@ -71,43 +89,75 @@ const LyceesSecteur = (props) => {
           <Table striped borderless hover responsive="xl" className="mb-0">
             <thead>
               <tr>
-                <th className="lycee">Lycée{" "}
+                <th className="lycee">
+                  Lycée{" "}
                   <OverlayTrigger
                     trigger="click"
                     placement="top"
-                    overlay={(propss) => <Tooltip {...propss}>{"Lycée de secteur " + props.secteur + " avec le lien vers sa fiche descriptive"}</Tooltip>}
+                    overlay={(propss) => (
+                      <Tooltip {...propss}>
+                        {"Lycée de secteur " +
+                          props.secteur +
+                          " avec le lien vers sa fiche descriptive"}
+                      </Tooltip>
+                    )}
                     rootCloseEvent="mousedown"
-                    rootClose="true">
+                    rootClose="true"
+                  >
                     <QuestionCircleFill width="20" height="20" />
                   </OverlayTrigger>
                 </th>
-                <th className="seuil">En 2021{" "}
+                <th className="seuil">
+                  En 2021{" "}
                   <OverlayTrigger
                     trigger="click"
                     placement="top"
-                    overlay={(propss) => <Tooltip {...propss}>{"Différence entre mon score et le seuil d'admission au lycée en 2021"}</Tooltip>}
+                    overlay={(propss) => (
+                      <Tooltip {...propss}>
+                        {
+                          "Différence entre mon score et le seuil d'admission au lycée en 2021"
+                        }
+                      </Tooltip>
+                    )}
                     rootCloseEvent="mousedown"
-                    rootClose="true">
+                    rootClose="true"
+                  >
                     <QuestionCircleFill width="20" height="20" />
                   </OverlayTrigger>
                 </th>
-                <th className="seuil">En 2022{" "}
+                <th className="seuil">
+                  En 2022{" "}
                   <OverlayTrigger
                     trigger="click"
                     placement="top"
-                    overlay={(propss) => <Tooltip {...propss}>{"Différence entre mon score et le seuil d'admission au lycée en 2022"}</Tooltip>}
+                    overlay={(propss) => (
+                      <Tooltip {...propss}>
+                        {
+                          "Différence entre mon score et le seuil d'admission au lycée en 2022"
+                        }
+                      </Tooltip>
+                    )}
                     rootCloseEvent="mousedown"
-                    rootClose="true">
+                    rootClose="true"
+                  >
                     <QuestionCircleFill width="20" height="20" />
                   </OverlayTrigger>
                 </th>
-                <th className="variation">+/-{" "}
+                <th className="variation">
+                  +/-{" "}
                   <OverlayTrigger
                     trigger="click"
                     placement="top"
-                    overlay={(propss) => <Tooltip {...propss}>{"Evolution de la différence entre mon score et le seuil d'admission au lycée entre 2021 et 2022"}</Tooltip>}
+                    overlay={(propss) => (
+                      <Tooltip {...propss}>
+                        {
+                          "Evolution de la différence entre mon score et le seuil d'admission au lycée entre 2021 et 2022"
+                        }
+                      </Tooltip>
+                    )}
                     rootCloseEvent="mousedown"
-                    rootClose="true">
+                    rootClose="true"
+                  >
                     <QuestionCircleFill width="20" height="20" />
                   </OverlayTrigger>
                 </th>
@@ -127,7 +177,14 @@ const LyceesSecteur = (props) => {
                 return (
                   <tr key={lycee.code + index}>
                     <td>
-                      <a className={status} target="_blank" rel="noreferrer" href={lycee.url}>{lycee.nom}</a>
+                      <a
+                        className={status}
+                        target="_blank"
+                        rel="noreferrer"
+                        href={lycee.url}
+                      >
+                        {lycee.nom}
+                      </a>
                       {status === "admissible" && (
                         <CheckLg color="green" width="20" height="20" />
                       )}
@@ -143,24 +200,35 @@ const LyceesSecteur = (props) => {
                       </span>
                     </td>
                     <td className="seuil">
-                      <span className={determineColor(nextResult, lycee)}>{lycee.seuils[1] > 0 ? formatVariation(nextResult) : "?"}
-{/*                         {lycee.seuils[1] > 0 && nextResult
+                      <span className={determineColor(nextResult, lycee)}>
+                        {lycee.seuils[1] > 0
                           ? formatVariation(nextResult)
                           : "?"}
- */}                      </span>
+                        {/*                         {lycee.seuils[1] > 0 && nextResult
+                          ? formatVariation(nextResult)
+                          : "?"}
+ */}{" "}
+                      </span>
                     </td>
                     <td className="variation">
                       <span
-                        className={determineColor(nextResult - prevResult, lycee)}
+                        className={determineColor(
+                          nextResult - prevResult,
+                          lycee
+                        )}
                       >
-                        {prevResult != null  && nextResult!= null ?
-                          formatVariation(nextResult - prevResult) : "?"}{" "}
-                        {(prevResult  != null && nextResult != null) ?
-                          (nextResult > prevResult ? (
+                        {prevResult != null && nextResult != null
+                          ? formatVariation(nextResult - prevResult)
+                          : "?"}{" "}
+                        {prevResult != null && nextResult != null ? (
+                          nextResult > prevResult ? (
                             <ArrowUpRight />
                           ) : (
                             <ArrowDownRight />
-                          )) : ""}
+                          )
+                        ) : (
+                          ""
+                        )}
                       </span>
                     </td>
                   </tr>
@@ -170,7 +238,7 @@ const LyceesSecteur = (props) => {
           </Table>
         </Card>
       </div>
-      </div>
+    </div>
   );
 };
 

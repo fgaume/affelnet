@@ -24,9 +24,8 @@ const computeAvancementSocle = (competences) => {
   competences.forEach((competence) => {
     if (competence.score > 0) avancement++;
   });
-  return Math.round(100 * avancement / 8);
+  return Math.round((100 * avancement) / 8);
 };
-
 
 const updateCompetences = (existingCompetences, nom, score) => {
   let updatedCompetences = existingCompetences.filter((c) => c.nom !== nom);
@@ -53,23 +52,22 @@ const allCompetencesSetTo = (score) => {
 const possibleSemestres = localStorage.getItem("semestres");
 if (possibleSemestres !== null) {
   listeCompetences.forEach((competence, index) => {
-      const possibleNote = localStorage.getItem("competence/" + competence.nom);
-      const score = JSON.parse(possibleNote);
-      if (score) {
-        listeCompetences[index] = {
+    const possibleNote = localStorage.getItem("competence/" + competence.nom);
+    const score = JSON.parse(possibleNote);
+    if (score) {
+      listeCompetences[index] = {
         nom: competence.nom,
         score: parseInt(score),
         order: competence.order,
-        }
+      };
     }
-  });  
+  });
 }
-
 
 export {
   listeCompetences,
   computeSocleCompetences,
   updateCompetences,
   allCompetencesSetTo,
-  computeAvancementSocle
+  computeAvancementSocle,
 };
