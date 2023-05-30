@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import Accordion from "react-bootstrap/Accordion";
 import LoadingScreen from "./main/LoadingScreen";
 import ListeSeuils from "./seuils/ListeSeuils";
-import { Tab, Tabs } from "react-bootstrap";
+import { Button, Tab, Tabs } from "react-bootstrap";
 import { CheckLg, ExclamationLg } from "react-bootstrap-icons";
 import MonBilan from "./bilan/MonBilan";
 import MonSocle from "./socle/MonSocle";
@@ -22,7 +22,7 @@ import ContribSeuils from "./seuils/ContribSeuils";
 import Secteurs from "./secteurs/Secteurs";
 
 const App = () => {
-  const version = "v8.2.7 29/05/2023";
+  const version = "v8.2.8 30/05/2023";
   const contrib = false;
 
   const [loading, setLoading] = useState(true);
@@ -79,6 +79,11 @@ const App = () => {
     // console.log("newNumberSeuils : " + newNumberSeuils);
     setNumberSeuils(newNumberSeuils);
   };
+
+  /* const clearCache = () => {
+    console.log("toto");
+    window.location.reload(true);
+  } */
 
   useEffect(() => {
     console.log("useffect App.js");
@@ -243,9 +248,13 @@ const App = () => {
               </Accordion.Body>
             </Accordion.Item>
           </Accordion>
-          <p className="text-end text-muted">
+          <p className="text-end text-muted mt-2">
             <small><a href="https://github.com/fgaume/affelnet" rel="noreferrer" target="_blank">{version}</a></small>
-          </p>
+          
+          {" "}<Button size="sm" variant="outline-primary" onClick={() => window.location.reload(true)}>
+            Mettre à jour
+            </Button>
+            </p>
         </div>
       ) : (
         <LoadingScreen />
