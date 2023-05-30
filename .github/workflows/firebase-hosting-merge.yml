@@ -23,7 +23,7 @@ jobs:
           node-version: ${{ matrix.node-version }}
       
       - name: build dependencies
-        run: npm install
+        run: npm config set legacy-peer-deps true && npm install
 
       - name: webpack production build
         run: npm run build
