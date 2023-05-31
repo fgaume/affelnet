@@ -29,6 +29,7 @@ jobs:
         env:
           CI: false
           REACT_APP_FIREBASE_API_KEY: '${{ secrets.REACT_APP_FIREBASE_API_KEY }}'
+          REACT_APP_FIREBASE_APP_ID: '${{ secrets.REACT_APP_FIREBASE_APP_ID }}'
         run: npm run build
 
       - name: Deploy
