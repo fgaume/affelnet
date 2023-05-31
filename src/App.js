@@ -20,9 +20,10 @@ import {
 } from "./services/specialites";
 import ContribSeuils from "./seuils/ContribSeuils";
 import Secteurs from "./secteurs/Secteurs";
+import { deleteWorker } from "./services/helper";
 
 const App = () => {
-  const version = "v8.2.8 30/05/2023";
+  const version = "v8.2.9 31/05/2023";
   const contrib = false;
 
   const [loading, setLoading] = useState(true);
@@ -251,7 +252,7 @@ const App = () => {
           <p className="text-end text-muted mt-2">
             <small><a href="https://github.com/fgaume/affelnet" rel="noreferrer" target="_blank">{version}</a></small>
           
-          {" "}<Button size="sm" variant="outline-primary" onClick={() => window.location.reload(true)}>
+          {" "}<Button size="sm" variant="outline-primary" onClick={() => deleteWorker()}>
             Mettre à jour
             </Button>
             </p>
@@ -264,3 +265,4 @@ const App = () => {
 };
 
 export default App;
+// window.location.reload(true)

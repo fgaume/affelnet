@@ -46,6 +46,8 @@ function useSeuils(sorting = "byLycee") {
             newSeuils.sort((a, b) => (a.nom < b.nom ? -1 : 1));
         }
         setLycees(newSeuils);
+      }, (error) => {
+        console.log("erreur firestore: ", error);
       }
     );
     return () => unsubscribe();
@@ -154,7 +156,7 @@ const ListeSeuils = (props) => {
         </Table>
       </Card>
       <div className="mt-5 mb-3">
-        <Alert show="true" variant="warning">
+        <Alert variant="warning">
           <div className="mb-2">
             <ExclamationCircle width="24" height="24" /> Les seuils d'admission
             sont des scores Affelnet, donc ils prennent en compte les{" "}

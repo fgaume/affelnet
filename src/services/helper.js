@@ -13,4 +13,15 @@ const formatVariation = (mynumber) => {
   return mynumber < 0 ? formatted : "+" + formatted;
 };
 
-export { formatInt, formatFloat, formatVariation };
+const deleteWorker = () => {
+  if ("serviceWorker" in navigator) {
+    navigator.serviceWorker.getRegistrations().then(function (registrations) {
+      for (let registration of registrations) {
+        registration.unregister();
+      }
+    });
+  }
+  window.location.reload(true);
+};
+
+export { formatInt, formatFloat, formatVariation, deleteWorker };
