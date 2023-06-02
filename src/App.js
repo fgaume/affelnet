@@ -23,7 +23,7 @@ import Secteurs from "./secteurs/Secteurs";
 import { deleteWorker } from "./services/helper";
 
 const App = () => {
-  const version = "v8.2.9 31/05/2023";
+  const version = "v8.3.0 02/06/2023";
   const contrib = false;
 
   const [loading, setLoading] = useState(true);
@@ -80,11 +80,6 @@ const App = () => {
     // console.log("newNumberSeuils : " + newNumberSeuils);
     setNumberSeuils(newNumberSeuils);
   };
-
-  /* const clearCache = () => {
-    console.log("toto");
-    window.location.reload(true);
-  } */
 
   useEffect(() => {
     console.log("useffect App.js");
@@ -250,12 +245,23 @@ const App = () => {
             </Accordion.Item>
           </Accordion>
           <p className="text-end text-muted mt-2">
-            <small><a href="https://github.com/fgaume/affelnet" rel="noreferrer" target="_blank">{version}</a></small>
-          
-          {" "}<Button size="sm" variant="outline-primary" onClick={() => deleteWorker()}>
-            Mettre à jour
+            <small>
+              <a
+                href="https://github.com/fgaume/affelnet"
+                rel="noreferrer"
+                target="_blank"
+              >
+                {version}
+              </a>
+            </small>{" "}
+            <Button
+              size="sm"
+              variant="outline-primary"
+              onClick={() => deleteWorker()}
+            >
+              Mettre à jour
             </Button>
-            </p>
+          </p>
         </div>
       ) : (
         <LoadingScreen />

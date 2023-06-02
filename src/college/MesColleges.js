@@ -6,6 +6,10 @@ import CollegeSelector from "./CollegeSelector";
 import "react-bootstrap-typeahead/css/Typeahead.css";
 import { CheckLg, QuestionCircleFill } from "react-bootstrap-icons";
 import { Card, OverlayTrigger, Popover, Stack } from "react-bootstrap";
+import { analytics } from "../services/firebase";
+import { logEvent } from "firebase/analytics";
+
+
 
 /* returns bonusIPS et college de secteur (pour avoir les lycées de secteur) */
 const MesColleges = (props) => {
@@ -55,6 +59,8 @@ const MesColleges = (props) => {
       if (!collegesMultiples) {
         setNomCollegeSecteur(collegeUpdate.nom);
         props.onChange(collegeUpdate);
+        logEvent(analytics, 'collège ' + collegeUpdate.nom);
+        logEvent(analytics, 'bonus ' + collegeUpdate.bonus);
       } else {
         if (nomCollegeSecteur && bonusCollege !== collegeUpdate.bonus) {
           props.onChange({
@@ -73,6 +79,7 @@ const MesColleges = (props) => {
     if (collegeUpdate && collegeUpdate.nom !== nomCollegeSecteur) {
       setNomCollegeSecteur(collegeUpdate.nom);
       props.onChange({ nom: collegeUpdate.nom, bonus: bonusCollege });
+      logEvent(analytics, 'collège secteur ' + collegeUpdate.nom);
     }
   };
 

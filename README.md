@@ -24,19 +24,36 @@ Elles se trouvent dans src/data :
 
 * colleges.js : liste des bonus IPS issue de la [circulaire officielle](https://www.fcpe75.org/wp-content/uploads/2022/04/annexe-1-guide-affectation-lycee-24309.pdf)
 * lycees.js : seuils d'admission des lycées (données collaboratives collectées depuis les fiches-barèmes officielles partagées par les parents)
-* specialites.js : liste des noms de spécialités compatible avec l'API du Rectorat
+* specialites.js : liste des noms de spécialités compatibles avec l'API du Rectorat
 * stats.js : liste des moyennes et écarts-types des années précédentes (déduites chaque année de 2 fiches-barèmes officielles différentes)
+
+## API exposées par l'application
+
+* Informations collèges :
+- https://affelnet75.web.app/api/colleges/colleges_2021.json
+- https://affelnet75.web.app/api/colleges/colleges_2022.json
+- https://affelnet75.web.app/api/colleges/colleges_2023.json
+
+* Informations lycées :
+- https://affelnet75.web.app/api/lycees/lycees_2020.json
+- https://affelnet75.web.app/api/lycees/lycees_2021.json
+- https://affelnet75.web.app/api/lycees/lycees_2022.json
+
+* Informations secteurs :
+- https://affelnet75.web.app/api/secteurs/secteurs_2021.json
+- https://affelnet75.web.app/api/secteurs/secteurs_2022.json
+
 
 ## Technologies utilisées
 
 C'est une PWA ([Progressive web app](https://fr.wikipedia.org/wiki/Progressive_web_app)) dévelopée en Javascript, conçue en particulier pour un environnement mobile (smartphone, tablette etc.).
 
-Les libraires utilisées : React ([Hooks](https://fr.reactjs.org/docs/hooks-intro.html)), [React-Bootstrap](https://react-bootstrap.github.io/), [react-bootstrap-typeahead](https://ericgio.github.io/react-bootstrap-typeahead/) et [Firebase](https://firebase.google.com/).
+Les libraires utilisées : [React Hooks](https://react.dev/)), [React-Bootstrap](https://react-bootstrap.github.io/), [react-bootstrap-typeahead](https://ericgio.github.io/react-bootstrap-typeahead/) et [Firebase](https://firebase.google.com/).
 
 
 ## Exécution en local
 
-`npm start` : lance un serveur de dev qui expose l'aplication via localhost:3000
+`npm start` : lance un serveur de dev qui expose l'application via localhost:3000
 
 ## Déploiement
 
@@ -45,6 +62,8 @@ Les libraires utilisées : React ([Hooks](https://fr.reactjs.org/docs/hooks-intr
 A date, ce package est exposé par un hosting Firebase. Donc pour déployer :
 
 `firebase deploy` : déploie sur https://affelnet75.web.app
+
+Une github action déploie automatiquement sur Firebase Hosting le code poussé sur la branche main.
 
 ---------------------------------------------------------------------------------------------
 
