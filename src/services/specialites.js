@@ -1,7 +1,7 @@
 import axios from "axios";
 import { codesSpecialitesMap } from "../data/specialites";
 
-const baseCacheKey = "cache/lycees-specialites-";
+//const baseCacheKey = "cache/lycees-specialites-";
 
 const setExclu = (lycees, lyceesWithSpe) => {
   lycees.forEach((lycee) => {
@@ -18,7 +18,7 @@ const resetExclu = (lycees) => {
 const intersection = (sets) => {
   let intersectionSet = sets.pop();
   let nextSet = sets.pop();
-  while (nextSet !== undefined) {
+  while (nextSet !== undefined && intersectionSet.length !== 0) {
     // eslint-disable-next-line no-loop-func
     intersectionSet = intersectionSet.filter((x) => nextSet.includes(x));
     nextSet = sets.pop();
@@ -38,7 +38,7 @@ const fetchLyceesHavingSpecialites = async (spes) => {
 
 const fetchLyceesHavingSpecialite = async (spe) => {
   if (spe) {
-    const cacheKey = baseCacheKey + spe;
+    /* const cacheKey = baseCacheKey + spe;
     const fromCache = localStorage.getItem(cacheKey);
     const cacheData = fromCache !== null ? JSON.parse(fromCache) : null;
     const cacheExpires = cacheData ? new Date(cacheData.expires) : null;
@@ -57,36 +57,38 @@ const fetchLyceesHavingSpecialite = async (spe) => {
           "fetchLyceesHavingSpecialite cache expiré, appel API lycees secteur: " +
             cacheExpires
         );
-      }
-      const response = await axios({
-        method: "GET",
-        url: "https://services9.arcgis.com/ekT8MJFiVh8nvlV5/arcgis/rest/services/LES_ENSEIGNEMENTS_DE_SPECIALITE_EN_CLASSE_DE_PREMIERE_RS_2021/FeatureServer/0/query",
-        headers: {},
-        params: {
-          outFields: "UAI",
-          returnGeometry: "false",
-          f: "pjson",
-          where: `ENSEIGNEMENT_DE_SPECIALITE='${codesSpecialitesMap.get(spe)}'`,
-        },
+      } */
+    const response = await axios({
+      method: "GET",
+      url: "https://services9.arcgis.com/ekT8MJFiVh8nvlV5/arcgis/rest/services/LES_ENSEIGNEMENTS_DE_SPECIALITE_EN_CLASSE_DE_PREMIERE_RS_2021/FeatureServer/0/query",
+      headers: {},
+      params: {
+        outFields: "UAI",
+        returnGeometry: "false",
+        f: "pjson",
+        where: `ENSEIGNEMENT_DE_SPECIALITE='${codesSpecialitesMap.get(spe)}'`,
+      },
+    });
+
+    if (response.data && response.data.features) {
+      const payload = response.data.features;
+      let newLycees = payload.map((item) => {
+        return item.attributes.UAI;
       });
 
-      if (response.data && response.data.features) {
-        const payload = response.data.features;
-        let newLycees = payload.map((item) => {
-          return item.attributes.UAI;
-        });
-
-        // add a day
-        let date = new Date();
+      /* let date = new Date();
         date.setDate(date.getDate() + 1);
         console.log("expire in : " + date);
         localStorage.setItem(
           cacheKey,
           JSON.stringify({ expires: date, data: newLycees })
-        );
+        ); */
 
-        return newLycees;
-      }
+      return newLycees;
+    }
+    else {
+      console.log("erreur : pas de réponse de l'API de spécialité pour ", spe);
+      return [];
     }
   }
 };

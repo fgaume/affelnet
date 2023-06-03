@@ -11,7 +11,7 @@ import { clientsClaim } from "workbox-core";
 import { ExpirationPlugin } from "workbox-expiration";
 import { precacheAndRoute, createHandlerBoundToURL } from "workbox-precaching";
 import { registerRoute } from "workbox-routing";
-import { CacheFirst, NetworkFirst } from "workbox-strategies";
+import { CacheFirst, StaleWhileRevalidate } from "workbox-strategies";
 
 clientsClaim();
 
@@ -60,8 +60,8 @@ registerRoute(
       // least-recently used images are removed.
       new ExpirationPlugin({
         maxEntries: 50,
-        maxAgeSeconds: 365 * 24 * 60 * 60,
-      }), // 1 year cache
+        maxAgeSeconds: 24 * 60 * 60,
+      }), // 1 day cache
     ],
   })
 );
@@ -69,16 +69,16 @@ registerRoute(
 // APIs education nationale arcgis
 registerRoute(
   ({ request }) => request.url.includes("arcgis"),
-  new CacheFirst({
+  new StaleWhileRevalidate({
     cacheName: "arcgis",
-    plugins: [
+    /* plugins: [
       // Ensure that once this runtime cache reaches a maximum size the
       // least-recently used are removed.
       new ExpirationPlugin({
         maxEntries: 300,
-        maxAgeSeconds: 60*60,
+        maxAgeSeconds: 60 * 60,
       }), // 1 month cache
-    ],
+    ], */
   })
 );
 
@@ -92,7 +92,7 @@ registerRoute(
       // least-recently used are removed.
       new ExpirationPlugin({
         maxEntries: 1,
-        maxAgeSeconds: 30 * 24 * 60 * 60, // 1 month
+        maxAgeSeconds: 24 * 60 * 60, // 1 day
       }),
     ],
   })

@@ -85,6 +85,7 @@ const FiltrageSpecialites = (props) => {
                   label={spe.acronyme}
                   onChange={onFiltreChange}
                   defaultChecked={filtres.includes(spe.acronyme)}
+                  className="mx-3 my-2"
                 />
               </OverlayTrigger>
             </span>
