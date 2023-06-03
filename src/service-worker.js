@@ -69,14 +69,14 @@ registerRoute(
 // APIs education nationale arcgis
 registerRoute(
   ({ request }) => request.url.includes("arcgis"),
-  new NetworkFirst({
+  new CacheFirst({
     cacheName: "arcgis",
     plugins: [
       // Ensure that once this runtime cache reaches a maximum size the
       // least-recently used are removed.
       new ExpirationPlugin({
         maxEntries: 300,
-        maxAgeSeconds: 30 * 24 * 60 * 60,
+        maxAgeSeconds: 60*60,
       }), // 1 month cache
     ],
   })

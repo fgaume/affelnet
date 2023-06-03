@@ -15,7 +15,7 @@ import LyceesSecteur from "./lycees/LyceesSecteur";
 import FiltrageSpecialites from "./lycees/FiltrageSpecialites";
 import {
   setExclu,
-  fetchLyceesHavingSpecialite,
+  fetchLyceesHavingSpecialites,
   resetExclu,
 } from "./services/specialites";
 import ContribSeuils from "./seuils/ContribSeuils";
@@ -89,11 +89,10 @@ const App = () => {
         if (newLycees && newLycees.length === 3) {
           newLycees.forEach((listeLycees) => resetExclu(listeLycees));
           if (filtreSpecialites && filtreSpecialites.length > 0) {
-            filtreSpecialites.forEach((spe) => {
-              fetchLyceesHavingSpecialite(spe).then((lyceesWithSpe) => {
+              fetchLyceesHavingSpecialites(filtreSpecialites).then((lyceesWithSpe) => {
                 console.log(
                   "lycees with spe " +
-                    spe +
+                  filtreSpecialites +
                     " : " +
                     JSON.stringify(lyceesWithSpe)
                 );
@@ -102,7 +101,6 @@ const App = () => {
                 });
                 setLyceesSecteur(newLycees);
               });
-            });
           } else {
             setLyceesSecteur(newLycees);
           }

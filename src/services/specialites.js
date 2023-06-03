@@ -15,6 +15,27 @@ const resetExclu = (lycees) => {
   });
 };
 
+const intersection = (sets) => {
+  let intersectionSet = sets.pop();
+  let nextSet = sets.pop();
+  while (nextSet !== undefined) {
+    // eslint-disable-next-line no-loop-func
+    intersectionSet = intersectionSet.filter((x) => nextSet.includes(x));
+    nextSet = sets.pop();
+  }
+  return intersectionSet;
+};
+
+const fetchLyceesHavingSpecialites = async (spes) => {
+  const allresults = await Promise.all(
+    spes.map(async (spe) => {
+      const response = await fetchLyceesHavingSpecialite(spe);
+      return response;
+    })
+  );
+  return intersection(allresults);
+};
+
 const fetchLyceesHavingSpecialite = async (spe) => {
   if (spe) {
     const cacheKey = baseCacheKey + spe;
@@ -70,4 +91,4 @@ const fetchLyceesHavingSpecialite = async (spe) => {
   }
 };
 
-export { resetExclu, setExclu, fetchLyceesHavingSpecialite };
+export { resetExclu, setExclu, fetchLyceesHavingSpecialites };
