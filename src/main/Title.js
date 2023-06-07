@@ -27,6 +27,7 @@ const Title = (props) => {
           </h4>
         </div>
         <div>
+          {/*eslint-disable-next-line jsx-a11y/anchor-is-valid */}
           <a href="#" onClick={() => setShow("true")}>
             <InfoCircleFill width="28" height="28" />
           </a>
