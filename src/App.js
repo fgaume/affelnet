@@ -23,7 +23,7 @@ import Secteurs from "./secteurs/Secteurs";
 import { deleteWorker } from "./services/helper";
 
 const App = () => {
-  const version = "v8.3.2 06/06/2023";
+  const version = "v8.3.3 07/06/2023";
   const contrib = false;
 
   const [loading, setLoading] = useState(true);
@@ -242,8 +242,8 @@ const App = () => {
               </Accordion.Body>
             </Accordion.Item>
           </Accordion>
-          <p className="text-end text-muted mt-2">
-            <small>
+          <p className="text-end text-muted mt-2 mx-2">
+            <small className="mx-2">
               <a
                 href="https://github.com/fgaume/affelnet"
                 rel="noreferrer"

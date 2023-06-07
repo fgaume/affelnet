@@ -35,9 +35,9 @@ const MatiereEditor = forwardRef((props, ref) => {
   return (
     <tr>
       <td>{props.nom}</td>
-      <td>
-        <Table className="align-middle mb-0">
-          <tbody>
+      <td class="bg-transparent">
+        <Table className="align-middle mb-0 bg-transparent">
+          <tbody className="bg-transparent">
             {editeurs.map((index) => {
               return (
                 <RangeInput
@@ -49,6 +49,7 @@ const MatiereEditor = forwardRef((props, ref) => {
                   label={(props.semestres ? "S" : "T") + (1 + index).toString()}
                   onChange={handleChange}
                   ref={(el) => (inputRef.current[index] = el)}
+                  className="bg-transparent"
                 />
               );
             })}
