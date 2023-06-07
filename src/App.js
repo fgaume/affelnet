@@ -23,7 +23,7 @@ import Secteurs from "./secteurs/Secteurs";
 import { deleteWorker } from "./services/helper";
 
 const App = () => {
-  const version = "v8.3.1 02/06/2023";
+  const version = "v8.3.2 06/06/2023";
   const contrib = false;
 
   const [loading, setLoading] = useState(true);
@@ -269,4 +269,3 @@ const App = () => {
 };
 
 export default App;
-// window.location.reload(true)
