@@ -1,29 +1,28 @@
-import React from "react";
-import { useState, useEffect } from "react";
-import Accordion from "react-bootstrap/Accordion";
-import LoadingScreen from "./main/LoadingScreen";
-import ListeSeuils from "./seuils/ListeSeuils";
+import React, { useEffect, useState } from "react";
 import { Button, Tab, Tabs } from "react-bootstrap";
 import { CheckLg, ExclamationLg } from "react-bootstrap-icons";
-import MonBilan from "./bilan/MonBilan";
-import MonSocle from "./socle/MonSocle";
-import MesColleges from "./college/MesColleges";
-import Title from "./main/Title";
-import fetchLycees from "./services/lycees";
+import Accordion from "react-bootstrap/Accordion";
 import "./App.css";
-import LyceesSecteur from "./lycees/LyceesSecteur";
+import MonBilan from "./bilan/MonBilan";
+import MesColleges from "./college/MesColleges";
 import FiltrageSpecialites from "./lycees/FiltrageSpecialites";
-import {
-  setExclu,
-  fetchLyceesHavingSpecialites,
-  resetExclu,
-} from "./services/specialites";
-import ContribSeuils from "./seuils/ContribSeuils";
+import LyceesSecteur from "./lycees/LyceesSecteur";
+import LoadingScreen from "./main/LoadingScreen";
+import Title from "./main/Title";
 import Secteurs from "./secteurs/Secteurs";
 import { deleteWorker } from "./services/helper";
+import fetchLycees from "./services/lycees";
+import {
+  fetchLyceesHavingSpecialites,
+  resetExclu,
+  setExclu,
+} from "./services/specialites";
+import ContribSeuils from "./seuils/ContribSeuils";
+import ListeSeuils from "./seuils/ListeSeuils";
+import MonSocle from "./socle/MonSocle";
 
 const App = () => {
-  const version = "v8.3.3 07/06/2023";
+  const version = "v8.3.4 08/06/2023";
   const contrib = false;
 
   const [loading, setLoading] = useState(true);
@@ -72,7 +71,7 @@ const App = () => {
   };
 
   const handleFiltreChange = (newFiltres) => {
-    console.log("newfiltre : " + JSON.stringify(newFiltres));
+    //console.log("newfiltre : " + JSON.stringify(newFiltres));
     setFiltreSpecialites(newFiltres);
   };
 

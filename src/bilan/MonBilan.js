@@ -20,6 +20,7 @@ import { moyennesAcademiques, ecartsAcademiques } from "../data/stats";
 import MatiereEditor from "./MatiereEditor";
 import "./MonBilan.css";
 import AffichageScores from "../main/AffichageScores";
+import MyToggle from "../components/MyToggle";
 
 const valueMap = new Map([
   [0, 0],
@@ -43,15 +44,15 @@ const MonBilan = (props) => {
   const inputRef = useRef([]);
 
   const handleMatiereChange = (nom, newNote, periode) => {
-    console.log("handleMatiereChange: " + nom + "/" + periode + "/" + newNote);
+    //console.log("handleMatiereChange: " + nom + "/" + periode + "/" + newNote);
     setQuickScore(0);
     const newMatieres = updateMatieres(matieres, nom, periode, newNote);
     //console.log(JSON.stringify(newMatieres));
     setMatieres(newMatieres);
   };
 
-  const handleChangeCheck = (event) => {
-    setSemestres(event.target.checked);
+  const handleChangeCheck = (newChecked) => {
+    setSemestres(newChecked);
   };
 
   const setAllNotes = (event) => {
@@ -105,7 +106,7 @@ const MonBilan = (props) => {
         />
       </div>
       <div className="mx-auto my-3">
-        <Form.Switch
+        <MyToggle
           id="semestres"
           label="Collège en semestres"
           defaultChecked={semestres}
@@ -125,7 +126,7 @@ const MonBilan = (props) => {
                   overlay={(propss) => (
                     <Tooltip {...propss}>
                       {
-                        "Ce curseur permet de renseigner toutes les moyennes en même temps."
+                        "Ce curseur permet de renseigner toutes les matières en même temps."
                       }
                     </Tooltip>
                   )}

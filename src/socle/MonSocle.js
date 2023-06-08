@@ -61,10 +61,10 @@ const MonSocle = (props) => {
     //const note = parseInt(event.target.value);
 
     const value = parseInt(event.target.value);
-    console.log("value = " + value);
+    //console.log("value = " + value);
     setQuickScore(value);
     const note = valueMap.get(value);
-    console.log("note = " + value);
+    //console.log("note = " + value);
 
     inputRef.current.forEach((elem) => {
       elem.setScore(note);

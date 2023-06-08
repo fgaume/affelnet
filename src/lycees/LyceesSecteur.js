@@ -1,12 +1,10 @@
 import React from "react";
 import { Card, OverlayTrigger, Table, Tooltip } from "react-bootstrap";
 import {
-  ArrowDownRight,
   ArrowReturnRight,
-  ArrowUpRight,
   CheckLg,
   QuestionCircleFill,
-  X,
+  X
 } from "react-bootstrap-icons";
 
 import AffichageScores from "../main/AffichageScores";
@@ -90,6 +88,7 @@ const LyceesSecteur = (props) => {
             <thead>
               <tr>
                 <th className="lycee">
+                <div className="d-flex align-items-center gap-1">
                   Lycée{" "}
                   <OverlayTrigger
                     trigger="click"
@@ -106,8 +105,10 @@ const LyceesSecteur = (props) => {
                   >
                     <QuestionCircleFill width="20" height="20" />
                   </OverlayTrigger>
+                  </div>
                 </th>
                 <th className="seuil">
+                <div className="d-flex align-items-center gap-1">
                   En 2021{" "}
                   <OverlayTrigger
                     trigger="click"
@@ -124,9 +125,11 @@ const LyceesSecteur = (props) => {
                   >
                     <QuestionCircleFill width="20" height="20" />
                   </OverlayTrigger>
+                  </div>
                 </th>
                 <th className="seuil">
-                  En 2022{" "}
+                <div className="d-flex align-items-center gap-1">
+                  En 2022
                   <OverlayTrigger
                     trigger="click"
                     placement="top"
@@ -142,24 +145,7 @@ const LyceesSecteur = (props) => {
                   >
                     <QuestionCircleFill width="20" height="20" />
                   </OverlayTrigger>
-                </th>
-                <th className="variation">
-                  +/-{" "}
-                  <OverlayTrigger
-                    trigger="click"
-                    placement="top"
-                    overlay={(propss) => (
-                      <Tooltip {...propss}>
-                        {
-                          "Evolution de la différence entre mon score et le seuil d'admission au lycée entre 2021 et 2022"
-                        }
-                      </Tooltip>
-                    )}
-                    rootCloseEvent="mousedown"
-                    rootClose="true"
-                  >
-                    <QuestionCircleFill width="20" height="20" />
-                  </OverlayTrigger>
+                  </div>
                 </th>
               </tr>
             </thead>
@@ -208,27 +194,6 @@ const LyceesSecteur = (props) => {
                           ? formatVariation(nextResult)
                           : "?"}
  */}{" "}
-                      </span>
-                    </td>
-                    <td className="variation">
-                      <span
-                        className={determineColor(
-                          nextResult - prevResult,
-                          lycee
-                        )}
-                      >
-                        {prevResult != null && nextResult != null
-                          ? formatVariation(nextResult - prevResult)
-                          : "?"}{" "}
-                        {prevResult != null && nextResult != null ? (
-                          nextResult > prevResult ? (
-                            <ArrowUpRight />
-                          ) : (
-                            <ArrowDownRight />
-                          )
-                        ) : (
-                          ""
-                        )}
                       </span>
                     </td>
                   </tr>

@@ -8,8 +8,7 @@ import { CheckLg, QuestionCircleFill } from "react-bootstrap-icons";
 import { Card, OverlayTrigger, Popover, Stack } from "react-bootstrap";
 import { analytics } from "../services/firebase";
 import { logEvent } from "firebase/analytics";
-
-
+import MyToggle from "../components/MyToggle";
 
 /* returns bonusIPS et college de secteur (pour avoir les lycées de secteur) */
 const MesColleges = (props) => {
@@ -50,17 +49,17 @@ const MesColleges = (props) => {
   );
 
   const onCollegeScolarisationChange = (collegeUpdate) => {
-    console.log(
+    /* console.log(
       "onCollegeScolarisationChange " + JSON.stringify(collegeUpdate)
-    );
+    ); */
     if (collegeUpdate && collegeUpdate.nom !== nomCollege) {
       setNomCollege(collegeUpdate.nom);
       setBonusCollege(collegeUpdate.bonus);
       if (!collegesMultiples) {
         setNomCollegeSecteur(collegeUpdate.nom);
         props.onChange(collegeUpdate);
-        logEvent(analytics, 'collège ' + collegeUpdate.nom);
-        logEvent(analytics, 'bonus ' + collegeUpdate.bonus);
+        logEvent(analytics, "collège " + collegeUpdate.nom);
+        logEvent(analytics, "bonus " + collegeUpdate.bonus);
       } else {
         if (nomCollegeSecteur && bonusCollege !== collegeUpdate.bonus) {
           props.onChange({
@@ -73,22 +72,23 @@ const MesColleges = (props) => {
   };
 
   const onCollegeSecteurChange = (collegeUpdate) => {
-    console.log(
+    /* console.log(
       "onCollegeSectorisationChange " + JSON.stringify(collegeUpdate)
-    );
+    ); */
     if (collegeUpdate && collegeUpdate.nom !== nomCollegeSecteur) {
       setNomCollegeSecteur(collegeUpdate.nom);
       props.onChange({ nom: collegeUpdate.nom, bonus: bonusCollege });
-      logEvent(analytics, 'collège secteur ' + collegeUpdate.nom);
+      logEvent(analytics, "collège secteur " + collegeUpdate.nom);
     }
   };
 
-  const handleCollegesMultiples = (event) => {
-    setCollegesMultiples(event.target.checked);
-    setNomCollegeSecteur(event.target.checked ? "" : nomCollege);
-    if (event.target.checked && nomCollegeSecteur && bonusCollege) {
+  const handleCollegesMultiples = (newChecked) => {
+    //console.log("switch event :", newChecked);
+    setCollegesMultiples(newChecked);
+    setNomCollegeSecteur(newChecked? "" : nomCollege);
+    if (newChecked && nomCollegeSecteur && bonusCollege) {
       props.onChange({ nom: nomCollegeSecteur, bonus: bonusCollege });
-    } else if (!event.target.checked && nomCollege && bonusCollege) {
+    } else if (!newChecked && nomCollege && bonusCollege) {
       props.onChange({ nom: nomCollege, bonus: bonusCollege });
     }
   };
@@ -114,9 +114,9 @@ const MesColleges = (props) => {
           </Form.Group>
           <Form.Group className="mb-3">
             <Stack direction="horizontal" gap={2}>
-              <Form.Switch
+              <MyToggle
                 id="collegesMultiples"
-                label="collège de secteur différent"
+                label="Collège de secteur différent"
                 defaultChecked={collegesMultiples}
                 onChange={handleCollegesMultiples}
               />

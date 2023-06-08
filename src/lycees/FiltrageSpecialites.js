@@ -1,12 +1,12 @@
 import React, { useEffect } from "react";
-import OverlayTrigger from "react-bootstrap/OverlayTrigger";
-import Tooltip from "react-bootstrap/Tooltip";
-import { Form, Popover } from "react-bootstrap";
+import { Popover, Stack } from "react-bootstrap";
 import { Funnel, QuestionCircleFill } from "react-bootstrap-icons";
+import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 
 import { specialites } from "../data/specialites";
 
 import "bootstrap/dist/css/bootstrap.css";
+import MyToggle from "../components/MyToggle";
 import { useLocalStorage } from "../services/useLocalStorage";
 import "./FiltrageSpecialites.css";
 
@@ -14,9 +14,8 @@ import "./FiltrageSpecialites.css";
 const FiltrageSpecialites = (props) => {
   const [filtres, setFiltres] = useLocalStorage("filtrageSpecialites", []);
 
-  const onFiltreChange = (event) => {
-    const spe = event.target.id;
-    const filterAdded = event.target.checked;
+  const onFiltreChange = (newChecked, spe) => {
+    const filterAdded = newChecked;
     let newFiltres = filtres.filter((e) => e !== spe);
     if (filterAdded) {
       newFiltres.push(spe);
@@ -31,9 +30,9 @@ const FiltrageSpecialites = (props) => {
       <Popover.Header as="h3">Filtrage par spécialités</Popover.Header>
       <Popover.Body>
         Permet d'exclure les lycées ne proposant pas les spécialités
-        sélectionnées. Les spécialités Mathématiques et SVT sont absentes des
-        filtres car tous les lycées parisiens les proposent. La source de
-        données est la{" "}
+        sélectionnées en 1ère. Les spécialités Mathématiques et SVT sont
+        absentes des filtres car tous les lycées parisiens les proposent. La
+        source de données est la{" "}
         <a
           target="_blank"
           rel="noreferrer"
@@ -66,31 +65,23 @@ const FiltrageSpecialites = (props) => {
         :
       </div>
       <div className="p-2">
-        {specialites.map((spe, index) => {
-          return (
-            <span key={index}>
-              <OverlayTrigger
-                key={spe.acronyme}
-                placement="top"
-                trigger="click"
-                rootCloseEvent="mousedown"
-                overlay={(props) => <Tooltip {...props}>{spe.nom}</Tooltip>}
-                rootClose="true"
-              >
-                <Form.Switch
-                  inline
-                  type="checkbox"
+        <Stack direction="horizontal" gap={4} className="flex-wrap">
+          {specialites.map((spe, index) => {
+            return (
+              <span key={index}>
+                <MyToggle
                   id={spe.acronyme}
                   key={spe.acronyme}
                   label={spe.acronyme}
                   onChange={onFiltreChange}
                   defaultChecked={filtres.includes(spe.acronyme)}
                   className="mx-3 my-2"
+                  tip={spe.nom}
                 />
-              </OverlayTrigger>
-            </span>
-          );
-        })}
+              </span>
+            );
+          })}
+        </Stack>
       </div>
     </div>
   );

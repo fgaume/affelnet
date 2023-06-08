@@ -18,6 +18,7 @@ const AffichageScores = (props) => {
             <tr>
               <td className="text-muted score">
                 <h6>
+                <div className="d-flex align-items-center gap-1 justify-content-center">
                   Score 2021{" "}
                   <OverlayTrigger
                     trigger="click"
@@ -30,10 +31,12 @@ const AffichageScores = (props) => {
                   >
                     <QuestionCircleFill width="20" height="20" />
                   </OverlayTrigger>
+                  </div>
                 </h6>
               </td>
               <td className="text-primary score">
                 <h6>
+                <div className="d-flex align-items-center gap-1 justify-content-center">
                   Score 2022{" "}
                   <OverlayTrigger
                     trigger="click"
@@ -46,10 +49,12 @@ const AffichageScores = (props) => {
                   >
                     <QuestionCircleFill width="20" height="20" />
                   </OverlayTrigger>
+                  </div>
                 </h6>
               </td>
               <td className="text-primary variation">
                 <h6>
+                <div className="d-flex align-items-center gap-1 justify-content-center">
                   +/-{" "}
                   <OverlayTrigger
                     trigger="click"
@@ -62,6 +67,7 @@ const AffichageScores = (props) => {
                   >
                     <QuestionCircleFill width="20" height="20" />
                   </OverlayTrigger>
+                  </div>
                 </h6>
               </td>
             </tr>
