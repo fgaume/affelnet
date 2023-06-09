@@ -18,7 +18,7 @@ const AffichageScores = (props) => {
             <tr>
               <td className="text-muted score">
                 <h6>
-                <div className="d-flex align-items-center gap-1 justify-content-center">
+                <div className="d-flex align-items-center gap-1 justify-content-center mt-2">
                   Score 2021{" "}
                   <OverlayTrigger
                     trigger="click"
@@ -36,7 +36,7 @@ const AffichageScores = (props) => {
               </td>
               <td className="text-primary score">
                 <h6>
-                <div className="d-flex align-items-center gap-1 justify-content-center">
+                <div className="d-flex align-items-center gap-1 justify-content-center mt-2">
                   Score 2022{" "}
                   <OverlayTrigger
                     trigger="click"
@@ -54,7 +54,7 @@ const AffichageScores = (props) => {
               </td>
               <td className="text-primary variation">
                 <h6>
-                <div className="d-flex align-items-center gap-1 justify-content-center">
+                <div className="d-flex align-items-center gap-1 justify-content-center mt-2">
                   +/-{" "}
                   <OverlayTrigger
                     trigger="click"
@@ -73,13 +73,13 @@ const AffichageScores = (props) => {
             </tr>
             <tr>
               <td className="text-muted score">
-                <h6>{formatFloat(props.scorePrevious)}</h6>
+                <h6 className="mt-2">{formatFloat(props.scorePrevious)}</h6>
               </td>
               <td className="text-primary score">
-                <h6>{formatFloat(props.scoreNext)}</h6>
+                <h6 className="mt-2">{formatFloat(props.scoreNext)}</h6>
               </td>
               <td className="text-primary variation">
-                <h6>
+                <h6 className="mt-2">
                   {props.scoreNext > 0
                     ? formatVariation(props.scoreNext - props.scorePrevious)
                     : "?"}

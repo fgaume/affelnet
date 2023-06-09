@@ -52,14 +52,7 @@ const LyceesSecteur = (props) => {
         <strong>secteur {props.secteur}</strong> que vous auriez obtenus, ou
         pas, dans les conditions de 2021 et 2022, et compte tenu des résultats
         scolaires actuels. Les lycées où votre score aurait été suffisant sont
-        en vert.
-      </div>
-      <div className="mx-3 my-3 mt-3 mb-3">
-        <ArrowReturnRight /> Si vous imposez des spécialités (switches plus
-        haut), les lycées ne proposant pas l'ensemble des spécialités demandées
-        seront barrés. Recoupez avec la fiche descriptive le cas échéant en
-        cliquant sur le nom du lycée pour être certain des spécialités
-        proposées, ainsi que de leur combinatoire autorisée.
+        en vert. Les 2 autres onglets ci-dessus afficheront les lycées des autres secteurs.
       </div>
       <div className="mx-auto mb-3">
         <AffichageScores

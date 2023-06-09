@@ -14,24 +14,18 @@ const Title = (props) => {
 
   return (
     <>
-      <div className="d-flex justify-content-between align-items-center p-2">
-        <div>
+      <div className="d-flex justify-content-between align-items-center mt-3 mx-2">
           <Image src={parent} width="36" />
-        </div>
-        <div>
           <h4>
-            <span>
+            <span className="d-flex align-items-center">
               <Tools />
               &nbsp;&nbsp;Boîte à outils Affelnet
             </span>
-          </h4>
-        </div>
-        <div>
+            </h4>
           {/*eslint-disable-next-line jsx-a11y/anchor-is-valid */}
           <a href="#" onClick={() => setShow("true")}>
             <InfoCircleFill width="28" height="28" />
           </a>
-        </div>
       </div>
 
       <div className="mx-2 my-2">

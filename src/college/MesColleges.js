@@ -33,10 +33,10 @@ const MesColleges = (props) => {
       <Popover.Header as="h3">Collège de secteur</Popover.Header>
       <Popover.Body>
         Le collège de secteur est déduit de votre adresse. S'il est différent du
-        collège où vous êtes réellement scolarisé, il faut donc il faut le
-        spécifier ici car il conditionne la liste de vos lycées de secteur 1. Si
-        vous venez d'un collège privé, il faut saisir ici le collège de secteur
-        publique lié à votre adresse. Pour connaitre son collège de secteur,{" "}
+        collège où vous êtes réellement scolarisé, il faut le spécifier ici car
+        il conditionne la liste de vos lycées de secteur 1. Si vous venez d'un
+        collège privé, il faut saisir ici le collège de secteur publique lié à
+        votre adresse. Pour connaitre son collège de secteur,{" "}
         <a
           rel="noreferrer"
           href="https://capgeo.sig.paris.fr/Apps/SecteursScolaires"
@@ -85,7 +85,7 @@ const MesColleges = (props) => {
   const handleCollegesMultiples = (newChecked) => {
     //console.log("switch event :", newChecked);
     setCollegesMultiples(newChecked);
-    setNomCollegeSecteur(newChecked? "" : nomCollege);
+    setNomCollegeSecteur(newChecked ? "" : nomCollege);
     if (newChecked && nomCollegeSecteur && bonusCollege) {
       props.onChange({ nom: nomCollegeSecteur, bonus: bonusCollege });
     } else if (!newChecked && nomCollege && bonusCollege) {

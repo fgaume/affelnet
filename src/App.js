@@ -22,7 +22,7 @@ import ListeSeuils from "./seuils/ListeSeuils";
 import MonSocle from "./socle/MonSocle";
 
 const App = () => {
-  const version = "v8.3.4 08/06/2023";
+  const version = "v8.3.5 09/06/2023";
   const contrib = false;
 
   const [loading, setLoading] = useState(true);

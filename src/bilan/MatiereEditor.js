@@ -35,7 +35,7 @@ const MatiereEditor = forwardRef((props, ref) => {
   return (
     <tr>
       <td>{props.nom}</td>
-      <td class="bg-transparent">
+      <td>
         <Table className="align-middle mb-0 bg-transparent">
           <tbody className="bg-transparent">
             {editeurs.map((index) => {
