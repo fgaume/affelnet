@@ -58,10 +58,6 @@ function useSeuils(sorting = "byLycee") {
 const ListeSeuils = (props) => {
   const [sorting, setSorting] = useState("byLycee");
 
-  /* const handleClick = () => {
-        createSeuils();
-    } */
-
   const determineVariationStyle = (prev, next) => {
     /* if (next > 0 && prev > 0) {
       return next > prev ? "variation text-danger" : "variation text-success";
@@ -116,7 +112,7 @@ const ListeSeuils = (props) => {
             {lycees.map((lycee, index) => (
               <tr key={lycee.id}>
                 <td className="lycee">
-                  <a target="_blank" rel="noreferrer" href={lycee.url}>
+                  <a target="_blank" rel="noreferrer" href={lycee.url} aria-label="lien fiche FCPE du lycée">
                     {lycee.nom}
                   </a>
                   &nbsp;
@@ -158,7 +154,7 @@ const ListeSeuils = (props) => {
       <div className="mt-5 mb-3">
         <Alert variant="warning">
           <div className="mb-2">
-            <ExclamationCircle width="24" height="24" /> Les seuils d'admission
+            <ExclamationCircle width="24" height="24" className="text-danger"/> Les seuils d'admission
             sont des scores Affelnet, donc ils prennent en compte les{" "}
             <strong>bonus IPS</strong>. Ils ne constituent donc absolument{" "}
             <strong>pas un indicateur du niveau scolaire</strong> du collégien
@@ -179,7 +175,7 @@ const ListeSeuils = (props) => {
         </Alert>
         <div className="col-12 col-sm-10 col-md-8 col-lg-6 col-xl-8 col-xxl-8 mx-auto">
           <Figure>
-            <Image src="/score-discontinu.png" className="img-fluid" />
+            <Image src="/score-discontinu.png" className="img-fluid" alt="Domaine de valeurs des scores Affelnet"/>
             <Figure.Caption className="text-center">
               Valeurs possibles pour un score Affelnet
             </Figure.Caption>

@@ -8,7 +8,8 @@ const firebaseConfig = {
   projectId: 'affelnet75',
   storageBucket: 'affelnet75.appspot.com',
   messagingSenderId: '462901127792',
-  appId: process.env.REACT_APP_FIREBASE_APP_ID
+  appId: process.env.REACT_APP_FIREBASE_APP_ID,
+  measurementId: "G-T8MTQSHQ6B"
 };
 
 const firebase = initializeApp(firebaseConfig);

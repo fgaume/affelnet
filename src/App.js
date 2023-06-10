@@ -22,7 +22,7 @@ import ListeSeuils from "./seuils/ListeSeuils";
 import MonSocle from "./socle/MonSocle";
 
 const App = () => {
-  const version = "v8.3.5 09/06/2023";
+  const version = "v8.3.6 10/06/2023";
   const contrib = false;
 
   const [loading, setLoading] = useState(true);
@@ -245,6 +245,7 @@ const App = () => {
             <small className="mx-2">
               <a
                 href="https://github.com/fgaume/affelnet"
+                aria-label="Lien vers Github"
                 rel="noreferrer"
                 target="_blank"
               >

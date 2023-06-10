@@ -160,6 +160,7 @@ const LyceesSecteur = (props) => {
                         className={status}
                         target="_blank"
                         rel="noreferrer"
+                        aria-label="Lien vers la fiche FCPE du lycée"
                         href={lycee.url}
                       >
                         {lycee.nom}

@@ -16,7 +16,7 @@ const SeuilEditor = () => {
   const updateSeuil = (codeLycee, seuil) => {
     const docRef = doc(firestore, "seuils", codeLycee);
     updateDoc(docRef, {
-      seuil: parseFloat(seuil.replace(",", ".")),
+      seuil2023: parseFloat(seuil.replace(",", ".")),
     });
   };
 

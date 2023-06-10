@@ -96,11 +96,8 @@ const computeBilanPeriodique = (
       (10 +
         (cd.score - moyennesAcademiques.get(cd.nom)) /
           ecartsAcademiques.get(cd.nom));
-    //console.log("cd " + cd.nom + cdscore);
-    //console.log("cd " + cd.nom + cdscore.toFixed(3));
     score += cd.coefficient * cdscore.toFixed(3);
   });
-  //console.log("bilan : " + score);
   const result = parseFloat(score);
   //console.log("bilan : " + result);
   return result;

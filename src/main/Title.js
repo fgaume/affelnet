@@ -14,17 +14,17 @@ const Title = (props) => {
 
   return (
     <>
-      <div className="d-flex justify-content-between align-items-center mt-3 mx-2">
-          <Image src={parent} width="36" />
+      <div className="d-flex justify-content-between align-items-center mt-3 mx-3">
+          <Image src={parent} width="36" className="mb-2" alt="icone parent enfant"/>
           <h4>
-            <span className="d-flex align-items-center">
+            <span className="d-flex align-items-center mt-1">
               <Tools />
               &nbsp;&nbsp;Boîte à outils Affelnet
             </span>
             </h4>
           {/*eslint-disable-next-line jsx-a11y/anchor-is-valid */}
-          <a href="#" onClick={() => setShow("true")}>
-            <InfoCircleFill width="28" height="28" />
+          <a href="#" aria-label="Lien infos" onClick={() => setShow("true")}>
+            <InfoCircleFill width="28" height="28" className="mb-1"/>
           </a>
       </div>
 
@@ -60,9 +60,10 @@ const Title = (props) => {
           sources de données) :{" "}
           <a
             href="https://fgaume.medium.com/simulateur-affelnet-2022-aa3e7393f5cb"
+            aria-label="Lien blog medium" 
             target="affelnet-medium"
           >
-            <BoxArrowUpRight width="24" height="24" />
+            <BoxArrowUpRight width="24" height="24" className="mb-2"/>
           </a>
           .
           <hr />
@@ -72,17 +73,18 @@ const Title = (props) => {
             seuils d'admission que vous avez reçus de votre{" "}
             <em>fiche-barème</em>
             &nbsp;(qu'il faut demander au rectorat dès le 1er juillet par mail à{" "}
-            <a href="mailto:ce.dve@ac-paris.fr">ce.dve@ac-paris.fr</a>).
+            <a href="mailto:ce.dve@ac-paris.fr" aria-label="Lien mail DVE">ce.dve@ac-paris.fr</a>).
           </p>
         </Alert>
         <Alert show={show === "true"} variant="warning">
-          <ExclamationCircle width="24" height="24" />
+          <ExclamationCircle width="24" height="24" className="text-danger"/>
           &nbsp; Les seuils d'admission ne sont valables que pour les collégiens{" "}
           <strong>non-boursiers</strong>
           &nbsp;(car{" "}
           <a
             href="https://fgaume.medium.com/la-m%C3%A9canique-daffelnet-79de9f0fe70a"
             target="affelnet-medium"
+            aria-label="Lien blog medium" 
           >
             les boursiers sont traités dans un concours séparé par Affelnet
           </a>

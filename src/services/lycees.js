@@ -6,22 +6,8 @@ import {
   tousSecteurs,
 } from "../data/lycees";
 
-//const cacheKey = "cache/lycees-secteur";
-//const cacheActivated = false;
-
 const fetchLycees = async (nomCollegeSecteur) => {
   if (nomCollegeSecteur) {
-    /* const fromCache = localStorage.getItem(cacheKey);
-    const cacheData = fromCache ? JSON.parse(fromCache) : null;
-    const cacheExpires = cacheData ? new Date(cacheData.expires) : null;
-    if (cacheExpires && cacheExpires > new Date()) {
-      console.log("fetchLycees found cache expires at : " + cacheExpires);
-      return cacheData.data;
-    } else {
-      if (cacheExpires)
-        console.log(
-          "fetchLycees cache expiré, appel API lycees secteur: " + cacheExpires
-        ); */
     const response = await axios({
       method: "GET",
       url: "https://services9.arcgis.com/ekT8MJFiVh8nvlV5/arcgis/rest/services/Affectation_Lyc%C3%A9es/FeatureServer/0/query",
@@ -85,18 +71,6 @@ const fetchLycees = async (nomCollegeSecteur) => {
         newLycees.filter((lycee) => lycee.secteur === 2),
         newLycees.filter((lycee) => lycee.secteur === 3),
       ];
-
-      // add a day
-      /* if (cacheActivated) {
-        let date = new Date();
-        date.setDate(date.getDate());
-        console.log("expire in : " + date);
-        localStorage.setItem(
-          cacheKey,
-          JSON.stringify({ expires: date, data: lyceeArray })
-        );
-      } */
-
       return lyceeArray;
     } else {
       console.log(

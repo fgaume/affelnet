@@ -41,6 +41,7 @@ const FiltrageSpecialites = (props) => {
         <a
           target="_blank"
           rel="noreferrer"
+          aria-label="Lien vers la carte des spécialités du Rectorat"
           href="https://rectoratparis.maps.arcgis.com/apps/webappviewer/index.html?id=47c86e32215248a0a6846e098890e13c"
         >
           carte des spécialités du Rectorat</a>

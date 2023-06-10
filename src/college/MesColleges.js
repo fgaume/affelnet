@@ -40,6 +40,7 @@ const MesColleges = (props) => {
         <a
           rel="noreferrer"
           href="https://capgeo.sig.paris.fr/Apps/SecteursScolaires"
+          aria-label="Lien vers la carte scolaire"
           target="_blank"
         >
           se rendre ici.
