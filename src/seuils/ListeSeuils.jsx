@@ -1,18 +1,16 @@
-import { useState, useEffect } from "react";
-import { firestore } from "../services/firebase";
 import { collection, onSnapshot } from "firebase/firestore";
+import { useEffect, useState } from "react";
 import { Alert, Card, Figure, Form, Image, Table } from "react-bootstrap";
-import { nomsLyceesMap, seuilsLyceesMap, urlsLyceesMap } from "../data/lycees";
 import {
-  ArrowDownRight,
   ArrowReturnRight,
-  ArrowUpRight,
   CheckLg,
   ExclamationCircle,
   ExclamationLg,
 } from "react-bootstrap-icons";
+import { nomsLyceesMap, seuilsLyceesMap, urlsLyceesMap } from "../data/lycees";
+import { firestore } from "../services/firebase";
+import { formatFloat, formatInt } from "../services/helper";
 import "./ListeSeuils.css";
-import { formatFloat, formatInt, formatVariation } from "../services/helper";
 
 function useSeuils(sorting = "byLycee") {
   const [lycees, setLycees] = useState([]);
@@ -24,29 +22,27 @@ function useSeuils(sorting = "byLycee") {
         const newSeuils = snapshot.docs.map((doc) => ({
           id: doc.id,
           nom: nomsLyceesMap.get(doc.id),
-          seuil_prev: seuilsLyceesMap.get(doc.id)[0],
+          seuil_prev_prev: seuilsLyceesMap.get(doc.id)[0],
+          seuil_prev: seuilsLyceesMap.get(doc.id)[1],
           url: urlsLyceesMap.get(doc.id),
           ...doc.data(),
         }));
         switch (sorting) {
+          case "bySeuilPrevPrev":
+            newSeuils.sort((a, b) => (a.seuil_prev_prev < b.seuil_prev_prev ? 1 : -1));
+            break;
           case "bySeuilPrev":
             newSeuils.sort((a, b) => (a.seuil_prev < b.seuil_prev ? 1 : -1));
             break;
           case "bySeuil":
-            newSeuils.sort((a, b) => (a.seuil < b.seuil ? 1 : -1));
-            break;
-          case "byVariation":
-            newSeuils.sort((a, b) => {
-              if (a.seuil_prev === 0 || b.seuil_prev === 0) return 1;
-              if (a.seuil - a.seuil_prev > b.seuil - b.seuil_prev) return -1;
-              else return 1;
-            });
+            newSeuils.sort((a, b) => (a.seuil2023 < b.seuil2023 ? 1 : -1));
             break;
           default:
             newSeuils.sort((a, b) => (a.nom < b.nom ? -1 : 1));
         }
         setLycees(newSeuils);
-      }, (error) => {
+      },
+      (error) => {
         console.log("erreur firestore: ", error);
       }
     );
@@ -58,12 +54,12 @@ function useSeuils(sorting = "byLycee") {
 const ListeSeuils = (props) => {
   const [sorting, setSorting] = useState("byLycee");
 
-  const determineVariationStyle = (prev, next) => {
-    /* if (next > 0 && prev > 0) {
+  /* const determineVariationStyle = (prev, next) => {
+    if (next > 0 && prev > 0) {
       return next > prev ? "variation text-danger" : "variation text-success";
-    } else */
+    } else
     return "variation text-primary";
-  };
+  }; */
 
   const handleSortChange = (event) => {
     setSorting(event.target.value);
@@ -74,7 +70,7 @@ const ListeSeuils = (props) => {
   useEffect(() => {
     let newNumberSeuils = 0;
     lycees.forEach((item) => {
-      if (item.seuil > 0) newNumberSeuils++;
+      if (item.seuil2023 > 0) newNumberSeuils++;
     });
     props.onChange(newNumberSeuils);
   }, [props, lycees]);
@@ -87,14 +83,15 @@ const ListeSeuils = (props) => {
         dernières sessions, ainsi que l'évolution par rapport à 2021. La source
         de ces seuils est l'ensemble des fiches-barème reçues du Rectorat et
         ensuite partagées par les parents. Figure également un lien vers la
-        fiche descriptive du lycée produite par la FCPE.
+        fiche descriptive du lycée produite par la FCPE. Les seuils des
+        anciennes années sont arrondis.
       </div>
       <div className="w-50">
         <Form.Select size="sm" value={sorting} onChange={handleSortChange}>
           <option value="byLycee">trier par lycée</option>
-          <option value="bySeuilPrev">trier par seuil 2021</option>
-          <option value="bySeuil">trier par seuil 2022</option>
-          <option value="byVariation">trier par variation</option>
+          <option value="bySeuil">trier par seuil 2023</option>
+          <option value="bySeuilPrev">trier par seuil 2022</option>
+          <option value="bySeuilPrevPrev">trier par seuil 2021</option>
         </Form.Select>
       </div>
 
@@ -105,46 +102,37 @@ const ListeSeuils = (props) => {
               <th className="lycee">Lycée</th>
               <th className="seuil">seuil 2021</th>
               <th className="seuil">seuil 2022</th>
-              <th className="variation">+/-</th>
+              <th className="seuil">seuil 2023</th>
             </tr>
           </thead>
           <tbody>
             {lycees.map((lycee, index) => (
               <tr key={lycee.id}>
                 <td className="lycee">
-                  <a target="_blank" rel="noreferrer" href={lycee.url} aria-label="lien fiche FCPE du lycée">
+                  <a
+                    target="_blank"
+                    rel="noreferrer"
+                    href={lycee.url}
+                    aria-label="lien fiche FCPE du lycée"
+                  >
                     {lycee.nom}
                   </a>
                   &nbsp;
-                  {lycee.seuil > 1000000 && (
+                  {lycee.seuil2023 > 1000000 && (
                     <CheckLg color="green" width="20" height="20" />
                   )}
-                  {lycee.seuil === 0 && (
+                  {lycee.seuil2023 === 0 && (
                     <ExclamationLg color="red" width="20" height="20" />
                   )}
+                </td>
+                <td className="seuil text-muted">
+                  {lycee.seuil_prev > 0 ? formatInt(lycee.seuil_prev_prev) : "?"}
                 </td>
                 <td className="seuil text-muted">
                   {lycee.seuil_prev > 0 ? formatInt(lycee.seuil_prev) : "?"}
                 </td>
                 <td className="seuil text-success">
-                  {lycee.seuil > 0 ? formatFloat(lycee.seuil) : "?"}
-                </td>
-                <td
-                  className={determineVariationStyle(
-                    lycee.seuil_prev,
-                    lycee.seuil
-                  )}
-                >
-                  {lycee.seuil_prev > 0 &&
-                    lycee.seuil > 0 &&
-                    formatVariation(lycee.seuil - lycee.seuil_prev)}{" "}
-                  {lycee.seuil_prev > 0 &&
-                    lycee.seuil > 0 &&
-                    (lycee.seuil > lycee.seuil_prev ? (
-                      <ArrowUpRight />
-                    ) : (
-                      <ArrowDownRight />
-                    ))}
+                  {lycee.seuil2023 > 0 ? formatFloat(lycee.seuil2023) : "?"}
                 </td>
               </tr>
             ))}
@@ -154,30 +142,38 @@ const ListeSeuils = (props) => {
       <div className="mt-5 mb-3">
         <Alert variant="warning">
           <div className="mb-2">
-            <ExclamationCircle width="24" height="24" className="text-danger"/> Les seuils d'admission
-            sont des scores Affelnet, donc ils prennent en compte les{" "}
-            <strong>bonus IPS</strong>. Ils ne constituent donc absolument{" "}
-            <strong>pas un indicateur du niveau scolaire</strong> du collégien
-            et donc du lycée. Un seuil élevé indique une forte pression des
-            collégiens bénéficiant de bonus IPS (tels Turgot, Condorcet ou
-            Hélène Boucher par exemple). La section "Secteurs" plus bas permet
-            de se faire une idée du poids des 2 groupes de collégiens avec bonus
-            sur un lycée donné.
+            <ExclamationCircle
+              width="32"
+              height="32"
+              className="text-danger me-1"
+            />{" "}
+            Les seuils d'admission sont des scores Affelnet, donc ils prennent
+            en compte les <strong>bonus IPS</strong>. Ils ne constituent donc
+            absolument <strong>pas un indicateur du niveau scolaire</strong> du
+            dernier collégien admis et donc du lycée. Un seuil élevé indique une forte
+            pression des collégiens bénéficiant de bonus IPS (tels Turgot,
+            Condorcet ou Hélène Boucher par exemple). La section "Secteurs" plus
+            bas permet de se faire une idée du poids des 2 groupes de collégiens
+            avec bonus sur un lycée donné.
           </div>
           <div> </div>
           <div>
             De plus, comme le montre la figure ci-dessous, le domaine de valeur
-            des scores Affelnet est loin d'être continu, donc une variation de
+            des scores Affelnet est <strong>loin d'être continu</strong>, donc une variation de
             seuil d'une année sur l'autre ne doit pas être sur-interpreté non
-            plus (par exemple on voit ici qu'aucun collégien ne peut avoir un
+            plus (par exemple on voit sur le schéma ci-dessous (à l'échelle) qu'aucun collégien ne peut avoir un
             score entre 27 000 et 37 000).
           </div>
         </Alert>
         <div className="col-12 col-sm-10 col-md-8 col-lg-6 col-xl-8 col-xxl-8 mx-auto">
           <Figure>
-            <Image src="/score-discontinu.png" className="img-fluid" alt="Domaine de valeurs des scores Affelnet"/>
+            <Image
+              src="/images/score-discontinu.png"
+              className="img-fluid"
+              alt="Domaine de valeurs des scores Affelnet"
+            />
             <Figure.Caption className="text-center">
-              Valeurs possibles pour un score Affelnet
+              Fig. 1 : valeurs possibles pour un score Affelnet en 2022
             </Figure.Caption>
           </Figure>
         </div>

@@ -4,7 +4,7 @@ import {
   ArrowReturnRight,
   CheckLg,
   QuestionCircleFill,
-  X
+  X,
 } from "react-bootstrap-icons";
 
 import AffichageScores from "../main/AffichageScores";
@@ -52,9 +52,10 @@ const LyceesSecteur = (props) => {
         <strong>secteur {props.secteur}</strong> que vous auriez obtenus, ou
         pas, dans les conditions de 2021 et 2022, et compte tenu des résultats
         scolaires actuels. Les lycées où votre score aurait été suffisant sont
-        en vert. Les 2 autres onglets ci-dessus afficheront les lycées des autres secteurs.
+        en vert. Les 2 autres onglets ci-dessus afficheront les lycées des
+        autres secteurs.
       </div>
-      <div className="mx-auto mb-3">
+      <div className="mx-2 col-12 col-sm-10 col-md-8 col-lg-6 col-xl-6 col-xxl-6 mx-auto my-3">
         <AffichageScores
           scorePrevious={props.scorePrevious + bonusGeo}
           scoreNext={props.scoreNext > 0 ? bonusGeo + props.scoreNext : 0}
@@ -74,14 +75,13 @@ const LyceesSecteur = (props) => {
             " entre 2021 et 2022"
           }
         />
-      </div>
-      <div className="mx-auto">
+        </div>
+      <div className="mx-2 col-12 col-sm-10 col-md-8 col-lg-6 col-xl-6 col-xxl-6 mx-auto">
         <Card className="mb-0">
           <Table striped borderless hover responsive="xl" className="mb-0">
             <thead>
               <tr>
-                <th className="lycee">
-                <div className="d-flex align-items-center gap-1">
+                <th>
                   Lycée{" "}
                   <OverlayTrigger
                     trigger="click"
@@ -96,12 +96,14 @@ const LyceesSecteur = (props) => {
                     rootCloseEvent="mousedown"
                     rootClose="true"
                   >
-                    <QuestionCircleFill width="20" height="20" />
+                    <QuestionCircleFill
+                      width="20"
+                      height="20"
+                      className="mb-1"
+                    />
                   </OverlayTrigger>
-                  </div>
                 </th>
-                <th className="seuil">
-                <div className="d-flex align-items-center gap-1">
+                <th className="resu">
                   En 2021{" "}
                   <OverlayTrigger
                     trigger="click"
@@ -116,13 +118,15 @@ const LyceesSecteur = (props) => {
                     rootCloseEvent="mousedown"
                     rootClose="true"
                   >
-                    <QuestionCircleFill width="20" height="20" />
+                    <QuestionCircleFill
+                      width="20"
+                      height="20"
+                      className="mb-1"
+                    />
                   </OverlayTrigger>
-                  </div>
                 </th>
-                <th className="seuil">
-                <div className="d-flex align-items-center gap-1">
-                  En 2022
+                <th className="resu">
+                  En 2022{" "}
                   <OverlayTrigger
                     trigger="click"
                     placement="top"
@@ -136,9 +140,12 @@ const LyceesSecteur = (props) => {
                     rootCloseEvent="mousedown"
                     rootClose="true"
                   >
-                    <QuestionCircleFill width="20" height="20" />
+                    <QuestionCircleFill
+                      width="20"
+                      height="20"
+                      className="mb-1"
+                    />
                   </OverlayTrigger>
-                  </div>
                 </th>
               </tr>
             </thead>
@@ -172,14 +179,14 @@ const LyceesSecteur = (props) => {
                         <X color="red" width="20" height="20" />
                       )}
                     </td>
-                    <td className="seuil">
+                    <td className="resu">
                       <span className={determineColor(prevResult, lycee)}>
                         {lycee.seuils[0] > 0
                           ? formatVariation(prevResult)
                           : "?"}
                       </span>
                     </td>
-                    <td className="seuil">
+                    <td className="resu">
                       <span className={determineColor(nextResult, lycee)}>
                         {lycee.seuils[1] > 0
                           ? formatVariation(nextResult)

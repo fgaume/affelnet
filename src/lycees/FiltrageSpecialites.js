@@ -57,8 +57,8 @@ const FiltrageSpecialites = (props) => {
   }, [filtres, props]);
 
   return (
-    <div className="bg-primary p-3 text-dark bg-opacity-10 rounded mb-3">
-      <div className="p-1 mb-2">
+    <div className="bg-primary text-dark bg-opacity-10 rounded p-1 my-2">
+      <div className="p-2 my-1">
         <Button variant="outline-primary" onClick={onCollapseChange}>
           <Funnel width="20" height="20" className="me-1" />
           Filtrage par spécialités
@@ -74,7 +74,7 @@ const FiltrageSpecialites = (props) => {
         </OverlayTrigger>{" "}
       </div>
       <Collapse in={spesOpen}>
-        <div className="p-2" id="speToggles">
+        <div className="ms-2 mb-2" id="speToggles">
           <Stack direction="horizontal" gap={4} className="flex-wrap">
             {specialites.map((spe, index) => {
               return (

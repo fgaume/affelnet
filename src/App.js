@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Button, Tab, Tabs } from "react-bootstrap";
-import { CheckLg, ExclamationLg } from "react-bootstrap-icons";
+import { ArrowClockwise, CheckLg, ExclamationLg } from "react-bootstrap-icons";
 import Accordion from "react-bootstrap/Accordion";
 import "./App.css";
 import MonBilan from "./bilan/MonBilan";
@@ -17,13 +17,13 @@ import {
   resetExclu,
   setExclu,
 } from "./services/specialites";
-import ContribSeuils from "./seuils/ContribSeuils";
 import ListeSeuils from "./seuils/ListeSeuils";
+import MesContributions from "./seuils/MesContributions";
 import MonSocle from "./socle/MonSocle";
 
 const App = () => {
-  const version = "v8.3.6 10/06/2023";
-  const contrib = false;
+  const version = "v8.3.7 12/06/2023";
+  const contrib = true;
 
   const [loading, setLoading] = useState(true);
 
@@ -88,10 +88,11 @@ const App = () => {
         if (newLycees && newLycees.length === 3) {
           newLycees.forEach((listeLycees) => resetExclu(listeLycees));
           if (filtreSpecialites && filtreSpecialites.length > 0) {
-              fetchLyceesHavingSpecialites(filtreSpecialites).then((lyceesWithSpe) => {
+            fetchLyceesHavingSpecialites(filtreSpecialites).then(
+              (lyceesWithSpe) => {
                 console.log(
                   "lycees with spe " +
-                  filtreSpecialites +
+                    filtreSpecialites +
                     " : " +
                     JSON.stringify(lyceesWithSpe)
                 );
@@ -99,7 +100,8 @@ const App = () => {
                   setExclu(lycees, lyceesWithSpe);
                 });
                 setLyceesSecteur(newLycees);
-              });
+              }
+            );
           } else {
             setLyceesSecteur(newLycees);
           }
@@ -111,7 +113,7 @@ const App = () => {
   return (
     <>
       {loading === false ? (
-        <div className="mx-2 col-12 col-sm-10 col-md-10 col-lg-10 col-xl-8 col-xxl-6 mx-auto">
+        <div className="mx-2 col-12 col-sm-10 col-md-10 col-lg-10 col-xl-10 col-xxl-8 mx-auto">
           <Title />
           <Accordion defaultActiveKey="3">
             <Accordion.Item eventKey="0">
@@ -221,18 +223,23 @@ const App = () => {
             </Accordion.Item>
             <Accordion.Item eventKey="4">
               <Accordion.Header>
+                <span className="fw-bolder">Mes contributions</span>
+              </Accordion.Header>
+              <Accordion.Body>
+                <MesContributions contrib={contrib} />
+              </Accordion.Body>
+            </Accordion.Item>
+            <Accordion.Item eventKey="5">
+              <Accordion.Header>
                 <span className="fw-bolder">
                   Seuils d'admission ({numberSeuils}/46)
                 </span>
               </Accordion.Header>
               <Accordion.Body>
-                <div>
-                  <ListeSeuils onChange={handleSeuilChange} />
-                  <ContribSeuils contrib={contrib} />
-                </div>
+                <ListeSeuils onChange={handleSeuilChange} />
               </Accordion.Body>
             </Accordion.Item>
-            <Accordion.Item eventKey="5">
+            <Accordion.Item eventKey="6">
               <Accordion.Header>
                 <span className="fw-bolder">Secteurs</span>
               </Accordion.Header>
@@ -241,7 +248,7 @@ const App = () => {
               </Accordion.Body>
             </Accordion.Item>
           </Accordion>
-          <p className="text-end text-muted mt-2 mx-2">
+          <p className="text-end text-muted p-2">
             <small className="mx-2">
               <a
                 href="https://github.com/fgaume/affelnet"
@@ -257,6 +264,7 @@ const App = () => {
               variant="outline-primary"
               onClick={() => deleteWorker()}
             >
+              <ArrowClockwise width="18" height="18" className="me-1" />
               Mettre à jour
             </Button>
           </p>

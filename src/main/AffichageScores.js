@@ -5,19 +5,12 @@ import { QuestionCircleFill } from "react-bootstrap-icons";
 
 const AffichageScores = (props) => {
   return (
-    <div className="mx-auto">
-      <Card className="mx-0 my-0 mt-0 mb-0">
-        <Table
-          striped
-          borderless
-          hover
-          size="xl"
-          className="mx-0 my-0 mt-0 mb-0"
-        >
-          <tbody>
-            <tr>
-              <td className="text-muted score">
-                <h6>
+    <Card className="mx-0 my-0 mt-0 mb-0">
+      <Table striped borderless hover size="xl" className="mx-0 my-0 mt-0 mb-0">
+        <tbody>
+          <tr>
+            <td className="text-muted score">
+              <h6>
                 <div className="d-flex align-items-center gap-1 justify-content-center mt-2">
                   Score 2021{" "}
                   <OverlayTrigger
@@ -31,11 +24,11 @@ const AffichageScores = (props) => {
                   >
                     <QuestionCircleFill width="20" height="20" />
                   </OverlayTrigger>
-                  </div>
-                </h6>
-              </td>
-              <td className="text-primary score">
-                <h6>
+                </div>
+              </h6>
+            </td>
+            <td className="text-primary score">
+              <h6>
                 <div className="d-flex align-items-center gap-1 justify-content-center mt-2">
                   Score 2022{" "}
                   <OverlayTrigger
@@ -49,11 +42,11 @@ const AffichageScores = (props) => {
                   >
                     <QuestionCircleFill width="20" height="20" />
                   </OverlayTrigger>
-                  </div>
-                </h6>
-              </td>
-              <td className="text-primary variation">
-                <h6>
+                </div>
+              </h6>
+            </td>
+            <td className="text-primary variation">
+              <h6>
                 <div className="d-flex align-items-center gap-1 justify-content-center mt-2">
                   +/-{" "}
                   <OverlayTrigger
@@ -67,29 +60,28 @@ const AffichageScores = (props) => {
                   >
                     <QuestionCircleFill width="20" height="20" />
                   </OverlayTrigger>
-                  </div>
-                </h6>
-              </td>
-            </tr>
-            <tr>
-              <td className="text-muted score">
-                <h6 className="mt-2">{formatFloat(props.scorePrevious)}</h6>
-              </td>
-              <td className="text-primary score">
-                <h6 className="mt-2">{formatFloat(props.scoreNext)}</h6>
-              </td>
-              <td className="text-primary variation">
-                <h6 className="mt-2">
-                  {props.scoreNext > 0
-                    ? formatVariation(props.scoreNext - props.scorePrevious)
-                    : "?"}
-                </h6>
-              </td>
-            </tr>
-          </tbody>
-        </Table>
-      </Card>
-    </div>
+                </div>
+              </h6>
+            </td>
+          </tr>
+          <tr>
+            <td className="text-muted score">
+              <h6 className="mt-2">{formatFloat(props.scorePrevious)}</h6>
+            </td>
+            <td className="text-primary score">
+              <h6 className="mt-2">{formatFloat(props.scoreNext)}</h6>
+            </td>
+            <td className="text-primary variation">
+              <h6 className="mt-2">
+                {props.scoreNext > 0
+                  ? formatVariation(props.scoreNext - props.scorePrevious)
+                  : "?"}
+              </h6>
+            </td>
+          </tr>
+        </tbody>
+      </Table>
+    </Card>
   );
 };
 export default AffichageScores;

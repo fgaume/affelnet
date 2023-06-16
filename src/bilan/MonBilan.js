@@ -89,14 +89,14 @@ const MonBilan = (props) => {
   }, [matieres, semestres, props]);
 
   return (
-    <div>
-      <div className="mx-auto mb-3">
+    <div className="mx-2 col-12 col-sm-12 col-md-12 col-lg-10 col-xl-8 col-xxl-8 mx-auto">
+      <div className="mx-3 my-3 mt-3 mb-3">
         <ArrowReturnRight /> Saisir ici vos moyennes de chaque matière pour
         chaque {semestres ? "se" : "tri"}mestre. Seuls les{" "}
         <strong>intervalles</strong> de notes comptent pour votre score
         Affelnet, il est donc inutile de saisir les notes précises.
       </div>
-      <div className="col-12 mx-auto mb-3">
+      <div  className="mx-2 col-12 col-sm-10 col-md-8 col-lg-8 col-xl-8 col-xxl-8 mx-auto my-3">
         <AffichageScores
           scorePrevious={scoreBilanPrevious}
           scoreNext={scoreBilanNext}
@@ -133,8 +133,9 @@ const MonBilan = (props) => {
                   rootCloseEvent="mousedown"
                   rootClose="true"
                 >
-                  <QuestionCircleFill width="20" height="20" />
-                </OverlayTrigger>
+                  <QuestionCircleFill width="20" height="20" className="mx-1 mb-1"/>
+                </OverlayTrigger>{" "}
+                :
               </td>
               <td>{"  "}</td>
               <td className="titre">

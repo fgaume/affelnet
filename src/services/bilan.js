@@ -173,4 +173,5 @@ export {
   updateMatieres,
   allMatiereSetTo,
   computeAvancementNotes,
+  CDs
 };

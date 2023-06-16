@@ -79,7 +79,7 @@ const MonSocle = (props) => {
   }, [competences, props]);
 
   return (
-    <div>
+    <div className="mx-2 col-12 col-sm-12 col-md-10 col-lg-10 col-xl-8 col-xxl-8 mx-auto">
       <div className="mx-auto mb-3">
         <ArrowReturnRight /> Estimez ici les 8 compétences de socle (qui
         comptent également pour le Brevet). Rappel :
@@ -120,7 +120,7 @@ const MonSocle = (props) => {
                   rootCloseEvent="mousedown"
                   rootClose="true"
                 >
-                  <QuestionCircleFill width="20" height="20" />
+                  <QuestionCircleFill width="20" height="20" className="mb-1 mx-1"/>
                 </OverlayTrigger>{" "}
                 :
               </td>

@@ -99,7 +99,7 @@ const MesColleges = (props) => {
   }, [nomCollegeSecteur, bonusCollege, props]);
 
   return (
-    <div className="col-md-6 mx-auto p-0">
+    <div className="mx-2 col-12 col-sm-10 col-md-8 col-lg-6 col-xl-6 col-xxl-6 mx-auto">
       <Card className="p-1 bg-primary bg-opacity-10">
         <div className="p-2 w-100">
           <CollegeSelector

@@ -91,3 +91,9 @@ a.inconnu:active {
     color: #343a40;
     text-decoration: solid;
 }
+th.resu {
+    text-align:right;
+}
+td.resu {
+    text-align:right;
+}

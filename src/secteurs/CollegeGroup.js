@@ -14,7 +14,7 @@ const CollegeGroup = (props) => {
       <div className="p-2 mx-3">
         <Row>
           <strong>
-            Collèges à bonus {props.bonus} ({props.effectif} élèves soit{" "}
+            Collèges à bonus {props.bonus} (~ {props.effectif} élèves soit{" "}
             {props.part})
           </strong>
         </Row>

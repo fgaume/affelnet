@@ -6,6 +6,7 @@ import { Alert, Button, Card, Form } from "react-bootstrap";
 import { listeLycees as lycees } from "../data/lycees";
 
 import { Typeahead } from "react-bootstrap-typeahead";
+import { ArrowReturnRight } from "react-bootstrap-icons";
 
 const SeuilEditor = () => {
   const typeaheadRef = useRef(null);
@@ -25,7 +26,9 @@ const SeuilEditor = () => {
   };
 
   const onSeuilLyceeChange = (event) => {
-    setSeuilLycee(event.target.value);
+    const newSeuil = event.target.value;
+    const cleanSeuil = newSeuil.replace(",", ".").replace(" ", "");
+    setSeuilLycee(cleanSeuil);
   };
 
   const handleSubmit = (e) => {
@@ -38,42 +41,49 @@ const SeuilEditor = () => {
   };
 
   return (
-    <Card className="bg-primary p-2 text-dark bg-opacity-10 rounded mb-3">
-      <Form onSubmit={handleSubmit}>
-        <div className="p-2 w-75">
-          <Typeahead
-            id="lyceeSeuil"
-            labelKey="nom"
-            onChange={onLyceeChange}
-            options={lycees}
-            placeholder="nom du lycée"
-            ref={typeaheadRef}
-          />
-        </div>
-        <div className="p-2 w-75">
-          <Form.Control
-            id="seuilLycee"
-            placeholder="seuil d'admission du lycée"
-            type="float"
-            onChange={onSeuilLyceeChange}
-          />
-        </div>
-        <div className="d-flex justify-content-between align-items-center p-2">
-          <Button
-            className="my-2"
-            type="submit"
-            disabled={seuilLycee < 1000 || seuilLycee > 42000}
-          >
-            Ajouter
-          </Button>
-          &nbsp;
-          {showConfirm && (
-            <Alert key="confirm" variant="success" className="my-0">
-              Le seuil du lycée a été ajouté. Merci de votre contribution !
-            </Alert>
-          )}
-        </div>
-      </Form>
+    <Card className="p-1 bg-primary bg-opacity-10">
+      <Card.Subtitle className="mx-2 my-2">
+        <ArrowReturnRight /> Ajoutez ici un nouveau seuil d'admission :{" "}
+      </Card.Subtitle>
+      <Card.Body>
+        <Form onSubmit={handleSubmit}>
+          <div className="p-2 w-75">
+            <Typeahead
+              id="lyceeSeuil"
+              labelKey="nom"
+              onChange={onLyceeChange}
+              options={lycees}
+              placeholder="nom du lycée"
+              ref={typeaheadRef}
+            />
+          </div>
+          <div className="p-2 w-75">
+            <Form.Control
+              id="seuilLycee"
+              placeholder="seuil d'admission du lycée"
+              type="float"
+              onChange={onSeuilLyceeChange}
+            />
+          </div>
+          <div className="d-flex justify-content-between align-items-center p-2">
+            <Button
+              className="mt-2 mb-0"
+              type="submit"
+              disabled={
+                seuilLycee === 0 || isNaN(seuilLycee) || seuilLycee < 4000
+              }
+            >
+              Ajouter
+            </Button>
+            &nbsp;
+            {showConfirm && (
+              <Alert key="confirm" variant="success" className="my-0">
+                Le seuil du lycée a été ajouté. Merci de votre contribution !
+              </Alert>
+            )}
+          </div>
+        </Form>
+      </Card.Body>
     </Card>
   );
 };

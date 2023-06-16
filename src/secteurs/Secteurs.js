@@ -38,12 +38,14 @@ const Secteurs = (props) => {
         <ArrowReturnRight /> Les effectifs des collèges sont estimés via leur
         nombre d'admis au DNB 2022
       </div>
-      <Card className="p-1 bg-light bg-opacity-30">
-        <div className="p-2 w-100">
-          <LyceeSelector onChange={onLyceeChange} lycee={codeLycee} />
-        </div>
-      </Card>
-      <div>
+      <div className="mx-2 col-12 col-sm-12 col-md-10 col-lg-8 col-xl-8 col-xxl-6 mx-auto">
+        <Card className="p-1 bg-light bg-opacity-30">
+          <div className="p-2 w-100">
+            <LyceeSelector onChange={onLyceeChange} lycee={codeLycee} />
+          </div>
+        </Card>
+      </div>
+      <div className="mx-2 col-12 col-sm-12 col-md-10 col-lg-8 col-xl-8 col-xxl-6 mx-auto">
         {collegesArray.map((group, index) => {
           return (
             <CollegeGroup
