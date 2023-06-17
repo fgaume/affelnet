@@ -16,6 +16,7 @@ import {
   computeAvancementSocle,
 } from "../services/socle";
 import RangeInput from "../components/RangeInput";
+import "./MonSocle.css";
 
 const valueMap = new Map([
   [0, 0],
@@ -79,12 +80,13 @@ const MonSocle = (props) => {
   }, [competences, props]);
 
   return (
-    <div className="mx-2 col-12 col-sm-12 col-md-10 col-lg-10 col-xl-8 col-xxl-8 mx-auto">
+    <div className="">
       <div className="mx-auto mb-3">
         <ArrowReturnRight /> Estimez ici les 8 compétences de socle (qui
         comptent également pour le Brevet). Rappel :
       </div>
-      <Card className="mx-auto mt-3">
+
+      <Card className="mt-3 mx-2 col-12 col-sm-10 col-md-8 col-lg-6 col-xl-6 col-xxl-6 mx-auto">
         <ul className="mb-2 mt-2">
           <li className="text-success">
             Très bonne <ArrowRight /> 600 pts
@@ -101,44 +103,53 @@ const MonSocle = (props) => {
         </ul>
       </Card>
 
-      <div className="mx-auto my-3">
+      <div className="mt-3 mx-2 col-12 col-sm-10 col-md-8 col-lg-6 col-xl-6 col-xxl-6 mx-auto">
         <Table borderless className="xy-0">
           <tbody>
             <tr>
-              <td>
-                <Lightning width="24" height="24" /> Saisie multiple{" "}
-                <OverlayTrigger
-                  trigger="click"
-                  placement="top"
-                  overlay={(propss) => (
-                    <Tooltip {...propss}>
-                      {
-                        "Ce curseur permet de renseigner toutes les compétences à la fois."
-                      }
-                    </Tooltip>
-                  )}
-                  rootCloseEvent="mousedown"
-                  rootClose="true"
-                >
-                  <QuestionCircleFill width="20" height="20" className="mb-1 mx-1"/>
-                </OverlayTrigger>{" "}
-                :
+              <td className="rapide">
+                <div className="mt-1 me-0">
+                  <Lightning width="24" height="24" /> Saisie rapide{" "}
+                  <OverlayTrigger
+                    trigger="click"
+                    placement="top"
+                    overlay={(propss) => (
+                      <Tooltip {...propss}>
+                        {
+                          "Ce curseur permet de renseigner toutes les compétences à la fois."
+                        }
+                      </Tooltip>
+                    )}
+                    rootCloseEvent="mousedown"
+                    rootClose="true"
+                  >
+                    <QuestionCircleFill
+                      width="20"
+                      height="20"
+                      className="mb-1 mx-1"
+                    />
+                  </OverlayTrigger>{" "}
+                  :
+                </div>
               </td>
-              <td className="header">
-                <Form.Range
-                  className="align-middle xy-0 form-range"
-                  min="0"
-                  max="4"
-                  step="1"
-                  value={quickScore}
-                  onChange={setAllNotes}
-                />
+              <td>
+                <div className="mt-0">
+                  <Form.Range
+                    className="form-range"
+                    min="0"
+                    max="4"
+                    step="1"
+                    value={quickScore}
+                    onChange={setAllNotes}
+                  />
+                </div>
               </td>
             </tr>
           </tbody>
         </Table>
       </div>
-      <div className="mx-auto">
+
+      <div className="mx-2 col-12 col-sm-10 col-md-8 col-lg-6 col-xl-6 col-xxl-6 mx-auto">
         <Card>
           <Table striped borderless hover className="align-middle mb-0">
             <tbody>
@@ -153,6 +164,7 @@ const MonSocle = (props) => {
                     listeTranches={tranchesCompetences}
                     onChange={handleCompetenceChange}
                     ref={(el) => (inputRef.current[index] = el)}
+                    labelClassName="bg-transparent competence"
                   />
                 );
               })}

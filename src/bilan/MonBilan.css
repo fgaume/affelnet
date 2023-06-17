@@ -5,11 +5,18 @@ td.score {
     width: 20%;
     text-align:center;
 }
-td.variation {
-    width: 20%;
-    text-align:center;
+td.matiere {
+    width: 120px;
+    text-align:left;
 }
 td.titre {
     width: 50%;
     text-align:center;
+}
+td.periode {
+    width: 30px;
+}
+td.rapide2 {
+    width: 166px;
+    text-align:left;
 }

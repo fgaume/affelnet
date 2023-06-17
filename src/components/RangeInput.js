@@ -42,7 +42,7 @@ const RangeInput = forwardRef((props, ref) => {
 
   return (
     <tr>
-      <td className="bg-transparent">{props.label}</td>
+      <td className={props.labelClassName}>{props.label}</td>
       <td className="bg-transparent">
         <table>
           <tbody>

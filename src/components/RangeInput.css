@@ -17,3 +17,7 @@ td.header {
     width: 40%;
     text-align:right;
 }
+td.competence {
+    width: 80px;
+    text-align:left;
+}

@@ -1,6 +1,7 @@
 import React, { forwardRef, useImperativeHandle, useRef } from "react";
 import { Table } from "react-bootstrap";
 import RangeInput from "../components/RangeInput";
+import "./MonBilan.css";
 
 const listeTranches = [
   { value: 0, score: 0, label: "Moyenne...", style: "low text-body" },
@@ -34,7 +35,7 @@ const MatiereEditor = forwardRef((props, ref) => {
 
   return (
     <tr>
-      <td>{props.nom}</td>
+      <td className="matiere">{props.nom}</td>
       <td>
         <Table className="align-middle mb-0 bg-transparent">
           <tbody className="bg-transparent">
@@ -49,7 +50,7 @@ const MatiereEditor = forwardRef((props, ref) => {
                   label={(props.semestres ? "S" : "T") + (1 + index).toString()}
                   onChange={handleChange}
                   ref={(el) => (inputRef.current[index] = el)}
-                  className="bg-transparent"
+                  labelClassName='bg-transparent periode'
                 />
               );
             })}

@@ -89,14 +89,14 @@ const MonBilan = (props) => {
   }, [matieres, semestres, props]);
 
   return (
-    <div className="mx-2 col-12 col-sm-12 col-md-12 col-lg-10 col-xl-8 col-xxl-8 mx-auto">
-      <div className="mx-3 my-3 mt-3 mb-3">
+    <div className="">
+      <div className="mx-3 my-3">
         <ArrowReturnRight /> Saisir ici vos moyennes de chaque matière pour
         chaque {semestres ? "se" : "tri"}mestre. Seuls les{" "}
         <strong>intervalles</strong> de notes comptent pour votre score
         Affelnet, il est donc inutile de saisir les notes précises.
       </div>
-      <div  className="mx-2 col-12 col-sm-10 col-md-8 col-lg-8 col-xl-8 col-xxl-8 mx-auto my-3">
+      <div className="mx-2 col-12 col-sm-10 col-md-8 col-lg-6 col-xl-6 col-xxl-6 mx-auto my-4">
         <AffichageScores
           scorePrevious={scoreBilanPrevious}
           scoreNext={scoreBilanNext}
@@ -105,7 +105,7 @@ const MonBilan = (props) => {
           tipDelta="Evolution de votre bilan périodique entre 2021 et 2022"
         />
       </div>
-      <div className="mx-auto my-3">
+      <div className="mx-4 col-12 col-sm-10 col-md-8 col-lg-6 col-xl-6 col-xxl-6 mx-auto mb-4">
         <MyToggle
           id="semestres"
           label="Collège en semestres"
@@ -113,46 +113,53 @@ const MonBilan = (props) => {
           onChange={handleChangeCheck}
         />
       </div>
-      <div className="mx-auto my-3">
-        <Table borderless className="ms-0">
+      <div className="mt-3 mx-2 col-12 col-sm-10 col-md-8 col-lg-6 col-xl-6 col-xxl-6 mx-auto">
+        <Table borderless className="xy-0">
           <tbody>
             <tr>
-              <td>
-                <Lightning width="24" height="24" />
-                Saisie rapide{" "}
-                <OverlayTrigger
-                  trigger="click"
-                  placement="top"
-                  overlay={(propss) => (
-                    <Tooltip {...propss}>
-                      {
-                        "Ce curseur permet de renseigner toutes les matières en même temps."
-                      }
-                    </Tooltip>
-                  )}
-                  rootCloseEvent="mousedown"
-                  rootClose="true"
-                >
-                  <QuestionCircleFill width="20" height="20" className="mx-1 mb-1"/>
-                </OverlayTrigger>{" "}
-                :
+              <td className="rapide2">
+                <div className="mt-1">
+                  <Lightning width="24" height="24" />
+                  Saisie rapide{" "}
+                  <OverlayTrigger
+                    trigger="click"
+                    placement="top"
+                    overlay={(propss) => (
+                      <Tooltip {...propss}>
+                        {
+                          "Ce curseur permet de renseigner toutes les matières en même temps."
+                        }
+                      </Tooltip>
+                    )}
+                    rootCloseEvent="mousedown"
+                    rootClose="true"
+                  >
+                    <QuestionCircleFill
+                      width="20"
+                      height="20"
+                      className="mb-1 mx-1"
+                    />
+                  </OverlayTrigger>{" "}
+                  :
+                </div>
               </td>
-              <td>{"  "}</td>
-              <td className="titre">
-                <Form.Range
-                  className="align-middle xy-0 form-range"
-                  min="0"
-                  max="4"
-                  step="1"
-                  value={quickScore}
-                  onChange={setAllNotes}
-                />
+              <td>
+                <div className="mt-0 me-2">
+                  <Form.Range
+                    className="form-range"
+                    min="0"
+                    max="4"
+                    step="1"
+                    value={quickScore}
+                    onChange={setAllNotes}
+                  />
+                </div>
               </td>
             </tr>
           </tbody>
         </Table>
       </div>
-      <div className="mx-auto">
+      <div className="mx-2 col-12 col-sm-11 col-md-8 col-lg-6 col-xl-6 col-xxl-6 mx-auto">
         <Card>
           <Table striped borderless className="align-middle xy-0">
             <tbody>
