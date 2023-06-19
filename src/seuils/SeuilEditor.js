@@ -6,9 +6,9 @@ import { Alert, Button, Card, Form } from "react-bootstrap";
 import { listeLycees as lycees } from "../data/lycees";
 
 import { Typeahead } from "react-bootstrap-typeahead";
-import { ArrowReturnRight } from "react-bootstrap-icons";
+import { ArrowReturnRight, EmojiSmile } from "react-bootstrap-icons";
 
-const SeuilEditor = () => {
+const SeuilEditor = (props) => {
   const typeaheadRef = useRef(null);
   const [lyceeSeuil, setLyceeSeuil] = useState("");
   const [seuilLycee, setSeuilLycee] = useState(0);
@@ -18,6 +18,7 @@ const SeuilEditor = () => {
     const docRef = doc(firestore, "seuils", codeLycee);
     updateDoc(docRef, {
       seuil2023: parseFloat(seuil.replace(",", ".")),
+      contributeur: props.nomCollegeScolarisation,
     });
   };
 
@@ -42,10 +43,10 @@ const SeuilEditor = () => {
 
   return (
     <Card className="p-1 bg-primary bg-opacity-10">
-      <Card.Subtitle className="mx-2 my-2">
+      <Card.Subtitle className="mx-2 mt-3 mb-0">
         <ArrowReturnRight /> Ajoutez ici un nouveau seuil d'admission :{" "}
       </Card.Subtitle>
-      <Card.Body>
+      <Card.Body  className="mt-0">
         <Form onSubmit={handleSubmit}>
           <div className="p-2 w-75">
             <Typeahead
@@ -67,7 +68,7 @@ const SeuilEditor = () => {
           </div>
           <div className="d-flex justify-content-between align-items-center p-2">
             <Button
-              className="mt-2 mb-0"
+              className="mt-1 mb-0"
               type="submit"
               disabled={
                 seuilLycee === 0 || isNaN(seuilLycee) || seuilLycee < 4000
@@ -77,8 +78,9 @@ const SeuilEditor = () => {
             </Button>
             &nbsp;
             {showConfirm && (
-              <Alert key="confirm" variant="success" className="my-0">
-                Le seuil du lycée a été ajouté. Merci de votre contribution !
+              <Alert key="confirm" variant="success" className="ms-3 my-0">
+                Les données ont été ajoutées. Merci de votre contribution{" "}
+                  <EmojiSmile /> !
               </Alert>
             )}
           </div>

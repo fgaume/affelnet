@@ -9,6 +9,7 @@ import { Card, OverlayTrigger, Popover, Stack } from "react-bootstrap";
 import { analytics } from "../services/firebase";
 import { logEvent } from "firebase/analytics";
 import MyToggle from "../components/MyToggle";
+import "./MesColleges.css"
 
 /* returns bonusIPS et college de secteur (pour avoir les lycées de secteur) */
 const MesColleges = (props) => {
@@ -58,7 +59,7 @@ const MesColleges = (props) => {
       setBonusCollege(collegeUpdate.bonus);
       if (!collegesMultiples) {
         setNomCollegeSecteur(collegeUpdate.nom);
-        props.onChange(collegeUpdate);
+        props.onChange(collegeUpdate, collegeUpdate);
         logEvent(analytics, "collège " + collegeUpdate.nom);
         logEvent(analytics, "bonus " + collegeUpdate.bonus);
       } else {
@@ -66,7 +67,7 @@ const MesColleges = (props) => {
           props.onChange({
             nom: nomCollegeSecteur,
             bonus: collegeUpdate.bonus,
-          });
+          }, collegeUpdate);
         }
       }
     }
@@ -78,7 +79,7 @@ const MesColleges = (props) => {
     ); */
     if (collegeUpdate && collegeUpdate.nom !== nomCollegeSecteur) {
       setNomCollegeSecteur(collegeUpdate.nom);
-      props.onChange({ nom: collegeUpdate.nom, bonus: bonusCollege });
+      props.onChange({ nom: collegeUpdate.nom, bonus: bonusCollege }, { nom: nomCollege, bonus: bonusCollege });
       logEvent(analytics, "collège secteur " + collegeUpdate.nom);
     }
   };
@@ -88,32 +89,33 @@ const MesColleges = (props) => {
     setCollegesMultiples(newChecked);
     setNomCollegeSecteur(newChecked ? "" : nomCollege);
     if (newChecked && nomCollegeSecteur && bonusCollege) {
-      props.onChange({ nom: nomCollegeSecteur, bonus: bonusCollege });
+      props.onChange({ nom: nomCollegeSecteur, bonus: bonusCollege }, { nom: nomCollege, bonus: bonusCollege });
     } else if (!newChecked && nomCollege && bonusCollege) {
-      props.onChange({ nom: nomCollege, bonus: bonusCollege });
+      props.onChange({ nom: nomCollege, bonus: bonusCollege }, { nom: nomCollege, bonus: bonusCollege });
     }
   };
 
   useEffect(() => {
-    props.onChange({ nom: nomCollegeSecteur, bonus: bonusCollege });
-  }, [nomCollegeSecteur, bonusCollege, props]);
+    //console.log("usedeffect : ", nomCollege);
+    props.onChange({ nom: nomCollegeSecteur, bonus: bonusCollege }, { nom: nomCollege, bonus: bonusCollege });
+  }, [nomCollege, nomCollegeSecteur, bonusCollege, props]);
 
   return (
     <div className="mx-2 col-12 col-sm-10 col-md-8 col-lg-6 col-xl-6 col-xxl-6 mx-auto">
       <Card className="p-1 bg-primary bg-opacity-10">
-        <div className="p-2 w-100">
+        <div className="p-2 w-100 mb-0">
           <CollegeSelector
             type="scolarisation"
             onChange={onCollegeScolarisationChange}
             college={nomCollege}
           />
-          <Form.Group className="mb-3">
+          <Form.Group className="mb-3 ms-1">
             Bonus IPS : {bonusCollege}{" "}
             {nomCollegeSecteur && (
-              <CheckLg color="green" width="28" height="28" />
+              <CheckLg color="green" width="30" height="30" className="mb-1"/>
             )}
           </Form.Group>
-          <Form.Group className="mb-3">
+          <Form.Group className="mb-3 ms-1">
             <Stack direction="horizontal" gap={2}>
               <MyToggle
                 id="collegesMultiples"
@@ -128,7 +130,7 @@ const MesColleges = (props) => {
                 rootCloseEvent="mousedown"
                 rootClose="true"
               >
-                <QuestionCircleFill width="20" height="20" />
+                <QuestionCircleFill width="24" height="24" />
               </OverlayTrigger>{" "}
             </Stack>
           </Form.Group>

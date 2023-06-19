@@ -12,7 +12,7 @@ const MesContributions = (props) => {
           <div className="mx-auto my-3">
             <Alert variant="success" className="mb-4">
               <ArrowReturnRight /> Cette section vous permet de{" "}
-              <strong>contribuer</strong> au fonctionnement de l'outil en
+              <strong>contribuer</strong> à cet outil en
               saisissant les données indispensables à son fonctionnement : les
               seuils d'admission aux lycées et les données statistiques
               nécessaires au calcul du score Affelnet. Ces données se retrouvent
@@ -23,11 +23,15 @@ const MesContributions = (props) => {
               </a>
             </Alert>
           </div>
-          <div className="mx-2 col-12 col-sm-10 col-md-8 col-lg-6 col-xl-6 col-xxl-6 mx-auto">
-            <SeuilEditor />
+          <div className="mx-2 mb-4 col-12 col-sm-10 col-md-8 col-lg-6 col-xl-6 col-xxl-6 mx-auto">
+            <SeuilEditor
+              nomCollegeScolarisation={props.nomCollegeScolarisation}
+            />
           </div>
           <hr />
-          <StatsChamps />
+          <StatsChamps
+            nomCollegeScolarisation={props.nomCollegeScolarisation}
+          />
         </>
       )}
     </>

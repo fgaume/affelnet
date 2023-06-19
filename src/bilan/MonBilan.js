@@ -19,7 +19,7 @@ import {
 import { moyennesAcademiques, ecartsAcademiques } from "../data/stats";
 import MatiereEditor from "./MatiereEditor";
 import "./MonBilan.css";
-import AffichageScores from "../main/AffichageScores";
+import AffichageScores from "../components/AffichageScores";
 import MyToggle from "../components/MyToggle";
 
 const valueMap = new Map([
@@ -95,6 +95,12 @@ const MonBilan = (props) => {
         chaque {semestres ? "se" : "tri"}mestre. Seuls les{" "}
         <strong>intervalles</strong> de notes comptent pour votre score
         Affelnet, il est donc inutile de saisir les notes précises.
+      </div>
+      <div className="mx-3 my-3">
+        <ArrowReturnRight /> Dans
+        le cas de {semestres ? "se" : "tri"}mestre non noté, laissez le curseur à "Non noté". Si aucune note n'est présente dans l'année pour un champ disciplinaire (cas de la
+        dispense annuelle d'EPS par exemple), la note harmonisée moyenne sur l'académie
+        sera appliquée, c'est à dire 100.
       </div>
       <div className="mx-2 col-12 col-sm-10 col-md-8 col-lg-6 col-xl-6 col-xxl-6 mx-auto my-4">
         <AffichageScores

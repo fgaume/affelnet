@@ -49,13 +49,16 @@ const computeNoteCDs = (matieres, semestres) => {
       );
       if (foundMatiere) {
         const notes = foundMatiere.notes;
-        scoresMatieres.push(...notes);
+        //console.log("notes = ", notes);
+        const filteredNotes = notes.filter((note) => note !== 0);
+        //console.log("filteredNotes = ", filteredNotes);
+        scoresMatieres.push(...filteredNotes);
       }
     });
     const scoreCD = computeAverage(scoresMatieres, semestres);
     scoresCDs.push({
       nom: cd.nom,
-      score: scoreCD.toFixed(2),
+      score: scoreCD,
       coefficient: cd.coefficient,
     });
   });
@@ -88,14 +91,19 @@ const computeBilanPeriodique = (
   moyennesAcademiques,
   ecartsAcademiques
 ) => {
+  //console.log("computeBilanPeriodique : ");
   if (!moyennesAcademiques) return 0;
   let score = 0;
   scoresCD.forEach((cd) => {
+    //console.log("score " + cd.nom + " : " + cd.score);
     const cdscore =
-      10 *
-      (10 +
-        (cd.score - moyennesAcademiques.get(cd.nom)) /
-          ecartsAcademiques.get(cd.nom));
+      cd.score === 0
+        ? 100
+        : 10 *
+          (10 +
+            (cd.score.toFixed(2) - moyennesAcademiques.get(cd.nom)) /
+              ecartsAcademiques.get(cd.nom));
+    //console.log("score " + cd.nom + " : " + cdscore.toFixed(3));
     score += cd.coefficient * cdscore.toFixed(3);
   });
   const result = parseFloat(score);
@@ -173,5 +181,5 @@ export {
   updateMatieres,
   allMatiereSetTo,
   computeAvancementNotes,
-  CDs
+  CDs,
 };

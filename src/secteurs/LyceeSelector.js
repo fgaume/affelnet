@@ -10,7 +10,7 @@ import { Col } from "react-bootstrap";
 import { CheckLg } from "react-bootstrap-icons";
 
 const LyceeSelector = (props) => {
-  const placeholder = "Saisir le lycée ...";
+  const placeholder = "Saisir ici le lycée ...";
   const labelLycee = "Lycée :";
   const inputRef = useRef();
 
@@ -27,7 +27,7 @@ const LyceeSelector = (props) => {
   return (
     <Form.Group className="mb-3">
       <Col>
-        <Form.Label>{labelLycee}</Form.Label>
+        <Form.Label className="ms-1">{labelLycee}</Form.Label>
       </Col>
       <Row>
         <Col xs={8}>
@@ -41,7 +41,7 @@ const LyceeSelector = (props) => {
           />
         </Col>
         <Col className="p-0">
-          {props.lycee && <CheckLg color="green" width="28" height="28" />}
+          {props.lycee && <CheckLg color="green" width="32" height="32" className="mt-1" />}
         </Col>
       </Row>
     </Form.Group>

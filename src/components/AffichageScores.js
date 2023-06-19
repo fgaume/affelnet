@@ -5,8 +5,8 @@ import { QuestionCircleFill } from "react-bootstrap-icons";
 
 const AffichageScores = (props) => {
   return (
-    <Card className="mx-0 my-0 mt-0 mb-0">
-      <Table striped borderless hover size="xl" className="mx-0 my-0 mt-0 mb-0">
+    <Card>
+      <Table striped borderless hover size="xl" className="mx-0 my-0">
         <tbody>
           <tr>
             <td className="text-muted score">

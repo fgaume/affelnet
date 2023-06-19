@@ -147,16 +147,15 @@ const ListeSeuils = (props) => {
               height="32"
               className="text-danger me-1"
             />{" "}
-            Les seuils d'admission sont des scores Affelnet, donc ils prennent
+            Les seuils d'admission sont des scores Affelnet réels, donc ils prennent
             en compte les <strong>bonus IPS</strong>. Ils ne constituent donc
             absolument <strong>pas un indicateur du niveau scolaire</strong> du
             dernier collégien admis et donc du lycée. Un seuil élevé indique une forte
-            pression des collégiens bénéficiant de bonus IPS (tels Turgot,
+            pression des collégiens bénéficiant de bonus IPS (cf. situation des lycées Turgot,
             Condorcet ou Hélène Boucher par exemple). La section "Secteurs" plus
             bas permet de se faire une idée du poids des 2 groupes de collégiens
             avec bonus sur un lycée donné.
           </div>
-          <div> </div>
           <div>
             De plus, comme le montre la figure ci-dessous, le domaine de valeur
             des scores Affelnet est <strong>loin d'être continu</strong>, donc une variation de

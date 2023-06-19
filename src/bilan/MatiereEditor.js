@@ -4,7 +4,7 @@ import RangeInput from "../components/RangeInput";
 import "./MonBilan.css";
 
 const listeTranches = [
-  { value: 0, score: 0, label: "Moyenne...", style: "low text-body" },
+  { value: 0, score: 0, label: "Non noté", style: "low text-body" },
   { value: 1, score: 3, label: "Moins de 5", style: "low text-danger" },
   { value: 2, score: 8, label: "Entre 5 et 9,99", style: "middle text-danger" },
   {

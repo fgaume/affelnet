@@ -7,7 +7,7 @@ import {
   X,
 } from "react-bootstrap-icons";
 
-import AffichageScores from "../main/AffichageScores";
+import AffichageScores from "../components/AffichageScores";
 import { formatVariation } from "../services/helper";
 import "./LyceesSecteur.css";
 
@@ -48,14 +48,15 @@ const LyceesSecteur = (props) => {
   return (
     <div>
       <div className="mx-3 my-3 mt-3 mb-3">
-        <ArrowReturnRight /> Cette section indique les lycées de{" "}
+        <ArrowReturnRight /> Cette section indique votre score Affelnet de{" "}
+        <strong>secteur {props.secteur}</strong> ainsi que les lycées de{" "}
         <strong>secteur {props.secteur}</strong> que vous auriez obtenus, ou
-        pas, dans les conditions de 2021 et 2022, et compte tenu des résultats
-        scolaires actuels. Les lycées où votre score aurait été suffisant sont
+        pas, dans les conditions de 2021 et 2022 compte tenu des résultats
+        scolaires actuels. Les lycées pour lesquels votre score aurait été suffisant sont
         en vert. Les 2 autres onglets ci-dessus afficheront les lycées des
-        autres secteurs.
+        2 autres secteurs.
       </div>
-      <div className="mx-2 col-12 col-sm-10 col-md-8 col-lg-6 col-xl-6 col-xxl-6 mx-auto my-3">
+      <div className="mx-2 col-12 col-sm-10 col-md-8 col-lg-6 col-xl-6 col-xxl-6 mx-auto mb-4">
         <AffichageScores
           scorePrevious={props.scorePrevious + bonusGeo}
           scoreNext={props.scoreNext > 0 ? bonusGeo + props.scoreNext : 0}
@@ -75,7 +76,7 @@ const LyceesSecteur = (props) => {
             " entre 2021 et 2022"
           }
         />
-        </div>
+      </div>
       <div className="mx-2 col-12 col-sm-10 col-md-8 col-lg-6 col-xl-6 col-xxl-6 mx-auto">
         <Card className="mb-0">
           <Table striped borderless hover responsive="xl" className="mb-0">

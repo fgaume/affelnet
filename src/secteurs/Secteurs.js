@@ -31,12 +31,12 @@ const Secteurs = (props) => {
   return (
     <div className="mx-auto p-0">
       <div className="mb-3">
-        <ArrowReturnRight /> Cette section liste le nombre d'élèves de chaque
+        <ArrowReturnRight /> Cette section estime le nombre d'élèves de chaque
         collège ayant un lycée donné en secteur 1.
       </div>
       <div className="mb-3">
         <ArrowReturnRight /> Les effectifs des collèges sont estimés via leur
-        nombre d'admis au DNB 2022
+        nombre d'admis au DNB 2022 (source opendata)
       </div>
       <div className="mx-2 col-12 col-sm-12 col-md-10 col-lg-8 col-xl-8 col-xxl-6 mx-auto">
         <Card className="p-1 bg-light bg-opacity-30">

@@ -8,9 +8,10 @@ import { listeColleges } from "../data/colleges";
 import "react-bootstrap-typeahead/css/Typeahead.css";
 import { Col } from "react-bootstrap";
 import { CheckLg } from "react-bootstrap-icons";
+import "./MesColleges.css"
 
 const CollegeSelector = (props) => {
-  const placeholder = "Saisir le collège de " + props.type + "...";
+  const placeholder = "Saisir ici le collège de " + props.type;
   const labelCollege = "Collège de " + props.type + " :";
   const inputRef = useRef();
 
@@ -27,10 +28,10 @@ const CollegeSelector = (props) => {
   return (
     <Form.Group className="mb-3">
       <Row>
-        <Form.Label>{labelCollege}</Form.Label>
+        <Form.Label className="ms-1">{labelCollege}</Form.Label>
       </Row>
       <Row>
-        <Col xs={8}>
+        <Col>
           <Typeahead
             id={props.type}
             labelKey="nom"
@@ -39,10 +40,11 @@ const CollegeSelector = (props) => {
             placeholder={placeholder}
             defaultSelected={[{ nom: props.college, bonus: 0 }]}
             ref={inputRef}
+            className="matiere"
           />
         </Col>
-        <Col className="p-0">
-          {props.college && <CheckLg color="green" width="28" height="28" />}
+        <Col className="p-0 ms-0">
+          {props.college && <CheckLg color="green" width="32" height="32" className="mt-1" />}
         </Col>
       </Row>
     </Form.Group>

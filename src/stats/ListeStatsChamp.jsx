@@ -1,7 +1,7 @@
 import { collection, onSnapshot } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { Card, Table } from "react-bootstrap";
-import { CheckCircle, ExclamationCircle } from "react-bootstrap-icons";
+import { CheckCircleFill, ExclamationCircle } from "react-bootstrap-icons";
 import { firestore } from "../services/firebase";
 import { formatFloat } from "../services/helper";
 import { computeStats } from "../services/statistiques";
@@ -47,7 +47,7 @@ const ListeStatsChamp = (props) => {
       <Card.Subtitle className="text-center my-2">
         {props.champ}
         {notes.length > 1 ? (
-          <CheckCircle
+          <CheckCircleFill
             color="green"
             width="24"
             height="24"
@@ -64,7 +64,7 @@ const ListeStatsChamp = (props) => {
       </Card.Subtitle>
       {stats && (
         <Card.Subtitle className="text-center mb-2 mt-0 text-success">
-          Moyenne: {formatFloat(stats.moyenne)}, Ecart-type:{" "}
+          Moyenne: {formatFloat(stats.moyenne)} &nbsp;&nbsp; | &nbsp;&nbsp; Ecart-type:{" "}
           {formatFloat(stats.ecartType)}
         </Card.Subtitle>
       )}
@@ -90,7 +90,10 @@ const ListeStatsChamp = (props) => {
           </tbody>
         </Table>
       )}
-      <StatsEditor champ={props.champ} />
+      <StatsEditor
+        champ={props.champ}
+        nomCollegeScolarisation={props.nomCollegeScolarisation}
+      />
     </Card>
   );
 };

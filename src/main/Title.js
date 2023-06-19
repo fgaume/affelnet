@@ -2,11 +2,10 @@ import React from "react";
 import { Alert, Button, Image } from "react-bootstrap";
 import {
   BoxArrowUpRight,
-  Check2,
   CheckLg,
   ExclamationCircle,
   InfoCircleFill,
-  Tools,
+  Tools
 } from "react-bootstrap-icons";
 import parent from "../images/parent.png";
 import { useLocalStorage } from "../services/useLocalStorage";
@@ -94,7 +93,12 @@ const Title = (props) => {
             <a href="mailto:ce.dve@ac-paris.fr" aria-label="Lien mail DVE">
               ce.dve@ac-paris.fr
             </a>
-            ).
+            ). Plus de détails dans{" "}  
+            <a
+            href="https://youtu.be/O8FVsFdCQyE"
+            target="affelnet-medium"
+            aria-label="Vidéo : comprendre son affectation"
+          >cette vidéo.</a>
           </p>
         </Alert>
         <Alert show={show === "true"} variant="warning">

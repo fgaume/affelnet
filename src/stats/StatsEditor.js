@@ -19,10 +19,11 @@ const StatsEditor = (props) => {
 
   const appendNewNote = (brute, harmonisee) => {
     const collectionRef = collection(firestore, "stats", props.champ, "notes");
-    setDoc(doc(collectionRef, "CD" + 100*brute), {
+    setDoc(doc(collectionRef, "CD" + 100 * brute), {
       brute: parseFloat(brute.replace(",", ".")),
       harmonisee: parseFloat(harmonisee.replace(",", ".")),
       timestamp: serverTimestamp(),
+      contributeur: props.nomCollegeScolarisation,
     });
   };
 

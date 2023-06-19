@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Button, Tab, Tabs } from "react-bootstrap";
-import { ArrowClockwise, CheckLg, ExclamationLg } from "react-bootstrap-icons";
+import { ArrowClockwise, CheckLg, ExclamationLg, ShareFill } from "react-bootstrap-icons";
 import Accordion from "react-bootstrap/Accordion";
 import "./App.css";
 import MonBilan from "./bilan/MonBilan";
@@ -22,7 +22,7 @@ import MesContributions from "./seuils/MesContributions";
 import MonSocle from "./socle/MonSocle";
 
 const App = () => {
-  const version = "v8.3.7 12/06/2023";
+  const version = "v9.0.0 19/06/2023";
   const contrib = true;
 
   const [loading, setLoading] = useState(true);
@@ -33,6 +33,7 @@ const App = () => {
   const [bonusCollege, setBonusCollege] = useState(0);
   const [collegeSecteur, setCollegeSecteur] = useState(0);
   const [lyceesSecteur, setLyceesSecteur] = useState([[], [], []]);
+  const [nomCollegeScolarisation, setNomCollegeScolarisation] = useState(0);
   const [scoreGlobalPrevious, setScoreGlobalPrevious] = useState(0);
   const [scoreGlobalNext, setScoreGlobalNext] = useState(0);
   const [filtreSpecialites, setFiltreSpecialites] = useState([]);
@@ -60,7 +61,7 @@ const App = () => {
     );
   };
 
-  const handleCollegeChange = (college) => {
+  const handleCollegeChange = (college, collegeScol) => {
     //console.log(JSON.stringify(college));
     setBonusCollege(college.bonus);
     setCollegeSecteur(college.nom);
@@ -68,6 +69,9 @@ const App = () => {
     setScoreGlobalNext(
       scoreBilanNext > 0 ? bonusCollege + scoreSocle + scoreBilanNext : 0
     );
+    if (collegeScol !== null) {
+      setNomCollegeScolarisation(collegeScol.nom);
+    }
   };
 
   const handleFiltreChange = (newFiltres) => {
@@ -81,7 +85,7 @@ const App = () => {
   };
 
   useEffect(() => {
-    console.log("useffect App.js");
+    //console.log("useffect App.js");
     setTimeout(() => setLoading(false), 500);
     if (collegeSecteur) {
       fetchLycees(collegeSecteur).then((newLycees) => {
@@ -223,14 +227,6 @@ const App = () => {
             </Accordion.Item>
             <Accordion.Item eventKey="4">
               <Accordion.Header>
-                <span className="fw-bolder">Mes contributions</span>
-              </Accordion.Header>
-              <Accordion.Body>
-                <MesContributions contrib={contrib} />
-              </Accordion.Body>
-            </Accordion.Item>
-            <Accordion.Item eventKey="5">
-              <Accordion.Header>
                 <span className="fw-bolder">
                   Seuils d'admission ({numberSeuils}/46)
                 </span>
@@ -239,7 +235,7 @@ const App = () => {
                 <ListeSeuils onChange={handleSeuilChange} />
               </Accordion.Body>
             </Accordion.Item>
-            <Accordion.Item eventKey="6">
+            <Accordion.Item eventKey="5">
               <Accordion.Header>
                 <span className="fw-bolder">Secteurs</span>
               </Accordion.Header>
@@ -247,11 +243,20 @@ const App = () => {
                 <Secteurs />
               </Accordion.Body>
             </Accordion.Item>
+            <Accordion.Item eventKey="6">
+              <Accordion.Header>
+                <span className="fw-bolder">Mes contributions</span>
+                <ShareFill width="20" height="20" className="ms-2" />
+              </Accordion.Header>
+              <Accordion.Body>
+                <MesContributions contrib={contrib} nomCollegeScolarisation={nomCollegeScolarisation} />
+              </Accordion.Body>
+            </Accordion.Item>
           </Accordion>
           <p className="text-end text-muted p-2">
             <small className="mx-2">
               <a
-                href="https://github.com/fgaume/affelnet"
+                href="https://github.com/fgaume/affelnet/actions"
                 aria-label="Lien vers Github"
                 rel="noreferrer"
                 target="_blank"
