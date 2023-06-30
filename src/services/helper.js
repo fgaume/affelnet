@@ -24,4 +24,9 @@ const deleteWorker = () => {
   window.location.reload(true);
 };
 
-export { formatInt, formatFloat, formatVariation, deleteWorker };
+const delta = (numberBefore, numberAfter) => {
+  const diff = Math.round(numberAfter - numberBefore);
+  return formatVariation(diff);
+}
+
+export { formatInt, formatFloat, formatVariation, deleteWorker, delta };

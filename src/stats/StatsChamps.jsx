@@ -1,4 +1,4 @@
-import { Col, Figure, Image, Row } from "react-bootstrap";
+import { Alert, Col, Figure, Image, Row } from "react-bootstrap";
 import ListeStatsChamp from "./ListeStatsChamp";
 import "./ListeStatsChamp.css";
 import { ArrowReturnRight } from "react-bootstrap-icons";
@@ -38,7 +38,8 @@ const StatsChamps = (props) => {
           </Figure.Caption>
         </Figure>
       </div>
-
+      <Alert variant="danger">Il n'est plus nécessaire de saisir d'autres données ici. Merci infiniment pour vos contributions !</Alert>
+        
       <Row xs={1} sm={1} md={2} lg={3} xl={3} className="g-4">
         {champsDisciplinaires.map((champ, idx) => {
           return (

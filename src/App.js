@@ -22,7 +22,7 @@ import MesContributions from "./seuils/MesContributions";
 import MonSocle from "./socle/MonSocle";
 
 const App = () => {
-  const version = "v9.0.1 23/06/2023";
+  const version = "v9.0.2 30/06/2023";
   const contrib = true;
 
   const [loading, setLoading] = useState(true);

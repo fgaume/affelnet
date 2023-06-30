@@ -9,7 +9,7 @@ import {
 } from "react-bootstrap-icons";
 import { nomsLyceesMap, seuilsLyceesMap, urlsLyceesMap } from "../data/lycees";
 import { firestore } from "../services/firebase";
-import { formatFloat, formatInt } from "../services/helper";
+import { formatVariation, formatFloat, formatInt } from "../services/helper";
 import "./ListeSeuils.css";
 
 function useSeuils(sorting = "byLycee") {
@@ -24,18 +24,32 @@ function useSeuils(sorting = "byLycee") {
           nom: nomsLyceesMap.get(doc.id),
           seuil_prev_prev: seuilsLyceesMap.get(doc.id)[0],
           seuil_prev: seuilsLyceesMap.get(doc.id)[1],
+          delta: doc.data().seuil2023 > 0 ? Math.round(doc.data().seuil2023 - doc.data().seuil2022) : 0,
           url: urlsLyceesMap.get(doc.id),
           ...doc.data(),
         }));
         switch (sorting) {
           case "bySeuilPrevPrev":
-            newSeuils.sort((a, b) => (a.seuil_prev_prev < b.seuil_prev_prev ? 1 : -1));
+            newSeuils.sort((a, b) =>
+              a.seuil_prev_prev < b.seuil_prev_prev ? 1 : -1
+            );
             break;
           case "bySeuilPrev":
             newSeuils.sort((a, b) => (a.seuil_prev < b.seuil_prev ? 1 : -1));
             break;
           case "bySeuil":
-            newSeuils.sort((a, b) => (a.seuil2023 < b.seuil2023 ? 1 : -1));
+            newSeuils.sort((a, b) => {
+              if (isNaN(a.seuil2023)) return 1;
+              if (isNaN(b.seuil2023)) return -1;
+              return a.seuil2023 < b.seuil2023 ? 1 : -1;
+            });
+            break;
+          case "byVariation":
+            newSeuils.sort((a, b) => {
+              if (isNaN(a.delta)) return 1;
+              if (isNaN(b.delta)) return -1;
+              return a.delta < b.delta ? 1 : -1;
+            });
             break;
           default:
             newSeuils.sort((a, b) => (a.nom < b.nom ? -1 : 1));
@@ -92,6 +106,7 @@ const ListeSeuils = (props) => {
           <option value="bySeuil">trier par seuil 2023</option>
           <option value="bySeuilPrev">trier par seuil 2022</option>
           <option value="bySeuilPrevPrev">trier par seuil 2021</option>
+          <option value="byVariation">trier par variation</option>
         </Form.Select>
       </div>
 
@@ -103,6 +118,7 @@ const ListeSeuils = (props) => {
               <th className="seuil">seuil 2021</th>
               <th className="seuil">seuil 2022</th>
               <th className="seuil">seuil 2023</th>
+              <th className="variation">+/-</th>
             </tr>
           </thead>
           <tbody>
@@ -126,13 +142,20 @@ const ListeSeuils = (props) => {
                   )}
                 </td>
                 <td className="seuil text-muted">
-                  {lycee.seuil_prev > 0 ? formatInt(lycee.seuil_prev_prev) : "?"}
+                  {lycee.seuil_prev > 0
+                    ? formatInt(lycee.seuil_prev_prev)
+                    : "?"}
                 </td>
                 <td className="seuil text-muted">
                   {lycee.seuil_prev > 0 ? formatInt(lycee.seuil_prev) : "?"}
                 </td>
                 <td className="seuil text-success">
                   {lycee.seuil2023 > 0 ? formatFloat(lycee.seuil2023) : "?"}
+                </td>
+                <td className="seuil text-primary">
+                  {lycee.seuil2023 > 0
+                    ? formatVariation(lycee.delta)
+                    : "?"}
                 </td>
               </tr>
             ))}
@@ -147,21 +170,23 @@ const ListeSeuils = (props) => {
               height="32"
               className="text-danger me-1"
             />{" "}
-            Les seuils d'admission sont des scores Affelnet réels, donc ils prennent
-            en compte les <strong>bonus IPS</strong>. Ils ne constituent donc
-            absolument <strong>pas un indicateur du niveau scolaire</strong> du
-            dernier collégien admis et donc du lycée. Un seuil élevé indique une forte
-            pression des collégiens bénéficiant de bonus IPS (cf. situation des lycées Turgot,
-            Condorcet ou Hélène Boucher par exemple). La section "Secteurs" plus
-            bas permet de se faire une idée du poids des 2 groupes de collégiens
-            avec bonus sur un lycée donné.
+            Les seuils d'admission sont des scores Affelnet réels, donc ils
+            prennent en compte les <strong>bonus IPS</strong>. Ils ne
+            constituent donc absolument{" "}
+            <strong>pas un indicateur du niveau scolaire</strong> du dernier
+            collégien admis et donc du lycée. Un seuil élevé indique une forte
+            pression des collégiens bénéficiant de bonus IPS (cf. situation des
+            lycées Turgot, Condorcet ou Hélène Boucher par exemple). La section
+            "Secteurs" plus bas permet de se faire une idée du poids des 2
+            groupes de collégiens avec bonus sur un lycée donné.
           </div>
           <div>
             De plus, comme le montre la figure ci-dessous, le domaine de valeur
-            des scores Affelnet est <strong>loin d'être continu</strong>, donc une variation de
-            seuil d'une année sur l'autre ne doit pas être sur-interpreté non
-            plus (par exemple on voit sur le schéma ci-dessous (à l'échelle) qu'aucun collégien ne peut avoir un
-            score entre 27 000 et 37 000).
+            des scores Affelnet est <strong>loin d'être continu</strong>, donc
+            une variation de seuil d'une année sur l'autre ne doit pas être
+            sur-interpreté non plus (par exemple on voit sur le schéma
+            ci-dessous (à l'échelle) qu'aucun collégien ne peut avoir un score
+            entre 27 000 et 37 000).
           </div>
         </Alert>
         <div className="col-12 col-sm-10 col-md-8 col-lg-6 col-xl-8 col-xxl-8 mx-auto">
