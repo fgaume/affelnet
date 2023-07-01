@@ -1,12 +1,12 @@
 import axios from "axios";
 import {
   nomsLyceesMap,
-  seuilsLyceesMap,
   urlsLyceesMap,
   tousSecteurs,
 } from "../data/lycees";
 
-const fetchLycees = async (nomCollegeSecteur) => {
+const fetchLycees = async (nomCollegeSecteur, seuilsLyceesMap) => {
+  console.log('fetch', seuilsLyceesMap);
   if (nomCollegeSecteur) {
     const response = await axios({
       method: "GET",

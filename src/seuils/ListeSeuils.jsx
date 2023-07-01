@@ -7,7 +7,7 @@ import {
   ExclamationCircle,
   ExclamationLg,
 } from "react-bootstrap-icons";
-import { nomsLyceesMap, seuilsLyceesMap, urlsLyceesMap } from "../data/lycees";
+import { nomsLyceesMap, urlsLyceesMap } from "../data/lycees";
 import { firestore } from "../services/firebase";
 import { formatVariation, formatFloat, formatInt } from "../services/helper";
 import "./ListeSeuils.css";
@@ -22,8 +22,8 @@ function useSeuils(sorting = "byLycee") {
         const newSeuils = snapshot.docs.map((doc) => ({
           id: doc.id,
           nom: nomsLyceesMap.get(doc.id),
-          seuil_prev_prev: seuilsLyceesMap.get(doc.id)[0],
-          seuil_prev: seuilsLyceesMap.get(doc.id)[1],
+          seuil_prev_prev: doc.data().seuil2021 > 0 ? Math.round(doc.data().seuil2021) : 0,
+          seuil_prev: doc.data().seuil2022 > 0 ? Math.round(doc.data().seuil2022) : 0,
           delta: doc.data().seuil2023 > 0 ? Math.round(doc.data().seuil2023 - doc.data().seuil2022) : 0,
           url: urlsLyceesMap.get(doc.id),
           ...doc.data(),
@@ -94,13 +94,13 @@ const ListeSeuils = (props) => {
       <div className="mb-3">
         <ArrowReturnRight /> Cette section liste les scores d'admission{" "}
         <strong>non-boursiers</strong> de chaque lycée parisien lors des 2
-        dernières sessions, ainsi que l'évolution par rapport à 2021. La source
+        dernières sessions, ainsi que l'évolution par rapport à l'an dernier. La source
         de ces seuils est l'ensemble des fiches-barème reçues du Rectorat et
         ensuite partagées par les parents. Figure également un lien vers la
         fiche descriptive du lycée produite par la FCPE. Les seuils des
         anciennes années sont arrondis.
       </div>
-      <div className="w-50">
+      <div className="combo">
         <Form.Select size="sm" value={sorting} onChange={handleSortChange}>
           <option value="byLycee">trier par lycée</option>
           <option value="bySeuil">trier par seuil 2023</option>

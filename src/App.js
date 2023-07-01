@@ -11,7 +11,7 @@ import LoadingScreen from "./main/LoadingScreen";
 import Title from "./main/Title";
 import Secteurs from "./secteurs/Secteurs";
 import { deleteWorker } from "./services/helper";
-import fetchLycees from "./services/lycees";
+import fetchLycees from "./services/lyceeService";
 import {
   fetchLyceesHavingSpecialites,
   resetExclu,
@@ -20,9 +20,38 @@ import {
 import ListeSeuils from "./seuils/ListeSeuils";
 import MesContributions from "./seuils/MesContributions";
 import MonSocle from "./socle/MonSocle";
+import { firestore } from "./services/firebase";
+import { collection, onSnapshot } from "firebase/firestore";
+
+function useSeuilsCourants() {
+  const [seuilsLyceesMap, setSeuilsLyceesMap] = useState([]);
+
+  useEffect(() => {
+    const unsubscribe = onSnapshot(
+      collection(firestore, "seuils"),
+      (snapshot) => {
+        const newSeuils = snapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        }));
+        let newMap = new Map();
+        newSeuils.forEach((seuil) => {
+            newMap.set(seuil.id, [ seuil.seuil2022, seuil.seuil2023]);
+        });
+        setSeuilsLyceesMap(newMap);
+      },
+      (error) => {
+        console.log("erreur firestore: ", error);
+      }
+    );
+    return () => unsubscribe();
+  }, []);
+  return seuilsLyceesMap;
+}
+
 
 const App = () => {
-  const version = "v9.0.2 30/06/2023";
+  const version = "v9.1.0 01/07/2023";
   const contrib = true;
 
   const [loading, setLoading] = useState(true);
@@ -40,6 +69,8 @@ const App = () => {
   const [avancementCompetences, setAvancementCompetences] = useState(0);
   const [avancementNotes, setAvancementNotes] = useState(0);
   const [numberSeuils, setNumberSeuils] = useState(0);
+
+  const seuilsLyceesMap = useSeuilsCourants();
 
   const handleBilanChange = (previous, next, newAvancement) => {
     setAvancementNotes(newAvancement);
@@ -84,11 +115,13 @@ const App = () => {
     setNumberSeuils(newNumberSeuils);
   };
 
+
   useEffect(() => {
+    //console.log(seuilsLyceesMap);
     //console.log("useffect App.js");
     setTimeout(() => setLoading(false), 500);
     if (collegeSecteur) {
-      fetchLycees(collegeSecteur).then((newLycees) => {
+      fetchLycees(collegeSecteur, seuilsLyceesMap).then((newLycees) => {
         if (newLycees && newLycees.length === 3) {
           newLycees.forEach((listeLycees) => resetExclu(listeLycees));
           if (filtreSpecialites && filtreSpecialites.length > 0) {
@@ -112,7 +145,7 @@ const App = () => {
         }
       });
     }
-  }, [collegeSecteur, filtreSpecialites]);
+  }, [collegeSecteur, filtreSpecialites, seuilsLyceesMap]);
 
   return (
     <>

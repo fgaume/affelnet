@@ -2,6 +2,7 @@ import React from "react";
 import { Card, OverlayTrigger, Table, Tooltip } from "react-bootstrap";
 import { formatFloat, formatVariation } from "../services/helper";
 import { QuestionCircleFill } from "react-bootstrap-icons";
+import "./AffichageScores.css";
 
 const AffichageScores = (props) => {
   return (
@@ -12,7 +13,7 @@ const AffichageScores = (props) => {
             <td className="text-muted score">
               <h6>
                 <div className="d-flex align-items-center gap-1 justify-content-center mt-2">
-                  Score 2021{" "}
+                  Score 2022{" "}
                   <OverlayTrigger
                     trigger="click"
                     placement="top"
@@ -30,7 +31,7 @@ const AffichageScores = (props) => {
             <td className="text-primary score">
               <h6>
                 <div className="d-flex align-items-center gap-1 justify-content-center mt-2">
-                  Score 2022{" "}
+                  Score 2023{" "}
                   <OverlayTrigger
                     trigger="click"
                     placement="top"

@@ -64,8 +64,8 @@ const ListeStatsChamp = (props) => {
       </Card.Subtitle>
       {stats && (
         <Card.Subtitle className="text-center mb-2 mt-0 text-success">
-          Moyenne: {formatFloat(stats.moyenne)} &nbsp;&nbsp; | &nbsp;&nbsp; Ecart-type:{" "}
-          {formatFloat(stats.ecartType)}
+          Moyenne: {formatFloat(stats.moyenne)} &nbsp;&nbsp; | &nbsp;&nbsp;
+          Ecart-type: {formatFloat(stats.ecartType)}
         </Card.Subtitle>
       )}
       {notes.length > 0 && (

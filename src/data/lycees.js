@@ -280,12 +280,12 @@ const listeLycees = [
 const tousSecteurs = ['0750655E','0750654D', '0750685M', '0750692V'];
 
 const nomsLyceesMap = new Map();
-const seuilsLyceesMap = new Map();
+//const seuilsLyceesMap = new Map();
 const urlsLyceesMap = new Map();
 listeLycees.forEach(item => {
     nomsLyceesMap.set(item.code, item.nom);
-    seuilsLyceesMap.set(item.code, item.seuils);
+    //seuilsLyceesMap.set(item.code, item.seuils);
     urlsLyceesMap.set(item.code, item.url);
 });
 
-export {listeLycees, nomsLyceesMap, seuilsLyceesMap, urlsLyceesMap, tousSecteurs}
+export {listeLycees, nomsLyceesMap, urlsLyceesMap, tousSecteurs}

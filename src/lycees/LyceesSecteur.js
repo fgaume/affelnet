@@ -36,10 +36,10 @@ const LyceesSecteur = (props) => {
       return "filtered";
     } else {
       if (lycee.seuils[1] > 0) {
-        return nextResult > 0 ? "admissible" : "elimine";
+        return nextResult >= 0 ? "admissible" : "elimine";
       }
       if (lycee.seuils[0] > 0) {
-        return prevResult > 0 ? "admissible" : "elimine";
+        return prevResult >= 0 ? "admissible" : "elimine";
       }
       return "inconnu";
     }
@@ -51,7 +51,7 @@ const LyceesSecteur = (props) => {
         <ArrowReturnRight /> Cette section indique votre score Affelnet de{" "}
         <strong>secteur {props.secteur}</strong> ainsi que les lycées de{" "}
         <strong>secteur {props.secteur}</strong> que vous auriez obtenus, ou
-        pas, dans les conditions de 2021 et 2022 compte tenu des résultats
+        pas, dans les conditions des années précédentes, compte tenu des résultats
         scolaires actuels. Les lycées pour lesquels votre score aurait été suffisant sont
         en vert. Les 2 autres onglets ci-dessus afficheront les lycées des
         2 autres secteurs.
@@ -63,17 +63,17 @@ const LyceesSecteur = (props) => {
           tipPrevious={
             "Votre score affelnet pour un voeu de lycée de secteur " +
             props.secteur +
-            " en 2021"
+            " en 2022"
           }
           tipNext={
             "Votre score affelnet pour un voeu de lycée de secteur " +
             props.secteur +
-            " en 2022"
+            " en 2023"
           }
           tipDelta={
             "Différence de score affelnet pour un voeu de lycée de secteur " +
             props.secteur +
-            " entre 2021 et 2022"
+            " entre 2022 et 2023"
           }
         />
       </div>
@@ -92,28 +92,6 @@ const LyceesSecteur = (props) => {
                         {"Lycée de secteur " +
                           props.secteur +
                           " avec le lien vers sa fiche descriptive"}
-                      </Tooltip>
-                    )}
-                    rootCloseEvent="mousedown"
-                    rootClose="true"
-                  >
-                    <QuestionCircleFill
-                      width="20"
-                      height="20"
-                      className="mb-1"
-                    />
-                  </OverlayTrigger>
-                </th>
-                <th className="resu">
-                  En 2021{" "}
-                  <OverlayTrigger
-                    trigger="click"
-                    placement="top"
-                    overlay={(propss) => (
-                      <Tooltip {...propss}>
-                        {
-                          "Différence entre mon score et le seuil d'admission au lycée en 2021"
-                        }
                       </Tooltip>
                     )}
                     rootCloseEvent="mousedown"
@@ -148,17 +126,39 @@ const LyceesSecteur = (props) => {
                     />
                   </OverlayTrigger>
                 </th>
+                <th className="resu">
+                  En 2023{" "}
+                  <OverlayTrigger
+                    trigger="click"
+                    placement="top"
+                    overlay={(propss) => (
+                      <Tooltip {...propss}>
+                        {
+                          "Différence entre mon score et le seuil d'admission au lycée en 2023"
+                        }
+                      </Tooltip>
+                    )}
+                    rootCloseEvent="mousedown"
+                    rootClose="true"
+                  >
+                    <QuestionCircleFill
+                      width="20"
+                      height="20"
+                      className="mb-1"
+                    />
+                  </OverlayTrigger>
+                </th>
               </tr>
             </thead>
             <tbody>
               {props.lycees.map((lycee, index) => {
                 const prevResult =
                   lycee.seuils[0] > 0
-                    ? parseInt(props.scorePrevious + bonusGeo - lycee.seuils[0])
+                    ? Math.round(props.scorePrevious + bonusGeo - lycee.seuils[0])
                     : null;
                 const nextResult =
                   lycee.seuils[1] > 0 && props.scoreNext > 0
-                    ? parseInt(props.scoreNext + bonusGeo - lycee.seuils[1])
+                    ? Math.round(props.scoreNext + bonusGeo - lycee.seuils[1])
                     : null;
                 const status = getStatus(lycee, prevResult, nextResult);
                 return (

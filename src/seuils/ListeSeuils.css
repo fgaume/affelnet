@@ -5,23 +5,18 @@ th.lycee {
     text-align:left;
 }
 th.seuil {
-    width: 20%;
     text-align:center;
 }
 th.variation {
-    width: 10%;
     text-align:center;
 }
 td.seuilprev {
-    width: 20%;
     text-align:center;
 }
 td.variation {
-    width: 10%;
     text-align:center;
 }
 td.seuil {
-    width: 20%;
     text-align:center;
 }
 
@@ -37,4 +32,7 @@ a:visited {
 }
 a:active {
     text-decoration: solid;
+}
+div.combo {
+    width: 10em;
 }

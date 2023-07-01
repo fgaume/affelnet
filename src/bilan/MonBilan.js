@@ -71,20 +71,23 @@ const MonBilan = (props) => {
     const scoreCDs = computeNoteCDs(matieres, semestres);
     const avancement = computeAvancementNotes(matieres, semestres);
     //console.log(JSON.stringify(scoreCDs));
+
     const scoreBPprevious = computeBilanPeriodique(
-      scoreCDs,
-      moyennesAcademiques.get("2021"),
-      ecartsAcademiques.get("2021")
-    );
-    //console.log("score BP = " + formatFloat(scoreBPprevious));
-    setScoreBilanPrevious(scoreBPprevious);
-    const scoreBPnext = computeBilanPeriodique(
       scoreCDs,
       moyennesAcademiques.get("2022"),
       ecartsAcademiques.get("2022")
     );
+    //console.log("score BP = " + formatFloat(scoreBPprevious));
+    setScoreBilanPrevious(scoreBPprevious);
+
+    const scoreBPnext = computeBilanPeriodique(
+      scoreCDs,
+      moyennesAcademiques.get("2023"),
+      ecartsAcademiques.get("2023")
+    );
     //console.log("score BP = " + formatFloat(scoreBPnext));
     setScoreBilanNext(scoreBPnext);
+    
     props.onChange(scoreBPprevious, scoreBPnext, avancement);
   }, [matieres, semestres, props]);
 

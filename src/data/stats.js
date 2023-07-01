@@ -38,14 +38,36 @@ const ecartsAcademiques2022 = new Map([
     ['EPS', 1.82626]
 ]);
 
+const moyennesAcademiques2023 = new Map([
+    ['Mathématiques', 11.84143],
+    ['Français', 12.30632],
+    ['Histoire-Géo', 12.47607],
+    ['Langues', 13.07874],
+    ['Sciences', 12.89748],
+    ['Arts', 14.53659],
+    ['EPS', 14.61110]
+]);
+
+const ecartsAcademiques2023 = new Map([
+    ['Mathématiques', 3.915427],
+    ['Français', 3.195228],
+    ['Histoire-Géo', 3.148615],
+    ['Langues', 3.028468],
+    ['Sciences', 2.733734],
+    ['Arts', 1.874239],
+    ['EPS', 1.816036]
+]);
+
 const moyennesAcademiques = new Map([
     ['2021', moyennesAcademiques2021],
-    ['2022', moyennesAcademiques2022]
+    ['2022', moyennesAcademiques2022],
+    ['2023', moyennesAcademiques2023]
 ]);
 
 const ecartsAcademiques = new Map([
     ['2021', ecartsAcademiques2021],
-    ['2022', ecartsAcademiques2022]
+    ['2022', ecartsAcademiques2022],
+    ['2023', ecartsAcademiques2023]
 ]);
 
 
