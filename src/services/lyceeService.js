@@ -47,18 +47,18 @@ const fetchLycees = async (nomCollegeSecteur, seuilsLyceesMap) => {
 
       // tri par seuil décroissant
       newLycees.sort((fa, fb) => {
-        if (fa.seuils[1] !== 0 && fb.seuils[1] !== 0) {
+        if (fa.seuils[2] !== 0 && fb.seuils[2] !== 0) {
+          if (fa.seuils[2] < fb.seuils[2]) {
+            return 1;
+          }
+          if (fa.seuils[2] > fb.seuils[2]) {
+            return -1;
+          }
+        } else {
           if (fa.seuils[1] < fb.seuils[1]) {
             return 1;
           }
           if (fa.seuils[1] > fb.seuils[1]) {
-            return -1;
-          }
-        } else {
-          if (fa.seuils[0] < fb.seuils[0]) {
-            return 1;
-          }
-          if (fa.seuils[0] > fb.seuils[0]) {
             return -1;
           }
         }

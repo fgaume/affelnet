@@ -1,6 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { Button, Tab, Tabs } from "react-bootstrap";
-import { ArrowClockwise, CheckLg, ExclamationLg, ShareFill } from "react-bootstrap-icons";
+import {
+  ArrowClockwise,
+  CheckLg,
+  ExclamationLg,
+  ShareFill,
+} from "react-bootstrap-icons";
 import Accordion from "react-bootstrap/Accordion";
 import "./App.css";
 import MonBilan from "./bilan/MonBilan";
@@ -20,10 +25,9 @@ import {
 import ListeSeuils from "./seuils/ListeSeuils";
 import MesContributions from "./seuils/MesContributions";
 import MonSocle from "./socle/MonSocle";
-import { firestore } from "./services/firebase";
-import { collection, onSnapshot } from "firebase/firestore";
+import { seuilsLyceesMap } from "./data/lycees";
 
-function useSeuilsCourants() {
+/* function useSeuilsCourants() {
   const [seuilsLyceesMap, setSeuilsLyceesMap] = useState([]);
 
   useEffect(() => {
@@ -47,11 +51,10 @@ function useSeuilsCourants() {
     return () => unsubscribe();
   }, []);
   return seuilsLyceesMap;
-}
-
+} */
 
 const App = () => {
-  const version = "v9.1.1 03/07/2023";
+  const version = "v9.1.2 04/07/2023";
   const contrib = true;
 
   const [loading, setLoading] = useState(true);
@@ -70,7 +73,7 @@ const App = () => {
   const [avancementNotes, setAvancementNotes] = useState(0);
   const [numberSeuils, setNumberSeuils] = useState(0);
 
-  const seuilsLyceesMap = useSeuilsCourants();
+  //  const seuilsLyceesMap = useSeuilsCourants();
 
   const handleBilanChange = (previous, next, newAvancement) => {
     setAvancementNotes(newAvancement);
@@ -115,7 +118,6 @@ const App = () => {
     setNumberSeuils(newNumberSeuils);
   };
 
-
   useEffect(() => {
     //console.log(seuilsLyceesMap);
     //console.log("useffect App.js");
@@ -145,7 +147,7 @@ const App = () => {
         }
       });
     }
-  }, [collegeSecteur, filtreSpecialites, seuilsLyceesMap]);
+  }, [collegeSecteur, filtreSpecialites]);
 
   return (
     <>
@@ -282,7 +284,10 @@ const App = () => {
                 <ShareFill width="20" height="20" className="ms-2" />
               </Accordion.Header>
               <Accordion.Body>
-                <MesContributions contrib={contrib} nomCollegeScolarisation={nomCollegeScolarisation} />
+                <MesContributions
+                  contrib={contrib}
+                  nomCollegeScolarisation={nomCollegeScolarisation}
+                />
               </Accordion.Body>
             </Accordion.Item>
           </Accordion>

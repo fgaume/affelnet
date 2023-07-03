@@ -35,10 +35,10 @@ const LyceesSecteur = (props) => {
     if (lycee.exclu) {
       return "filtered";
     } else {
-      if (lycee.seuils[1] > 0) {
+      if (lycee.seuils[2] > 0) {
         return nextResult >= 0 ? "admissible" : "elimine";
       }
-      if (lycee.seuils[0] > 0) {
+      if (lycee.seuils[1] > 0) {
         return prevResult >= 0 ? "admissible" : "elimine";
       }
       return "inconnu";
@@ -153,12 +153,12 @@ const LyceesSecteur = (props) => {
             <tbody>
               {props.lycees.map((lycee, index) => {
                 const prevResult =
-                  lycee.seuils[0] > 0
-                    ? Math.round(props.scorePrevious + bonusGeo - lycee.seuils[0])
+                  lycee.seuils[1] > 0
+                    ? Math.round(props.scorePrevious + bonusGeo - lycee.seuils[1])
                     : null;
                 const nextResult =
-                  lycee.seuils[1] > 0 && props.scoreNext > 0
-                    ? Math.round(props.scoreNext + bonusGeo - lycee.seuils[1])
+                  lycee.seuils[2] > 0 && props.scoreNext > 0
+                    ? Math.round(props.scoreNext + bonusGeo - lycee.seuils[2])
                     : null;
                 const status = getStatus(lycee, prevResult, nextResult);
                 return (
@@ -182,17 +182,17 @@ const LyceesSecteur = (props) => {
                     </td>
                     <td className="resu">
                       <span className={determineColor(prevResult, lycee)}>
-                        {lycee.seuils[0] > 0
+                        {lycee.seuils[1] > 0
                           ? formatVariation(prevResult)
                           : "?"}
                       </span>
                     </td>
                     <td className="resu">
                       <span className={determineColor(nextResult, lycee)}>
-                        {lycee.seuils[1] > 0
+                        {lycee.seuils[2] > 0
                           ? formatVariation(nextResult)
                           : "?"}
-                        {/*                         {lycee.seuils[1] > 0 && nextResult
+                        {/*                         {lycee.seuils[2] > 0 && nextResult
                           ? formatVariation(nextResult)
                           : "?"}
  */}{" "}

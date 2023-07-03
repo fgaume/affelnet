@@ -1,4 +1,3 @@
-import { collection, onSnapshot } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { Alert, Card, Figure, Form, Image, Table } from "react-bootstrap";
 import {
@@ -7,60 +6,50 @@ import {
   ExclamationCircle,
   ExclamationLg,
 } from "react-bootstrap-icons";
-import { nomsLyceesMap, urlsLyceesMap } from "../data/lycees";
-import { firestore } from "../services/firebase";
-import { formatVariation, formatFloat, formatInt } from "../services/helper";
+import { listeLycees, urlsLyceesMap } from "../data/lycees";
+import { formatFloat, formatInt, formatVariation } from "../services/helper";
 import "./ListeSeuils.css";
 
 function useSeuils(sorting = "byLycee") {
   const [lycees, setLycees] = useState([]);
 
   useEffect(() => {
-    const unsubscribe = onSnapshot(
-      collection(firestore, "seuils"),
-      (snapshot) => {
-        const newSeuils = snapshot.docs.map((doc) => ({
-          id: doc.id,
-          nom: nomsLyceesMap.get(doc.id),
-          seuil_prev_prev: doc.data().seuil2021 > 0 ? Math.round(doc.data().seuil2021) : 0,
-          seuil_prev: doc.data().seuil2022 > 0 ? Math.round(doc.data().seuil2022) : 0,
-          delta: doc.data().seuil2023 > 0 ? Math.round(doc.data().seuil2023 - doc.data().seuil2022) : 0,
-          url: urlsLyceesMap.get(doc.id),
-          ...doc.data(),
-        }));
-        switch (sorting) {
-          case "bySeuilPrevPrev":
-            newSeuils.sort((a, b) =>
-              a.seuil_prev_prev < b.seuil_prev_prev ? 1 : -1
-            );
-            break;
-          case "bySeuilPrev":
-            newSeuils.sort((a, b) => (a.seuil_prev < b.seuil_prev ? 1 : -1));
-            break;
-          case "bySeuil":
-            newSeuils.sort((a, b) => {
-              if (isNaN(a.seuil2023)) return 1;
-              if (isNaN(b.seuil2023)) return -1;
-              return a.seuil2023 < b.seuil2023 ? 1 : -1;
-            });
-            break;
-          case "byVariation":
-            newSeuils.sort((a, b) => {
-              if (isNaN(a.delta)) return 1;
-              if (isNaN(b.delta)) return -1;
-              return a.delta < b.delta ? 1 : -1;
-            });
-            break;
-          default:
-            newSeuils.sort((a, b) => (a.nom < b.nom ? -1 : 1));
-        }
-        setLycees(newSeuils);
-      },
-      (error) => {
-        console.log("erreur firestore: ", error);
-      }
-    );
-    return () => unsubscribe();
+    const newSeuils = listeLycees.map((doc) => ({
+      id: doc.code,
+      nom: doc.nom,
+      seuil_prev_prev: doc.seuils[0] > 0 ? Math.round(doc.seuils[0]) : 0,
+      seuil_prev: doc.seuils[1] > 0 ? Math.round(doc.seuils[1]) : 0,
+      delta: doc.seuils[2] > 0 ? Math.round(doc.seuils[2] - doc.seuils[1]) : 0,
+      url: urlsLyceesMap.get(doc.code),
+      seuil2023: doc.seuils[2] > 0 ? Math.round(doc.seuils[2]) : 0,
+    }));
+    switch (sorting) {
+      case "bySeuilPrevPrev":
+        newSeuils.sort((a, b) =>
+          a.seuil_prev_prev < b.seuil_prev_prev ? 1 : -1
+        );
+        break;
+      case "bySeuilPrev":
+        newSeuils.sort((a, b) => (a.seuil_prev < b.seuil_prev ? 1 : -1));
+        break;
+      case "bySeuil":
+        newSeuils.sort((a, b) => {
+          if (isNaN(a.seuil2023)) return 1;
+          if (isNaN(b.seuil2023)) return -1;
+          return a.seuil2023 < b.seuil2023 ? 1 : -1;
+        });
+        break;
+      case "byVariation":
+        newSeuils.sort((a, b) => {
+          if (isNaN(a.delta)) return 1;
+          if (isNaN(b.delta)) return -1;
+          return a.delta < b.delta ? 1 : -1;
+        });
+        break;
+      default:
+        newSeuils.sort((a, b) => (a.nom < b.nom ? -1 : 1));
+    }
+    setLycees(newSeuils);
   }, [sorting]);
   return lycees;
 }
@@ -94,9 +83,9 @@ const ListeSeuils = (props) => {
       <div className="mb-3">
         <ArrowReturnRight /> Cette section liste les scores d'admission{" "}
         <strong>non-boursiers</strong> de chaque lycée parisien lors des 2
-        dernières sessions, ainsi que l'évolution par rapport à l'an dernier. La source
-        de ces seuils est l'ensemble des fiches-barème reçues du Rectorat et
-        ensuite partagées par les parents. Figure également un lien vers la
+        dernières sessions, ainsi que l'évolution par rapport à l'an dernier. La
+        source de ces seuils est l'ensemble des fiches-barème reçues du Rectorat
+        et ensuite partagées par les parents. Figure également un lien vers la
         fiche descriptive du lycée produite par la FCPE. Les seuils des
         anciennes années sont arrondis.
       </div>
@@ -153,9 +142,7 @@ const ListeSeuils = (props) => {
                   {lycee.seuil2023 > 0 ? formatFloat(lycee.seuil2023) : "?"}
                 </td>
                 <td className="seuil text-primary">
-                  {lycee.seuil2023 > 0
-                    ? formatVariation(lycee.delta)
-                    : "?"}
+                  {lycee.seuil2023 > 0 ? formatVariation(lycee.delta) : "?"}
                 </td>
               </tr>
             ))}

@@ -1,8 +1,7 @@
 import React from "react";
-import SeuilEditor from "./SeuilEditor";
 import { Alert } from "react-bootstrap";
-import StatsChamps from "../stats/StatsChamps";
 import { ArrowReturnRight } from "react-bootstrap-icons";
+import SeuilEditor from "./SeuilEditor";
 
 const MesContributions = (props) => {
   return (
@@ -28,13 +27,16 @@ const MesContributions = (props) => {
               nomCollegeScolarisation={props.nomCollegeScolarisation}
             />
           </div>
-          <hr />
-          <StatsChamps
-            nomCollegeScolarisation={props.nomCollegeScolarisation}
-          />
         </>
       )}
     </>
   );
 };
 export default MesContributions;
+
+/*
+          <hr />
+          <StatsChamps
+            nomCollegeScolarisation={props.nomCollegeScolarisation}
+          />
+*/
