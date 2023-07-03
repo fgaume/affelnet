@@ -51,7 +51,7 @@ function useSeuilsCourants() {
 
 
 const App = () => {
-  const version = "v9.1.0 01/07/2023";
+  const version = "v9.1.1 03/07/2023";
   const contrib = true;
 
   const [loading, setLoading] = useState(true);
