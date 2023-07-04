@@ -54,7 +54,7 @@ import { seuilsLyceesMap } from "./data/lycees";
 } */
 
 const App = () => {
-  const version = "v9.1.3 04/07/2023";
+  const version = "v9.1.4 04/07/2023";
   const contrib = true;
 
   const [loading, setLoading] = useState(true);
@@ -72,6 +72,7 @@ const App = () => {
   const [avancementCompetences, setAvancementCompetences] = useState(0);
   const [avancementNotes, setAvancementNotes] = useState(0);
   const [numberSeuils, setNumberSeuils] = useState(0);
+  const [seuilsCourants, setSeuilsCourants] = useState(seuilsLyceesMap);
 
   //  const seuilsLyceesMap = useSeuilsCourants();
 
@@ -118,12 +119,26 @@ const App = () => {
     setNumberSeuils(newNumberSeuils);
   };
 
+  const onSeuilUpdated = (lyceeId, updatedSeuil) => {
+    console.log("App.onSeuilUpdated : " + lyceeId + ": ", updatedSeuil);
+    const seuilsCourantsCopy = new Map(
+      JSON.parse(
+       JSON.stringify(Array.from(seuilsCourants))
+      )
+    );
+    const existingSeuil = seuilsCourantsCopy.get(lyceeId);
+    if (existingSeuil[2] !== updatedSeuil) {
+      seuilsCourantsCopy.set(lyceeId, [existingSeuil[0], existingSeuil[1], updatedSeuil]);
+      setSeuilsCourants(seuilsCourantsCopy);
+    }
+  };
+
   useEffect(() => {
-    //console.log(seuilsLyceesMap);
-    //console.log("useffect App.js");
+    console.log(seuilsCourants);
+    console.log("useffect App.js");
     setTimeout(() => setLoading(false), 500);
     if (collegeSecteur) {
-      fetchLycees(collegeSecteur, seuilsLyceesMap).then((newLycees) => {
+      fetchLycees(collegeSecteur, seuilsCourants).then((newLycees) => {
         if (newLycees && newLycees.length === 3) {
           newLycees.forEach((listeLycees) => resetExclu(listeLycees));
           if (filtreSpecialites && filtreSpecialites.length > 0) {
@@ -147,7 +162,7 @@ const App = () => {
         }
       });
     }
-  }, [collegeSecteur, filtreSpecialites]);
+  }, [collegeSecteur, filtreSpecialites, seuilsCourants]);
 
   return (
     <>
@@ -287,6 +302,7 @@ const App = () => {
                 <MesContributions
                   contrib={contrib}
                   nomCollegeScolarisation={nomCollegeScolarisation}
+                  onSeuilUpdated={onSeuilUpdated}
                 />
               </Accordion.Body>
             </Accordion.Item>

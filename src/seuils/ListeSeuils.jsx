@@ -21,7 +21,7 @@ function useSeuils(sorting = "byLycee") {
       seuil_prev: doc.seuils[1] > 0 ? Math.round(doc.seuils[1]) : 0,
       delta: doc.seuils[2] > 0 ? Math.round(doc.seuils[2] - doc.seuils[1]) : 0,
       url: urlsLyceesMap.get(doc.code),
-      seuil2023: doc.seuils[2] > 0 ? Math.round(doc.seuils[2]) : 0,
+      seuil2023: doc.seuils[2] > 0 ? doc.seuils[2] : 0,
     }));
     switch (sorting) {
       case "bySeuilPrevPrev":

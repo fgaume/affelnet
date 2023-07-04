@@ -17,9 +17,10 @@ const SeuilEditor = (props) => {
   const updateSeuil = (codeLycee, seuil) => {
     const docRef = doc(firestore, "seuils", codeLycee);
     updateDoc(docRef, {
-      seuil2023: parseFloat(seuil.replace(",", ".")),
+      seuil2023: seuil,
       contributeur: props.nomCollegeScolarisation,
     });
+    props.onSeuilUpdated(codeLycee, seuil);
   };
 
   const onLyceeChange = (lyceeUpdate) => {
@@ -28,12 +29,13 @@ const SeuilEditor = (props) => {
 
   const onSeuilLyceeChange = (event) => {
     const newSeuil = event.target.value;
-    const cleanSeuil = newSeuil.replace(",", ".").replace(" ", "");
+    const cleanSeuil = parseFloat(newSeuil.replace(",", ".").replace(" ", ""));
     setSeuilLycee(cleanSeuil);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    //const cleanSeuil = parseFloat(seuilLycee);
     updateSeuil(lyceeSeuil.code, seuilLycee);
     typeaheadRef.current.clear();
     document.getElementById("seuilLycee").value = "";

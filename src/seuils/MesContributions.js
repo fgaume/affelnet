@@ -4,6 +4,12 @@ import { ArrowReturnRight } from "react-bootstrap-icons";
 import SeuilEditor from "./SeuilEditor";
 
 const MesContributions = (props) => {
+
+  const onSeuilUpdated = (lyceeId, updatedSeuil) => {
+    console.log("MesContributions.onSeuilUpdated : " + lyceeId + ": ", updatedSeuil);
+    props.onSeuilUpdated(lyceeId, updatedSeuil);
+  };
+
   return (
     <>
       {props.contrib === true && (
@@ -25,6 +31,7 @@ const MesContributions = (props) => {
           <div className="mx-2 mb-4 col-12 col-sm-10 col-md-8 col-lg-6 col-xl-6 col-xxl-6 mx-auto">
             <SeuilEditor
               nomCollegeScolarisation={props.nomCollegeScolarisation}
+              onSeuilUpdated={onSeuilUpdated}
             />
           </div>
         </>
