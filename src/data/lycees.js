@@ -62,7 +62,7 @@ const listeLycees = [
     {
       "code": "0750712S",
       "nom": "DIDEROT",
-      "seuils": [25316.545, 23470, 0],
+      "seuils": [25316.545, 23470, 5664.67],
       "url": "https://www.fcpe75.org/wp-content/uploads/2023/02/19_DIDEROT_Fiche_Lycee2023.pdf"
     },
     {
@@ -74,7 +74,7 @@ const listeLycees = [
     {
       "code": "0750671X",
       "nom": "EDGAR QUINET",
-      "seuils": [24129.843, 39047.581, 0],
+      "seuils": [24129.843, 39047.581, 38713.174],
       "url": "https://www.fcpe75.org/wp-content/uploads/2023/02/09_EDGAR_QUINET_Fiche_Lycee2023.pdf"
     },
     {
@@ -98,13 +98,13 @@ const listeLycees = [
     {
       "code": "0750690T",
       "nom": "FRANCOIS VILLON",
-      "seuils": [24090.145, 22363.395, 0],
+      "seuils": [24090.145, 22363.395, 6511.071],
       "url": "https://www.fcpe75.org/wp-content/uploads/2022/02/14_VILLON_Fiche_Lycee2022.pdf"
     },
     {
       "code": "0750684L",
       "nom": "GABRIEL FAURE",
-      "seuils": [23180.853, 24402.417, 0],
+      "seuils": [23180.853, 24402.417, 5756.611],
       "url": "https://www.fcpe75.org/wp-content/uploads/2023/02/13_GABRIEL_FAURE_Fiche-Lycee2023.pdf"
     },
     {
@@ -188,13 +188,13 @@ const listeLycees = [
     {
       "code": "0750715V",
       "nom": "MAURICE RAVEL",
-      "seuils": [39610.883, 39266.478, 0],
+      "seuils": [39610.883, 39266.478, 39597.318],
       "url": "https://www.fcpe75.org/wp-content/uploads/2022/02/20_RAVEL_Fiche_Lycee2022.pdf"
     },
     {
       "code": "0750703G",
       "nom": "MOLIERE",
-      "seuils": [39139.363, 38884.118, 0],
+      "seuils": [39139.363, 38884.118, 39128.392],
       "url": "https://www.fcpe75.org/wp-content/uploads/2023/02/16_MOLIERE_Fiche_Lycee2023.pdf"
     },
     {
@@ -218,13 +218,13 @@ const listeLycees = [
     {
       "code": "0750679F",
       "nom": "PAUL VALERY",
-      "seuils": [22268.841, 17760, 0],
+      "seuils": [22268.841, 17760, 5203.038],
       "url": "https://www.fcpe75.org/wp-content/uploads/2022/03/12_PAUL_VALERY_Fiche_Lycee2022.pdf"
     },
     {
         "code": "0750688R",
         "nom": "RABELAIS",
-        "seuils": [7707.827, 22132.527, 0],
+        "seuils": [7707.827, 22132.527, 5993.295],
       "url": "https://www.fcpe75.org/wp-content/uploads/2022/02/18_RABELAIS_Fiche_Lycee2022.pdf"
     },
     {
@@ -236,7 +236,7 @@ const listeLycees = [
     {
       "code": "0750682J",
       "nom": "RODIN",
-      "seuils": [25216.998, 7886.202, 0],
+      "seuils": [25216.998, 7886.202, 5586.306],
       "url": "https://www.fcpe75.org/wp-content/uploads/2023/02/13_RODIN_Fiche_Lycee2023.pdf"
     },
     {

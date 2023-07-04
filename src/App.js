@@ -54,7 +54,7 @@ import { seuilsLyceesMap } from "./data/lycees";
 } */
 
 const App = () => {
-  const version = "v9.1.2 04/07/2023";
+  const version = "v9.1.3 04/07/2023";
   const contrib = true;
 
   const [loading, setLoading] = useState(true);
