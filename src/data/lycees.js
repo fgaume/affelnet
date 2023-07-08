@@ -38,7 +38,7 @@ const listeLycees = [
     {
       "code": "0750698B",
       "nom": "CLAUDE BERNARD",
-      "seuils": [7150.874, 21767.262, 0],
+      "seuils": [7150.874, 21767.262, 23678.567],
       "url": "https://www.fcpe75.org/wp-content/uploads/2022/03/16_CLAUDE_BERNARD_Fiche_Lycee2022.pdf"
     },
     {
@@ -122,7 +122,7 @@ const listeLycees = [
     {
       "code": "0750654D",
       "nom": "HENRI IV",
-      "seuils": [0, 40734.331, 0],
+      "seuils": [0, 40734.331, 40875.435],
       "url": "https://www.fcpe75.org/wp-content/uploads/2022/02/05_HENRI-IV_Fiche_Lycee2022.pdf"
     },
     {
@@ -182,7 +182,7 @@ const listeLycees = [
     {
       "code": "0750655E",
       "nom": "LOUIS LE GRAND",
-      "seuils": [0, 0, 0],
+      "seuils": [0, 0, 40876.346],
       "url": "https://www.fcpe75.org/wp-content/uploads/2023/02/05_LOUIS-LE-GRAND_Fiche_Lycee2023.pdf"
     },
     {

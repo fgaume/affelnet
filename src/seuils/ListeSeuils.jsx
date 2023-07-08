@@ -19,7 +19,7 @@ function useSeuils(sorting = "byLycee") {
       nom: doc.nom,
       seuil_prev_prev: doc.seuils[0] > 0 ? Math.round(doc.seuils[0]) : 0,
       seuil_prev: doc.seuils[1] > 0 ? Math.round(doc.seuils[1]) : 0,
-      delta: doc.seuils[2] > 0 ? Math.round(doc.seuils[2] - doc.seuils[1]) : 0,
+      delta: (doc.seuils[1] > 0) && (doc.seuils[2] > 0) ? Math.round(doc.seuils[2] - doc.seuils[1]) : null,
       url: urlsLyceesMap.get(doc.code),
       seuil2023: doc.seuils[2] > 0 ? doc.seuils[2] : 0,
     }));
@@ -142,7 +142,7 @@ const ListeSeuils = (props) => {
                   {lycee.seuil2023 > 0 ? formatFloat(lycee.seuil2023) : "?"}
                 </td>
                 <td className="seuil text-primary">
-                  {lycee.seuil2023 > 0 ? formatVariation(lycee.delta) : "?"}
+                  {lycee.delta !== null ? formatVariation(lycee.delta) : "?"}
                 </td>
               </tr>
             ))}
