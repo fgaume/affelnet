@@ -80,13 +80,13 @@ const listeLycees = [
     {
       "code": "0750677D",
       "nom": "ELISA LEMONNIER",
-      "seuils": [23861.234, 5709.842, 0],
+      "seuils": [23861.234, 5709.842, 25156],
       "url": "https://www.fcpe75.org/wp-content/uploads/2022/03/12_ELISA_LEMONNIER_Fiche_Lycee2022.pdf"
     },
     {
       "code": "0750692V",
       "nom": "EMILE DUBOIS",
-      "seuils": [38094.583, 32640, 0],
+      "seuils": [38094.583, 32640, 39073.4],
       "url": "https://www.fcpe75.org/wp-content/uploads/2022/03/14_EMILE_DUBOIS_Fiche_Lycee2022.pdf"
     },
     {
