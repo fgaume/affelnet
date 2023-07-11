@@ -6,7 +6,7 @@ import {
   ExclamationCircle,
   ExclamationLg,
 } from "react-bootstrap-icons";
-import { listeLycees, urlsLyceesMap } from "../data/lycees";
+import { listeLyceesSeuils, urlsLyceesMap } from "../data/lycees";
 import { formatFloat, formatInt, formatVariation } from "../services/helper";
 import "./ListeSeuils.css";
 
@@ -14,7 +14,7 @@ function useSeuils(sorting = "byLycee") {
   const [lycees, setLycees] = useState([]);
 
   useEffect(() => {
-    const newSeuils = listeLycees.map((doc) => ({
+    const newSeuils = listeLyceesSeuils.map((doc) => ({
       id: doc.code,
       nom: doc.nom,
       seuil_prev_prev: doc.seuils[0] > 0 ? Math.round(doc.seuils[0]) : 0,

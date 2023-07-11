@@ -27,6 +27,9 @@ const MesContributions = (props) => {
                 ce.dve@ac-paris.fr
               </a>
             </Alert>
+            <Alert variant="warning" className="mb-4">
+              <ArrowReturnRight /> Note : Henri IV et Louis le Grand n'ont pas de seuil unique puisque présentent des quotas par bonus IPS.
+            <div>Plus de détails dans <a href="https://www.ipp.eu/wp-content/uploads/2023/02/Note_IPP_89.pdf" aria-label="Lien note IPP">ce document.</a></div></Alert>
           </div>
           <div className="mx-2 mb-4 col-12 col-sm-10 col-md-8 col-lg-6 col-xl-6 col-xxl-6 mx-auto">
             <SeuilEditor

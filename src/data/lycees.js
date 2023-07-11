@@ -122,7 +122,7 @@ const listeLycees = [
     {
       "code": "0750654D",
       "nom": "HENRI IV",
-      "seuils": [0, 40734.331, 40875.435],
+      "seuils": [0, 0, 0],
       "url": "https://www.fcpe75.org/wp-content/uploads/2022/02/05_HENRI-IV_Fiche_Lycee2022.pdf"
     },
     {
@@ -182,7 +182,7 @@ const listeLycees = [
     {
       "code": "0750655E",
       "nom": "LOUIS LE GRAND",
-      "seuils": [0, 0, 40876.346],
+      "seuils": [0, 0, 0],
       "url": "https://www.fcpe75.org/wp-content/uploads/2023/02/05_LOUIS-LE-GRAND_Fiche_Lycee2023.pdf"
     },
     {
@@ -282,10 +282,12 @@ const tousSecteurs = ['0750655E','0750654D', '0750685M', '0750692V'];
 const nomsLyceesMap = new Map();
 const seuilsLyceesMap = new Map();
 const urlsLyceesMap = new Map();
+const listeLyceesSeuils = [];
 listeLycees.forEach(item => {
     nomsLyceesMap.set(item.code, item.nom);
     seuilsLyceesMap.set(item.code, item.seuils);
     urlsLyceesMap.set(item.code, item.url);
+    if (item.code !== '0750655E' && item.code !== '0750654D') listeLyceesSeuils.push(item);
 });
 
-export {listeLycees, nomsLyceesMap, seuilsLyceesMap, urlsLyceesMap, tousSecteurs}
+export {listeLyceesSeuils, listeLycees, nomsLyceesMap, seuilsLyceesMap, urlsLyceesMap, tousSecteurs}

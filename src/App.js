@@ -54,7 +54,7 @@ import { seuilsLyceesMap } from "./data/lycees";
 } */
 
 const App = () => {
-  const version = "v9.1.6 09/07/2023";
+  const version = "v9.1.7 11/07/2023";
   const contrib = true;
 
   const [loading, setLoading] = useState(true);
@@ -278,7 +278,7 @@ const App = () => {
             <Accordion.Item eventKey="4">
               <Accordion.Header>
                 <span className="fw-bolder">
-                  Seuils d'admission ({numberSeuils}/46)
+                  Seuils d'admission ({numberSeuils}/44)
                 </span>
               </Accordion.Header>
               <Accordion.Body>

@@ -3,7 +3,7 @@ import { doc, updateDoc } from "firebase/firestore";
 import { firestore } from "../services/firebase";
 import { Alert, Button, Card, Form } from "react-bootstrap";
 
-import { listeLycees as lycees } from "../data/lycees";
+import { listeLyceesSeuils as lycees } from "../data/lycees";
 
 import { Typeahead } from "react-bootstrap-typeahead";
 import { ArrowReturnRight, EmojiSmile } from "react-bootstrap-icons";
