@@ -1,44 +1,86 @@
 [
- {
-   "annee": 2022,
-   "champs": "Maths",
-   "moyenne": 11.81732654,
-   "ecart-type": 3.92003136
- },
- {
-   "annee": 2022,
-   "champs": "Français",
-   "moyenne": 12.35774014,
-   "ecart-type": 3.216123499
- },
- {
-   "annee": 2022,
-   "champs": "Histoire-Géo",
-   "moyenne": 12.47907026,
-   "ecart-type": 3.155237695
- },
- {
-   "annee": 2022,
-   "champs": "Langues",
-   "moyenne": 13.06765105,
-   "ecart-type": 3.013409673
- },
- {
-   "annee": 2022,
-   "champs": "Sciences",
-   "moyenne": 12.96649939,
-   "ecart-type": 2.712600027
- },
- {
-   "annee": 2022,
-   "champs": "Arts",
-   "moyenne": 14.5092,
-   "ecart-type": 1.88857
- },
- {
-   "annee": 2022,
-   "champs": "EPS",
-   "moyenne": 14.57907232,
-   "ecart-type": 1.826150475
- }
+  {
+    "annee": 2023,
+    "champs": "Maths",
+    "moyenne": 11.84143,
+    "ecart-type": 3.915427
+  },
+  {
+    "annee": 2023,
+    "champs": "Français",
+    "moyenne": 12.30632,
+    "ecart-type": 3.195228
+  },
+  {
+    "annee": 2023,
+    "champs": "Histoire-Géo",
+    "moyenne": 12.47607,
+    "ecart-type": 3.148615
+  },
+  {
+    "annee": 2023,
+    "champs": "Langues",
+    "moyenne": 13.07874,
+    "ecart-type": 3.028468
+  },
+  {
+    "annee": 2023,
+    "champs": "Sciences",
+    "moyenne": 12.89748,
+    "ecart-type": 2.733734
+  },
+  {
+    "annee": 2023,
+    "champs": "Arts",
+    "moyenne": 14.53659,
+    "ecart-type": 1.874239
+  },
+  {
+    "annee": 2023,
+    "champs": "EPS",
+    "moyenne": 14.61110,
+    "ecart-type": 1.816036
+  },
+  {
+    "annee": 2022,
+    "champs": "Maths",
+    "moyenne": 11.81732654,
+    "ecart-type": 3.92003136
+  },
+  {
+    "annee": 2022,
+    "champs": "Français",
+    "moyenne": 12.35774014,
+    "ecart-type": 3.216123499
+  },
+  {
+    "annee": 2022,
+    "champs": "Histoire-Géo",
+    "moyenne": 12.47907026,
+    "ecart-type": 3.155237695
+  },
+  {
+    "annee": 2022,
+    "champs": "Langues",
+    "moyenne": 13.06765105,
+    "ecart-type": 3.013409673
+  },
+  {
+    "annee": 2022,
+    "champs": "Sciences",
+    "moyenne": 12.96649939,
+    "ecart-type": 2.712600027
+  },
+  {
+    "annee": 2022,
+    "champs": "Arts",
+    "moyenne": 14.5092,
+    "ecart-type": 1.88857
+  },
+  {
+    "annee": 2022,
+    "champs": "EPS",
+    "moyenne": 14.57907232,
+    "ecart-type": 1.826150475
+  }
 ]
