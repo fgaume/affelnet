@@ -1,37 +1,37 @@
 [
   {
     "annee": 2023,
-    "champ": "Maths",
+    "champ": "MATHEMATIQUES",
     "moyenne": 11.84143,
     "ecart-type": 3.915427
   },
   {
     "annee": 2023,
-    "champ": "Français",
+    "champ": "FRANCAIS",
     "moyenne": 12.30632,
     "ecart-type": 3.195228
   },
   {
     "annee": 2023,
-    "champ": "Histoire-Géo",
+    "champ": "HISTOIRE_GEO",
     "moyenne": 12.47607,
     "ecart-type": 3.148615
   },
   {
     "annee": 2023,
-    "champ": "Langues",
+    "champ": "LANGUES_VIVANTES",
     "moyenne": 13.07874,
     "ecart-type": 3.028468
   },
   {
     "annee": 2023,
-    "champ": "Sciences",
+    "champ": "SCIENCES",
     "moyenne": 12.89748,
     "ecart-type": 2.733734
   },
   {
     "annee": 2023,
-    "champ": "Arts",
+    "champ": "ARTS",
     "moyenne": 14.53659,
     "ecart-type": 1.874239
   },
@@ -43,37 +43,37 @@
   },
   {
     "annee": 2022,
-    "champ": "Maths",
+    "champ": "MATHEMATIQUES",
     "moyenne": 11.81732654,
     "ecart-type": 3.92003136
   },
   {
     "annee": 2022,
-    "champ": "Français",
+    "champ": "FRANCAIS",
     "moyenne": 12.35774014,
     "ecart-type": 3.216123499
   },
   {
     "annee": 2022,
-    "champ": "Histoire-Géo",
+    "champ": "HISTOIRE_GEO",
     "moyenne": 12.47907026,
     "ecart-type": 3.155237695
   },
   {
     "annee": 2022,
-    "champ": "Langues",
+    "champ": "LANGUES_VIVANTES",
     "moyenne": 13.06765105,
     "ecart-type": 3.013409673
   },
   {
     "annee": 2022,
-    "champ": "Sciences",
+    "champ": "SCIENCES",
     "moyenne": 12.96649939,
     "ecart-type": 2.712600027
   },
   {
     "annee": 2022,
-    "champ": "Arts",
+    "champ": "ARTS",
     "moyenne": 14.5092,
     "ecart-type": 1.88857
   },
