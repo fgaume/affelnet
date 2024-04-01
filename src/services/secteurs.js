@@ -3,6 +3,10 @@ import axios from "axios";
 import { collegesMap } from "../data/colleges";
 import { formatInt } from "../services/helper";
 
+/*
+  fetchCollegesSecteur appelle l'API Rectorat pour récupérer la liste des collèges associés
+  à un lycée donné (codeLyceeSecteur), triée par secteur (1/2/3)
+*/
 const fetchCollegesSecteur = async (codeLyceeSecteur) => {
   if (codeLyceeSecteur) {
     const response = await axios({

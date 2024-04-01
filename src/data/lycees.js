@@ -78,12 +78,6 @@ const listeLycees = [
       "url": "https://www.fcpe75.org/wp-content/uploads/2023/02/09_EDGAR_QUINET_Fiche_Lycee2023.pdf"
     },
     {
-      "code": "0750677D",
-      "nom": "ELISA LEMONNIER",
-      "seuils": [23861.234, 5709.842, 25156],
-      "url": "https://www.fcpe75.org/wp-content/uploads/2022/03/12_ELISA_LEMONNIER_Fiche_Lycee2022.pdf"
-    },
-    {
       "code": "0750692V",
       "nom": "EMILE DUBOIS",
       "seuils": [38094.583, 32640, 39073.4],
@@ -172,12 +166,6 @@ const listeLycees = [
       "nom": "LAVOISIER",
       "seuils": [40559.383, 40600.589, 40519.962],
       "url": "https://www.fcpe75.org/wp-content/uploads/2022/02/05_LAVOISIER_Fiche_Lycee2022.pdf"
-    },
-    {
-      "code": "0751708Z",
-      "nom": "LOUIS ARMAND",
-      "seuils": [7565.549, 23591.625, 0],
-      "url": "https://www.fcpe75.org/wp-content/uploads/2022/02/15_LOUIS_ARMAND_Fiche_Lycee2022.pdf"
     },
     {
       "code": "0750655E",
@@ -277,7 +265,8 @@ const listeLycees = [
     }
 ]
 
-const tousSecteurs = ['0750655E','0750654D', '0750685M', '0750692V'];
+// LLG, H4 et PGDG
+const tousSecteurs = ['0750655E','0750654D', '0750685M'];
 
 const nomsLyceesMap = new Map();
 const seuilsLyceesMap = new Map();
@@ -287,6 +276,7 @@ listeLycees.forEach(item => {
     nomsLyceesMap.set(item.code, item.nom);
     seuilsLyceesMap.set(item.code, item.seuils);
     urlsLyceesMap.set(item.code, item.url);
+    // LLG et H4 n'ont pas de seuils car hors algo
     if (item.code !== '0750655E' && item.code !== '0750654D') listeLyceesSeuils.push(item);
 });
 
