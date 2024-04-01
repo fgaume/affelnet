@@ -100,6 +100,12 @@ const Title = (props) => {
             aria-label="Vidéo : comprendre son affectation"
           >cette vidéo.</a>
           </p>
+          <hr />
+          <p className="mb-0">
+            <strong>[Mise à jour 01/04/2024]</strong> Mise à jour des bonus IPS 2024, et le lycée Emile Dubois n'est
+            plus un lycée "tous secteurs", il devient un lycée de secteur comme un autre et
+            remplace François Villon qui n'accueille plus de classes de seconde GT.
+          </p>
         </Alert>
         <Alert show={show === "true"} variant="warning">
           <ExclamationCircle
