@@ -1,10 +1,18 @@
 import React, { useEffect, useState } from "react";
-import { Button, Tab, Tabs } from "react-bootstrap";
+import {
+  Button,
+  Tab,
+  Tabs,
+  ButtonToolbar,
+  ButtonGroup,
+  Stack,
+} from "react-bootstrap";
 import {
   ArrowClockwise,
   CheckLg,
   ExclamationLg,
   ShareFill,
+  Trash,
 } from "react-bootstrap-icons";
 import Accordion from "react-bootstrap/Accordion";
 import "./App.css";
@@ -122,13 +130,15 @@ const App = () => {
   const onSeuilUpdated = (lyceeId, updatedSeuil) => {
     console.log("App.onSeuilUpdated : " + lyceeId + ": ", updatedSeuil);
     const seuilsCourantsCopy = new Map(
-      JSON.parse(
-       JSON.stringify(Array.from(seuilsCourants))
-      )
+      JSON.parse(JSON.stringify(Array.from(seuilsCourants)))
     );
     const existingSeuil = seuilsCourantsCopy.get(lyceeId);
     if (existingSeuil[2] !== updatedSeuil) {
-      seuilsCourantsCopy.set(lyceeId, [existingSeuil[0], existingSeuil[1], updatedSeuil]);
+      seuilsCourantsCopy.set(lyceeId, [
+        existingSeuil[0],
+        existingSeuil[1],
+        updatedSeuil,
+      ]);
       setSeuilsCourants(seuilsCourantsCopy);
     }
   };
@@ -307,8 +317,33 @@ const App = () => {
               </Accordion.Body>
             </Accordion.Item>
           </Accordion>
-          <p className="text-end text-muted p-2">
-            <small className="mx-2">
+          <Stack direction="horizontal" gap={3}>
+            <ButtonToolbar aria-label="boutons apps" className="p-2">
+              <ButtonGroup aria-label="update" className="me-2">
+                <Button
+                  size="sm"
+                  variant="outline-primary"
+                  onClick={() => deleteWorker()}
+                >
+                  <ArrowClockwise width="18" height="18" className="me-1" />
+                  Mettre à jour
+                </Button>
+              </ButtonGroup>
+              <ButtonGroup className="me-2" aria-label="reset">
+                <Button
+                  size="sm"
+                  variant="outline-danger"
+                  onClick={() => {
+                    localStorage.clear();
+                    deleteWorker();
+                  }}
+                >
+                  <Trash width="18" height="18" className="me-1" />
+                  Reset
+                </Button>
+              </ButtonGroup>
+            </ButtonToolbar>
+            <small className="p-2 ms-auto">
               <a
                 href="https://github.com/fgaume/affelnet/actions"
                 aria-label="Lien vers Github"
@@ -317,16 +352,8 @@ const App = () => {
               >
                 {version}
               </a>
-            </small>{" "}
-            <Button
-              size="sm"
-              variant="outline-primary"
-              onClick={() => deleteWorker()}
-            >
-              <ArrowClockwise width="18" height="18" className="me-1" />
-              Mettre à jour
-            </Button>
-          </p>
+            </small>
+          </Stack>
         </div>
       ) : (
         <LoadingScreen />
