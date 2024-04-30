@@ -555,7 +555,7 @@ const listeColleges = [
     "annee": 2024,
     "dnb_admis": 100,
     "ips": 127.1,
-    "bonus": 0
+    "bonus": 600
   },
   {
     "code": "0752249M",
