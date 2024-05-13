@@ -1,0 +1,686 @@
+[
+  {
+    "college_id": "0751703U",
+    "annee": 2024,
+    "ips_moyen": 127.6,
+    "ips_bonus": 600
+  },
+  {
+    "college_id": "0752248L",
+    "annee": 2024,
+    "ips_moyen": 128.2,
+    "ips_bonus": 600
+  },
+  {
+    "college_id": "0750387N",
+    "annee": 2024,
+    "ips_moyen": 141.8,
+    "ips_bonus": 0
+  },
+  {
+    "college_id": "0752523K",
+    "annee": 2024,
+    "ips_moyen": 119.8,
+    "ips_bonus": 600
+  },
+  {
+    "college_id": "0752524L",
+    "annee": 2024,
+    "ips_moyen": 134.4,
+    "ips_bonus": 0
+  },
+  {
+    "college_id": "0752525M",
+    "annee": 2024,
+    "ips_moyen": 130,
+    "ips_bonus": 0
+  },
+  {
+    "college_id": "0752693V",
+    "annee": 2024,
+    "ips_moyen": 129.2,
+    "ips_bonus": 0
+  },
+  {
+    "college_id": "0750407K",
+    "annee": 2024,
+    "ips_moyen": 157.3,
+    "ips_bonus": 0
+  },
+  {
+    "college_id": "0751790N",
+    "annee": 2024,
+    "ips_moyen": 145.9,
+    "ips_bonus": 0
+  },
+  {
+    "college_id": "0752186U",
+    "annee": 2024,
+    "ips_moyen": 135.5,
+    "ips_bonus": 0
+  },
+  {
+    "college_id": "0752526N",
+    "annee": 2024,
+    "ips_moyen": 147.6,
+    "ips_bonus": 0
+  },
+  {
+    "college_id": "0752531U",
+    "annee": 2024,
+    "ips_moyen": 147.8,
+    "ips_bonus": 0
+  },
+  {
+    "college_id": "0752187V",
+    "annee": 2024,
+    "ips_moyen": 121.7,
+    "ips_bonus": 600
+  },
+  {
+    "college_id": "0752527P",
+    "annee": 2024,
+    "ips_moyen": 140.3,
+    "ips_bonus": 0
+  },
+  {
+    "college_id": "0752249M",
+    "annee": 2024,
+    "ips_moyen": 128,
+    "ips_bonus": 600
+  },
+  {
+    "college_id": "0752528R",
+    "annee": 2024,
+    "ips_moyen": 147.3,
+    "ips_bonus": 0
+  },
+  {
+    "college_id": "0751791P",
+    "annee": 2024,
+    "ips_moyen": 142.2,
+    "ips_bonus": 0
+  },
+  {
+    "college_id": "0752529S",
+    "annee": 2024,
+    "ips_moyen": 143,
+    "ips_bonus": 0
+  },
+  {
+    "college_id": "0752530T",
+    "annee": 2024,
+    "ips_moyen": 141,
+    "ips_bonus": 0
+  },
+  {
+    "college_id": "0752250N",
+    "annee": 2024,
+    "ips_moyen": 137.3,
+    "ips_bonus": 0
+  },
+  {
+    "college_id": "0752532V",
+    "annee": 2024,
+    "ips_moyen": 126.3,
+    "ips_bonus": 600
+  },
+  {
+    "college_id": "0752533W",
+    "annee": 2024,
+    "ips_moyen": 129,
+    "ips_bonus": 600
+  },
+  {
+    "college_id": "0752534X",
+    "annee": 2024,
+    "ips_moyen": 139.6,
+    "ips_bonus": 0
+  },
+  {
+    "college_id": "0750584C",
+    "annee": 2024,
+    "ips_moyen": 111.9,
+    "ips_bonus": 600
+  },
+  {
+    "college_id": "0752251P",
+    "annee": 2024,
+    "ips_moyen": 123.4,
+    "ips_bonus": 600
+  },
+  {
+    "college_id": "0752829T",
+    "annee": 2024,
+    "ips_moyen": 125.4,
+    "ips_bonus": 600
+  },
+  {
+    "college_id": "0753047E",
+    "annee": 2024,
+    "ips_moyen": 110.8,
+    "ips_bonus": 600
+  },
+  {
+    "college_id": "0755778Y",
+    "annee": 2024,
+    "ips_moyen": 99.1,
+    "ips_bonus": 1200
+  },
+  {
+    "college_id": "0750362L",
+    "annee": 2024,
+    "ips_moyen": 128.4,
+    "ips_bonus": 600
+  },
+  {
+    "college_id": "0750465Y",
+    "annee": 2024,
+    "ips_moyen": 116.4,
+    "ips_bonus": 600
+  },
+  {
+    "college_id": "0750607C",
+    "annee": 2024,
+    "ips_moyen": 116,
+    "ips_bonus": 600
+  },
+  {
+    "college_id": "0750608D",
+    "annee": 2024,
+    "ips_moyen": 122.4,
+    "ips_bonus": 600
+  },
+  {
+    "college_id": "0752536Z",
+    "annee": 2024,
+    "ips_moyen": 125.8,
+    "ips_bonus": 600
+  },
+  {
+    "college_id": "0754528P",
+    "annee": 2024,
+    "ips_moyen": 118.2,
+    "ips_bonus": 600
+  },
+  {
+    "college_id": "0750444A",
+    "annee": 2024,
+    "ips_moyen": 122.9,
+    "ips_bonus": 600
+  },
+  {
+    "college_id": "0750609E",
+    "annee": 2024,
+    "ips_moyen": 122.3,
+    "ips_bonus": 600
+  },
+  {
+    "college_id": "0750610F",
+    "annee": 2024,
+    "ips_moyen": 105.4,
+    "ips_bonus": 1200
+  },
+  {
+    "college_id": "0752189X",
+    "annee": 2024,
+    "ips_moyen": 115,
+    "ips_bonus": 600
+  },
+  {
+    "college_id": "0752537A",
+    "annee": 2024,
+    "ips_moyen": 105.7,
+    "ips_bonus": 1200
+  },
+  {
+    "college_id": "0752542F",
+    "annee": 2024,
+    "ips_moyen": 115.6,
+    "ips_bonus": 600
+  },
+  {
+    "college_id": "0753936W",
+    "annee": 2024,
+    "ips_moyen": 103.3,
+    "ips_bonus": 1200
+  },
+  {
+    "college_id": "0750525N",
+    "annee": 2024,
+    "ips_moyen": 120.2,
+    "ips_bonus": 600
+  },
+  {
+    "college_id": "0752316K",
+    "annee": 2024,
+    "ips_moyen": 112.9,
+    "ips_bonus": 600
+  },
+  {
+    "college_id": "0752385K",
+    "annee": 2024,
+    "ips_moyen": 104,
+    "ips_bonus": 1200
+  },
+  {
+    "college_id": "0752538B",
+    "annee": 2024,
+    "ips_moyen": 133.4,
+    "ips_bonus": 0
+  },
+  {
+    "college_id": "0752539C",
+    "annee": 2024,
+    "ips_moyen": 124.7,
+    "ips_bonus": 600
+  },
+  {
+    "college_id": "0752540D",
+    "annee": 2024,
+    "ips_moyen": 106.4,
+    "ips_bonus": 1200
+  },
+  {
+    "college_id": "0752694W",
+    "annee": 2024,
+    "ips_moyen": 88.4,
+    "ips_bonus": 1200
+  },
+  {
+    "college_id": "0752957G",
+    "annee": 2024,
+    "ips_moyen": 118.2,
+    "ips_bonus": 600
+  },
+  {
+    "college_id": "0753518S",
+    "annee": 2024,
+    "ips_moyen": 108.9,
+    "ips_bonus": 600
+  },
+  {
+    "college_id": "0753937X",
+    "annee": 2024,
+    "ips_moyen": 94.9,
+    "ips_bonus": 1200
+  },
+  {
+    "college_id": "0755000C",
+    "annee": 2024,
+    "ips_moyen": 100.3,
+    "ips_bonus": 1200
+  },
+  {
+    "college_id": "0750445B",
+    "annee": 2024,
+    "ips_moyen": 100.8,
+    "ips_bonus": 1200
+  },
+  {
+    "college_id": "0750611G",
+    "annee": 2024,
+    "ips_moyen": 122.4,
+    "ips_bonus": 600
+  },
+  {
+    "college_id": "0751705W",
+    "annee": 2024,
+    "ips_moyen": 102.2,
+    "ips_bonus": 1200
+  },
+  {
+    "college_id": "0752543G",
+    "annee": 2024,
+    "ips_moyen": 132.2,
+    "ips_bonus": 0
+  },
+  {
+    "college_id": "0752544H",
+    "annee": 2024,
+    "ips_moyen": 94.5,
+    "ips_bonus": 1200
+  },
+  {
+    "college_id": "0754253R",
+    "annee": 2024,
+    "ips_moyen": 128.4,
+    "ips_bonus": 600
+  },
+  {
+    "college_id": "0751563S",
+    "annee": 2024,
+    "ips_moyen": 109.2,
+    "ips_bonus": 600
+  },
+  {
+    "college_id": "0752190Y",
+    "annee": 2024,
+    "ips_moyen": 97.3,
+    "ips_bonus": 1200
+  },
+  {
+    "college_id": "0752192A",
+    "annee": 2024,
+    "ips_moyen": 124.7,
+    "ips_bonus": 600
+  },
+  {
+    "college_id": "0752317L",
+    "annee": 2024,
+    "ips_moyen": 127.1,
+    "ips_bonus": 600
+  },
+  {
+    "college_id": "0752318M",
+    "annee": 2024,
+    "ips_moyen": 106.4,
+    "ips_bonus": 1200
+  },
+  {
+    "college_id": "0752545J",
+    "annee": 2024,
+    "ips_moyen": 130.2,
+    "ips_bonus": 0
+  },
+  {
+    "college_id": "0752546K",
+    "annee": 2024,
+    "ips_moyen": 129.5,
+    "ips_bonus": 0
+  },
+  {
+    "college_id": "0754305X",
+    "annee": 2024,
+    "ips_moyen": 106.6,
+    "ips_bonus": 600
+  },
+  {
+    "college_id": "0752547L",
+    "annee": 2024,
+    "ips_moyen": 107.9,
+    "ips_bonus": 600
+  },
+  {
+    "college_id": "0752548M",
+    "annee": 2024,
+    "ips_moyen": 128.5,
+    "ips_bonus": 0
+  },
+  {
+    "college_id": "0752549N",
+    "annee": 2024,
+    "ips_moyen": 148,
+    "ips_bonus": 0
+  },
+  {
+    "college_id": "0752550P",
+    "annee": 2024,
+    "ips_moyen": 135.7,
+    "ips_bonus": 0
+  },
+  {
+    "college_id": "0752551R",
+    "annee": 2024,
+    "ips_moyen": 115.4,
+    "ips_bonus": 600
+  },
+  {
+    "college_id": "0752107H",
+    "annee": 2024,
+    "ips_moyen": 125.2,
+    "ips_bonus": 600
+  },
+  {
+    "college_id": "0752387M",
+    "annee": 2024,
+    "ips_moyen": 128.6,
+    "ips_bonus": 0
+  },
+  {
+    "college_id": "0752552S",
+    "annee": 2024,
+    "ips_moyen": 139.6,
+    "ips_bonus": 0
+  },
+  {
+    "college_id": "0752553T",
+    "annee": 2024,
+    "ips_moyen": 126.4,
+    "ips_bonus": 600
+  },
+  {
+    "college_id": "0752554U",
+    "annee": 2024,
+    "ips_moyen": 123.8,
+    "ips_bonus": 600
+  },
+  {
+    "college_id": "0752958H",
+    "annee": 2024,
+    "ips_moyen": 93.2,
+    "ips_bonus": 1200
+  },
+  {
+    "college_id": "0755779Z",
+    "annee": 2024,
+    "ips_moyen": 113,
+    "ips_bonus": 600
+  },
+  {
+    "college_id": "0755433Y",
+    "annee": 2024,
+    "ips_moyen": 86.8,
+    "ips_bonus": 1200
+  },
+  {
+    "college_id": "0750429J",
+    "annee": 2024,
+    "ips_moyen": 120.3,
+    "ips_bonus": 600
+  },
+  {
+    "college_id": "0750546L",
+    "annee": 2024,
+    "ips_moyen": 80.6,
+    "ips_bonus": 1200
+  },
+  {
+    "college_id": "0751793S",
+    "annee": 2024,
+    "ips_moyen": 86,
+    "ips_bonus": 1200
+  },
+  {
+    "college_id": "0752108J",
+    "annee": 2024,
+    "ips_moyen": 137.5,
+    "ips_bonus": 0
+  },
+  {
+    "college_id": "0752195D",
+    "annee": 2024,
+    "ips_moyen": 105.1,
+    "ips_bonus": 1200
+  },
+  {
+    "college_id": "0752196E",
+    "annee": 2024,
+    "ips_moyen": 90.3,
+    "ips_bonus": 1200
+  },
+  {
+    "college_id": "0752252R",
+    "annee": 2024,
+    "ips_moyen": 104.3,
+    "ips_bonus": 1200
+  },
+  {
+    "college_id": "0752319N",
+    "annee": 2024,
+    "ips_moyen": 109.3,
+    "ips_bonus": 1200
+  },
+  {
+    "college_id": "0754706H",
+    "annee": 2024,
+    "ips_moyen": 103,
+    "ips_bonus": 1200
+  },
+  {
+    "college_id": "0755030K",
+    "annee": 2024,
+    "ips_moyen": 73.8,
+    "ips_bonus": 1200
+  },
+  {
+    "college_id": "0750360J",
+    "annee": 2024,
+    "ips_moyen": 123,
+    "ips_bonus": 600
+  },
+  {
+    "college_id": "0750484U",
+    "annee": 2024,
+    "ips_moyen": 97.1,
+    "ips_bonus": 1200
+  },
+  {
+    "college_id": "0750507U",
+    "annee": 2024,
+    "ips_moyen": 101.4,
+    "ips_bonus": 1200
+  },
+  {
+    "college_id": "0750575T",
+    "annee": 2024,
+    "ips_moyen": 92.9,
+    "ips_bonus": 1200
+  },
+  {
+    "college_id": "0751706X",
+    "annee": 2024,
+    "ips_moyen": 115.9,
+    "ips_bonus": 600
+  },
+  {
+    "college_id": "0751707Y",
+    "annee": 2024,
+    "ips_moyen": 100.4,
+    "ips_bonus": 1200
+  },
+  {
+    "college_id": "0752555V",
+    "annee": 2024,
+    "ips_moyen": 105.5,
+    "ips_bonus": 1200
+  },
+  {
+    "college_id": "0752606A",
+    "annee": 2024,
+    "ips_moyen": 82.4,
+    "ips_bonus": 1200
+  },
+  {
+    "college_id": "0752695X",
+    "annee": 2024,
+    "ips_moyen": 96.1,
+    "ips_bonus": 1200
+  },
+  {
+    "college_id": "0753345D",
+    "annee": 2024,
+    "ips_moyen": 96.6,
+    "ips_bonus": 1200
+  },
+  {
+    "college_id": "0753938Y",
+    "annee": 2024,
+    "ips_moyen": 90.1,
+    "ips_bonus": 1200
+  },
+  {
+    "college_id": "0755095F",
+    "annee": 2024,
+    "ips_moyen": 111.6,
+    "ips_bonus": 600
+  },
+  {
+    "college_id": "0755747P",
+    "annee": 2024,
+    "ips_moyen": 91.3,
+    "ips_bonus": 1200
+  },
+  {
+    "college_id": "0750478M",
+    "annee": 2024,
+    "ips_moyen": 107.5,
+    "ips_bonus": 600
+  },
+  {
+    "college_id": "0750550R",
+    "annee": 2024,
+    "ips_moyen": 107.5,
+    "ips_bonus": 1200
+  },
+  {
+    "college_id": "0750552T",
+    "annee": 2024,
+    "ips_moyen": 119.5,
+    "ips_bonus": 600
+  },
+  {
+    "college_id": "0750591K",
+    "annee": 2024,
+    "ips_moyen": 116.3,
+    "ips_bonus": 600
+  },
+  {
+    "college_id": "0752198G",
+    "annee": 2024,
+    "ips_moyen": 89.3,
+    "ips_bonus": 1200
+  },
+  {
+    "college_id": "0752556W",
+    "annee": 2024,
+    "ips_moyen": 117.2,
+    "ips_bonus": 600
+  },
+  {
+    "college_id": "0752557X",
+    "annee": 2024,
+    "ips_moyen": 121.6,
+    "ips_bonus": 600
+  },
+  {
+    "college_id": "0752696Y",
+    "annee": 2024,
+    "ips_moyen": 104.5,
+    "ips_bonus": 1200
+  },
+  {
+    "college_id": "0753046D",
+    "annee": 2024,
+    "ips_moyen": 101.7,
+    "ips_bonus": 1200
+  },
+  {
+    "college_id": "0753939Z",
+    "annee": 2024,
+    "ips_moyen": 85.1,
+    "ips_bonus": 1200
+  },
+  {
+    "college_id": "0754355B",
+    "annee": 2024,
+    "ips_moyen": 101.1,
+    "ips_bonus": 1200
+  },
+  {
+    "college_id": "0755241P",
+    "annee": 2024,
+    "ips_moyen": 103.8,
+    "ips_bonus": 1200
+  }
+]

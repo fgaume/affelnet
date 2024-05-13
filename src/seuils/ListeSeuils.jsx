@@ -82,7 +82,7 @@ const ListeSeuils = (props) => {
     <div>
       <div className="mb-3">
         <ArrowReturnRight /> Cette section liste les scores d'admission{" "}
-        <strong>non-boursiers</strong> de chaque lycée parisien lors des 2
+        <strong>non-boursiers</strong> de chaque lycée parisien lors des 3
         dernières sessions, ainsi que l'évolution par rapport à l'an dernier. La
         source de ces seuils est l'ensemble des fiches-barème reçues du Rectorat
         et ensuite partagées par les parents. Figure également un lien vers la
