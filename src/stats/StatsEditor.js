@@ -1,31 +1,20 @@
-import { collection, doc, serverTimestamp, setDoc } from "firebase/firestore";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Alert, Button, Collapse, Form } from "react-bootstrap";
 import { EmojiSmile, PlusCircle } from "react-bootstrap-icons";
-import { firestore } from "../services/firebase";
+import { appendNewNote, saveChampIfNotExists } from "../services/statistiques";
 
 const StatsEditor = (props) => {
   const [noteBrute, setNoteBrute] = useState(0);
   const [noteHarmonisee, setNoteHarmonisee] = useState(0);
   const [showConfirm, setShowConfirm] = useState(false);
+  const [showError, setShowError] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
+
   const [open, setOpen] = useState(false);
 
-  /* const updateSeuil = (codeLycee, seuil) => {
-    const docRef = doc(firestore, "seuils", codeLycee);
-    updateDoc(docRef, {
-      seuil2023: parseFloat(seuil.replace(",", ".")),
-    });
-  }; */
-
-  const appendNewNote = (brute, harmonisee) => {
-    const collectionRef = collection(firestore, "stats", props.champ, "notes");
-    setDoc(doc(collectionRef, "CD" + 100 * brute), {
-      brute: brute,
-      harmonisee: harmonisee,
-      timestamp: serverTimestamp(),
-      contributeur: props.nomCollegeScolarisation,
-    });
-  };
+  useEffect(() => {
+    saveChampIfNotExists(props.champ);
+  }, [props.champ]);
 
   const onNoteBruteChange = (event) => {
     setNoteBrute(event.target.value);
@@ -35,17 +24,53 @@ const StatsEditor = (props) => {
     setNoteHarmonisee(event.target.value);
   };
 
+  const isValid = (brute, harmo) => {
+    let isValid = false;
+    if (brute >= 3 && brute <= 16) {
+      if (harmo > 85 && harmo < 120) {
+        const harmoString = harmo.toString();
+        const frac = harmoString.split(".")[1];
+        //console.log("frac=", frac);
+        if (frac && frac.length > 1) {
+          isValid = true;
+          //console.log("notes valides");
+        } else {
+          setErrorMessage(
+            "Note harmonisée incorrecte : doit avoir 3 décimales"
+          );
+        }
+      } else {
+        setErrorMessage(
+          "Note harmonisée incorrecte : doit être entre 85 et 120"
+        );
+      }
+    } else {
+      setErrorMessage("Note brute incorrecte : doit être entre 3 et 16");
+    }
+    return isValid;
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    appendNewNote(
-      parseFloat(noteBrute.replace(",", ".")),
-      parseFloat(noteHarmonisee.replace(",", ".")));
-    setShowConfirm(true);
-    setTimeout(() => {
-      setShowConfirm(false);
-      setOpen(false);
-    }, 3500);
-    e.target.reset();
+    const noteBruteFloat = parseFloat(noteBrute.replace(",", "."));
+    const noteHarmoniseeFloat = parseFloat(noteHarmonisee.replace(",", "."));
+    if (isValid(noteBruteFloat, noteHarmoniseeFloat)) {
+      setShowError(false);
+      appendNewNote(
+        noteBruteFloat,
+        noteHarmoniseeFloat,
+        props.champ,
+        props.contributeur
+      );
+      setShowConfirm(true);
+      setTimeout(() => {
+        setShowConfirm(false);
+        setOpen(false);
+      }, 3500);
+      e.target.reset();
+    } else {
+      setShowError(true);
+    }
   };
 
   const handleAjouter = (e) => {
@@ -84,22 +109,17 @@ const StatsEditor = (props) => {
               />
             </div>
             <div className="text-center p-2">
-              <Button
-                type="submit"
-                disabled={
-                  noteHarmonisee < 80 ||
-                  noteHarmonisee > 120 ||
-                  noteBrute > 16 ||
-                  noteBrute < 3
-                }
-              >
-                Valider
-              </Button>
+              <Button type="submit">Valider</Button>
               &nbsp;
               {showConfirm && (
                 <Alert key="confirm" variant="success" className="my-3">
                   Les données ont été ajoutées. Merci de votre contribution{" "}
                   <EmojiSmile /> !
+                </Alert>
+              )}
+              {showError && (
+                <Alert key="confirm" variant="danger" className="my-3">
+                  {errorMessage}
                 </Alert>
               )}
             </div>

@@ -1,30 +1,4 @@
-const listeMatieres = [
-  { nom: "Mathématiques", notes: [], order: 0 },
-  { nom: "Français", notes: [], order: 1 },
-  { nom: "Histoire-Géo", notes: [], order: 2 },
-  { nom: "Langue 1", notes: [], order: 3 },
-  { nom: "Langue 2", notes: [], order: 4 },
-  { nom: "Physique-Chimie", notes: [], order: 5 },
-  { nom: "SVT", notes: [], order: 6 },
-  { nom: "Technologie", notes: [], order: 7 },
-  { nom: "Arts Plastiques", notes: [], order: 8 },
-  { nom: "Musique", notes: [], order: 9 },
-  { nom: "EPS", notes: [], order: 10 },
-];
-
-const CDs = [
-  { nom: "Mathématiques", coefficient: 5, matieres: ["Mathématiques"] },
-  { nom: "Français", coefficient: 5, matieres: ["Français"] },
-  { nom: "Histoire-Géo", coefficient: 4, matieres: ["Histoire-Géo"] },
-  { nom: "Langues", coefficient: 4, matieres: ["Langue 1", "Langue 2"] },
-  {
-    nom: "Sciences",
-    coefficient: 4,
-    matieres: ["Physique-Chimie", "SVT", "Technologie"],
-  },
-  { nom: "Arts", coefficient: 4, matieres: ["Arts Plastiques", "Musique"] },
-  { nom: "EPS", coefficient: 4, matieres: ["EPS"] },
-];
+import { CDs, listeMatieres } from "../data/bilan";
 
 const computeAverage = (values, semestres) => {
   let average = 0;
@@ -91,25 +65,46 @@ const computeBilanPeriodique = (
   moyennesAcademiques,
   ecartsAcademiques
 ) => {
-  //console.log("computeBilanPeriodique : ");
+  console.log("computeBilanPeriodique : ");
   if (!moyennesAcademiques) return 0;
   let score = 0;
   scoresCD.forEach((cd) => {
     //console.log("score " + cd.nom + " : " + cd.score);
+    const base = (cd.score) ? cd.score.toFixed(2) : 16;
     const cdscore =
       cd.score === 0
         ? 100
         : 10 *
           (10 +
-            (cd.score.toFixed(2) - moyennesAcademiques.get(cd.nom)) /
+            (base - moyennesAcademiques.get(cd.nom)) /
               ecartsAcademiques.get(cd.nom));
-    //console.log("score " + cd.nom + " : " + cdscore.toFixed(3));
+    console.log("score " + cd.nom + " : " + cd.score + " -> " + cdscore.toFixed(3));
     score += cd.coefficient * cdscore.toFixed(3);
   });
-  const result = parseFloat(score);
-  //console.log("bilan : " + result);
+  const result = parseFloat(score.toFixed(3));
+  console.log("bilan : " + result);
   return result;
 };
+
+const mergeMoyennes = (currentMap, listeRecentStats) => {
+  let mergedMoyennes = new Map();
+  listeRecentStats.forEach((stat) => {
+    const champ = stat.id;
+    const moyenne = stat.moyenne ? stat.moyenne : currentMap.get(champ);
+    mergedMoyennes.set(champ, moyenne);
+  });
+  return mergedMoyennes;
+}
+
+const mergeEcartsTypes = (currentMap, listeRecentStats) => {
+  let mergedEcarts = new Map();
+  listeRecentStats.forEach((stat) => {
+    const champ = stat.id;
+    const ecart = stat.ecartType ? stat.ecartType : currentMap.get(champ);
+    mergedEcarts.set(champ, ecart);
+  });
+  return mergedEcarts;
+}
 
 /* const testcomputeNoteCDs = () => {
     const matieres = [
@@ -175,11 +170,11 @@ if (possibleSemestres !== null) {
 }
 
 export {
-  listeMatieres,
   computeNoteCDs,
   computeBilanPeriodique,
   updateMatieres,
   allMatiereSetTo,
   computeAvancementNotes,
-  CDs,
+  mergeEcartsTypes,
+  mergeMoyennes
 };

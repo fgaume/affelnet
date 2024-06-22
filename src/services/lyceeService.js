@@ -5,8 +5,9 @@ import {
   tousSecteurs,
 } from "../data/lycees";
 
-const fetchLycees = async (nomCollegeSecteur, seuilsLyceesMap) => {
-  console.log('fetch', seuilsLyceesMap);
+const fetchLycees = async (nomCollegeSecteur, historySeuilsLyceesMap, seuilsRecentsLyceesMap) => {
+  //console.log('fetch historySeuilsLyceesMap', historySeuilsLyceesMap);
+  //console.log('fetch seuilsRecentsLyceesMap', seuilsRecentsLyceesMap);
   if (nomCollegeSecteur) {
     const response = await axios({
       method: "GET",
@@ -25,40 +26,50 @@ const fetchLycees = async (nomCollegeSecteur, seuilsLyceesMap) => {
     if (payload) {
       let newLycees = payload.map((item) => {
         const codelycee = item.attributes.UAI;
+        const historySeuilsLycee = historySeuilsLyceesMap.get(codelycee);
+        const nbSeuils = historySeuilsLycee.length;
+        const seuilPrecedent = historySeuilsLycee[nbSeuils - 2];
         return {
           code: codelycee,
           secteur: parseInt(item.attributes.secteur),
           nom: nomsLyceesMap.get(codelycee),
-          seuils: seuilsLyceesMap.get(codelycee),
+//          seuils: historySeuilsLyceesMap.get(codelycee),
+          seuilRecent: seuilsRecentsLyceesMap.get(codelycee),
+          seuilPrecedent: seuilPrecedent,
           url: urlsLyceesMap.get(codelycee),
         };
       });
 
       // ajout des lycées multisecteurs 1
       tousSecteurs.forEach((codelycee) => {
+        const historySeuilsLycee = historySeuilsLyceesMap.get(codelycee);
+        const nbSeuils = historySeuilsLycee.length;
+        const seuilPrecedent = historySeuilsLycee[nbSeuils - 2];
         newLycees.push({
           code: codelycee,
           secteur: 1,
           nom: nomsLyceesMap.get(codelycee),
-          seuils: seuilsLyceesMap.get(codelycee),
+          //          seuils: historySeuilsLyceesMap.get(codelycee),
+          seuilRecent: seuilsRecentsLyceesMap.get(codelycee),
+          seuilPrecedent: seuilPrecedent,
           url: urlsLyceesMap.get(codelycee),
         });
       });
 
       // tri par seuil décroissant
       newLycees.sort((fa, fb) => {
-        if (fa.seuils[2] !== 0 && fb.seuils[2] !== 0) {
-          if (fa.seuils[2] < fb.seuils[2]) {
+        if (fa.seuilRecent !== 0 && fb.seuilRecent !== 0) {
+          if (fa.seuilRecent < fb.seuilRecent) {
             return 1;
           }
-          if (fa.seuils[2] > fb.seuils[2]) {
+          if (fa.seuilRecent > fb.seuilRecent) {
             return -1;
           }
         } else {
-          if (fa.seuils[1] < fb.seuils[1]) {
+          if (fa.seuilPrecedent < fb.seuilPrecedent) {
             return 1;
           }
-          if (fa.seuils[1] > fb.seuils[1]) {
+          if (fa.seuilPrecedent > fb.seuilPrecedent) {
             return -1;
           }
         }

@@ -1,27 +1,17 @@
-import React, { useState, useRef } from "react";
-import { doc, updateDoc } from "firebase/firestore";
-import { firestore } from "../services/firebase";
+import React, { useRef, useState } from "react";
 import { Alert, Button, Card, Form } from "react-bootstrap";
 
 import { listeLyceesSeuils as lycees } from "../data/lycees";
 
-import { Typeahead } from "react-bootstrap-typeahead";
 import { ArrowReturnRight, EmojiSmile } from "react-bootstrap-icons";
+import { Typeahead } from "react-bootstrap-typeahead";
+import { saveSeuil } from "../services/seuils";
 
 const SeuilEditor = (props) => {
   const typeaheadRef = useRef(null);
   const [lyceeSeuil, setLyceeSeuil] = useState("");
   const [seuilLycee, setSeuilLycee] = useState(0);
   const [showConfirm, setShowConfirm] = useState(false);
-
-  const updateSeuil = (codeLycee, seuil) => {
-    const docRef = doc(firestore, "seuils", codeLycee);
-    updateDoc(docRef, {
-      seuil2023: seuil,
-      contributeur: props.nomCollegeScolarisation,
-    });
-    props.onSeuilUpdated(codeLycee, seuil);
-  };
 
   const onLyceeChange = (lyceeUpdate) => {
     setLyceeSeuil(lyceeUpdate[0]);
@@ -35,8 +25,8 @@ const SeuilEditor = (props) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    //const cleanSeuil = parseFloat(seuilLycee);
-    updateSeuil(lyceeSeuil.code, seuilLycee);
+    saveSeuil(lyceeSeuil.code, seuilLycee, props.contributeur);
+    //props.onSeuilUpdated(lyceeSeuil.code, seuilLycee);
     typeaheadRef.current.clear();
     document.getElementById("seuilLycee").value = "";
     setShowConfirm(true);

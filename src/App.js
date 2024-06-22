@@ -33,39 +33,18 @@ import {
 import ListeSeuils from "./seuils/ListeSeuils";
 import MesContributions from "./seuils/MesContributions";
 import MonSocle from "./socle/MonSocle";
-import { seuilsLyceesMap } from "./data/lycees";
-
-/* function useSeuilsCourants() {
-  const [seuilsLyceesMap, setSeuilsLyceesMap] = useState([]);
-
-  useEffect(() => {
-    const unsubscribe = onSnapshot(
-      collection(firestore, "seuils"),
-      (snapshot) => {
-        const newSeuils = snapshot.docs.map((doc) => ({
-          id: doc.id,
-          ...doc.data(),
-        }));
-        let newMap = new Map();
-        newSeuils.forEach((seuil) => {
-            newMap.set(seuil.id, [ seuil.seuil2022, seuil.seuil2023]);
-        });
-        setSeuilsLyceesMap(newMap);
-      },
-      (error) => {
-        console.log("erreur firestore: ", error);
-      }
-    );
-    return () => unsubscribe();
-  }, []);
-  return seuilsLyceesMap;
-} */
+import { listeLyceesSeuils, seuilsLyceesMap } from "./data/lycees";
+import { useSeuilsRecents } from "./services/seuils";
+import { useOngoingStats } from "./services/statistiques";
 
 const App = () => {
-  const version = "v9.2.2 13/05/2024";
+  const version = "v9.3.0 23/06/2024";
   const contrib = true;
 
   const [loading, setLoading] = useState(true);
+
+  const seuilsRecents = useSeuilsRecents();
+  const recentStats = useOngoingStats();
 
   const [scoreBilanPrevious, setScoreBilanPrevious] = useState(0);
   const [scoreBilanNext, setScoreBilanNext] = useState(0);
@@ -80,38 +59,36 @@ const App = () => {
   const [avancementCompetences, setAvancementCompetences] = useState(0);
   const [avancementNotes, setAvancementNotes] = useState(0);
   const [numberSeuils, setNumberSeuils] = useState(0);
-  const [seuilsCourants, setSeuilsCourants] = useState(seuilsLyceesMap);
-
-  //  const seuilsLyceesMap = useSeuilsCourants();
+  //const [seuilsCourants, setSeuilsCourants] = useState(seuilsRecents);
 
   const handleBilanChange = (previous, next, newAvancement) => {
     setAvancementNotes(newAvancement);
     setScoreBilanPrevious(previous);
     setScoreBilanNext(next);
-    setScoreGlobalPrevious(bonusCollege + scoreSocle + scoreBilanPrevious);
-    setScoreGlobalNext(
-      scoreBilanNext > 0 ? bonusCollege + scoreSocle + scoreBilanNext : 0
-    );
+    const newScoreGlobalPrevious = (bonusCollege + scoreSocle + scoreBilanPrevious).toFixed(3);
+    setScoreGlobalPrevious(parseFloat(newScoreGlobalPrevious));
+    const newScoreGlobalNext = (bonusCollege + scoreSocle + scoreBilanNext).toFixed(3);
+    setScoreGlobalNext(scoreBilanNext > 0 ? parseFloat(newScoreGlobalNext) : 0);
   };
 
   const handleSocleChange = (newScore, newAvancement) => {
     //console.log(JSON.stringify(socle));
     setAvancementCompetences(newAvancement);
     setScoreSocle(newScore);
-    setScoreGlobalPrevious(bonusCollege + scoreSocle + scoreBilanPrevious);
-    setScoreGlobalNext(
-      scoreBilanNext > 0 ? bonusCollege + scoreSocle + scoreBilanNext : 0
-    );
+    const newScoreGlobalPrevious = (bonusCollege + scoreSocle + scoreBilanPrevious).toFixed(3);
+    setScoreGlobalPrevious(parseFloat(newScoreGlobalPrevious));
+    const newScoreGlobalNext = (bonusCollege + scoreSocle + scoreBilanNext).toFixed(3);
+    setScoreGlobalNext(scoreBilanNext > 0 ? parseFloat(newScoreGlobalNext) : 0);
   };
 
   const handleCollegeChange = (college, collegeScol) => {
     //console.log(JSON.stringify(college));
     setBonusCollege(college.bonus);
     setCollegeSecteur(college.nom);
-    setScoreGlobalPrevious(bonusCollege + scoreSocle + scoreBilanPrevious);
-    setScoreGlobalNext(
-      scoreBilanNext > 0 ? bonusCollege + scoreSocle + scoreBilanNext : 0
-    );
+    const newScoreGlobalPrevious = (bonusCollege + scoreSocle + scoreBilanPrevious).toFixed(3);
+    setScoreGlobalPrevious(parseFloat(newScoreGlobalPrevious));
+    const newScoreGlobalNext = (bonusCollege + scoreSocle + scoreBilanNext).toFixed(3);
+    setScoreGlobalNext(scoreBilanNext > 0 ? parseFloat(newScoreGlobalNext) : 0);
     if (collegeScol !== null) {
       setNomCollegeScolarisation(collegeScol.nom);
     }
@@ -123,12 +100,14 @@ const App = () => {
   };
 
   const handleSeuilChange = (newNumberSeuils) => {
-    // console.log("newNumberSeuils : " + newNumberSeuils);
+    //console.log("newNumberSeuils : " + newNumberSeuils);
     setNumberSeuils(newNumberSeuils);
   };
 
-  const onSeuilUpdated = (lyceeId, updatedSeuil) => {
-    console.log("App.onSeuilUpdated : " + lyceeId + ": ", updatedSeuil);
+  //  const onSeuilUpdated = (lyceeId, updatedSeuil) => {
+  //    console.log("App.onSeuilUpdated : " + lyceeId + ": ", updatedSeuil);
+  /*    console.log(seuilsCourants);
+    console.log(seuilsLyceesMap);
     const seuilsCourantsCopy = new Map(
       JSON.parse(JSON.stringify(Array.from(seuilsCourants)))
     );
@@ -140,39 +119,41 @@ const App = () => {
         updatedSeuil,
       ]);
       setSeuilsCourants(seuilsCourantsCopy);
-    }
-  };
+    } */
+  // };
 
   useEffect(() => {
-    console.log(seuilsCourants);
     console.log("useffect App.js");
+    //console.log("seuilsRecents: " + seuilsRecents);
     setTimeout(() => setLoading(false), 500);
     if (collegeSecteur) {
-      fetchLycees(collegeSecteur, seuilsCourants).then((newLycees) => {
-        if (newLycees && newLycees.length === 3) {
-          newLycees.forEach((listeLycees) => resetExclu(listeLycees));
-          if (filtreSpecialites && filtreSpecialites.length > 0) {
-            fetchLyceesHavingSpecialites(filtreSpecialites).then(
-              (lyceesWithSpe) => {
-                console.log(
-                  "lycees with spe " +
-                    filtreSpecialites +
-                    " : " +
-                    JSON.stringify(lyceesWithSpe)
-                );
-                newLycees.forEach((lycees) => {
-                  setExclu(lycees, lyceesWithSpe);
-                });
-                setLyceesSecteur(newLycees);
-              }
-            );
-          } else {
-            setLyceesSecteur(newLycees);
+      fetchLycees(collegeSecteur, seuilsLyceesMap, seuilsRecents).then(
+        (newLycees) => {
+          if (newLycees && newLycees.length === 3) {
+            newLycees.forEach((listeLycees) => resetExclu(listeLycees));
+            if (filtreSpecialites && filtreSpecialites.length > 0) {
+              fetchLyceesHavingSpecialites(filtreSpecialites).then(
+                (lyceesWithSpe) => {
+                  console.log(
+                    "lycees with spe " +
+                      filtreSpecialites +
+                      " : " +
+                      JSON.stringify(lyceesWithSpe)
+                  );
+                  newLycees.forEach((lycees) => {
+                    setExclu(lycees, lyceesWithSpe);
+                  });
+                  setLyceesSecteur(newLycees);
+                }
+              );
+            } else {
+              setLyceesSecteur(newLycees);
+            }
           }
         }
-      });
+      );
     }
-  }, [collegeSecteur, filtreSpecialites, seuilsCourants]);
+  }, [collegeSecteur, filtreSpecialites, seuilsRecents]);
 
   return (
     <>
@@ -239,7 +220,11 @@ const App = () => {
                 )}
               </Accordion.Header>
               <Accordion.Body>
-                <MonBilan onChange={handleBilanChange} />
+                <MonBilan
+                  onChange={handleBilanChange}
+                  moyennes={recentStats.moyennes}
+                  ecarttypes={recentStats.ecarttypes}
+                />
               </Accordion.Body>
             </Accordion.Item>
             <Accordion.Item eventKey="3" hidden={!collegeSecteur}>
@@ -259,7 +244,8 @@ const App = () => {
                         lycees={lyceesSecteur[0]}
                         scorePrevious={scoreGlobalPrevious}
                         scoreNext={scoreGlobalNext}
-                        bonusGeo="32640"
+                        scoreMax={4800 + recentStats.scoreMax}
+                        bonusGeo={32640}
                         secteur="1"
                       />
                     </Tab>
@@ -268,7 +254,8 @@ const App = () => {
                         lycees={lyceesSecteur[1]}
                         scorePrevious={scoreGlobalPrevious}
                         scoreNext={scoreGlobalNext}
-                        bonusGeo="17760"
+                        scoreMax={4800 + recentStats.scoreMax}
+                        bonusGeo={17760}
                         secteur="2"
                       />
                     </Tab>
@@ -277,7 +264,8 @@ const App = () => {
                         lycees={lyceesSecteur[2]}
                         scorePrevious={scoreGlobalPrevious}
                         scoreNext={scoreGlobalNext}
-                        bonusGeo="16800"
+                        scoreMax={4800 + recentStats.scoreMax}
+                        bonusGeo={16800}
                         secteur="3"
                       />
                     </Tab>
@@ -292,7 +280,12 @@ const App = () => {
                 </span>
               </Accordion.Header>
               <Accordion.Body>
-                <ListeSeuils onChange={handleSeuilChange} />
+                <ListeSeuils
+                  seuils={listeLyceesSeuils}
+                  seuilsRecents={seuilsRecents}
+                  onChange={handleSeuilChange}
+                  scoreMax={recentStats.scoreMax}
+                />
               </Accordion.Body>
             </Accordion.Item>
             <Accordion.Item eventKey="5">
@@ -311,8 +304,8 @@ const App = () => {
               <Accordion.Body>
                 <MesContributions
                   contrib={contrib}
-                  nomCollegeScolarisation={nomCollegeScolarisation}
-                  onSeuilUpdated={onSeuilUpdated}
+                  contributeur={nomCollegeScolarisation}
+                  //                  onSeuilUpdated={onSeuilUpdated}
                 />
               </Accordion.Body>
             </Accordion.Item>

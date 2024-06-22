@@ -1,34 +1,10 @@
-import { collection, onSnapshot } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { Card, Table } from "react-bootstrap";
 import { CheckCircleFill, ExclamationCircle } from "react-bootstrap-icons";
-import { firestore } from "../services/firebase";
 import { formatFloat } from "../services/helper";
-import { computeStats } from "../services/statistiques";
+import { computeStats, saveStats, useStatsChamp } from "../services/statistiques";
 import "./ListeStatsChamp.css";
 import StatsEditor from "./StatsEditor";
-
-function useStatsChamp(champ) {
-  const [notes, setNotes] = useState([]);
-
-  useEffect(() => {
-    const unsubscribe = onSnapshot(
-      collection(firestore, "stats", champ, "notes"),
-      (snapshot) => {
-        const newNotes = snapshot.docs.map((doc) => ({
-          id: doc.id,
-          ...doc.data(),
-        }));
-        setNotes(newNotes);
-      },
-      (error) => {
-        console.log("erreur firestore: ", error);
-      }
-    );
-    return () => unsubscribe();
-  }, [champ]);
-  return notes;
-}
 
 const ListeStatsChamp = (props) => {
   const notes = useStatsChamp(props.champ);
@@ -36,11 +12,13 @@ const ListeStatsChamp = (props) => {
 
   useEffect(() => {
     if (notes !== null && notes.length > 1) {
-      setStats(computeStats(notes));
+      const stat = computeStats(notes);
+      setStats(stat);
+      saveStats(props.champ, stat)
     } else {
       setStats(null);
     }
-  }, [notes]);
+  }, [notes, props.champ]);
 
   return (
     <Card className="mb-0 mt-3 bg-primary bg-opacity-10 mt-0">
@@ -92,7 +70,7 @@ const ListeStatsChamp = (props) => {
       )}
       <StatsEditor
         champ={props.champ}
-        nomCollegeScolarisation={props.nomCollegeScolarisation}
+        contributeur={props.contributeur}
       />
     </Card>
   );

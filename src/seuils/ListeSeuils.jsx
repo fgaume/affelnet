@@ -6,37 +6,57 @@ import {
   ExclamationCircle,
   ExclamationLg,
 } from "react-bootstrap-icons";
-import { listeLyceesSeuils, urlsLyceesMap } from "../data/lycees";
+import { urlsLyceesMap } from "../data/lycees";
 import { formatFloat, formatInt, formatVariation } from "../services/helper";
 import "./ListeSeuils.css";
+import { getSeuil } from "../services/seuils";
+import { anneeN } from "../data/lycees";
 
-function useSeuils(sorting = "byLycee") {
+function useSeuils(listeLyceesSeuils, seuilsRecents, sorting = "byLycee") {
   const [lycees, setLycees] = useState([]);
 
   useEffect(() => {
-    const newSeuils = listeLyceesSeuils.map((doc) => ({
-      id: doc.code,
-      nom: doc.nom,
-      seuil_prev_prev: doc.seuils[0] > 0 ? Math.round(doc.seuils[0]) : 0,
-      seuil_prev: doc.seuils[1] > 0 ? Math.round(doc.seuils[1]) : 0,
-      delta: (doc.seuils[1] > 0) && (doc.seuils[2] > 0) ? Math.round(doc.seuils[2] - doc.seuils[1]) : null,
-      url: urlsLyceesMap.get(doc.code),
-      seuil2023: doc.seuils[2] > 0 ? doc.seuils[2] : 0,
-    }));
+    const newSeuils = listeLyceesSeuils.map((lycee) => {
+      // const seuilPrecedent =
+      //   lycee.seuils[nbSeuils - 2] > 0
+      //     ? Math.round(lycee.seuils[nbSeuils - 2])
+      //     : 0;
+      const seuilPrecedent = Math.round(getSeuil(anneeN - 1, lycee.code));
+      const seuilPrecedent2 = Math.round(getSeuil(anneeN - 2, lycee.code));
+      const seuilRecent = getSeuil(anneeN, lycee.code, seuilsRecents);
+      return {
+        id: lycee.code,
+        nom: lycee.nom,
+        seuilPrecedent2: seuilPrecedent2,
+          // lycee.seuils[nbSeuils - 3] > 0
+          //   ? Math.round(lycee.seuils[nbSeuils - 3])
+          //   : 0,
+        seuilPrecedent: seuilPrecedent,
+        seuilRecent: seuilRecent,
+        delta:
+          seuilPrecedent && seuilRecent
+            ? Math.round(seuilRecent - seuilPrecedent)
+            : null,
+        url: urlsLyceesMap.get(lycee.code),
+        //      seuilRecent: lycee.seuils[nbSeuils - 1] > 0 ? lycee.seuils[nbSeuils - 1] : 0,
+      };
+    });
     switch (sorting) {
-      case "bySeuilPrevPrev":
+      case "bySeuilPrecedent2":
         newSeuils.sort((a, b) =>
-          a.seuil_prev_prev < b.seuil_prev_prev ? 1 : -1
+          a.seuilPrecedent2 < b.seuilPrecedent2 ? 1 : -1
         );
         break;
-      case "bySeuilPrev":
-        newSeuils.sort((a, b) => (a.seuil_prev < b.seuil_prev ? 1 : -1));
+      case "bySeuilPrecedent":
+        newSeuils.sort((a, b) =>
+          a.seuilPrecedent < b.seuilPrecedent ? 1 : -1
+        );
         break;
-      case "bySeuil":
+      case "bySeuilRecent":
         newSeuils.sort((a, b) => {
-          if (isNaN(a.seuil2023)) return 1;
-          if (isNaN(b.seuil2023)) return -1;
-          return a.seuil2023 < b.seuil2023 ? 1 : -1;
+          if (isNaN(a.seuilRecent)) return 1;
+          if (isNaN(b.seuilRecent)) return -1;
+          return a.seuilRecent < b.seuilRecent ? 1 : -1;
         });
         break;
       case "byVariation":
@@ -50,11 +70,16 @@ function useSeuils(sorting = "byLycee") {
         newSeuils.sort((a, b) => (a.nom < b.nom ? -1 : 1));
     }
     setLycees(newSeuils);
-  }, [sorting]);
+  }, [listeLyceesSeuils, seuilsRecents, sorting]);
   return lycees;
 }
 
 const ListeSeuils = (props) => {
+  const listeLyceesSeuils = props.seuils;
+  const seuilsRecents = props.seuilsRecents;
+  const scoreMax = props.scoreMax;
+
+  const nbSeuils = listeLyceesSeuils[0].seuils.length;
   const [sorting, setSorting] = useState("byLycee");
 
   /* const determineVariationStyle = (prev, next) => {
@@ -68,12 +93,12 @@ const ListeSeuils = (props) => {
     setSorting(event.target.value);
   };
 
-  const lycees = useSeuils(sorting);
+  const lycees = useSeuils(listeLyceesSeuils, seuilsRecents, sorting);
 
   useEffect(() => {
     let newNumberSeuils = 0;
     lycees.forEach((item) => {
-      if (item.seuil2023 > 0) newNumberSeuils++;
+      if (item.seuilRecent > 0) newNumberSeuils++;
     });
     props.onChange(newNumberSeuils);
   }, [props, lycees]);
@@ -89,12 +114,22 @@ const ListeSeuils = (props) => {
         fiche descriptive du lycée produite par la FCPE. Les seuils des
         anciennes années sont arrondis.
       </div>
+      <div className="mb-3">
+        <ArrowReturnRight /> Pour ajouter un nouveau seuil d'admission grâce à votre fiche-barème, se rendre
+        à la section "Mes Contributions" tout en bas.
+      </div>
       <div className="combo">
         <Form.Select size="sm" value={sorting} onChange={handleSortChange}>
           <option value="byLycee">trier par lycée</option>
-          <option value="bySeuil">trier par seuil 2023</option>
-          <option value="bySeuilPrev">trier par seuil 2022</option>
-          <option value="bySeuilPrevPrev">trier par seuil 2021</option>
+          <option value="bySeuilRecent">
+            trier par seuil {2020 + nbSeuils}
+          </option>
+          <option value="bySeuilPrecedent">
+            trier par seuil {2019 + nbSeuils}
+          </option>
+          <option value="bySeuilPrecedent2">
+            trier par seuil {2018 + nbSeuils}
+          </option>
           <option value="byVariation">trier par variation</option>
         </Form.Select>
       </div>
@@ -104,10 +139,10 @@ const ListeSeuils = (props) => {
           <thead>
             <tr>
               <th className="lycee">Lycée</th>
-              <th className="seuil">seuil 2021</th>
-              <th className="seuil">seuil 2022</th>
-              <th className="seuil">seuil 2023</th>
               <th className="variation">+/-</th>
+              <th className="seuil">seuil {2020 + nbSeuils}</th>
+              <th className="seuil">seuil {2019 + nbSeuils}</th>
+              <th className="seuil">seuil {2018 + nbSeuils}</th>
             </tr>
           </thead>
           <tbody>
@@ -123,26 +158,35 @@ const ListeSeuils = (props) => {
                     {lycee.nom}
                   </a>
                   &nbsp;
-                  {lycee.seuil2023 > 1000000 && (
+                  {lycee.seuilRecent > 1000000 && (
                     <CheckLg color="green" width="20" height="20" />
                   )}
-                  {lycee.seuil2023 === 0 && (
-                    <ExclamationLg color="red" width="20" height="20" />
+                  {lycee.seuilRecent === 0 && (
+                    <ExclamationLg className="text-danger mb-1" width="20" height="20" />
                   )}
-                </td>
-                <td className="seuil text-muted">
-                  {lycee.seuil_prev > 0
-                    ? formatInt(lycee.seuil_prev_prev)
-                    : "?"}
-                </td>
-                <td className="seuil text-muted">
-                  {lycee.seuil_prev > 0 ? formatInt(lycee.seuil_prev) : "?"}
-                </td>
-                <td className="seuil text-success">
-                  {lycee.seuil2023 > 0 ? formatFloat(lycee.seuil2023) : "?"}
                 </td>
                 <td className="seuil text-primary">
                   {lycee.delta !== null ? formatVariation(lycee.delta) : "?"}
+                </td>
+                {lycee.seuilRecent <= scoreMax && (
+                <td className="seuil text-success">
+                {lycee.seuilRecent > 0 ? formatFloat(lycee.seuilRecent) : "?"}
+              </td>
+                )}
+                {lycee.seuilRecent > scoreMax && (
+                <td className="seuil text-danger">
+                {lycee.seuilRecent > 0 ? formatFloat(lycee.seuilRecent) : "?"}
+              </td>
+                )}
+                <td className="seuil text-muted">
+                  {lycee.seuilPrecedent > 0
+                    ? formatInt(lycee.seuilPrecedent)
+                    : "?"}
+                </td>
+                <td className="seuil text-muted">
+                  {lycee.seuilPrecedent > 0
+                    ? formatInt(lycee.seuilPrecedent2)
+                    : "?"}
                 </td>
               </tr>
             ))}

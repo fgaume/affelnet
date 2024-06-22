@@ -102,9 +102,12 @@ const Title = (props) => {
           </p>
           <hr />
           <p className="mb-0">
-            <strong>[Mise à jour 01/04/2024]</strong> Mise à jour des bonus IPS 2024, et le lycée Emile Dubois n'est
-            plus un lycée "tous secteurs", il devient un lycée de secteur comme un autre et
-            remplace François Villon qui n'accueille plus de classes de seconde GT.
+            <strong>Mise à jour [9.3.0] du 23/06/2024 :</strong>
+            <ul>
+              <li>Réactivation du mode contributif (seuils et statistiques).</li>
+              <li>Calcul progressif du score 2024 en fonction des statistiques renseignées (Le score ne sera exact que lorsque toutes les statistiques auront été renseignées dans la section "Mes Contributions").</li>
+              <li>Prise en compte du nouveau bonus exceptionnel 2024</li>
+            </ul>            
           </p>
         </Alert>
         <Alert show={show === "true"} variant="warning">

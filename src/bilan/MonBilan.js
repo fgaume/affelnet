@@ -9,18 +9,19 @@ import {
 
 import { useLocalStorage } from "../services/useLocalStorage";
 import {
-  listeMatieres,
   computeNoteCDs,
   computeBilanPeriodique,
   updateMatieres,
   allMatiereSetTo,
-  computeAvancementNotes,
+  computeAvancementNotes
 } from "../services/bilan";
 import { moyennesAcademiques, ecartsAcademiques } from "../data/stats";
 import MatiereEditor from "./MatiereEditor";
 import "./MonBilan.css";
 import AffichageScores from "../components/AffichageScores";
 import MyToggle from "../components/MyToggle";
+import { listeMatieres } from "../data/bilan";
+import { anneeN } from "../data/lycees";
 
 const valueMap = new Map([
   [0, 0],
@@ -32,6 +33,8 @@ const valueMap = new Map([
 
 /* returns scoreBilanPrevious and scoreBilanNext */
 const MonBilan = (props) => {
+  const anneeN1 = anneeN - 1;
+
   const [semestres, setSemestres] = useLocalStorage("semestres", false);
   const [matieres, setMatieres] = useLocalStorage(
     "bilan_periodique/matieres",
@@ -42,6 +45,9 @@ const MonBilan = (props) => {
   const [quickScore, setQuickScore] = useState(0);
 
   const inputRef = useRef([]);
+
+  //const moyennesMap = props.stats.moyennesMap;
+  //const ecarttypesMap = props.stats.ecarttypesMap;
 
   const handleMatiereChange = (nom, newNote, periode) => {
     //console.log("handleMatiereChange: " + nom + "/" + periode + "/" + newNote);
@@ -74,22 +80,22 @@ const MonBilan = (props) => {
 
     const scoreBPprevious = computeBilanPeriodique(
       scoreCDs,
-      moyennesAcademiques.get("2022"),
-      ecartsAcademiques.get("2022")
+      moyennesAcademiques.get(anneeN1),
+      ecartsAcademiques.get(anneeN1)
     );
     //console.log("score BP = " + formatFloat(scoreBPprevious));
     setScoreBilanPrevious(scoreBPprevious);
 
     const scoreBPnext = computeBilanPeriodique(
       scoreCDs,
-      moyennesAcademiques.get("2023"),
-      ecartsAcademiques.get("2023")
+      props.moyennes,
+      props.ecarttypes
     );
-    //console.log("score BP = " + formatFloat(scoreBPnext));
+    console.log("score BP next = " + scoreBPnext);
     setScoreBilanNext(scoreBPnext);
-    
+
     props.onChange(scoreBPprevious, scoreBPnext, avancement);
-  }, [matieres, semestres, props]);
+  }, [matieres, semestres, props, anneeN1, props.moyennes, props.ecarttypes]);
 
   return (
     <div className="">
@@ -100,18 +106,20 @@ const MonBilan = (props) => {
         Affelnet, il est donc inutile de saisir les notes précises.
       </div>
       <div className="mx-3 my-3">
-        <ArrowReturnRight /> Dans
-        le cas de {semestres ? "se" : "tri"}mestre non noté, laissez le curseur à "Non noté". Si aucune note n'est présente dans l'année pour un champ disciplinaire (cas de la
-        dispense annuelle d'EPS par exemple), la note harmonisée moyenne sur l'académie
-        sera appliquée, c'est à dire 100.
+        <ArrowReturnRight /> Dans le cas de {semestres ? "se" : "tri"}mestre non
+        noté, laissez le curseur à "Non noté". Si aucune note n'est présente
+        dans l'année pour un champ disciplinaire (cas de la dispense annuelle
+        d'EPS par exemple), la note harmonisée moyenne sur l'académie sera
+        appliquée, c'est à dire 100.
       </div>
       <div className="mx-2 col-12 col-sm-10 col-md-8 col-lg-6 col-xl-6 col-xxl-6 mx-auto my-4">
         <AffichageScores
           scorePrevious={scoreBilanPrevious}
           scoreNext={scoreBilanNext}
-          tipPrevious="Score de votre bilan périodique en 2021"
-          tipNext="Score de votre bilan périodique en 2022"
-          tipDelta="Evolution de votre bilan périodique entre 2021 et 2022"
+          tipPrevious={"Score de votre bilan périodique en " + anneeN1}
+          tipNext={"Score de votre bilan périodique en " + anneeN}
+          tipDelta="Evolution de votre bilan périodique"
+          nbSeuils={props.nbSeuils}
         />
       </div>
       <div className="mx-4 col-12 col-sm-10 col-md-8 col-lg-6 col-xl-6 col-xxl-6 mx-auto mb-4">

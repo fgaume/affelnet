@@ -57,7 +57,7 @@ const fetchCollegesSecteur = async (codeLyceeSecteur) => {
         collegesArray.push({
           bonus: bonus,
           effectif: effectif,
-          part: formatInt((100 * effectif) / effectifTotal) + " %",
+          part: (effectifTotal === 0) ? "0 %" : formatInt((100 * effectif) / effectifTotal) + " %",
           colleges: group,
         });
       });
