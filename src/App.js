@@ -33,18 +33,20 @@ import {
 import ListeSeuils from "./seuils/ListeSeuils";
 import MesContributions from "./seuils/MesContributions";
 import MonSocle from "./socle/MonSocle";
-import { listeLyceesSeuils, seuilsLyceesMap } from "./data/lycees";
-import { useSeuilsRecents } from "./services/seuils";
-import { useOngoingStats } from "./services/statistiques";
+import { anneeN, listeLyceesSeuils, seuilsLyceesMap, seuilsRecentsMap } from "./data/lycees";
+//import { useSeuilsRecents } from "./services/seuils";
+import { localStats } from "./services/statistiques";
 
 const App = () => {
-  const version = "v9.3.0 23/06/2024";
+  const version = "v9.3.1 03/07/2024";
   const contrib = true;
 
   const [loading, setLoading] = useState(true);
 
-  const seuilsRecents = useSeuilsRecents();
-  const recentStats = useOngoingStats();
+ // const seuilsRecents = useSeuilsRecents();
+  //const recentStats = useOngoingStats(anneeN);
+  const recentStats = localStats(anneeN);
+  const seuilsRecents = seuilsRecentsMap;
 
   const [scoreBilanPrevious, setScoreBilanPrevious] = useState(0);
   const [scoreBilanNext, setScoreBilanNext] = useState(0);
@@ -59,7 +61,6 @@ const App = () => {
   const [avancementCompetences, setAvancementCompetences] = useState(0);
   const [avancementNotes, setAvancementNotes] = useState(0);
   const [numberSeuils, setNumberSeuils] = useState(0);
-  //const [seuilsCourants, setSeuilsCourants] = useState(seuilsRecents);
 
   const handleBilanChange = (previous, next, newAvancement) => {
     setAvancementNotes(newAvancement);
@@ -104,27 +105,8 @@ const App = () => {
     setNumberSeuils(newNumberSeuils);
   };
 
-  //  const onSeuilUpdated = (lyceeId, updatedSeuil) => {
-  //    console.log("App.onSeuilUpdated : " + lyceeId + ": ", updatedSeuil);
-  /*    console.log(seuilsCourants);
-    console.log(seuilsLyceesMap);
-    const seuilsCourantsCopy = new Map(
-      JSON.parse(JSON.stringify(Array.from(seuilsCourants)))
-    );
-    const existingSeuil = seuilsCourantsCopy.get(lyceeId);
-    if (existingSeuil[2] !== updatedSeuil) {
-      seuilsCourantsCopy.set(lyceeId, [
-        existingSeuil[0],
-        existingSeuil[1],
-        updatedSeuil,
-      ]);
-      setSeuilsCourants(seuilsCourantsCopy);
-    } */
-  // };
-
   useEffect(() => {
     console.log("useffect App.js");
-    //console.log("seuilsRecents: " + seuilsRecents);
     setTimeout(() => setLoading(false), 500);
     if (collegeSecteur) {
       fetchLycees(collegeSecteur, seuilsLyceesMap, seuilsRecents).then(
@@ -276,7 +258,7 @@ const App = () => {
             <Accordion.Item eventKey="4">
               <Accordion.Header>
                 <span className="fw-bolder">
-                  Seuils d'admission ({numberSeuils}/44)
+                  Seuils d'admission ({numberSeuils}/41)
                 </span>
               </Accordion.Header>
               <Accordion.Body>
@@ -305,7 +287,6 @@ const App = () => {
                 <MesContributions
                   contrib={contrib}
                   contributeur={nomCollegeScolarisation}
-                  //                  onSeuilUpdated={onSeuilUpdated}
                 />
               </Accordion.Body>
             </Accordion.Item>
@@ -319,7 +300,7 @@ const App = () => {
                   onClick={() => deleteWorker()}
                 >
                   <ArrowClockwise width="18" height="18" className="me-1" />
-                  Mettre à jour
+                  Mise à jour
                 </Button>
               </ButtonGroup>
               <ButtonGroup className="me-2" aria-label="reset">

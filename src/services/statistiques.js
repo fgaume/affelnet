@@ -9,7 +9,6 @@ import {
 import { firestore } from "../services/firebase";
 import { useEffect, useState } from "react";
 import { ecartsAcademiques, moyennesAcademiques } from "../data/stats";
-import { anneeN } from "../data/lycees";
 import {
   computeBilanPeriodique,
   mergeEcartsTypes,
@@ -67,16 +66,14 @@ const appendNewNote = (brute, harmonisee, champ, contributeur) => {
 
 const saveStats = (champ, stats) => {
   console.log("saving in firestore stats for " + champ);
-  //const docRef = doc(firestore, "stats", champ);
   setDoc(doc(firestore, "stats", champ), {
     moyenne: stats.moyenne,
     ecartType: stats.ecartType,
   });
 };
 
-function useStatsChamp(champ) {
+function useStatsChamp(champ, annee) {
   const [notes, setNotes] = useState([]);
-
   useEffect(() => {
     console.log("loading stats from firestore");
     const unsubscribe = onSnapshot(
@@ -97,7 +94,20 @@ function useStatsChamp(champ) {
   return notes;
 }
 
-function useOngoingStats() {
+const localStats = (annee) => {
+  const scoreBPMax = computeBilanPeriodique(
+    CDs,
+    moyennesAcademiques.get(annee),
+    ecartsAcademiques.get(annee)
+  );
+  return {
+    moyennes: moyennesAcademiques.get(annee),
+    ecarttypes: ecartsAcademiques.get(annee),
+    scoreMax: scoreBPMax,
+  }
+}
+
+function useOngoingStats(annee) {
   const [stats, setStats] = useState([]);
 
   useEffect(() => {
@@ -110,14 +120,13 @@ function useOngoingStats() {
           ...doc.data(),
         }));
         const moyennesMap = mergeMoyennes(
-          moyennesAcademiques.get(anneeN),
+          moyennesAcademiques.get(annee),
           newStats
         );
         const ecarttypesMap = mergeEcartsTypes(
-          ecartsAcademiques.get(anneeN),
+          ecartsAcademiques.get(annee),
           newStats
         );
-
         const scoreBPMax = computeBilanPeriodique(
           CDs,
           moyennesMap,
@@ -136,8 +145,19 @@ function useOngoingStats() {
       }
     );
     return () => unsubscribe();
-  }, []);
+  }, [annee]);
+
   return stats;
+}
+
+const statsCompleted = (annee) => {
+  const moyennes = moyennesAcademiques.get(annee);
+  const ecartTypes = ecartsAcademiques.get(annee);
+  CDs.forEach( cd => {
+    if (moyennes.get(cd) === null || moyennes.get(cd) === 0) return false;
+    if (ecartTypes.get(cd) === null || ecartTypes.get(cd) === 0) return false;
+  });
+  return true;
 }
 
 export {
@@ -147,4 +167,6 @@ export {
   useStatsChamp,
   saveStats,
   useOngoingStats,
+  localStats,
+  statsCompleted,
 };

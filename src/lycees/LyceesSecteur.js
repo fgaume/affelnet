@@ -25,18 +25,18 @@ const computeResult = (
     seuilAdmission > 0 && scoreVoeu > 0
       ? Math.round(scoreVoeu - seuilAdmission)
       : null;
-  if (codeLycee === "0750667T") {
-    console.log("computeResult scoreVoeu 0750667T : ", scoreVoeu);
-    const bonus = hasBonusExceptionnel(
-      secteur,
-      codeLycee,
-      annee,
-      scoreMax,
-      scoreVoeu,
-      seuilAdmission
-    );
-    console.log("bonus : ", bonus);
-  }
+  // if (codeLycee === "0750667T") {
+  //   console.log("computeResult scoreVoeu 0750667T : ", scoreVoeu);
+  //   const bonus = hasBonusExceptionnel(
+  //     secteur,
+  //     codeLycee,
+  //     annee,
+  //     scoreMax,
+  //     scoreVoeu,
+  //     seuilAdmission
+  //   );
+  //   console.log("bonus : ", bonus);
+  // }
   return hasBonusExceptionnel(
     secteur,
     codeLycee,
@@ -102,7 +102,7 @@ const determineColor = (result, lycee) => {
 
 const LyceesSecteur = (props) => {
   const anneeN1 = anneeN - 1;
-  console.log("props : ", props);
+  //console.log("props : ", props);
 
   return (
     <div>

@@ -4,10 +4,10 @@ import { CheckCircleFill, ExclamationCircle } from "react-bootstrap-icons";
 import { formatFloat } from "../services/helper";
 import { computeStats, saveStats, useStatsChamp } from "../services/statistiques";
 import "./ListeStatsChamp.css";
-import StatsEditor from "./StatsEditor";
 
-const ListeStatsChamp = (props) => {
-  const notes = useStatsChamp(props.champ);
+const ListeStatsChamp = (props, annee) => {
+  const open = false;
+  const notes = useStatsChamp(props.champ, annee);
   const [stats, setStats] = useState([]);
 
   useEffect(() => {
@@ -46,7 +46,7 @@ const ListeStatsChamp = (props) => {
           Ecart-type: {formatFloat(stats.ecartType)}
         </Card.Subtitle>
       )}
-      {notes.length > 0 && (
+      {open && notes.length > 0 && (
         <Table hover responsive="lg" className="mb-0 bg-transparent">
           <thead>
             <tr>
@@ -68,10 +68,10 @@ const ListeStatsChamp = (props) => {
           </tbody>
         </Table>
       )}
-      <StatsEditor
+      {/* <StatsEditor
         champ={props.champ}
         contributeur={props.contributeur}
-      />
+      /> */}
     </Card>
   );
 };

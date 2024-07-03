@@ -65,7 +65,7 @@ const computeBilanPeriodique = (
   moyennesAcademiques,
   ecartsAcademiques
 ) => {
-  console.log("computeBilanPeriodique : ");
+  //console.log("computeBilanPeriodique : ");
   if (!moyennesAcademiques) return 0;
   let score = 0;
   scoresCD.forEach((cd) => {
@@ -78,11 +78,11 @@ const computeBilanPeriodique = (
           (10 +
             (base - moyennesAcademiques.get(cd.nom)) /
               ecartsAcademiques.get(cd.nom));
-    console.log("score " + cd.nom + " : " + cd.score + " -> " + cdscore.toFixed(3));
+    //console.log("score " + cd.nom + " : " + cd.score + " -> " + cdscore.toFixed(3));
     score += cd.coefficient * cdscore.toFixed(3);
   });
   const result = parseFloat(score.toFixed(3));
-  console.log("bilan : " + result);
+  //console.log("bilan : " + result);
   return result;
 };
 

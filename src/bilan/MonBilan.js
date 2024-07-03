@@ -91,7 +91,7 @@ const MonBilan = (props) => {
       props.moyennes,
       props.ecarttypes
     );
-    console.log("score BP next = " + scoreBPnext);
+    //console.log("score BP next = " + scoreBPnext);
     setScoreBilanNext(scoreBPnext);
 
     props.onChange(scoreBPprevious, scoreBPnext, avancement);

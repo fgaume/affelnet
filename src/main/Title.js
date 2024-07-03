@@ -25,7 +25,7 @@ const Title = (props) => {
         <h4>
           <span className="d-flex align-items-center mt-1">
             <Tools />
-            &nbsp;&nbsp;Boîte à outils Affelnet
+            &nbsp;&nbsp;Affelnet Paris
           </span>
         </h4>
         {/*eslint-disable-next-line jsx-a11y/anchor-is-valid */}
@@ -102,11 +102,10 @@ const Title = (props) => {
           </p>
           <hr />
           <p className="mb-0">
-            <strong>Mise à jour [9.3.0] du 23/06/2024 :</strong>
+            <strong>Mise à jour [9.3.1] du 03/07/2024 :</strong>
             <ul>
-              <li>Réactivation du mode contributif (seuils et statistiques).</li>
-              <li>Calcul progressif du score 2024 en fonction des statistiques renseignées (Le score ne sera exact que lorsque toutes les statistiques auront été renseignées dans la section "Mes Contributions").</li>
-              <li>Prise en compte du nouveau bonus exceptionnel 2024</li>
+              <li>Fermeture des contributions aux statistiques (puisque complètes)</li>
+              <li>Calcul exact du score 2024.</li>
             </ul>            
           </p>
         </Alert>
