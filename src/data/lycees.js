@@ -116,7 +116,7 @@ const listeLycees = [
     {
       "code": "0750705J",
       "nom": "HONORE DE BALZAC",
-      "seuils": [40269.556, 39935.372, 39794.109, 38974.183],
+      "seuils": [40269.556, 39935.372, 39794.109, 39811.346],
       "url": "https://www.fcpe75.org/wp-content/uploads/2024/01/17_BALZAC_Fiche_Lycee2024.pdf"
     },
     {
@@ -218,7 +218,7 @@ const listeLycees = [
     {
       "code": "0750682J",
       "nom": "RODIN",
-      "seuils": [25216.998, 7886.202, 5586.306, 4583.576],
+      "seuils": [25216.998, 7886.202, 5586.306, 39084.229],
       "url": "https://www.fcpe75.org/wp-content/uploads/2024/01/13_RODIN_Fiche_Lycee2024.pdf"
     },
     {

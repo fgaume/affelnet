@@ -38,7 +38,7 @@ import { anneeN, listeLyceesSeuils, seuilsLyceesMap, seuilsRecentsMap } from "./
 import { localStats } from "./services/statistiques";
 
 const App = () => {
-  const version = "v9.3.1 03/07/2024";
+  const version = "v9.3.2 01/10/2024";
   const contrib = true;
 
   const [loading, setLoading] = useState(true);
