@@ -921,6 +921,7 @@ const listeColleges = [
 
 const collegesMap = new Map();
 listeColleges.forEach(item => {
+  item.url = "https://data.education.gouv.fr/pages/fiche-etablissement/?code_etab=" + item.code
   collegesMap.set(item.code, item);
 });
 

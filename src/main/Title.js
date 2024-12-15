@@ -102,10 +102,9 @@ const Title = (props) => {
           </p>
           <hr />
           <p className="mb-0">
-            <strong>Mise à jour [9.3.1] du 03/07/2024 :</strong>
+            <strong>Mise à jour [9.3.3] du 16/12/2024 :</strong>
             <ul>
-              <li>Fermeture des contributions aux statistiques (puisque complètes)</li>
-              <li>Calcul exact du score 2024.</li>
+              <li>Ajout du lien vers la fiche d'établissement de l'Opendata EN</li>
             </ul>            
           </p>
         </Alert>

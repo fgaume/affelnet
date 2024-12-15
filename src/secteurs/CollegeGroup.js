@@ -23,7 +23,7 @@ const CollegeGroup = (props) => {
           {props.colleges.map((college, index) => {
             return (
               <li key={index}>
-                {college.nom} ({college.dnb_admis})
+                <a href={college.url}>{college.nom}</a> ({college.dnb_admis})
               </li>
             );
           })}

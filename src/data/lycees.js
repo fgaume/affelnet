@@ -271,7 +271,7 @@ listeLycees.forEach(item => {
     nomsLyceesMap.set(item.code, item.nom);
     seuilsLyceesMap.set(item.code, item.seuils);
     seuilsRecentsMap.set(item.code, item.seuils.slice(-1));
-    urlsLyceesMap.set(item.code, item.url);
+    urlsLyceesMap.set(item.code, "https://data.education.gouv.fr/pages/fiche-etablissement/?code_etab=" + item.code);
     // LLG et H4 n'ont pas de seuils car hors algo
     if (item.code !== '0750655E' && item.code !== '0750654D') listeLyceesSeuils.push(item);
 });
