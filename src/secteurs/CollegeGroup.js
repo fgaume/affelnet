@@ -9,13 +9,33 @@ const CollegeGroup = (props) => {
       ? "primary"
       : "danger";
 
+  const bonusColor =
+    props.bonus === 1200
+      ? "#008001"
+      : props.bonus === 600
+      ? "#0C6FFD"
+      : "#FB824A";
+
   return (
     <Card className={"p-1 bg-opacity-10 my-3 bg-" + bg}>
       <div className="p-2 mx-3">
         <Row>
           <strong>
-            Collèges à bonus {props.bonus} (~ {props.effectif} élèves soit{" "}
-            {props.part})
+            Collèges à bonus{" "}
+            <span
+              style={{
+                backgroundColor: bonusColor,
+                color: "white",
+                borderRadius: "8px",
+                padding: "3px 5px",
+                display: "inline-flex",
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
+              {props.bonus}
+            </span>
+            &nbsp;(~ {props.effectif} élèves soit {props.part})
           </strong>
         </Row>
         <Row>&nbsp;</Row>
