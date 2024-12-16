@@ -105,6 +105,7 @@ const Title = (props) => {
             <strong>Mise à jour [9.3.3] du 16/12/2024 :</strong>
             <ul>
               <li>Ajout du lien vers la fiche d'établissement de l'Opendata EN</li>
+              <li>Ajout d'un graphique des "collèges de secteur 1"</li>
             </ul>            
           </p>
         </Alert>

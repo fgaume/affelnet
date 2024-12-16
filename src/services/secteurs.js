@@ -36,6 +36,7 @@ const fetchCollegesSecteur = async (codeLyceeSecteur) => {
       });
 
       const collegesArray = [];
+      const collegesPieArray = [];
 
       let groups = [1200, 600, 0];
 
@@ -54,15 +55,22 @@ const fetchCollegesSecteur = async (codeLyceeSecteur) => {
           }
           return 0;
         });
-        collegesArray.push({
-          bonus: bonus,
-          effectif: effectif,
-          part: (effectifTotal === 0) ? "0 %" : formatInt((100 * effectif) / effectifTotal) + " %",
-          colleges: group,
-        });
+        if (effectif !== 0) {
+          collegesArray.push({
+            bonus: bonus,
+            effectif: effectif,
+            part: (effectifTotal === 0) ? "0 %" : formatInt((100 * effectif) / effectifTotal) + " %",
+            colleges: group,
+          });
+          collegesPieArray.push({
+            title: bonus,
+            value: effectif,
+            color: bonus === 1200 ? "#008001" : (bonus === 0 ? "#FB824A" : "#0C6FFD")
+          });
+          }
       });
 
-      return collegesArray;
+      return { collegesArray: collegesArray, collegesPieArray: collegesPieArray }
     }
   }
 };

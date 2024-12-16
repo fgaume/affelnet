@@ -1,6 +1,6 @@
 {
   "name": "affelnet75",
-  "version": "9.3.1",
+  "version": "9.3.3",
   "private": true,
   "dependencies": {
     "axios": "^1.4.0",
@@ -12,6 +12,7 @@
     "react-bootstrap-icons": "^1.10.3",
     "react-bootstrap-typeahead": "^6.2.2",
     "react-dom": "^18.2.0",
+    "react-minimal-pie-chart": "^9.1.0",
     "react-scripts": "5.0.1",
     "react-switch": "^7.0.0",
     "sass": "^1.56.1",
