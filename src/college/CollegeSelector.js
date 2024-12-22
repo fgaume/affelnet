@@ -1,19 +1,21 @@
-import React, { useRef, useEffect } from "react";
+import React, { useRef, useEffect, useContext } from "react";
 import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
 import { Typeahead } from "react-bootstrap-typeahead";
 
-import { listeColleges } from "../data/colleges";
+//import { listeColleges } from "../data/colleges";
 
 import "react-bootstrap-typeahead/css/Typeahead.css";
 import { Col } from "react-bootstrap";
 import { CheckLg } from "react-bootstrap-icons";
 import "./MesColleges.css"
+import SharedContext from "../context";
 
 const CollegeSelector = (props) => {
   const placeholder = "Saisir ici le collège de " + props.type;
   const labelCollege = "Collège de " + props.type + " :";
   const inputRef = useRef();
+  const { listeColleges } = useContext(SharedContext);
 
   const onCollegeChange = (collegeUpdate) => {
     props.onChange(collegeUpdate[0]);

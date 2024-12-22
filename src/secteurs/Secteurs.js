@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 
 import "react-bootstrap-typeahead/css/Typeahead.css";
 import { Card } from "react-bootstrap";
@@ -7,6 +7,7 @@ import fetchCollegesSecteur from "../services/secteurs";
 import CollegeGroup from "./CollegeGroup";
 import { ArrowReturnRight } from "react-bootstrap-icons";
 import { PieChart } from "react-minimal-pie-chart";
+import SharedContext from "../context";
 
 /* returns list colleges secteur 1 */
 const Secteurs = (props) => {
@@ -16,10 +17,25 @@ const Secteurs = (props) => {
   const [collegesArray, setCollegesArray] = useState([]);
   const [collegesPieArray, setCollegesPieArray] = useState([]);
 
+  const [collegesMap, setCollegesMap] = useState(null);
+  
+  const { listeColleges } = useContext(SharedContext);
+
   //  const [selected, setSelected] = useState(0);
   //  const [hovered, setHovered] = useState();
 
+  useEffect(() => {
+    const newMap = new Map();
+    listeColleges.forEach(item => {
+      item.url = "https://data.education.gouv.fr/pages/fiche-etablissement/?code_etab=" + item.code
+      newMap.set(item.code, item);
+    });
+    setCollegesMap(newMap);
+    }, [listeColleges]);
+  
+
   const onLyceeChange = (lyceeUpdate) => {
+    console.log("collgeMap", JSON.stringify(collegesMap))
     //console.log("onLyceeChange " + JSON.stringify(lyceeUpdate));
     if (lyceeUpdate === undefined) {
       setCodeLycee(null);
@@ -28,7 +44,7 @@ const Secteurs = (props) => {
     if (lyceeUpdate && lyceeUpdate.code !== codeLycee) {
       setCodeLycee(lyceeUpdate.code);
       setNomLycee(lyceeUpdate.nom);
-      fetchCollegesSecteur(lyceeUpdate.code).then((collegesSecteur) => {
+      fetchCollegesSecteur(lyceeUpdate.code, collegesMap).then((collegesSecteur) => {
         if (collegesSecteur) {
           //console.log("colleges de secteur  : " + JSON.stringify(collegesSecteur));
           setCollegesArray(collegesSecteur.collegesArray);
@@ -47,7 +63,7 @@ const Secteurs = (props) => {
       </div>
       <div className="mb-3">
         <ArrowReturnRight /> Les effectifs des collèges sont estimés via leur
-        nombre d'admis au DNB 2022 (source opendata)
+        nombre d'admis au <b>DNB 2023</b> (source opendata)
       </div>
       <div className="mx-2 col-12 col-sm-12 col-md-10 col-lg-8 col-xl-8 col-xxl-6 mx-auto">
         <Card className="p-1 bg-light bg-opacity-30">

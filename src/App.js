@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { SharedProvider } from './context'; 
 import {
   Button,
   Tab,
@@ -142,155 +143,157 @@ const App = () => {
       {loading === false ? (
         <div className="mx-2 col-12 col-sm-10 col-md-10 col-lg-10 col-xl-10 col-xxl-8 mx-auto">
           <Title />
-          <Accordion defaultActiveKey="3">
-            <Accordion.Item eventKey="0">
-              <Accordion.Header>
-                <span className="fw-bolder">
-                  Mon collège ({bonusCollege.toLocaleString()} pts)
-                </span>
-                {collegeSecteur ? (
-                  <CheckLg color="green" width="20" height="20" />
-                ) : (
-                  <ExclamationLg color="red" width="20" height="20" />
-                )}
-              </Accordion.Header>
-              <Accordion.Body>
-                <MesColleges onChange={handleCollegeChange} />
-              </Accordion.Body>
-            </Accordion.Item>
-            <Accordion.Item eventKey="1">
-              <Accordion.Header>
-                <span className="fw-bolder">Mes compétences&nbsp;</span>
-                {avancementCompetences === 100 ? (
+          <SharedProvider>
+            <Accordion defaultActiveKey="3">
+              <Accordion.Item eventKey="0">
+                <Accordion.Header>
                   <span className="fw-bolder">
-                    ({scoreSocle.toLocaleString()} pts)&nbsp;
+                    Mon collège ({bonusCollege.toLocaleString()} pts)
                   </span>
-                ) : (
+                  {collegeSecteur ? (
+                    <CheckLg color="green" width="20" height="20" />
+                  ) : (
+                    <ExclamationLg color="red" width="20" height="20" />
+                  )}
+                </Accordion.Header>
+                <Accordion.Body>
+                  <MesColleges onChange={handleCollegeChange} />
+                </Accordion.Body>
+              </Accordion.Item>
+              <Accordion.Item eventKey="1">
+                <Accordion.Header>
+                  <span className="fw-bolder">Mes compétences&nbsp;</span>
+                  {avancementCompetences === 100 ? (
+                    <span className="fw-bolder">
+                      ({scoreSocle.toLocaleString()} pts)&nbsp;
+                    </span>
+                  ) : (
+                    <span className="fw-bolder">
+                      ({avancementCompetences} %)&nbsp;
+                    </span>
+                  )}
+                  {avancementCompetences === 100 ? (
+                    <CheckLg color="green" width="20" height="20" />
+                  ) : (
+                    <ExclamationLg color="red" width="20" height="20" />
+                  )}
+                </Accordion.Header>
+                <Accordion.Body>
+                  <MonSocle onChange={handleSocleChange} />
+                </Accordion.Body>
+              </Accordion.Item>
+              <Accordion.Item eventKey="2">
+                <Accordion.Header>
+                  <span className="fw-bolder">Mes notes&nbsp;</span>
+                  {avancementNotes === 100 ? (
+                    <span className="fw-bolder">
+                      (
+                      {(scoreBilanNext
+                        ? scoreBilanNext
+                        : scoreBilanPrevious
+                      ).toLocaleString()}{" "}
+                      pts)&nbsp;
+                    </span>
+                  ) : (
+                    <span className="fw-bolder">({avancementNotes} %)&nbsp;</span>
+                  )}
+                  {avancementNotes === 100 ? (
+                    <CheckLg color="green" width="20" height="20" />
+                  ) : (
+                    <ExclamationLg color="red" width="20" height="20" />
+                  )}
+                </Accordion.Header>
+                <Accordion.Body>
+                  <MonBilan
+                    onChange={handleBilanChange}
+                    moyennes={recentStats.moyennes}
+                    ecarttypes={recentStats.ecarttypes}
+                  />
+                </Accordion.Body>
+              </Accordion.Item>
+              <Accordion.Item eventKey="3" hidden={!collegeSecteur}>
+                <Accordion.Header>
+                  <span className="fw-bolder">Mes lycées</span>
+                </Accordion.Header>
+                <Accordion.Body>
+                  <div>
+                    <FiltrageSpecialites onChange={handleFiltreChange} />
+                    <Tabs
+                      defaultActiveKey="secteur1"
+                      id="lycees"
+                      className="mx-0 my-0"
+                    >
+                      <Tab eventKey="secteur1" title="Secteur 1">
+                        <LyceesSecteur
+                          lycees={lyceesSecteur[0]}
+                          scorePrevious={scoreGlobalPrevious}
+                          scoreNext={scoreGlobalNext}
+                          scoreMax={4800 + recentStats.scoreMax}
+                          bonusGeo={32640}
+                          secteur="1"
+                        />
+                      </Tab>
+                      <Tab eventKey="secteur2" title="Sect. 2">
+                        <LyceesSecteur
+                          lycees={lyceesSecteur[1]}
+                          scorePrevious={scoreGlobalPrevious}
+                          scoreNext={scoreGlobalNext}
+                          scoreMax={4800 + recentStats.scoreMax}
+                          bonusGeo={17760}
+                          secteur="2"
+                        />
+                      </Tab>
+                      <Tab eventKey="secteur3" title="Sect. 3">
+                        <LyceesSecteur
+                          lycees={lyceesSecteur[2]}
+                          scorePrevious={scoreGlobalPrevious}
+                          scoreNext={scoreGlobalNext}
+                          scoreMax={4800 + recentStats.scoreMax}
+                          bonusGeo={16800}
+                          secteur="3"
+                        />
+                      </Tab>
+                    </Tabs>
+                  </div>
+                </Accordion.Body>
+              </Accordion.Item>
+              <Accordion.Item eventKey="4">
+                <Accordion.Header>
                   <span className="fw-bolder">
-                    ({avancementCompetences} %)&nbsp;
+                    Seuils d'admission ({numberSeuils}/41)
                   </span>
-                )}
-                {avancementCompetences === 100 ? (
-                  <CheckLg color="green" width="20" height="20" />
-                ) : (
-                  <ExclamationLg color="red" width="20" height="20" />
-                )}
-              </Accordion.Header>
-              <Accordion.Body>
-                <MonSocle onChange={handleSocleChange} />
-              </Accordion.Body>
-            </Accordion.Item>
-            <Accordion.Item eventKey="2">
-              <Accordion.Header>
-                <span className="fw-bolder">Mes notes&nbsp;</span>
-                {avancementNotes === 100 ? (
-                  <span className="fw-bolder">
-                    (
-                    {(scoreBilanNext
-                      ? scoreBilanNext
-                      : scoreBilanPrevious
-                    ).toLocaleString()}{" "}
-                    pts)&nbsp;
-                  </span>
-                ) : (
-                  <span className="fw-bolder">({avancementNotes} %)&nbsp;</span>
-                )}
-                {avancementNotes === 100 ? (
-                  <CheckLg color="green" width="20" height="20" />
-                ) : (
-                  <ExclamationLg color="red" width="20" height="20" />
-                )}
-              </Accordion.Header>
-              <Accordion.Body>
-                <MonBilan
-                  onChange={handleBilanChange}
-                  moyennes={recentStats.moyennes}
-                  ecarttypes={recentStats.ecarttypes}
-                />
-              </Accordion.Body>
-            </Accordion.Item>
-            <Accordion.Item eventKey="3" hidden={!collegeSecteur}>
-              <Accordion.Header>
-                <span className="fw-bolder">Mes lycées</span>
-              </Accordion.Header>
-              <Accordion.Body>
-                <div>
-                  <FiltrageSpecialites onChange={handleFiltreChange} />
-                  <Tabs
-                    defaultActiveKey="secteur1"
-                    id="lycees"
-                    className="mx-0 my-0"
-                  >
-                    <Tab eventKey="secteur1" title="Secteur 1">
-                      <LyceesSecteur
-                        lycees={lyceesSecteur[0]}
-                        scorePrevious={scoreGlobalPrevious}
-                        scoreNext={scoreGlobalNext}
-                        scoreMax={4800 + recentStats.scoreMax}
-                        bonusGeo={32640}
-                        secteur="1"
-                      />
-                    </Tab>
-                    <Tab eventKey="secteur2" title="Sect. 2">
-                      <LyceesSecteur
-                        lycees={lyceesSecteur[1]}
-                        scorePrevious={scoreGlobalPrevious}
-                        scoreNext={scoreGlobalNext}
-                        scoreMax={4800 + recentStats.scoreMax}
-                        bonusGeo={17760}
-                        secteur="2"
-                      />
-                    </Tab>
-                    <Tab eventKey="secteur3" title="Sect. 3">
-                      <LyceesSecteur
-                        lycees={lyceesSecteur[2]}
-                        scorePrevious={scoreGlobalPrevious}
-                        scoreNext={scoreGlobalNext}
-                        scoreMax={4800 + recentStats.scoreMax}
-                        bonusGeo={16800}
-                        secteur="3"
-                      />
-                    </Tab>
-                  </Tabs>
-                </div>
-              </Accordion.Body>
-            </Accordion.Item>
-            <Accordion.Item eventKey="4">
-              <Accordion.Header>
-                <span className="fw-bolder">
-                  Seuils d'admission ({numberSeuils}/41)
-                </span>
-              </Accordion.Header>
-              <Accordion.Body>
-                <ListeSeuils
-                  seuils={listeLyceesSeuils}
-                  seuilsRecents={seuilsRecents}
-                  onChange={handleSeuilChange}
-                  scoreMax={recentStats.scoreMax}
-                />
-              </Accordion.Body>
-            </Accordion.Item>
-            <Accordion.Item eventKey="5">
-              <Accordion.Header>
-                <span className="fw-bolder">Secteurs</span>
-              </Accordion.Header>
-              <Accordion.Body>
-                <Secteurs />
-              </Accordion.Body>
-            </Accordion.Item>
-            <Accordion.Item eventKey="6">
-              <Accordion.Header>
-                <span className="fw-bolder">Mes contributions</span>
-                <ShareFill width="20" height="20" className="ms-2" />
-              </Accordion.Header>
-              <Accordion.Body>
-                <MesContributions
-                  contrib={contrib}
-                  contributeur={nomCollegeScolarisation}
-                />
-              </Accordion.Body>
-            </Accordion.Item>
-          </Accordion>
+                </Accordion.Header>
+                <Accordion.Body>
+                  <ListeSeuils
+                    seuils={listeLyceesSeuils}
+                    seuilsRecents={seuilsRecents}
+                    onChange={handleSeuilChange}
+                    scoreMax={recentStats.scoreMax}
+                  />
+                </Accordion.Body>
+              </Accordion.Item>
+              <Accordion.Item eventKey="5">
+                <Accordion.Header>
+                  <span className="fw-bolder">Secteurs</span>
+                </Accordion.Header>
+                <Accordion.Body>
+                  <Secteurs />
+                </Accordion.Body>
+              </Accordion.Item>
+              <Accordion.Item eventKey="6">
+                <Accordion.Header>
+                  <span className="fw-bolder">Mes contributions</span>
+                  <ShareFill width="20" height="20" className="ms-2" />
+                </Accordion.Header>
+                <Accordion.Body>
+                  <MesContributions
+                    contrib={contrib}
+                    contributeur={nomCollegeScolarisation}
+                  />
+                </Accordion.Body>
+              </Accordion.Item>
+            </Accordion>
+          </SharedProvider>
           <Stack direction="horizontal" gap={3}>
             <ButtonToolbar aria-label="boutons apps" className="p-2">
               <ButtonGroup aria-label="update" className="me-2">
