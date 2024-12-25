@@ -4,29 +4,43 @@ import axios from "axios";
 const SharedContext = createContext([]);
 
 export const SharedProvider = ({ children }) => {
-  const [listeColleges, setListeColleges] = useState([]);
-  const [collegesMap, setCollegesMap] = useState(null);
+  const [data, setData] = useState(null); // Un seul état pour les deux listes
 
   useEffect(() => {
-    const fetchData = async () => {
+    const fetchColleges = async () => {
       try {
         const response = await axios.get(
           "https://affelnet-paris.web.app/api/colleges.json"
         );
-        setListeColleges(response.data);
-        setCollegesMap(collegesMap)
+        // Mise à jour de l'état avec les collèges
+        setData(prevData => ({ ...prevData, listeColleges: response.data })); 
       } catch (error) {
         console.error(error);
       } finally {
-        console.log("appel colleges terminé")
+        console.log("appel colleges terminé");
       }
     };
 
-    fetchData();
-  }, [collegesMap]); // Le tableau vide [] assure que useEffect ne s'exécute qu'une fois au montage
+    const fetchLycees = async () => {
+      try {
+        const response = await axios.get(
+          "https://affelnet-paris.web.app/api/lycees.json"
+        );
+        // Mise à jour de l'état avec les lycées
+        setData(prevData => ({ ...prevData, listeLycees: response.data })); 
+      } catch (error) {
+        console.error(error);
+      } finally {
+        console.log("appel lycees terminé");
+      }
+    };
+
+    fetchColleges();
+    fetchLycees();
+  }, []);
 
   return (
-    <SharedContext.Provider value={{ listeColleges, collegesMap }}>
+    <SharedContext.Provider value={{ data }}> {/* Passage de l'objet data */}
       {children}
     </SharedContext.Provider>
   );

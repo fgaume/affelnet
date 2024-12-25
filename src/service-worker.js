@@ -98,6 +98,19 @@ registerRoute(
   })
 );
 
+registerRoute(
+  ({ request }) => request.url.endsWith('.json'), // Correction ici
+  new CacheFirst({
+    cacheName: 'colleges-lycees',
+    plugins: [
+      new ExpirationPlugin({
+        maxAgeSeconds: 24 * 60 * 60, // 1 day
+      }),
+    ],
+  })
+);
+
+
 // This allows the web app to trigger skipWaiting via
 // registration.waiting.postMessage({type: 'SKIP_WAITING'})
 self.addEventListener("message", (event) => {

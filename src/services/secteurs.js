@@ -1,6 +1,5 @@
 import axios from "axios";
 
-//import { collegesMap } from "../data/colleges";
 import { formatInt } from "../services/helper";
 
 /*

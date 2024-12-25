@@ -84,7 +84,7 @@ const App = () => {
   };
 
   const handleCollegeChange = (college, collegeScol) => {
-    //console.log(JSON.stringify(college));
+    //console.log("handleCollegeChange: ", JSON.stringify(college));
     setBonusCollege(college.bonus);
     setCollegeSecteur(college.nom);
     const newScoreGlobalPrevious = (bonusCollege + scoreSocle + scoreBilanPrevious).toFixed(3);

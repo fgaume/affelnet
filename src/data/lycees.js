@@ -278,4 +278,4 @@ listeLycees.forEach(item => {
 const nbSeuils = listeLycees[0].seuils.length;
 const anneeN = 2020 + nbSeuils;
 
-export {anneeN, listeLyceesSeuils, listeLycees, nomsLyceesMap, seuilsLyceesMap, urlsLyceesMap, tousSecteurs, seuilsRecentsMap}
+export {anneeN, listeLyceesSeuils, nomsLyceesMap, seuilsLyceesMap, urlsLyceesMap, tousSecteurs, seuilsRecentsMap}

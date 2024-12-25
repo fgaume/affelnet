@@ -18,24 +18,28 @@ const Secteurs = (props) => {
   const [collegesPieArray, setCollegesPieArray] = useState([]);
 
   const [collegesMap, setCollegesMap] = useState(null);
-  
-  const { listeColleges } = useContext(SharedContext);
+
+  const { data } = useContext(SharedContext);
 
   //  const [selected, setSelected] = useState(0);
   //  const [hovered, setHovered] = useState();
 
   useEffect(() => {
-    const newMap = new Map();
-    listeColleges.forEach(item => {
-      item.url = "https://data.education.gouv.fr/pages/fiche-etablissement/?code_etab=" + item.code
-      newMap.set(item.code, item);
-    });
-    setCollegesMap(newMap);
-    }, [listeColleges]);
-  
+    if (data) {
+      const { listeColleges } = data;
+      const newMap = new Map();
+      listeColleges.forEach((item) => {
+        item.url =
+          "https://data.education.gouv.fr/pages/fiche-etablissement/?code_etab=" +
+          item.code;
+        newMap.set(item.code, item);
+      });
+      setCollegesMap(newMap);
+    }
+  }, [data]);
 
   const onLyceeChange = (lyceeUpdate) => {
-    console.log("collgeMap", JSON.stringify(collegesMap))
+    //console.log("collgeMap", JSON.stringify(collegesMap))
     //console.log("onLyceeChange " + JSON.stringify(lyceeUpdate));
     if (lyceeUpdate === undefined) {
       setCodeLycee(null);
@@ -44,13 +48,15 @@ const Secteurs = (props) => {
     if (lyceeUpdate && lyceeUpdate.code !== codeLycee) {
       setCodeLycee(lyceeUpdate.code);
       setNomLycee(lyceeUpdate.nom);
-      fetchCollegesSecteur(lyceeUpdate.code, collegesMap).then((collegesSecteur) => {
-        if (collegesSecteur) {
-          //console.log("colleges de secteur  : " + JSON.stringify(collegesSecteur));
-          setCollegesArray(collegesSecteur.collegesArray);
-          setCollegesPieArray(collegesSecteur.collegesPieArray);
+      fetchCollegesSecteur(lyceeUpdate.code, collegesMap).then(
+        (collegesSecteur) => {
+          if (collegesSecteur) {
+            //console.log("colleges de secteur  : " + JSON.stringify(collegesSecteur));
+            setCollegesArray(collegesSecteur.collegesArray);
+            setCollegesPieArray(collegesSecteur.collegesPieArray);
+          }
         }
-      });
+      );
     }
   };
 
