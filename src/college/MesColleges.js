@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import Form from "react-bootstrap/Form";
 import { useLocalStorage } from "../services/useLocalStorage";
 import CollegeSelector from "./CollegeSelector";
@@ -6,27 +6,41 @@ import CollegeSelector from "./CollegeSelector";
 import "react-bootstrap-typeahead/css/Typeahead.css";
 import { CheckLg, QuestionCircleFill } from "react-bootstrap-icons";
 import { Card, OverlayTrigger, Popover, Stack } from "react-bootstrap";
-import { analytics } from "../services/firebase";
-import { logEvent } from "firebase/analytics";
+//import { analytics } from "../services/firebase";
+//import { logEvent } from "firebase/analytics";
 import MyToggle from "../components/MyToggle";
 import "./MesColleges.css"
+import SharedContext from "../context";
 
 /* returns bonusIPS et college de secteur (pour avoir les lycées de secteur) */
 const MesColleges = (props) => {
+
+  const { data } = useContext(SharedContext);
+
   const [collegesMultiples, setCollegesMultiples] = useLocalStorage(
     "MonCollege/collegesMultiples",
     false
   );
-  const [bonusCollege, setBonusCollege] = useLocalStorage(
+/*  const [bonusCollege, setBonusCollege] = useLocalStorage(
     "MonCollege/bonusCollege",
     0
-  );
+  ); */
+
   const [nomCollege, setNomCollege] = useLocalStorage(
     "MonCollege/nomCollege",
     ""
   );
   const [nomCollegeSecteur, setNomCollegeSecteur] = useLocalStorage(
     "MonCollege/nomCollegeSecteur",
+    ""
+  );
+
+  const [collegeScolarisation, setCollegeScolarisation] = useLocalStorage(
+    "MesColleges/collegeScolarisation",
+    ""
+  );
+  const [collegeSecteur, setCollegeSecteur] = useLocalStorage(
+    "MesColleges/collegeSecteur",
     ""
   );
   const popover = (
@@ -54,20 +68,19 @@ const MesColleges = (props) => {
     /* console.log(
       "onCollegeScolarisationChange " + JSON.stringify(collegeUpdate)
     ); */
-    if (collegeUpdate && collegeUpdate.nom !== nomCollege) {
-      setNomCollege(collegeUpdate.nom);
-      setBonusCollege(collegeUpdate.bonus);
+    if (collegeUpdate && collegeUpdate.code !== collegeScolarisation.code) {
+      setCollegeScolarisation(collegeUpdate);
+      //setNomCollege(collegeUpdate.nom);
+      //setBonusCollege(collegeUpdate.bonus);
       if (!collegesMultiples) {
-        setNomCollegeSecteur(collegeUpdate.nom);
+        setCollegeSecteur(collegeUpdate);
+        //setNomCollegeSecteur(collegeUpdate.nom);
         props.onChange(collegeUpdate, collegeUpdate);
-        logEvent(analytics, "collège " + collegeUpdate.nom);
-        logEvent(analytics, "bonus " + collegeUpdate.bonus);
+        //logEvent(analytics, "collège " + collegeUpdate.nom);
+        //logEvent(analytics, "bonus " + collegeUpdate.bonus);
       } else {
-        if (nomCollegeSecteur && bonusCollege !== collegeUpdate.bonus) {
-          props.onChange({
-            nom: nomCollegeSecteur,
-            bonus: collegeUpdate.bonus,
-          }, collegeUpdate);
+        if (collegeSecteur && collegeScolarisation.bonus !== collegeUpdate.bonus) {
+          props.onChange(collegeSecteur, collegeUpdate);
         }
       }
     }
@@ -77,28 +90,53 @@ const MesColleges = (props) => {
     /* console.log(
       "onCollegeSectorisationChange " + JSON.stringify(collegeUpdate)
     ); */
-    if (collegeUpdate && collegeUpdate.nom !== nomCollegeSecteur) {
-      setNomCollegeSecteur(collegeUpdate.nom);
-      props.onChange({ nom: collegeUpdate.nom, bonus: bonusCollege }, { nom: nomCollege, bonus: bonusCollege });
-      logEvent(analytics, "collège secteur " + collegeUpdate.nom);
+    if (collegeUpdate && collegeUpdate.code !== collegeSecteur.code) {
+      setCollegeSecteur(collegeUpdate);
+      props.onChange(collegeUpdate, null);
+      //logEvent(analytics, "collège secteur " + collegeUpdate.nom);
     }
   };
 
   const handleCollegesMultiples = (newChecked) => {
     //console.log("switch event :", newChecked);
     setCollegesMultiples(newChecked);
-    setNomCollegeSecteur(newChecked ? "" : nomCollege);
-    if (newChecked && nomCollegeSecteur && bonusCollege) {
-      props.onChange({ nom: nomCollegeSecteur, bonus: bonusCollege }, { nom: nomCollege, bonus: bonusCollege });
-    } else if (!newChecked && nomCollege && bonusCollege) {
-      props.onChange({ nom: nomCollege, bonus: bonusCollege }, { nom: nomCollege, bonus: bonusCollege });
+    setCollegeSecteur(newChecked ? "" : collegeScolarisation);
+    if (newChecked && collegeSecteur) {
+      props.onChange(collegeSecteur, collegeScolarisation);
+    } else if (!newChecked && collegeScolarisation) {
+      props.onChange(collegeScolarisation, collegeScolarisation);
     }
   };
 
   useEffect(() => {
-    //console.log("usedeffect : ", nomCollege);
-    props.onChange({ nom: nomCollegeSecteur, bonus: bonusCollege }, { nom: nomCollege, bonus: bonusCollege });
-  }, [nomCollege, nomCollegeSecteur, bonusCollege, props]);
+    console.log("useEffect MesColleges");
+
+    var collegeSect = collegeSecteur;
+    if (data && data.listeColleges && !collegeSecteur && nomCollegeSecteur) {
+      //console.log("nomCollegeSecteur: ", nomCollegeSecteur)
+      collegeSect = data.listeColleges.find(c => c.nom === nomCollegeSecteur);
+      if (collegeSect) {
+        //console.log("storedCollegeSecteur: ", collegeSect)
+        setCollegeSecteur(collegeSect);
+        setNomCollegeSecteur(null);
+        localStorage.removeItem("MonCollege/nomCollegeSecteur");  
+      }
+    }
+
+    var collegeScol = collegeScolarisation;
+    if (data && data.listeColleges && !collegeScolarisation && nomCollege) {
+      //console.log("nomCollege: ", nomCollege)
+      collegeScol = data.listeColleges.find(c => c.nom === nomCollege);
+      if (collegeScol) {
+        //console.log("storedCollegeScolarisation: ", collegeScol)
+        setCollegeScolarisation(collegeScol);  
+        setNomCollege(null);
+        localStorage.removeItem("MonCollege/nomCollege");
+      }
+    }
+
+    props.onChange(collegeSect, collegeScol);
+  }, [collegeSecteur, collegeScolarisation, props, data, nomCollegeSecteur, nomCollege, setCollegeSecteur, setCollegeScolarisation, setNomCollegeSecteur, setNomCollege]);
 
   return (
     <div className="mx-2 col-12 col-sm-10 col-md-8 col-lg-6 col-xl-6 col-xxl-6 mx-auto">
@@ -107,11 +145,11 @@ const MesColleges = (props) => {
           <CollegeSelector
             type="scolarisation"
             onChange={onCollegeScolarisationChange}
-            college={nomCollege}
+            college={collegeScolarisation}
           />
           <Form.Group className="mb-3 ms-1">
-            Bonus IPS : {bonusCollege}{" "}
-            {nomCollegeSecteur && (
+            Bonus IPS : {collegeScolarisation.bonus}{" "}
+            {collegeSecteur && (
               <CheckLg color="green" width="30" height="30" className="mb-1"/>
             )}
           </Form.Group>
@@ -138,7 +176,7 @@ const MesColleges = (props) => {
             <CollegeSelector
               type="secteur"
               onChange={onCollegeSecteurChange}
-              college={nomCollegeSecteur}
+              college={collegeSecteur}
             />
           )}
         </div>

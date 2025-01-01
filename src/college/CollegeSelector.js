@@ -13,18 +13,16 @@ const CollegeSelector = (props) => {
   const placeholder = "Saisir ici le collège de " + props.type;
   const labelCollege = "Collège de " + props.type + " :";
   const inputRef = useRef();
-  //const { listeColleges } = useContext(SharedContext);
- // const listeColleges = data.listeColleges;
   const { data } = useContext(SharedContext);
-  //const { listeColleges } = data;
 
   const onCollegeChange = (collegeUpdate) => {
     props.onChange(collegeUpdate[0]);
   };
 
   useEffect(() => {
-    if (!props.college || props.college.length === 0) {
-      inputRef.current.focus();
+    if (!props.college || props.college.nom.length === 0) {
+//      if (!props.college || props.college.length === 0) {
+        inputRef.current.focus();
     }
   }, [props]);
 
@@ -41,7 +39,7 @@ const CollegeSelector = (props) => {
               onChange={onCollegeChange}
               options={data?.listeColleges || []}
               placeholder={placeholder}
-              defaultSelected={[{ nom: props.college, bonus: 0 }]}
+              defaultSelected={[props.college]}
               ref={inputRef}
               className="matiere"
             />

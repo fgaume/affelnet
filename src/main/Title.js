@@ -101,13 +101,12 @@ const Title = (props) => {
           >cette vidéo.</a>
           </p>
           <hr />
-          <p className="mb-0">
-            <strong>Mise à jour [9.3.4] du 16/12/2024 :</strong>
+          <div className="mb-0">
+            <strong>Mise à jour [9.3.5] du 06/01/2025 :</strong>
             <ul>
-              <li>Ajout du lien vers la fiche d'établissement de l'Opendata EN</li>
-              <li>Ajout d'un graphique des "collèges de secteur 1"</li>
+              <li>Améliorations techniques</li>
             </ul>            
-          </p>
+          </div>
         </Alert>
         <Alert show={show === "true"} variant="warning">
           <ExclamationCircle

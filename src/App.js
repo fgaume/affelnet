@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { SharedProvider } from './context'; 
+import { SharedProvider } from "./context";
 import {
   Button,
   Tab,
@@ -34,17 +34,22 @@ import {
 import ListeSeuils from "./seuils/ListeSeuils";
 import MesContributions from "./seuils/MesContributions";
 import MonSocle from "./socle/MonSocle";
-import { anneeN, listeLyceesSeuils, seuilsLyceesMap, seuilsRecentsMap } from "./data/lycees";
+import {
+  anneeN,
+  listeLyceesSeuils,
+  seuilsLyceesMap,
+  seuilsRecentsMap,
+} from "./data/lycees";
 //import { useSeuilsRecents } from "./services/seuils";
 import { localStats } from "./services/statistiques";
 
 const App = () => {
-  const version = "v9.3.4 16/12/2024";
+  const version = "v9.3.5 05/01/2025";
   const contrib = true;
 
   const [loading, setLoading] = useState(true);
 
- // const seuilsRecents = useSeuilsRecents();
+  // const seuilsRecents = useSeuilsRecents();
   //const recentStats = useOngoingStats(anneeN);
   const recentStats = localStats(anneeN);
   const seuilsRecents = seuilsRecentsMap;
@@ -52,10 +57,9 @@ const App = () => {
   const [scoreBilanPrevious, setScoreBilanPrevious] = useState(0);
   const [scoreBilanNext, setScoreBilanNext] = useState(0);
   const [scoreSocle, setScoreSocle] = useState(0);
-  const [bonusCollege, setBonusCollege] = useState(0);
-  const [collegeSecteur, setCollegeSecteur] = useState(0);
+  const [collegeSecteur, setCollegeSecteur] = useState(null);
+  const [collegeScolarisation, setCollegeScolarisation] = useState(null);
   const [lyceesSecteur, setLyceesSecteur] = useState([[], [], []]);
-  const [nomCollegeScolarisation, setNomCollegeScolarisation] = useState(0);
   const [scoreGlobalPrevious, setScoreGlobalPrevious] = useState(0);
   const [scoreGlobalNext, setScoreGlobalNext] = useState(0);
   const [filtreSpecialites, setFiltreSpecialites] = useState([]);
@@ -63,36 +67,48 @@ const App = () => {
   const [avancementNotes, setAvancementNotes] = useState(0);
   const [numberSeuils, setNumberSeuils] = useState(0);
 
-  const handleBilanChange = (previous, next, newAvancement) => {
-    setAvancementNotes(newAvancement);
-    setScoreBilanPrevious(previous);
-    setScoreBilanNext(next);
-    const newScoreGlobalPrevious = (bonusCollege + scoreSocle + scoreBilanPrevious).toFixed(3);
+  const updateGlobalScores = (collegeScol) => {
+    const newScoreGlobalPrevious = (
+      collegeScol.bonus +
+      scoreSocle +
+      scoreBilanPrevious
+    ).toFixed(3);
     setScoreGlobalPrevious(parseFloat(newScoreGlobalPrevious));
-    const newScoreGlobalNext = (bonusCollege + scoreSocle + scoreBilanNext).toFixed(3);
-    setScoreGlobalNext(scoreBilanNext > 0 ? parseFloat(newScoreGlobalNext) : 0);
+    const newScoreGlobalNext = (
+      collegeScol.bonus +
+      scoreSocle +
+      scoreBilanNext
+    ).toFixed(3);
+    setScoreGlobalNext(
+      scoreBilanNext > 0 ? parseFloat(newScoreGlobalNext) : 0
+    );
+  }
+
+  const handleBilanChange = (previous, next, newAvancement) => {
+    if (collegeScolarisation) {
+      setAvancementNotes(newAvancement);
+      setScoreBilanPrevious(previous);
+      setScoreBilanNext(next);
+      updateGlobalScores(collegeScolarisation);
+    }
   };
 
   const handleSocleChange = (newScore, newAvancement) => {
-    //console.log(JSON.stringify(socle));
-    setAvancementCompetences(newAvancement);
-    setScoreSocle(newScore);
-    const newScoreGlobalPrevious = (bonusCollege + scoreSocle + scoreBilanPrevious).toFixed(3);
-    setScoreGlobalPrevious(parseFloat(newScoreGlobalPrevious));
-    const newScoreGlobalNext = (bonusCollege + scoreSocle + scoreBilanNext).toFixed(3);
-    setScoreGlobalNext(scoreBilanNext > 0 ? parseFloat(newScoreGlobalNext) : 0);
+    if (collegeScolarisation) {
+      setAvancementCompetences(newAvancement);
+      setScoreSocle(newScore);
+      updateGlobalScores(collegeScolarisation);
+    }
   };
 
-  const handleCollegeChange = (college, collegeScol) => {
+  const handleCollegeChange = (collegeSect, collegeScol) => {
     //console.log("handleCollegeChange: ", JSON.stringify(college));
-    setBonusCollege(college.bonus);
-    setCollegeSecteur(college.nom);
-    const newScoreGlobalPrevious = (bonusCollege + scoreSocle + scoreBilanPrevious).toFixed(3);
-    setScoreGlobalPrevious(parseFloat(newScoreGlobalPrevious));
-    const newScoreGlobalNext = (bonusCollege + scoreSocle + scoreBilanNext).toFixed(3);
-    setScoreGlobalNext(scoreBilanNext > 0 ? parseFloat(newScoreGlobalNext) : 0);
     if (collegeScol !== null) {
-      setNomCollegeScolarisation(collegeScol.nom);
+      setCollegeScolarisation(collegeScol);
+      updateGlobalScores(collegeScol);
+    }
+    if (collegeSect !== null) {
+      setCollegeSecteur(collegeSect);
     }
   };
 
@@ -148,7 +164,8 @@ const App = () => {
               <Accordion.Item eventKey="0">
                 <Accordion.Header>
                   <span className="fw-bolder">
-                    Mon collège ({bonusCollege.toLocaleString()} pts)
+                    Mon collège ({collegeScolarisation?.bonus?.toLocaleString()}{" "}
+                    pts)
                   </span>
                   {collegeSecteur ? (
                     <CheckLg color="green" width="20" height="20" />
@@ -195,7 +212,9 @@ const App = () => {
                       pts)&nbsp;
                     </span>
                   ) : (
-                    <span className="fw-bolder">({avancementNotes} %)&nbsp;</span>
+                    <span className="fw-bolder">
+                      ({avancementNotes} %)&nbsp;
+                    </span>
                   )}
                   {avancementNotes === 100 ? (
                     <CheckLg color="green" width="20" height="20" />
@@ -288,7 +307,7 @@ const App = () => {
                 <Accordion.Body>
                   <MesContributions
                     contrib={contrib}
-                    contributeur={nomCollegeScolarisation}
+                    contributeur={collegeScolarisation?.nom}
                   />
                 </Accordion.Body>
               </Accordion.Item>

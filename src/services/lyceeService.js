@@ -5,10 +5,10 @@ import {
   tousSecteurs,
 } from "../data/lycees";
 
-const fetchLycees = async (nomCollegeSecteur, historySeuilsLyceesMap, seuilsRecentsLyceesMap) => {
+const fetchLycees = async (collegeSecteur, historySeuilsLyceesMap, seuilsRecentsLyceesMap) => {
   //console.log('fetch historySeuilsLyceesMap', historySeuilsLyceesMap);
   //console.log('fetch seuilsRecentsLyceesMap', seuilsRecentsLyceesMap);
-  if (nomCollegeSecteur) {
+  if (collegeSecteur) {
     const response = await axios({
       method: "GET",
       url: "https://services9.arcgis.com/ekT8MJFiVh8nvlV5/arcgis/rest/services/Affectation_Lyc%C3%A9es/FeatureServer/0/query",
@@ -18,7 +18,7 @@ const fetchLycees = async (nomCollegeSecteur, historySeuilsLyceesMap, seuilsRece
         returnGeometry: "false",
         f: "pjson",
         orderByFields: "secteur",
-        where: `secteur<>'Tête' and Nom_tete='${nomCollegeSecteur}'`,
+        where: `secteur<>'Tête' and Réseau='${collegeSecteur.code}'`,
       },
     });
 
@@ -86,7 +86,7 @@ const fetchLycees = async (nomCollegeSecteur, historySeuilsLyceesMap, seuilsRece
     } else {
       console.log(
         "erreur : pas de réponse de l'API de secteurs pour ",
-        nomCollegeSecteur
+        collegeSecteur.nom
       );
       return [];
     }
