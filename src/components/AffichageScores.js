@@ -3,10 +3,8 @@ import { Card, OverlayTrigger, Table, Tooltip } from "react-bootstrap";
 import { formatFloat, formatVariation } from "../services/helper";
 import { QuestionCircleFill } from "react-bootstrap-icons";
 import "./AffichageScores.css";
-import { anneeN } from "../data/lycees";
 
-const AffichageScores = (props) => {
-  const anneeN1 = anneeN - 1;
+const AffichageScores = ({anneeN, tipNext, tipPrevious, tipDelta, scoreNext, scorePrevious}) => {
   
   return (
     <Card>
@@ -21,7 +19,7 @@ const AffichageScores = (props) => {
                     trigger="click"
                     placement="top"
                     overlay={(propss) => (
-                      <Tooltip {...propss}>{props.tipNext}</Tooltip>
+                      <Tooltip {...propss}>{tipNext}</Tooltip>
                     )}
                     rootCloseEvent="mousedown"
                     rootClose="true"
@@ -34,12 +32,12 @@ const AffichageScores = (props) => {
             <td className="text-muted score">
               <h6>
                 <div className="d-flex align-items-center gap-1 justify-content-center mt-2">
-                  Score {anneeN1}{" "}
+                  Score {anneeN - 1}{" "}
                   <OverlayTrigger
                     trigger="click"
                     placement="top"
                     overlay={(propss) => (
-                      <Tooltip {...propss}>{props.tipPrevious}</Tooltip>
+                      <Tooltip {...propss}>{tipPrevious}</Tooltip>
                     )}
                     rootCloseEvent="mousedown"
                     rootClose="true"
@@ -57,7 +55,7 @@ const AffichageScores = (props) => {
                     trigger="click"
                     placement="top"
                     overlay={(propss) => (
-                      <Tooltip {...propss}>{props.tipDelta}</Tooltip>
+                      <Tooltip {...propss}>{tipDelta}</Tooltip>
                     )}
                     rootCloseEvent="mousedown"
                     rootClose="true"
@@ -70,15 +68,15 @@ const AffichageScores = (props) => {
           </tr>
           <tr>
             <td className="text-primary score">
-              <h6 className="mt-2">{formatFloat(props.scoreNext)}</h6>
+              <h6 className="mt-2">{formatFloat(scoreNext)}</h6>
             </td>
             <td className="text-muted score">
-              <h6 className="mt-2">{formatFloat(props.scorePrevious)}</h6>
+              <h6 className="mt-2">{formatFloat(scorePrevious)}</h6>
             </td>
             <td className="text-primary variation">
               <h6 className="mt-2">
-                {props.scoreNext > 0
-                  ? formatVariation(props.scoreNext - props.scorePrevious)
+                {scoreNext > 0
+                  ? formatVariation(scoreNext - scorePrevious)
                   : "?"}
               </h6>
             </td>

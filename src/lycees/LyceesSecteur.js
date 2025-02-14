@@ -11,39 +11,28 @@ import {
 import AffichageScores from "../components/AffichageScores";
 import { formatVariation } from "../services/helper";
 import "./LyceesSecteur.css";
-import { anneeN } from "../data/lycees";
 
 const computeResult = (
   secteur,
-  codeLycee,
+//  codeLycee,
   annee,
   scoreMax,
   scoreVoeu,
-  seuilAdmission
+  seuilAdmission,
+  bonusExceptionnel
 ) => {
   const result =
     seuilAdmission > 0 && scoreVoeu > 0
       ? Math.round(scoreVoeu - seuilAdmission)
       : null;
-  // if (codeLycee === "0750667T") {
-  //   console.log("computeResult scoreVoeu 0750667T : ", scoreVoeu);
-  //   const bonus = hasBonusExceptionnel(
-  //     secteur,
-  //     codeLycee,
-  //     annee,
-  //     scoreMax,
-  //     scoreVoeu,
-  //     seuilAdmission
-  //   );
-  //   console.log("bonus : ", bonus);
-  // }
   return hasBonusExceptionnel(
     secteur,
-    codeLycee,
+//    codeLycee,
     annee,
     scoreMax,
     scoreVoeu,
-    seuilAdmission
+    seuilAdmission,
+    bonusExceptionnel
   )
     ? 500 + result
     : result;
@@ -51,17 +40,18 @@ const computeResult = (
 
 const hasBonusExceptionnel = (
   secteur,
-  codeLycee,
   annee,
   scoreMax,
   scoreVoeu,
-  seuilAdmission
+  seuilAdmission,
+  bonusExceptionnel
 ) => {
   const result =
     seuilAdmission > 0 && scoreVoeu > 0
       ? Math.round(scoreVoeu - seuilAdmission)
       : null;
   return (
+    bonusExceptionnel === true &&
     secteur === "1" &&
     result < 0 &&
     annee > 2023 &&
@@ -83,12 +73,6 @@ const getStatus = (lycee, nextResult, prevResult) => {
   }
 };
 
-/* const determineVariationStyle = (prev, next) => {
-    if (next > 0 && prev > 0) {
-      return next > prev ? "variation text-danger" : "variation text-success";
-    } else return "variation";
-  }; */
-
 const determineColor = (result, lycee) => {
   if (result === null) return "text-muted";
   if (result === 0) return "text-success";
@@ -101,7 +85,7 @@ const determineColor = (result, lycee) => {
 };
 
 const LyceesSecteur = (props) => {
-  const anneeN1 = anneeN - 1;
+  const anneeN1 = props.anneeN - 1;
   //console.log("props : ", props);
 
   return (
@@ -129,13 +113,15 @@ const LyceesSecteur = (props) => {
             "Votre score affelnet pour un voeu de lycée de secteur " +
             props.secteur +
             " en " +
-            anneeN
+            props.anneeN
           }
           tipDelta={
             "Différence de score affelnet pour un voeu de lycée de secteur " +
             props.secteur +
             " entre les 2 dernières années"
           }
+          anneeN={props.anneeN}
+          anneeN1={props.anneeN - 1}
         />
       </div>
       <div className="mx-2 col-12 col-sm-10 col-md-8 col-lg-6 col-xl-6 col-xxl-6 mx-auto">
@@ -166,14 +152,14 @@ const LyceesSecteur = (props) => {
                   </OverlayTrigger>
                 </th>
                 <th className="resu">
-                  En {anneeN}{" "}
+                  En {props.anneeN}{" "}
                   <OverlayTrigger
                     trigger="click"
                     placement="top"
                     overlay={(propss) => (
                       <Tooltip {...propss}>
                         {"Différence entre mon score et le seuil d'admission au lycée en " +
-                          anneeN}
+                          props.anneeN}
                       </Tooltip>
                     )}
                     rootCloseEvent="mousedown"
@@ -213,35 +199,31 @@ const LyceesSecteur = (props) => {
               {props.lycees.map((lycee, index) => {
                 const prevResult = computeResult(
                   props.secteur,
-                  lycee.code,
-                  anneeN - 1,
+//                  lycee.code,
+                  props.anneeN - 1,
                   props.scoreMax + props.bonusGeo,
                   props.scorePrevious + props.bonusGeo,
-                  lycee.seuilPrecedent
+                  lycee.seuilPrecedent,
+                  props.bonusExceptionnel
                 );
                 const nextResult = computeResult(
                   props.secteur,
-                  lycee.code,
-                  anneeN,
+//                  lycee.code,
+                  props.anneeN,
                   props.scoreMax + props.bonusGeo,
                   props.scoreNext + props.bonusGeo,
-                  lycee.seuilRecent
+                  lycee.seuilRecent,
+                  props.bonusExceptionnel
                 );
-                /* const prevResult =
-                  
-                const nextResult =
-                  lycee.seuilRecent > 0 && props.scoreNext > 0
-                    ? Math.round(props.scoreNext + props.bonusGeo - lycee.seuilRecent)
-                    : null; */
                 const status = getStatus(lycee, nextResult, prevResult);
-                //const status = nextResult < 0 ? "elimine" : "admissible";
                 const bonusExceptionnel = hasBonusExceptionnel(
                   props.secteur,
-                  lycee.code,
-                  anneeN,
+//                  lycee.code,
+                  props.anneeN,
                   props.scoreMax + props.bonusGeo,
                   props.scoreNext + props.bonusGeo,
-                  lycee.seuilRecent
+                  lycee.seuilRecent,
+                  props.bonusExceptionnel
                 );
                 return (
                   <tr key={lycee.code + index}>
@@ -274,11 +256,7 @@ const LyceesSecteur = (props) => {
                       <span className={determineColor(nextResult, lycee)}>
                         {lycee.seuilRecent > 0
                           ? formatVariation(nextResult)
-                          : "?"}
-                        {/*                         {lycee.seuilRecent > 0 && nextResult
-                          ? formatVariation(nextResult)
-                          : "?"}
- */}{" "}
+                          : "?"}{" "}
                       </span>
                       {bonusExceptionnel === true && (
                         <Gift

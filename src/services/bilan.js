@@ -62,22 +62,27 @@ const computeAvancementNotes = (matieres, semestres) => {
 
 const computeBilanPeriodique = (
   scoresCD,
-  moyennesAcademiques,
-  ecartsAcademiques
+  statsAcademiques
+//  statsRecentes
 ) => {
-  //console.log("computeBilanPeriodique : ");
-  if (!moyennesAcademiques) return 0;
+  if (!statsAcademiques) return 0;
+  //console.log("computeBilanPeriodique.scoresCD : ", scoresCD);
+  //console.log("computeBilanPeriodique.statsAcademiques : ", statsAcademiques);
   let score = 0;
   scoresCD.forEach((cd) => {
     //console.log("score " + cd.nom + " : " + cd.score);
     const base = (cd.score) ? cd.score.toFixed(2) : 16;
-    const cdscore =
+    const cdStats = statsAcademiques.get(cd.nom);
+    //const recentStats = statsRecentes?.get(cd.nom);
+    //const cdStats = recentStats ? recentStats  : histoStats;
+    //console.log("cdStats: ", cdStats)
+    const cdscore = 
       cd.score === 0
         ? 100
         : 10 *
           (10 +
-            (base - moyennesAcademiques.get(cd.nom)) /
-              ecartsAcademiques.get(cd.nom));
+            (base - cdStats.moyenne) /
+            cdStats.ecart_type);
     //console.log("score " + cd.nom + " : " + cd.score + " -> " + cdscore.toFixed(3));
     score += cd.coefficient * cdscore.toFixed(3);
   });
@@ -86,7 +91,7 @@ const computeBilanPeriodique = (
   return result;
 };
 
-const mergeMoyennes = (currentMap, listeRecentStats) => {
+/* const mergeMoyennes = (currentMap, listeRecentStats) => {
   let mergedMoyennes = new Map();
   listeRecentStats.forEach((stat) => {
     const champ = stat.id;
@@ -104,6 +109,17 @@ const mergeEcartsTypes = (currentMap, listeRecentStats) => {
     mergedEcarts.set(champ, ecart);
   });
   return mergedEcarts;
+} */
+
+const mergeStats = (currentMap, listeRecentStats) => {
+  let mergeStats = new Map();
+  listeRecentStats.forEach((stat) => {
+    const champ = stat.id;
+    const moyenne = stat.moyenne ? stat.moyenne : currentMap.get(champ);
+    const ecart_type = stat.ecart_type ? stat.ecart_type : currentMap.get(champ);
+    mergeStats.set(champ, { moyenne: moyenne, ecart_type: ecart_type});
+  });
+  return mergeStats;
 }
 
 /* const testcomputeNoteCDs = () => {
@@ -175,6 +191,5 @@ export {
   updateMatieres,
   allMatiereSetTo,
   computeAvancementNotes,
-  mergeEcartsTypes,
-  mergeMoyennes
+  mergeStats
 };

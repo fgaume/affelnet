@@ -1,20 +1,16 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Alert, Button, Collapse, Form } from "react-bootstrap";
 import { EmojiSmile, PlusCircle } from "react-bootstrap-icons";
-import { appendNewNote, saveChampIfNotExists } from "../services/statistiques";
+import { appendNewNote } from "../services/statistiques";
 
 const StatsEditor = (props) => {
-  const [noteBrute, setNoteBrute] = useState(0);
-  const [noteHarmonisee, setNoteHarmonisee] = useState(0);
+  const [noteBrute, setNoteBrute] = useState("");
+  const [noteHarmonisee, setNoteHarmonisee] = useState("");
   const [showConfirm, setShowConfirm] = useState(false);
   const [showError, setShowError] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
 
   const [open, setOpen] = useState(false);
-
-  useEffect(() => {
-    saveChampIfNotExists(props.champ);
-  }, [props.champ]);
 
   const onNoteBruteChange = (event) => {
     setNoteBrute(event.target.value);
@@ -96,7 +92,8 @@ const StatsEditor = (props) => {
               <Form.Control
                 id="noteBrute"
                 placeholder="note brute"
-                type="float"
+                type="number"
+                step="0.01"
                 onChange={onNoteBruteChange}
               />
             </div>
@@ -104,7 +101,8 @@ const StatsEditor = (props) => {
               <Form.Control
                 id="noteHarmonisee"
                 placeholder="note harmonisée"
-                type="float"
+                type="number"
+                step="0.001"
                 onChange={onNoteHarmoniseeChange}
               />
             </div>

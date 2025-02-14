@@ -102,9 +102,9 @@ const Title = (props) => {
           </p>
           <hr />
           <div className="mb-0">
-            <strong>Mise à jour [9.3.5] du 06/01/2025 :</strong>
+            <strong>Mise à jour [9.4.0] du 14/02/2025 :</strong>
             <ul>
-              <li>Améliorations techniques</li>
+              <li>Historique graphique des seuils d'admission</li>
             </ul>            
           </div>
         </Alert>

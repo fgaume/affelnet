@@ -4,13 +4,16 @@ import { createRoot } from "react-dom/client";
 import * as serviceWorkerRegistration from "./serviceWorkerRegistration";
 import "bootstrap/dist/css/bootstrap.css";
 import "./custom.scss";
+import { SharedProvider } from "./context";
 
 const rootElement = document.getElementById("root");
 const root = createRoot(rootElement);
 
 root.render(
   <React.StrictMode>
-    <App />
+    <SharedProvider>
+      <App />
+    </SharedProvider>
   </React.StrictMode>
 );
 

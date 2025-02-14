@@ -13,15 +13,13 @@ import {
   computeBilanPeriodique,
   updateMatieres,
   allMatiereSetTo,
-  computeAvancementNotes
+  computeAvancementNotes,
 } from "../services/bilan";
-import { moyennesAcademiques, ecartsAcademiques } from "../data/stats";
 import MatiereEditor from "./MatiereEditor";
 import "./MonBilan.css";
 import AffichageScores from "../components/AffichageScores";
 import MyToggle from "../components/MyToggle";
 import { listeMatieres } from "../data/bilan";
-import { anneeN } from "../data/lycees";
 
 const valueMap = new Map([
   [0, 0],
@@ -33,8 +31,6 @@ const valueMap = new Map([
 
 /* returns scoreBilanPrevious and scoreBilanNext */
 const MonBilan = (props) => {
-  const anneeN1 = anneeN - 1;
-
   const [semestres, setSemestres] = useLocalStorage("semestres", false);
   const [matieres, setMatieres] = useLocalStorage(
     "bilan_periodique/matieres",
@@ -43,11 +39,9 @@ const MonBilan = (props) => {
   const [scoreBilanPrevious, setScoreBilanPrevious] = useState(0);
   const [scoreBilanNext, setScoreBilanNext] = useState(0);
   const [quickScore, setQuickScore] = useState(0);
+  //const [anneeN, setAnneeN] = useState(props.derniereAnnee);
 
   const inputRef = useRef([]);
-
-  //const moyennesMap = props.stats.moyennesMap;
-  //const ecarttypesMap = props.stats.ecarttypesMap;
 
   const handleMatiereChange = (nom, newNote, periode) => {
     //console.log("handleMatiereChange: " + nom + "/" + periode + "/" + newNote);
@@ -74,28 +68,40 @@ const MonBilan = (props) => {
   };
 
   useEffect(() => {
-    const scoreCDs = computeNoteCDs(matieres, semestres);
-    const avancement = computeAvancementNotes(matieres, semestres);
-    //console.log(JSON.stringify(scoreCDs));
+    if (props.statsMap) {
+      const statsMap = props.statsMap;
+      const recentStatsMap = props.recentStatsMap;
+      /* setAnneeN(
+        recentStatsMap !== null && recentStatsMap.keys()
+          ? recentStatsMap.keys().next().value
+          : props.derniereAnnee
+      ); */
 
-    const scoreBPprevious = computeBilanPeriodique(
-      scoreCDs,
-      moyennesAcademiques.get(anneeN1),
-      ecartsAcademiques.get(anneeN1)
-    );
-    //console.log("score BP = " + formatFloat(scoreBPprevious));
-    setScoreBilanPrevious(scoreBPprevious);
+      //console.log("recentStatsMap:", recentStatsMap);
+      //console.log("anneeN:", props.anneeN);
+      const scoreCDs = computeNoteCDs(matieres, semestres);
+      const avancement = computeAvancementNotes(matieres, semestres);
+      //console.log(JSON.stringify(scoreCDs));
+      //const statsMap = props.statsMap;
+      const scoreBPprevious = computeBilanPeriodique(
+        scoreCDs,
+        statsMap.get(props.anneeN - 1)
+      );
+      //console.log("score BP = " + formatFloat(scoreBPprevious));
+      setScoreBilanPrevious(scoreBPprevious);
 
-    const scoreBPnext = computeBilanPeriodique(
-      scoreCDs,
-      props.moyennes,
-      props.ecarttypes
-    );
-    //console.log("score BP next = " + scoreBPnext);
-    setScoreBilanNext(scoreBPnext);
+      const scoreBPnext = computeBilanPeriodique(
+        scoreCDs,
+        recentStatsMap
+          ? recentStatsMap.get(props.anneeN)
+          : statsMap.get(props.anneeN)
+      );
+      //console.log("score BP next = " + scoreBPnext);
+      setScoreBilanNext(scoreBPnext);
 
-    props.onChange(scoreBPprevious, scoreBPnext, avancement);
-  }, [matieres, semestres, props, anneeN1, props.moyennes, props.ecarttypes]);
+      props.onChange(scoreBPprevious, scoreBPnext, avancement);
+    }
+  }, [matieres, semestres, props.anneeN, props]);
 
   return (
     <div className="">
@@ -116,10 +122,10 @@ const MonBilan = (props) => {
         <AffichageScores
           scorePrevious={scoreBilanPrevious}
           scoreNext={scoreBilanNext}
-          tipPrevious={"Score de votre bilan périodique en " + anneeN1}
-          tipNext={"Score de votre bilan périodique en " + anneeN}
+          tipPrevious={"Score de votre bilan périodique en " + (props.anneeN - 1)}
+          tipNext={"Score de votre bilan périodique en " + props.anneeN}
           tipDelta="Evolution de votre bilan périodique"
-          nbSeuils={props.nbSeuils}
+          anneeN={props.anneeN}
         />
       </div>
       <div className="mx-4 col-12 col-sm-10 col-md-8 col-lg-6 col-xl-6 col-xxl-6 mx-auto mb-4">

@@ -15,11 +15,29 @@ const formatVariation = (mynumber) => {
 
 const deleteWorker = () => {
   if ("serviceWorker" in navigator) {
-    navigator.serviceWorker.getRegistrations().then(function (registrations) {
+    navigator.serviceWorker.getRegistrations().then((registrations) => {
       for (let registration of registrations) {
-        registration.unregister();
+        registration
+          .unregister()
+          .then((success) => {
+            if (success) {
+              console.log("Service Worker désenregistré avec succès.");
+            } else {
+              console.warn("Échec du désenregistrement du Service Worker.");
+            }
+          })
+          .catch((error) => {
+            console.error(
+              "Erreur lors du désenregistrement du Service Worker:",
+              error
+            );
+          });
       }
     });
+  } else {
+    console.warn(
+      "Les Service Workers ne sont pas supportés par ce navigateur."
+    );
   }
   window.location.reload(true);
 };
@@ -27,6 +45,6 @@ const deleteWorker = () => {
 const delta = (numberBefore, numberAfter) => {
   const diff = Math.round(numberAfter - numberBefore);
   return formatVariation(diff);
-}
+};
 
 export { formatInt, formatFloat, formatVariation, deleteWorker, delta };

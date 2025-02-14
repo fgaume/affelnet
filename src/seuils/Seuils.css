@@ -1,0 +1,18 @@
+/* ... (autres styles) ... */
+
+.graph-icon-button {
+    color: var(--bs-primary); /* Ou la couleur bleue de votre choix */
+    -webkit-text-stroke: 3px;
+  }
+  
+  .graph-icon-button:hover {
+     color: var(--bs-primary); /* on garde la meme couleur au survol */
+  }
+  
+  .graph-icon-button:focus {
+     color: var(--bs-primary); /* on garde la meme couleur au focus */
+  }
+
+.text-icon-aligned {
+   vertical-align: 0.2em;
+ }

@@ -1,20 +1,72 @@
 import {
   collection,
   doc,
-  getDoc,
   onSnapshot,
   serverTimestamp,
   setDoc,
+  getDoc,
 } from "firebase/firestore";
 import { firestore } from "../services/firebase";
 import { useEffect, useState } from "react";
-import { ecartsAcademiques, moyennesAcademiques } from "../data/stats";
-import {
-  computeBilanPeriodique,
-  mergeEcartsTypes,
-  mergeMoyennes,
-} from "./bilan";
+import { computeBilanPeriodique } from "./bilan";
 import { CDs } from "../data/bilan";
+
+const saveStats = async (champ, newStats) => {
+  // Renommer 'stats' en 'newStats' pour plus de clarté
+  console.log("checking firestore stats for " + champ + " before saving...");
+
+  const docRef = doc(firestore, "stats", champ);
+
+  try {
+    const docSnap = await getDoc(docRef);
+
+    if (docSnap.exists()) {
+      // Le document existe déjà, on va comparer les données
+
+      const existingStats = docSnap.data();
+
+      // Comparer les nouvelles stats (newStats) avec les stats existantes (existingStats)
+      if (
+        existingStats.moyenne === newStats.moyenne &&
+        existingStats.ecart_type === newStats.ecart_type
+      ) {
+        console.log("Stats for " + champ + " are unchanged. No save needed.");
+        return; // Sortir de la fonction sans sauvegarder car les données sont identiques
+      } else {
+        console.log(
+          "Stats for " + champ + " have changed. Saving to Firestore..."
+        );
+        // Les stats sont différentes, on procède à la sauvegarde
+        await setDoc(docRef, {
+          moyenne: newStats.moyenne,
+          ecart_type: newStats.ecart_type,
+          timestamp: serverTimestamp(),
+        });
+        console.log("Stats for " + champ + " saved successfully in Firestore.");
+      }
+    } else {
+      // Le document n'existe pas encore, il faut le créer (première sauvegarde)
+      console.log(
+        "Stats for " +
+          champ +
+          " do not exist yet. Saving to Firestore for the first time..."
+      );
+      await setDoc(docRef, {
+        moyenne: newStats.moyenne,
+        ecart_type: newStats.ecart_type,
+      });
+      console.log(
+        "Stats for " + champ + " saved for the first time in Firestore."
+      );
+    }
+  } catch (error) {
+    console.error(
+      "Error checking or saving stats for " + champ + " in Firestore:",
+      error
+    );
+    // Gérer l'erreur ici (afficher un message à l'utilisateur, etc.)
+  }
+};
 
 const computeStats = (notes) => {
   //console.log("computeStats : ", notes.toString());
@@ -33,24 +85,17 @@ const computeStats = (notes) => {
   //console.log("y2=", y2);
   let ecartType = (x1 - x2) / (y1 - y2);
   let moyenne = x1 - y1 * ecartType;
-  let stats = { moyenne: moyenne, ecartType: ecartType };
+
+  // Conserver 4 decimales pour la moyenne et 5 pour l'ecart_type
+  let moyenneArrondie = parseFloat(moyenne.toFixed(4));
+  let ecartTypeArrondi = parseFloat(ecartType.toFixed(5));
+
+  let stats = {
+    moyenne: moyenneArrondie,
+    ecart_type: ecartTypeArrondi,
+  };
   //console.log("stats=", stats);
   return stats;
-};
-
-const saveChampIfNotExists = async (nomChamp) => {
-  console.log("check firestore existence champ stats: " + nomChamp);
-  const docRef = doc(firestore, "stats", nomChamp);
-  const docSnap = await getDoc(docRef);
-  if (!docSnap.exists()) {
-    console.log("does not exist");
-    const moyennesValides = moyennesAcademiques.get(2023);
-    const ecartsValides = ecartsAcademiques.get(2023);
-    setDoc(doc(firestore, "stats", nomChamp), {
-      moyenne: moyennesValides.get(nomChamp),
-      ecartType: ecartsValides.get(nomChamp),
-    });
-  }
 };
 
 const appendNewNote = (brute, harmonisee, champ, contributeur) => {
@@ -64,15 +109,7 @@ const appendNewNote = (brute, harmonisee, champ, contributeur) => {
   });
 };
 
-const saveStats = (champ, stats) => {
-  console.log("saving in firestore stats for " + champ);
-  setDoc(doc(firestore, "stats", champ), {
-    moyenne: stats.moyenne,
-    ecartType: stats.ecartType,
-  });
-};
-
-function useStatsChamp(champ, annee) {
+function useStatsChamp(champ) {
   const [notes, setNotes] = useState([]);
   useEffect(() => {
     console.log("loading stats from firestore");
@@ -94,63 +131,51 @@ function useStatsChamp(champ, annee) {
   return notes;
 }
 
-const localStats = (annee) => {
-  const scoreBPMax = computeBilanPeriodique(
-    CDs,
-    moyennesAcademiques.get(annee),
-    ecartsAcademiques.get(annee)
-  );
+const localStats = (statsMap, pAnnee, derniereAnnee) => {
+  const annee = pAnnee ? pAnnee : derniereAnnee;
+  const statsCDs = statsMap.get(annee);
+
+  const scoreBPMax = computeBilanPeriodique(CDs, statsCDs);
   return {
-    moyennes: moyennesAcademiques.get(annee),
-    ecarttypes: ecartsAcademiques.get(annee),
+    statsCDs: statsCDs,
     scoreMax: scoreBPMax,
-  }
-}
+  };
+};
 
-function useOngoingStats(annee) {
-  const [stats, setStats] = useState([]);
+// function useOngoingStats(statsMap, pAnnee, derniereAnnee) {
+//   const annee = pAnnee ? pAnnee : derniereAnnee;
+//   const [stats, setStats] = useState([]);
 
-  useEffect(() => {
-    console.log("loading ongoing stats from firestore");
-    const unsubscribe = onSnapshot(
-      collection(firestore, "stats"),
-      (snapshot) => {
-        const newStats = snapshot.docs.map((doc) => ({
-          id: doc.id,
-          ...doc.data(),
-        }));
-        const moyennesMap = mergeMoyennes(
-          moyennesAcademiques.get(annee),
-          newStats
-        );
-        const ecarttypesMap = mergeEcartsTypes(
-          ecartsAcademiques.get(annee),
-          newStats
-        );
-        const scoreBPMax = computeBilanPeriodique(
-          CDs,
-          moyennesMap,
-          ecarttypesMap
-        );
-        console.log("score BP next max = " + scoreBPMax);
-        setStats({
-          moyennes: moyennesMap,
-          ecarttypes: ecarttypesMap,
-          scoreMax: scoreBPMax,
-        });
-        console.log("firestore stats: ", newStats);
-      },
-      (error) => {
-        console.log("erreur firestore: ", error);
-      }
-    );
-    return () => unsubscribe();
-  }, [annee]);
+//   useEffect(() => {
+//     console.log("loading ongoing stats from firestore");
+//     const unsubscribe = onSnapshot(
+//       collection(firestore, "stats"),
+//       (snapshot) => {
+//         const newStats = snapshot.docs.map((doc) => ({
+//           id: doc.id,
+//           ...doc.data(),
+//         }));
+//         const mergedMap = mergeStats(statsMap.get(annee), newStats);
+//         const scoreBPMax = computeBilanPeriodique(CDs, statsMap(annee));
+//         console.log("score BP next max = " + scoreBPMax);
+//         setStats({
+//           statsCD: mergedMap,
+//           scoreMax: scoreBPMax,
+//         });
+//         console.log("firestore stats: ", newStats);
+//       },
+//       (error) => {
+//         console.log("erreur firestore: ", error);
+//       }
+//     );
+//     return () => unsubscribe();
+//   }, [annee, statsMap]);
 
-  return stats;
-}
+//   return stats;
+// }
 
-const statsCompleted = (annee) => {
+/* const statsCompleted = (pAnnee) => {
+  const annee = pAnnee ? pAnnee : derniereAnnee;
   const moyennes = moyennesAcademiques.get(annee);
   const ecartTypes = ecartsAcademiques.get(annee);
   CDs.forEach( cd => {
@@ -158,15 +183,21 @@ const statsCompleted = (annee) => {
     if (ecartTypes.get(cd) === null || ecartTypes.get(cd) === 0) return false;
   });
   return true;
-}
+} */
 
-export {
-  computeStats,
-  saveChampIfNotExists,
-  appendNewNote,
-  useStatsChamp,
-  saveStats,
-  useOngoingStats,
-  localStats,
-  statsCompleted,
-};
+// const saveChampIfNotExists = async (nomChamp, statsMap, anneeN1) => {
+//   console.log("check firestore existence champ stats: " + nomChamp);
+//   const docRef = doc(firestore, "stats", nomChamp);
+//   const docSnap = await getDoc(docRef);
+//   if (!docSnap.exists()) {
+//     console.log("does not exist");
+//     const statsCDs = statsMap.get(anneeN1);
+//     const statCD = statsCDs.get(nomChamp);
+//     setDoc(doc(firestore, "stats", nomChamp), {
+//       moyenne: statCD.moyenne,
+//       ecart_type: statCD.ecart_type,
+//     });
+//   }
+// };
+
+export { computeStats, appendNewNote, useStatsChamp, saveStats, localStats };

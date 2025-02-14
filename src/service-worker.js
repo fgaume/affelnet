@@ -11,7 +11,11 @@ import { clientsClaim } from "workbox-core";
 import { ExpirationPlugin } from "workbox-expiration";
 import { precacheAndRoute, createHandlerBoundToURL } from "workbox-precaching";
 import { registerRoute } from "workbox-routing";
-import { CacheFirst, StaleWhileRevalidate } from "workbox-strategies";
+import {
+  CacheFirst,
+  NetworkFirst,
+  StaleWhileRevalidate,
+} from "workbox-strategies";
 
 clientsClaim();
 
@@ -60,7 +64,7 @@ registerRoute(
       // least-recently used images are removed.
       new ExpirationPlugin({
         maxEntries: 50,
-        maxAgeSeconds: 24 * 60 * 60,
+        maxAgeSeconds: 30 * 24 * 60 * 60,
       }), // 1 day cache
     ],
   })
@@ -71,14 +75,14 @@ registerRoute(
   ({ request }) => request.url.includes("arcgis"),
   new StaleWhileRevalidate({
     cacheName: "arcgis",
-    /* plugins: [
+    plugins: [
       // Ensure that once this runtime cache reaches a maximum size the
       // least-recently used are removed.
       new ExpirationPlugin({
         maxEntries: 300,
-        maxAgeSeconds: 60 * 60,
-      }), // 1 month cache
-    ], */
+        maxAgeSeconds: 60 * 60 * 24,
+      }),
+    ],
   })
 );
 
@@ -99,9 +103,9 @@ registerRoute(
 );
 
 registerRoute(
-  ({ request }) => request.url.endsWith('.json'), // Correction ici
-  new CacheFirst({
-    cacheName: 'colleges-lycees',
+  ({ request }) => request.url.endsWith("app.json"), // Correction ici
+  new NetworkFirst({
+    cacheName: "app-infos",
     plugins: [
       new ExpirationPlugin({
         maxAgeSeconds: 24 * 60 * 60, // 1 day
@@ -110,6 +114,67 @@ registerRoute(
   })
 );
 
+registerRoute(
+  ({ request }) => request.url.endsWith("statistiques.json"), // Correction ici
+  new StaleWhileRevalidate({
+    cacheName: "statistiques",
+    plugins: [
+      new ExpirationPlugin({
+        maxAgeSeconds: 7 *  24 * 60 * 60,
+      }),
+    ],
+  })
+);
+
+registerRoute(
+  ({ request }) => request.url.endsWith("colleges.json"), // Correction ici
+  new StaleWhileRevalidate({
+    cacheName: "colleges",
+    plugins: [
+      new ExpirationPlugin({
+        maxAgeSeconds: 7 * 24 * 60 * 60,
+      }),
+    ],
+  })
+);
+
+registerRoute(
+  ({ request }) => request.url.endsWith("lycees.json"), // Correction ici
+  new StaleWhileRevalidate({
+    cacheName: "lycees",
+    plugins: [
+      new ExpirationPlugin({
+        maxAgeSeconds: 7 * 24 * 60 * 60,
+      }),
+    ],
+  })
+);
+
+registerRoute(
+  ({ request }) => request.url.endsWith("seuils_recents.json"),
+  new NetworkFirst({
+    cacheName: "seuils_recents",
+    networkTimeoutSeconds: 5, // Délai d'attente de 5 secondes
+    plugins: [
+      new ExpirationPlugin({
+        maxAgeSeconds: 24 * 60 * 60,
+      }),
+    ],
+  })
+);
+
+registerRoute(
+  ({ request }) => request.url.endsWith("stats_recentes.json"),
+  new NetworkFirst({
+    cacheName: "stats_recentes",
+    networkTimeoutSeconds: 5, // Délai d'attente de 5 secondes
+    plugins: [
+      new ExpirationPlugin({
+        maxAgeSeconds: 24 * 60 * 60,
+      }),
+    ],
+  })
+);
 
 // This allows the web app to trigger skipWaiting via
 // registration.waiting.postMessage({type: 'SKIP_WAITING'})

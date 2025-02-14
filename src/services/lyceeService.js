@@ -1,13 +1,6 @@
 import axios from "axios";
-import {
-  nomsLyceesMap,
-  urlsLyceesMap,
-  tousSecteurs,
-} from "../data/lycees";
 
-const fetchLycees = async (collegeSecteur, historySeuilsLyceesMap, seuilsRecentsLyceesMap) => {
-  //console.log('fetch historySeuilsLyceesMap', historySeuilsLyceesMap);
-  //console.log('fetch seuilsRecentsLyceesMap', seuilsRecentsLyceesMap);
+const fetchLycees = async (collegeSecteur, lyceesMap, seuilsRecents) => {
   if (collegeSecteur) {
     const response = await axios({
       method: "GET",
@@ -26,33 +19,60 @@ const fetchLycees = async (collegeSecteur, historySeuilsLyceesMap, seuilsRecents
     if (payload) {
       let newLycees = payload.map((item) => {
         const codelycee = item.attributes.UAI;
-        const historySeuilsLycee = historySeuilsLyceesMap.get(codelycee);
+        const lycee = lyceesMap.get(codelycee);
+
+        const historySeuilsLycee = lycee.seuils;
         const nbSeuils = historySeuilsLycee.length;
-        const seuilPrecedent = historySeuilsLycee[nbSeuils - 2];
+
+        let seuilRecent = 0;
+        let seuilPrecedent = 0;
+
+        if (seuilsRecents && seuilsRecents.length > 0) {
+          const seuilRecentObject = seuilsRecents.find(
+            (lycee) => lycee.code === codelycee
+          );
+          if (seuilRecentObject) {
+            seuilRecent = seuilRecentObject.seuil;
+          }
+
+          seuilPrecedent = historySeuilsLycee.at(-1);
+        }
+        else {
+          seuilRecent = historySeuilsLycee.at(-1);
+          seuilPrecedent = historySeuilsLycee[nbSeuils - 2];
+        }
+
+        /* if (codelycee === '0750675B') {
+          console.log("seuilRecent", seuilRecent);
+          console.log("seuilPrecedent", seuilPrecedent);
+        } */
+
         return {
           code: codelycee,
           secteur: parseInt(item.attributes.secteur),
-          nom: nomsLyceesMap.get(codelycee),
-//          seuils: historySeuilsLyceesMap.get(codelycee),
-          seuilRecent: seuilsRecentsLyceesMap.get(codelycee),
+          nom: lycee.nom,
+          //          seuils: historySeuilsLyceesMap.get(codelycee),
+          seuilRecent: seuilRecent,
           seuilPrecedent: seuilPrecedent,
-          url: urlsLyceesMap.get(codelycee),
+          url: lycee.url,
         };
       });
 
       // ajout des lycées multisecteurs 1
+      const tousSecteurs = ["0750655E", "0750654D", "0750685M"];
       tousSecteurs.forEach((codelycee) => {
-        const historySeuilsLycee = historySeuilsLyceesMap.get(codelycee);
+        const lycee = lyceesMap.get(codelycee);
+        const historySeuilsLycee = lycee.seuils;
         const nbSeuils = historySeuilsLycee.length;
         const seuilPrecedent = historySeuilsLycee[nbSeuils - 2];
         newLycees.push({
           code: codelycee,
           secteur: 1,
-          nom: nomsLyceesMap.get(codelycee),
+          nom: lycee.nom,
           //          seuils: historySeuilsLyceesMap.get(codelycee),
-          seuilRecent: seuilsRecentsLyceesMap.get(codelycee),
+          seuilRecent: lycee.seuils.at(-1),
           seuilPrecedent: seuilPrecedent,
-          url: urlsLyceesMap.get(codelycee),
+          url: lycee.url,
         });
       });
 

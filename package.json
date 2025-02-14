@@ -1,9 +1,9 @@
 {
   "name": "affelnet75",
-  "version": "9.3.4",
+  "version": "9.4.0",
   "private": true,
   "dependencies": {
-    "axios": "^1.4.0",
+    "axios": "^1.7.9",
     "bootstrap": "^5.3.0",
     "bootstrap-icons": "^1.10.5",
     "firebase": "^10.12.2",
@@ -15,7 +15,9 @@
     "react-minimal-pie-chart": "^9.1.0",
     "react-scripts": "5.0.1",
     "react-switch": "^7.0.0",
+    "recharts": "^2.15.0",
     "sass": "^1.56.1",
+    "simple-statistics": "^7.8.7",
     "web-vitals": "^2.1.4",
     "workbox-background-sync": "^7.0.0",
     "workbox-broadcast-update": "^7.0.0",

@@ -109,7 +109,7 @@ const MesColleges = (props) => {
   };
 
   useEffect(() => {
-    console.log("useEffect MesColleges");
+    //console.log("useEffect MesColleges");
 
     var collegeSect = collegeSecteur;
     if (data && data.listeColleges && !collegeSecteur && nomCollegeSecteur) {
