@@ -102,9 +102,9 @@ const Title = (props) => {
           </p>
           <hr />
           <div className="mb-0">
-            <strong>Mise à jour [9.4.0] du 14/02/2025 :</strong>
+            <strong>Mise à jour [9.4.1] du 11/04/2025 :</strong>
             <ul>
-              <li>Historique graphique des seuils d'admission</li>
+              <li>Mise à jour IPS et nombre admis DNB pour les collèges de secteur</li>
             </ul>            
           </div>
         </Alert>

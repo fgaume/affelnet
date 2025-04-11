@@ -103,7 +103,7 @@ registerRoute(
 );
 
 registerRoute(
-  ({ request }) => request.url.endsWith("app.json"), // Correction ici
+  ({ request }) => request.url.endsWith("app.json"),
   new NetworkFirst({
     cacheName: "app-infos",
     plugins: [
@@ -115,31 +115,31 @@ registerRoute(
 );
 
 registerRoute(
-  ({ request }) => request.url.endsWith("statistiques.json"), // Correction ici
+  ({ request }) => request.url.endsWith("statistiques.json"),
   new StaleWhileRevalidate({
     cacheName: "statistiques",
     plugins: [
       new ExpirationPlugin({
-        maxAgeSeconds: 7 *  24 * 60 * 60,
+        maxAgeSeconds: 1 * 24 * 60 * 60,
       }),
     ],
   })
 );
 
 registerRoute(
-  ({ request }) => request.url.endsWith("colleges.json"), // Correction ici
+  ({ request }) => request.url.endsWith("colleges.json"),
   new StaleWhileRevalidate({
     cacheName: "colleges",
     plugins: [
       new ExpirationPlugin({
-        maxAgeSeconds: 7 * 24 * 60 * 60,
+        maxAgeSeconds: 1 * 24 * 60 * 60,
       }),
     ],
   })
 );
 
 registerRoute(
-  ({ request }) => request.url.endsWith("lycees.json"), // Correction ici
+  ({ request }) => request.url.endsWith("lycees.json"),
   new StaleWhileRevalidate({
     cacheName: "lycees",
     plugins: [

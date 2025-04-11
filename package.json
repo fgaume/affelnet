@@ -1,6 +1,6 @@
 {
   "name": "affelnet75",
-  "version": "9.4.0",
+  "version": "9.4.1",
   "private": true,
   "dependencies": {
     "axios": "^1.7.9",

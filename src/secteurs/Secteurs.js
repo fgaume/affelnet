@@ -69,7 +69,11 @@ const Secteurs = (props) => {
       </div>
       <div className="mb-3">
         <ArrowReturnRight /> Les effectifs des collèges sont estimés via leur
-        nombre d'admis au <b>DNB 2023</b> (source opendata)
+        nombre d'admis au dernier DNB (source{" "}
+        <a target='_blank' rel="noreferrer" href="https://data.education.gouv.fr/explore/embed/dataset/fr-en-indicateurs-valeur-ajoutee-colleges/table/?disjunctive.uai&disjunctive.nom_de_l_etablissement&disjunctive.commune&disjunctive.departement&disjunctive.academie&sort=num_ligne&refine.academie=PARIS&refine.secteur=PU">
+          opendata
+        </a>
+        )
       </div>
       <div className="mx-2 col-12 col-sm-12 col-md-10 col-lg-8 col-xl-8 col-xxl-6 mx-auto">
         <Card className="p-1 bg-light bg-opacity-30">
