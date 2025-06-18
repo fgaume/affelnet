@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+/* import { useEffect, useState } from "react";
 import { Alert, Card, Figure, Form, Image, Table } from "react-bootstrap";
 import {
   ArrowReturnRight,
@@ -259,3 +259,4 @@ const ListeSeuils = (props) => {
 };
 
 export default ListeSeuils;
+*/

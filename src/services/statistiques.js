@@ -69,7 +69,7 @@ const saveStats = async (champ, newStats) => {
 };
 
 const computeStats = (notes) => {
-  //console.log("computeStats : ", notes.toString());
+  //console.log("computeStats : ", notes);
   notes.sort((a, b) => (a.brute < b.brute ? 1 : -1));
   let smallPair = notes[0];
   //console.log("smallPair=", smallPair);

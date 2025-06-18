@@ -17,7 +17,9 @@ const ListeStatsChamp = (props) => {
 
   useEffect(() => {
     if (notes.length > 1) {
+      // console.log("computeStats called ...")
       const stat = computeStats(notes);
+      // console.log("stats", stat)
       setStats(stat);
       saveStats(champ, stat);
     } else {

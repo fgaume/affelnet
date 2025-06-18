@@ -1,5 +1,5 @@
 import React, { useState, useMemo } from "react";
-import { Table, Modal, Button } from "react-bootstrap";
+import { Table, Modal, Button, Alert } from "react-bootstrap";
 import { GraphUp, ChevronUp, ChevronDown } from "react-bootstrap-icons";
 import { linearRegression } from "simple-statistics";
 import GraphiqueSeuils from "./GraphiqueSeuils";
@@ -236,6 +236,10 @@ const Seuils = ({ listeLycees, seuilsRecents, enableSeuilsRecents }) => {
         </tbody>
       </Table>
 
+      <Alert variant="warning">
+          Pour contribuer et ajouter un nouveau seuil, se rendre à la section <strong>"Mes contributions"</strong> tout en bas.
+          Une fois validé, il apparaitra un peu plus tard dans ce tableau.
+        </Alert>
 
       <Modal show={showModal} onHide={handleCloseModal} size="lg">
         <Modal.Header closeButton>

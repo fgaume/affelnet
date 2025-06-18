@@ -14,14 +14,14 @@ const MesContributions = (props) => {
           indispensables à son fonctionnement : les seuils d'admission aux
           lycées et les données statistiques nécessaires au calcul du score
           Affelnet. Ces données se retrouvent facilement sur votre fiche barème
-          qu'il faut demander début juillet par email à :{" "}
+          qu'il faut demander dès que affectation a été prononcée par email à :{" "}
           <a href="mailto:ce.dve@ac-paris.fr" aria-label="Lien mail DVE">
             ce.dve@ac-paris.fr
           </a>
         </Alert>
         <Alert variant="warning" className="mb-4">
           <ArrowReturnRight /> Note : Henri IV et Louis le Grand n'ont pas de
-          seuil unique puisque présentent des quotas par bonus IPS.
+          seuil d'admission unique puisque ils ont des quotas par bonus IPS.
           <div>
             Plus de détails dans{" "}
             <a

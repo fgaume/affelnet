@@ -30,7 +30,7 @@ const SeuilEditor = (props) => {
     typeaheadRef.current.clear();
     document.getElementById("seuilLycee").value = "";
     setShowConfirm(true);
-    setTimeout(() => setShowConfirm(false), 3000);
+    setTimeout(() => setShowConfirm(false), 4000);
   };
 
   return (
@@ -71,7 +71,7 @@ const SeuilEditor = (props) => {
             &nbsp;
             {showConfirm && (
               <Alert key="confirm" variant="success" className="ms-3 my-0">
-                Les données ont été ajoutées. Merci de votre contribution{" "}
+                Le seuil a été enregistré, il apparaitra un peu plus tard dans la section "Seuils d'admission" après validation. Merci de votre contribution{" "}
                 <EmojiSmile /> !
               </Alert>
             )}

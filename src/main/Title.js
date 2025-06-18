@@ -89,7 +89,7 @@ const Title = (props) => {
             invités à partager dans la section <b>"Mes contributions"</b> les
             seuils d'admission que vous avez reçus de votre{" "}
             <em>fiche-barème</em>
-            &nbsp;(qu'il faut demander au rectorat dès le 1er juillet par mail à{" "}
+            &nbsp;(qu'il faut demander au rectorat dès que affectation a été prononcée par mail à{" "}
             <a href="mailto:ce.dve@ac-paris.fr" aria-label="Lien mail DVE">
               ce.dve@ac-paris.fr
             </a>
@@ -102,9 +102,9 @@ const Title = (props) => {
           </p>
           <hr />
           <div className="mb-0">
-            <strong>Mise à jour [9.4.1] du 11/04/2025 :</strong>
+            <strong>Mise à jour [9.4.2] du 18/06/2025 :</strong>
             <ul>
-              <li>Mise à jour IPS et nombre admis DNB pour les collèges de secteur</li>
+              <li>Activation des saisies de seuils et statistiques</li>
             </ul>            
           </div>
         </Alert>
