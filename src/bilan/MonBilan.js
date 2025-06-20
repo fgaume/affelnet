@@ -39,6 +39,8 @@ const MonBilan = (props) => {
   const [scoreBilanPrevious, setScoreBilanPrevious] = useState(0);
   const [scoreBilanNext, setScoreBilanNext] = useState(0);
   const [quickScore, setQuickScore] = useState(0);
+  const [scoresCDs, setScoresCDs] = useState([]); // New state for scoreCDs
+
   //const [anneeN, setAnneeN] = useState(props.derniereAnnee);
 
   const inputRef = useRef([]);
@@ -71,37 +73,68 @@ const MonBilan = (props) => {
     if (props.statsMap) {
       const statsMap = props.statsMap;
       const recentStatsMap = props.recentStatsMap;
-      /* setAnneeN(
-        recentStatsMap !== null && recentStatsMap.keys()
-          ? recentStatsMap.keys().next().value
-          : props.derniereAnnee
-      ); */
+
+      // Get academic stats for the current year (props.anneeN)
+      const currentAcademicStats = recentStatsMap
+        ? recentStatsMap.get(props.anneeN)
+        : statsMap.get(props.anneeN);
+
+      // Compute raw CD scores
+      const rawScoresCDs = computeNoteCDs(matieres, semestres);
+
+      // Now, compute the harmonized score for each CD and update the state
+      const scoresWithHarmonized = rawScoresCDs.map((cd) => {
+        let harmonizedScore = "N/A"; // Default to N/A
+
+        if (currentAcademicStats) {
+          const cdStats = currentAcademicStats.get(cd.nom);
+          if (cdStats) {
+            const base = cd.score ? cd.score : 16; // Use raw score, default to 16 if it's 0 or N/A
+            harmonizedScore =
+              cd.score === 0 // If raw score is 0, the harmonized score is 100
+                ? 100
+                : 10 * (10 + (base - cdStats.moyenne) / cdStats.ecart_type);
+            harmonizedScore = parseFloat(harmonizedScore.toFixed(3)); // Format to 2 decimal places
+          }
+        }
+        return {
+          ...cd, // Keep existing properties (nom, score, coefficient)
+          harmonizedScore: harmonizedScore, // Add the new harmonized score
+        };
+      });
+
+      setScoresCDs(scoresWithHarmonized); // Update state with raw and harmonized scores
 
       //console.log("recentStatsMap:", recentStatsMap);
       //console.log("anneeN:", props.anneeN);
-      const scoreCDs = computeNoteCDs(matieres, semestres);
+      //const scoreCDs = computeNoteCDs(matieres, semestres);
       const avancement = computeAvancementNotes(matieres, semestres);
       //console.log(JSON.stringify(scoreCDs));
       //const statsMap = props.statsMap;
       const scoreBPprevious = computeBilanPeriodique(
-        scoreCDs,
+        rawScoresCDs,
         statsMap.get(props.anneeN - 1)
       );
       //console.log("score BP = " + formatFloat(scoreBPprevious));
       setScoreBilanPrevious(scoreBPprevious);
 
       const scoreBPnext = computeBilanPeriodique(
-        scoreCDs,
-        recentStatsMap
-          ? recentStatsMap.get(props.anneeN)
-          : statsMap.get(props.anneeN)
+        rawScoresCDs,
+        currentAcademicStats
       );
       //console.log("score BP next = " + scoreBPnext);
       setScoreBilanNext(scoreBPnext);
 
       props.onChange(scoreBPprevious, scoreBPnext, avancement);
     }
-  }, [matieres, semestres, props.anneeN, props]);
+  }, [
+    matieres,
+    semestres,
+    props.anneeN,
+    props.statsMap,
+    props.recentStatsMap,
+    props,
+  ]);
 
   return (
     <div className="">
@@ -112,17 +145,15 @@ const MonBilan = (props) => {
         Affelnet, il est donc inutile de saisir les notes précises.
       </div>
       <div className="mx-3 my-3">
-        <ArrowReturnRight /> Dans le cas de {semestres ? "se" : "tri"}mestre non
-        noté, laissez le curseur à "Non noté". Si aucune note n'est présente
-        dans l'année pour un champ disciplinaire (cas de la dispense annuelle
-        d'EPS par exemple), la note harmonisée moyenne sur l'académie sera
-        appliquée, c'est à dire 100.
+        <ArrowReturnRight /> Remarque : <a href="https://affelnet-paris.webapp.fr/doc/prompt.txt" aria-label="Lien vers prompt">Un prompt pour IA générative</a> est également disponible afin de calculer le bilan périodique à partir des bulletins Pronote PDF (votre IA doit donc être capable d'ingérer des documents PDF). Il ne sera valable qu'une fois les statistiques des champs disciplinaires connues.
       </div>
       <div className="mx-2 col-12 col-sm-10 col-md-8 col-lg-6 col-xl-6 col-xxl-6 mx-auto my-4">
         <AffichageScores
           scorePrevious={scoreBilanPrevious}
           scoreNext={scoreBilanNext}
-          tipPrevious={"Score de votre bilan périodique en " + (props.anneeN - 1)}
+          tipPrevious={
+            "Score de votre bilan périodique en " + (props.anneeN - 1)
+          }
           tipNext={"Score de votre bilan périodique en " + props.anneeN}
           tipDelta="Evolution de votre bilan périodique"
           anneeN={props.anneeN}
@@ -198,6 +229,36 @@ const MonBilan = (props) => {
                   />
                 );
               })}
+            </tbody>
+          </Table>
+        </Card>
+      </div>
+
+      {/* New Table for scoreCDs */}
+      <div className="mx-2 col-12 col-sm-11 col-md-8 col-lg-6 col-xl-6 col-xxl-6 mx-auto mt-4">
+        <Card>
+          <Card.Header>Notes harmonisées par champs disciplinaires</Card.Header>
+          <Table striped bordered hover className="mb-0">
+            <thead>
+              <tr>
+                <th>Champ disciplinaire</th>
+                <th className="text-end">Brut</th>
+                <th className="text-end">Harmonisé</th>
+              </tr>
+            </thead>
+            <tbody>
+              {scoresCDs.map((cd) => (
+                <tr key={cd.nom}>
+                  <td>{cd.nom}</td>
+                  <td className="text-end">{cd.score === 0 ? "N/A" : cd.score.toFixed(2)}</td>
+                  <td className="text-end">
+                    {/* Display the harmonized score */}
+                    {cd.harmonizedScore === "N/A"
+                      ? "N/A"
+                      : cd.harmonizedScore.toFixed(3)}
+                  </td>
+                </tr>
+              ))}
             </tbody>
           </Table>
         </Card>

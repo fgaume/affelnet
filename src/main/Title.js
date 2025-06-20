@@ -102,9 +102,9 @@ const Title = (props) => {
           </p>
           <hr />
           <div className="mb-0">
-            <strong>Mise à jour [9.4.2] du 18/06/2025 :</strong>
+            <strong>Mise à jour [9.4.3] du 20/06/2025 :</strong>
             <ul>
-              <li>Activation des saisies de seuils et statistiques</li>
+              <li>Ajout tableau fiche barème</li>
             </ul>            
           </div>
         </Alert>

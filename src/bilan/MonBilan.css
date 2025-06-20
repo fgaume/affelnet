@@ -1,11 +1,16 @@
 table {
-    width: 100%;
+  width: 100%;
 }
 td.rapide2 {
-    width: 166px;
-    text-align:left;
+  width: 166px;
+  text-align: left;
 }
 td.matiere {
-    width: 166px;
-    text-align:center;
+  width: 166px;
+  text-align: center;
+}
+.average-grade {
+  font-size: 0.8em;
+  color: #666;
+  margin-top: 5px;
 }

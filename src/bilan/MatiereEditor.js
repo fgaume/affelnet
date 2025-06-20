@@ -33,9 +33,25 @@ const MatiereEditor = forwardRef((props, ref) => {
     props.onChange(nom, newNote, periode);
   };
 
+  // Calculate the average grade
+  const calculateAverage = () => {
+    const validNotes = props.notes.filter(note => note !== undefined && note !== null);
+    if (validNotes.length === 0) {
+      return "N/A"; // No valid grades to calculate average
+    }
+    const sum = validNotes.reduce((acc, current) => acc + current, 0);
+    return (sum / validNotes.length).toFixed(2); // Format to 2 decimal places
+  };
+
+  const average = calculateAverage();
+
   return (
     <tr>
-      <td className="matiere">{props.nom}</td>
+      <td className="matiere">{props.nom}
+      <div className="average-grade">
+          Moyenne: {average}
+        </div>
+      </td>
       <td>
         <Table className="align-middle mb-0 bg-transparent">
           <tbody className="bg-transparent">
