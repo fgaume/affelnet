@@ -5,7 +5,7 @@ import {
   CheckLg,
   ExclamationCircle,
   InfoCircleFill,
-  Tools
+  Tools,
 } from "react-bootstrap-icons";
 import parent from "../images/parent.png";
 import { useLocalStorage } from "../services/useLocalStorage";
@@ -89,23 +89,26 @@ const Title = (props) => {
             invités à partager dans la section <b>"Mes contributions"</b> les
             seuils d'admission que vous avez reçus de votre{" "}
             <em>fiche-barème</em>
-            &nbsp;(qu'il faut demander au rectorat dès que affectation a été prononcée par mail à{" "}
+            &nbsp;(qu'il faut demander au rectorat dès que affectation a été
+            prononcée par mail à{" "}
             <a href="mailto:ce.dve@ac-paris.fr" aria-label="Lien mail DVE">
               ce.dve@ac-paris.fr
             </a>
-            ). Plus de détails dans{" "}  
+            ). Plus de détails dans{" "}
             <a
-            href="https://youtu.be/O8FVsFdCQyE"
-            target="affelnet-medium"
-            aria-label="Vidéo : comprendre son affectation"
-          >cette vidéo.</a>
+              href="https://youtu.be/O8FVsFdCQyE"
+              target="affelnet-medium"
+              aria-label="Vidéo : comprendre son affectation"
+            >
+              cette vidéo.
+            </a>
           </p>
           <hr />
           <div className="mb-0">
-            <strong>Mise à jour [9.4.3] du 20/06/2025 :</strong>
+            <strong>Mise à jour [9.4.4] du 20/06/2025 :</strong>
             <ul>
               <li>Ajout tableau fiche barème</li>
-            </ul>            
+            </ul>
           </div>
         </Alert>
         <Alert show={show === "true"} variant="warning">
@@ -114,8 +117,8 @@ const Title = (props) => {
             height="32"
             className="text-danger me-2"
           />
-          Les seuils d'admission présentés ici ne sont valables que pour les collégiens{" "}
-          <strong>non-boursiers</strong>
+          Les seuils d'admission présentés ici ne sont valables que pour les
+          collégiens <strong>non-boursiers</strong>
           &nbsp;(car{" "}
           <a
             href="https://fgaume.medium.com/la-m%C3%A9canique-daffelnet-79de9f0fe70a"

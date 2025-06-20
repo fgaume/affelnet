@@ -145,7 +145,7 @@ const MonBilan = (props) => {
         Affelnet, il est donc inutile de saisir les notes précises.
       </div>
       <div className="mx-3 my-3">
-        <ArrowReturnRight /> Remarque : <a href="https://affelnet-paris.webapp.fr/doc/prompt.txt" aria-label="Lien vers prompt">Un prompt pour IA générative</a> est également disponible afin de calculer le bilan périodique à partir des bulletins Pronote PDF (votre IA doit donc être capable d'ingérer des documents PDF). Il ne sera valable qu'une fois les statistiques des champs disciplinaires connues.
+        <ArrowReturnRight /> Remarque : <a href="https://affelnet-paris.web.app/doc/prompt.txt" aria-label="Lien vers prompt">Un prompt pour IA générative</a> est également disponible afin de calculer le bilan périodique à partir des bulletins Pronote PDF (votre IA doit donc être capable d'ingérer des documents PDF). Il ne sera valable qu'une fois les statistiques des champs disciplinaires connues.
       </div>
       <div className="mx-2 col-12 col-sm-10 col-md-8 col-lg-6 col-xl-6 col-xxl-6 mx-auto my-4">
         <AffichageScores
