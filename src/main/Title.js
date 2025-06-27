@@ -89,12 +89,10 @@ const Title = (props) => {
             invités à partager dans la section <b>"Mes contributions"</b> les
             seuils d'admission que vous avez reçus de votre{" "}
             <em>fiche-barème</em>
-            &nbsp;(qu'il faut demander au rectorat dès que affectation a été
-            prononcée par mail à{" "}
-            <a href="mailto:ce.dve@ac-paris.fr" aria-label="Lien mail DVE">
-              ce.dve@ac-paris.fr
-            </a>
-            ). Plus de détails dans{" "}
+            &nbsp;qu'il faut demander via{" "}
+            <a href="https://www.demarches-simplifiees.fr/commencer/demande-de-fiche-bareme" target="_blank" rel="noreferrer" aria-label="Lien de la démarche simplifiée">
+              cette démarche simplifiée en ligne
+            </a>. Plus de détails dans{" "}
             <a
               href="https://youtu.be/O8FVsFdCQyE"
               target="affelnet-medium"
@@ -105,9 +103,9 @@ const Title = (props) => {
           </p>
           <hr />
           <div className="mb-0">
-            <strong>Mise à jour [9.4.4] du 20/06/2025 :</strong>
+            <strong>Mise à jour [9.4.5] du 28/06/2025 :</strong>
             <ul>
-              <li>Ajout tableau fiche barème</li>
+              <li>Nouveau lien demande fiche barème</li>
             </ul>
           </div>
         </Alert>

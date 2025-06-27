@@ -14,10 +14,10 @@ const MesContributions = (props) => {
           indispensables à son fonctionnement : les seuils d'admission aux
           lycées et les données statistiques nécessaires au calcul du score
           Affelnet. Ces données se retrouvent facilement sur votre fiche barème
-          qu'il faut demander dès que affectation a été prononcée par email à :{" "}
-          <a href="mailto:ce.dve@ac-paris.fr" aria-label="Lien mail DVE">
-            ce.dve@ac-paris.fr
-          </a>
+          qu'il faut demander dès que votre affectation a été prononcée via {" "}
+          <a href="https://www.demarches-simplifiees.fr/commencer/demande-de-fiche-bareme" target="_blank" rel="noreferrer" aria-label="Lien de la démarche simplifiée">
+              cette démarche simplifiée en ligne
+            </a>
         </Alert>
         <Alert variant="warning" className="mb-4">
           <ArrowReturnRight /> Note : Henri IV et Louis le Grand n'ont pas de
