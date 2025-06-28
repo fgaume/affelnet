@@ -103,9 +103,9 @@ const Title = (props) => {
           </p>
           <hr />
           <div className="mb-0">
-            <strong>Mise à jour [9.4.5] du 28/06/2025 :</strong>
+            <strong>Mise à jour [9.5.0] du 28/06/2025 :</strong>
             <ul>
-              <li>Nouveau lien demande fiche barème</li>
+              <li>Ajout de l'EMC</li>
             </ul>
           </div>
         </Alert>
