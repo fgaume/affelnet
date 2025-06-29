@@ -56,7 +56,8 @@ const computeAvancementNotes = (matieres, semestres) => {
     });
     avancement += avancementCD;
   });
-  let nbExpectedNotes = semestres ? 22 : 33;
+  const nbExpectedNotes = listeMatieres.length * (semestres ? 2 : 3);
+  //et nbExpectedNotes = semestres ? 22 : 33;
   return Math.round((100 * avancement) / nbExpectedNotes);
 };
 
