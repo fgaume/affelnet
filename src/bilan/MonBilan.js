@@ -89,12 +89,17 @@ const MonBilan = (props) => {
         if (currentAcademicStats) {
           const cdStats = currentAcademicStats.get(cd.nom);
           if (cdStats) {
-            const base = cd.score ? cd.score : 16; // Use raw score, default to 16 if it's 0 or N/A
+            const base = cd.score ? cd.score.toFixed(2) : 16;
             harmonizedScore =
               cd.score === 0 // If raw score is 0, the harmonized score is 100
                 ? 100
-                : 10 * (10 + (base - cdStats.moyenne) / cdStats.ecart_type);
-            harmonizedScore = parseFloat(harmonizedScore.toFixed(3)); // Format to 2 decimal places
+                : 10 *
+                  (10 +
+                    (base - cdStats.moyenne) / cdStats.ecart_type);
+            //console.log("score:", base);
+            //console.log("cdStats:", cdStats);
+            //console.log("harmonizedScore:", harmonizedScore);
+            harmonizedScore = parseFloat(harmonizedScore.toFixed(3));
           }
         }
         return {
@@ -145,7 +150,17 @@ const MonBilan = (props) => {
         Affelnet, il est donc inutile de saisir les notes précises.
       </div>
       <div className="mx-3 my-3">
-        <ArrowReturnRight /> Remarque : <a href="https://affelnet-paris.web.app/doc/prompt.txt" aria-label="Lien vers prompt">Un prompt pour IA générative</a> est également disponible afin de calculer le bilan périodique à partir des bulletins Pronote PDF (votre IA doit donc être capable d'ingérer des documents PDF). Il ne sera valable qu'une fois les statistiques des champs disciplinaires connues.
+        <ArrowReturnRight /> Remarque :{" "}
+        <a
+          href="https://affelnet-paris.web.app/doc/prompt.txt"
+          aria-label="Lien vers prompt"
+        >
+          Un prompt pour IA générative
+        </a>{" "}
+        est également disponible afin de calculer le bilan périodique à partir
+        des bulletins Pronote PDF (votre IA doit donc être capable d'ingérer des
+        documents PDF). Il ne sera valable qu'une fois les statistiques des
+        champs disciplinaires connues.
       </div>
       <div className="mx-2 col-12 col-sm-10 col-md-8 col-lg-6 col-xl-6 col-xxl-6 mx-auto my-4">
         <AffichageScores
@@ -250,7 +265,9 @@ const MonBilan = (props) => {
               {scoresCDs.map((cd) => (
                 <tr key={cd.nom}>
                   <td>{cd.nom}</td>
-                  <td className="text-end">{cd.score === 0 ? "N/A" : cd.score.toFixed(2)}</td>
+                  <td className="text-end">
+                    {cd.score === 0 ? "N/A" : cd.score.toFixed(2)}
+                  </td>
                   <td className="text-end">
                     {/* Display the harmonized score */}
                     {cd.harmonizedScore === "N/A"

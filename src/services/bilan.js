@@ -63,7 +63,7 @@ const computeAvancementNotes = (matieres, semestres) => {
 const computeBilanPeriodique = (
   scoresCD,
   statsAcademiques
-//  statsRecentes
+  //  statsRecentes
 ) => {
   if (!statsAcademiques) return 0;
   //console.log("computeBilanPeriodique.scoresCD : ", scoresCD);
@@ -71,18 +71,15 @@ const computeBilanPeriodique = (
   let score = 0;
   scoresCD.forEach((cd) => {
     //console.log("score " + cd.nom + " : " + cd.score);
-    const base = (cd.score) ? cd.score.toFixed(2) : 16;
+    const base = cd.score ? cd.score.toFixed(2) : 16;
     const cdStats = statsAcademiques.get(cd.nom);
     //const recentStats = statsRecentes?.get(cd.nom);
     //const cdStats = recentStats ? recentStats  : histoStats;
     //console.log("cdStats: ", cdStats)
-    const cdscore = 
+    const cdscore =
       cd.score === 0
         ? 100
-        : 10 *
-          (10 +
-            (base - cdStats.moyenne) /
-            cdStats.ecart_type);
+        : 10 * (10 + (base - cdStats.moyenne) / cdStats.ecart_type);
     //console.log("score " + cd.nom + " : " + cd.score + " -> " + cdscore.toFixed(3));
     score += cd.coefficient * cdscore.toFixed(3);
   });
@@ -116,11 +113,13 @@ const mergeStats = (currentMap, listeRecentStats) => {
   listeRecentStats.forEach((stat) => {
     const champ = stat.id;
     const moyenne = stat.moyenne ? stat.moyenne : currentMap.get(champ);
-    const ecart_type = stat.ecart_type ? stat.ecart_type : currentMap.get(champ);
-    mergeStats.set(champ, { moyenne: moyenne, ecart_type: ecart_type});
+    const ecart_type = stat.ecart_type
+      ? stat.ecart_type
+      : currentMap.get(champ);
+    mergeStats.set(champ, { moyenne: moyenne, ecart_type: ecart_type });
   });
   return mergeStats;
-}
+};
 
 /* const testcomputeNoteCDs = () => {
     const matieres = [
@@ -191,5 +190,5 @@ export {
   updateMatieres,
   allMatiereSetTo,
   computeAvancementNotes,
-  mergeStats
+  mergeStats,
 };

@@ -157,7 +157,7 @@ registerRoute(
     networkTimeoutSeconds: 5, // Délai d'attente de 5 secondes
     plugins: [
       new ExpirationPlugin({
-        maxAgeSeconds: 24 * 60 * 60,
+        maxAgeSeconds: 30,
       }),
     ],
   })
@@ -170,7 +170,7 @@ registerRoute(
     networkTimeoutSeconds: 5, // Délai d'attente de 5 secondes
     plugins: [
       new ExpirationPlugin({
-        maxAgeSeconds: 24 * 60 * 60,
+        maxAgeSeconds: 30,
       }),
     ],
   })
