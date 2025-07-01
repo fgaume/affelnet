@@ -103,9 +103,11 @@ const Title = (props) => {
           </p>
           <hr />
           <div className="mb-0">
-            <strong>Mise à jour [9.5.1] du 29/06/2025 :</strong>
+            <strong>Mise à jour [9.5.2] du 01/07/2025 :</strong>
             <ul>
-              <li>Correction arrondi harmonisation</li>
+            <li>Support des notes manquantes</li>
+            <li>Ordre des compétences de socle iso-fiche-barème</li>
+            <li>Amélioration du calcul de note harmonisée</li>
             </ul>
           </div>
         </Alert>
