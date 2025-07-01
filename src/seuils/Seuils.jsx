@@ -14,8 +14,6 @@ const Seuils = ({ listeLycees, seuilsRecents, enableSeuilsRecents }) => {
   });
 
   // L'année du seuil courant est l'année actuelle
-  //const anneeCourante = new Date().getFullYear();
-  //const anneeCourante = 
   // On va mapper currentSeuils par code de lycée pour un accès plus rapide
   const seuilsRecentsMap = useMemo(() => {
     const map = new Map();
@@ -58,46 +56,61 @@ const Seuils = ({ listeLycees, seuilsRecents, enableSeuilsRecents }) => {
   }, [anneeRecente, listeLycees]);
 
   // Calculer la variation relative et la pente de régression pour chaque lycée
-  const lyceesData = useMemo(() => {
-    return listeLycees.map((lycee) => {
-      const seuilsMap = new Map();
-      for (const [annee, seuil] of lycee.seuilsMap.entries()) {
-        seuilsMap.set(Number(annee), Number(seuil));
-      }
-      const seuilRecent = seuilsMap.get(anneeRecente);
-      const seuilPrecedent = seuilsMap.get(anneePrecedente);
-      // On calcule la difference brute :
-      const difference =
-        seuilRecent && seuilPrecedent ? seuilRecent - seuilPrecedent : null;
+const lyceesData = useMemo(() => {
+  return listeLycees.map((lycee) => {
+    const seuilsMap = new Map();
+    for (const [annee, seuil] of lycee.seuilsMap.entries()) {
+      seuilsMap.set(Number(annee), Number(seuil));
+    }
+    const seuilRecent = seuilsMap.get(anneeRecente);
+    const seuilPrecedent = seuilsMap.get(anneePrecedente);
+    const difference =
+      seuilRecent && seuilPrecedent ? seuilRecent - seuilPrecedent : null;
 
-      const seuilsArray = Array.from(seuilsMap.entries()).map(
-        ([annee, seuil]) => ({
-          annee: Number(annee),
-          seuil: Number(seuil),
-        })
-      );
-      seuilsArray.sort((a, b) => a.annee - b.annee);
-      const dataForRegression = seuilsArray.map((s) => [
-        Number(s.annee),
-        Number(s.seuil),
-      ]);
-      const regression = linearRegression(dataForRegression);
-      const pente = regression.m;
+    const seuilsArray = Array.from(seuilsMap.entries()).map(
+      ([annee, seuil]) => ({
+        annee: Number(annee),
+        seuil: Number(seuil),
+      })
+    );
+    
+    // Récupérer le seuil de l'année courante si disponible
+    const seuilCourant = seuilsRecentsMap.get(lycee.code) || null;
 
-      // Récupérer le seuil de l'année courante si disponible
-      const seuilCourant = seuilsRecentsMap.get(lycee.code) || null;
+    // MODIFICATION : On ajoute le seuil de 2025 au tableau pour le graphique
+    if (enableSeuilsRecents && seuilCourant !== null) {
+      seuilsArray.push({
+        annee: anneeRecente + 1, // L'année actuelle est l'année la plus récente + 1
+        seuil: seuilCourant,
+      });
+    }
 
-      return {
-        ...lycee,
-        seuilsMap,
-        seuilRecent,
-        difference,
-        pente,
-        seuilsArray,
-        seuilCourant,
-      };
-    });
-  }, [listeLycees, anneeRecente, anneePrecedente, seuilsRecentsMap]);
+    seuilsArray.sort((a, b) => a.annee - b.annee);
+    
+    const dataForRegression = seuilsArray.map((s) => [
+      Number(s.annee),
+      Number(s.seuil),
+    ]);
+    const regression = linearRegression(dataForRegression);
+    const pente = regression.m;
+
+    return {
+      ...lycee,
+      seuilsMap,
+      seuilRecent,
+      difference,
+      pente,
+      seuilsArray, // Ce tableau contient maintenant la donnée de 2025
+      seuilCourant,
+    };
+  });
+}, [
+  listeLycees,
+  anneeRecente,
+  anneePrecedente,
+  seuilsRecentsMap,
+  enableSeuilsRecents, // N'oubliez pas d'ajouter cette dépendance
+]);
 
   // Trier les données
   const sortedLycees = useMemo(() => {
