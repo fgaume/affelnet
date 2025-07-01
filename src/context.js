@@ -218,8 +218,37 @@ export const SharedProvider = ({ children }) => {
       }
     };
 
+    // NOUVEAU : Fonction pour charger les barèmes de notes
+    const fetchNotes = async () => {
+      try {
+        const response = await axios.get(
+          `${affelnetParisHostname}/api/notes.json`
+        );
+        const baremesData = response.data.baremes;
+
+        // On transforme l'objet en une Map de Maps pour une utilisation optimisée
+        // La structure sera : Map<NomMatiere, Map<NoteBrute, NoteHarmonisee>>
+        const baremesMap = new Map();
+        for (const [matiere, points] of Object.entries(baremesData)) {
+          baremesMap.set(matiere, new Map(points));
+        }
+
+        // Mise à jour de l'état avec les barèmes de notes
+        setData((prevData) => ({
+          ...prevData,
+          baremesMap: baremesMap,
+        }));
+      } catch (error) {
+        console.error("error fetchNotes", error);
+      } finally {
+        console.log("fetchNotes OK");
+        callsCompleted++;
+        checkCompletion();
+      }
+    };
+
     const checkCompletion = () => {
-      if (callsCompleted === 4) {
+      if (callsCompleted === 5) {
         // gerer ici les stats recentes extrapolées et scores max
         /* const annee = data.recentStatsMap.keys().next().value;
         const scoreMaxAnneeN = computeBilanPeriodique(
@@ -236,6 +265,7 @@ export const SharedProvider = ({ children }) => {
     fetchStats();
     fetchColleges();
     fetchLycees();
+    fetchNotes();
   }, []);
 
   return (
