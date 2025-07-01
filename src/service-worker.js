@@ -176,6 +176,19 @@ registerRoute(
   })
 );
 
+registerRoute(
+  ({ request }) => request.url.endsWith("notes.json"),
+  new NetworkFirst({
+    cacheName: "notes",
+    networkTimeoutSeconds: 5, // Délai d'attente de 5 secondes
+    plugins: [
+      new ExpirationPlugin({
+        maxAgeSeconds: 30,
+      }),
+    ],
+  })
+);
+
 // This allows the web app to trigger skipWaiting via
 // registration.waiting.postMessage({type: 'SKIP_WAITING'})
 self.addEventListener("message", (event) => {
