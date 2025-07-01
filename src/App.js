@@ -39,7 +39,7 @@ import MonSocle from "./socle/MonSocle";
 import Seuils from "./seuils/Seuils";
 
 const App = () => {
-  const versionLocale = "v9.5.1 29/06/2025";
+  const versionLocale = "v9.5.2 01/07/2025";
 
   const { data } = useContext(SharedContext);
 
@@ -272,6 +272,7 @@ const App = () => {
                   recentStatsMap={data.recentStatsMap}
                   anneeN={anneeN}
                   derniereAnnee={data.derniereAnnee}
+                  baremesMap={data.baremesMap}
                 />
               </Accordion.Body>
             </Accordion.Item>
