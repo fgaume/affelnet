@@ -35,7 +35,7 @@ const MatiereEditor = forwardRef((props, ref) => {
 
   // Calculate the average grade
   const calculateAverage = () => {
-    const validNotes = props.notes.filter(note => note !== undefined && note !== null);
+    const validNotes = props.notes.filter(note => note !== undefined && note !== null && note !== 0);
     if (validNotes.length === 0) {
       return "N/A"; // No valid grades to calculate average
     }
