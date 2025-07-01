@@ -28,15 +28,15 @@ const valueMap = new Map([
 
 const tranchesCompetences = [
   { value: 0, score: 0, label: "Maitrise...", style: "low text-body" },
-  { value: 1, score: 120, label: "Insuffisante", style: "low text-danger" },
-  { value: 2, score: 300, label: "Fragile", style: "middle text-danger" },
+  { value: 1, score: 120, label: "Insuffisante (15)", style: "low text-danger" },
+  { value: 2, score: 300, label: "Fragile (25)", style: "middle text-danger" },
   {
     value: 3,
     score: 480,
-    label: "Satisfaisante",
+    label: "Satisfaisante (40)",
     style: "middle text-primary",
   },
-  { value: 4, score: 600, label: "Très bonne", style: "high text-success" },
+  { value: 4, score: 600, label: "Très bonne (50)", style: "high text-success" },
 ];
 
 /* returns scoreSocle */
