@@ -14,6 +14,8 @@ import {
   updateMatieres,
   allMatiereSetTo,
   computeAvancementNotes,
+  calculerNoteHarmonisee,
+  computeBilanPeriodiqueWithNotes
 } from "../services/bilan";
 import MatiereEditor from "./MatiereEditor";
 import "./MonBilan.css";
@@ -70,41 +72,31 @@ const MonBilan = (props) => {
   };
 
   useEffect(() => {
-    if (props.statsMap) {
+    if (props.statsMap && props.baremesMap) {
       const statsMap = props.statsMap;
-      const recentStatsMap = props.recentStatsMap;
+      //const recentStatsMap = props.recentStatsMap;
 
       // Get academic stats for the current year (props.anneeN)
-      const currentAcademicStats = recentStatsMap
+      /* const currentAcademicStats = recentStatsMap
         ? recentStatsMap.get(props.anneeN)
-        : statsMap.get(props.anneeN);
+        : statsMap.get(props.anneeN); */
 
       // Compute raw CD scores
       const rawScoresCDs = computeNoteCDs(matieres, semestres);
 
       // Now, compute the harmonized score for each CD and update the state
       const scoresWithHarmonized = rawScoresCDs.map((cd) => {
-        let harmonizedScore = "N/A"; // Default to N/A
-
-        if (currentAcademicStats) {
-          const cdStats = currentAcademicStats.get(cd.nom);
-          if (cdStats) {
-            const base = cd.score ? cd.score.toFixed(2) : 16;
-            harmonizedScore =
-              cd.score === 0 // If raw score is 0, the harmonized score is 100
-                ? 100
-                : 10 *
-                  (10 +
-                    (base - cdStats.moyenne) / cdStats.ecart_type);
-            //console.log("score:", base);
-            //console.log("cdStats:", cdStats);
-            //console.log("harmonizedScore:", harmonizedScore);
-            harmonizedScore = parseFloat(harmonizedScore.toFixed(3));
-          }
+        let harmonizedScore = 100;
+        if (cd.score) {
+          const base = parseFloat(cd.score);
+          const existingNotes = props.baremesMap.get(cd.nom);
+          //console.log("notes connues : ", existingNotes)
+          harmonizedScore = calculerNoteHarmonisee(base, existingNotes);
         }
+        
         return {
           ...cd, // Keep existing properties (nom, score, coefficient)
-          harmonizedScore: harmonizedScore, // Add the new harmonized score
+          harmonizedScore: parseFloat(harmonizedScore), // Add the new harmonized score
         };
       });
 
@@ -123,9 +115,9 @@ const MonBilan = (props) => {
       //console.log("score BP = " + formatFloat(scoreBPprevious));
       setScoreBilanPrevious(scoreBPprevious);
 
-      const scoreBPnext = computeBilanPeriodique(
+      const scoreBPnext = computeBilanPeriodiqueWithNotes(
         rawScoresCDs,
-        currentAcademicStats
+        props.baremesMap
       );
       //console.log("score BP next = " + scoreBPnext);
       setScoreBilanNext(scoreBPnext);
