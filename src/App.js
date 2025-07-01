@@ -39,7 +39,7 @@ import MonSocle from "./socle/MonSocle";
 import Seuils from "./seuils/Seuils";
 
 const App = () => {
-  const versionLocale = "v9.5.2 01/07/2025";
+  const versionLocale = "v9.5.3 01/07/2025";
 
   const { data } = useContext(SharedContext);
 
@@ -158,12 +158,13 @@ const App = () => {
       }
 
       if (data.recentStatsMap && data.recentStatsMap.keys()) {
+        console.log("anneeN=", data.recentStatsMap.keys().next().value);
         //const recentCDMap = data.recentStatsMap.values().next().value;
         setAnneeN(data.recentStatsMap.keys().next().value);
         setScoreBilanNextMax(4800 + data.scoreMaxRecent);
         setScoreBilanPreviousMax(4800 + data.scoreMaxAnneeN);
       } else {
-        setAnneeN(data.derniereAnnee);
+        setAnneeN(1+data.derniereAnnee);
         setScoreBilanNextMax(4800 + data.scoreMaxAnneeN);
         setScoreBilanPreviousMax(4800 + data.scoreMaxAnneeN1);
       }
