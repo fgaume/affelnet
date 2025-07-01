@@ -1,12 +1,12 @@
 let listeCompetences = [
-  { nom: "Langue française", score: 0, order: 0 },
-  { nom: "Scientifique", score: 0, order: 1 },
-  { nom: "Langues étrangères", score: 0, order: 2 },
-  { nom: "Activités humaines", score: 0, order: 3 },
-  { nom: "Systèmes naturels/techniques", score: 0, order: 4 },
+  { nom: "Langage des arts/corps", score: 0, order: 0 },
+  { nom: "Langues étrangères", score: 0, order: 1 },
+  { nom: "Langue française", score: 0, order: 2 },
+  { nom: "Scientifique", score: 0, order: 3 },
+  { nom: "Citoyen", score: 0, order: 4 },
   { nom: "Méthodes/outils", score: 0, order: 5 },
-  { nom: "Citoyen", score: 0, order: 6 },
-  { nom: "Langage des arts/corps", score: 0, order: 7 },
+  { nom: "Activités humaines", score: 0, order: 6 },
+  { nom: "Systèmes naturels/techniques", score: 0, order: 7 },
 ];
 
 // competences : nom, score
