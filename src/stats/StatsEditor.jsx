@@ -23,7 +23,7 @@ const StatsEditor = (props) => {
   const isValid = (brute, harmo) => {
     let isValid = false;
     if (brute >= 3 && brute <= 16) {
-      if (harmo > 85 && harmo < 120) {
+      if (harmo > 75 && harmo < 120) {
         const harmoString = harmo.toString();
         const frac = harmoString.split(".")[1];
         //console.log("frac=", frac);
@@ -37,7 +37,7 @@ const StatsEditor = (props) => {
         }
       } else {
         setErrorMessage(
-          "Note harmonisée incorrecte : doit être entre 85 et 120"
+          "Note harmonisée incorrecte : doit être entre 75 et 120"
         );
       }
     } else {
