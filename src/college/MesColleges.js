@@ -54,7 +54,7 @@ const MesColleges = (props) => {
         votre adresse. Pour connaitre son collège de secteur,{" "}
         <a
           rel="noreferrer"
-          href="https://capgeo.sig.paris.fr/Apps/SecteursScolaires"
+          href="https://experience.arcgis.com/experience/5b6803bc7f634620a85da29dd8a113fe"
           aria-label="Lien vers la carte scolaire"
           target="_blank"
         >

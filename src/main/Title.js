@@ -90,9 +90,15 @@ const Title = (props) => {
             seuils d'admission que vous avez reçus de votre{" "}
             <em>fiche-barème</em>
             &nbsp;qu'il faut demander via{" "}
-            <a href="https://www.demarches-simplifiees.fr/commencer/demande-de-fiche-bareme" target="_blank" rel="noreferrer" aria-label="Lien de la démarche simplifiée">
+            <a
+              href="https://www.demarches-simplifiees.fr/commencer/demande-de-fiche-bareme"
+              target="_blank"
+              rel="noreferrer"
+              aria-label="Lien de la démarche simplifiée"
+            >
               cette démarche simplifiée en ligne
-            </a>. Plus de détails dans{" "}
+            </a>
+            . Plus de détails dans{" "}
             <a
               href="https://youtu.be/O8FVsFdCQyE"
               target="affelnet-medium"
@@ -103,12 +109,9 @@ const Title = (props) => {
           </p>
           <hr />
           <div className="mb-0">
-            <strong>Mise à jour [9.5.3] du 01/07/2025 :</strong>
+            <strong>Mise à jour [9.5.4] du 03/10/2025 :</strong>
             <ul>
-            <li>Correction du mauvais affichage des années</li>
-            <li>Support des notes manquantes</li>
-            <li>Ordre des compétences de socle iso-fiche-barème</li>
-            <li>Amélioration du calcul de note harmonisée</li>
+              <li>Mise à jour du lien pour la sectorisation</li>
             </ul>
           </div>
         </Alert>
