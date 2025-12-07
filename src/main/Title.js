@@ -24,7 +24,7 @@ const Title = (props) => {
         />
         <h4>
           <span className="d-flex align-items-center mt-1">
-            <Tools />
+            <Tools width="24" height="24" />
             &nbsp;&nbsp;Affelnet Paris
           </span>
         </h4>

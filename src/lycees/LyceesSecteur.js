@@ -91,7 +91,7 @@ const LyceesSecteur = (props) => {
   return (
     <div>
       <div className="mx-3 my-3 mt-3 mb-3">
-        <ArrowReturnRight /> Cette section indique votre score Affelnet de{" "}
+        <ArrowReturnRight width="24" height="24" /> Cette section indique votre score Affelnet de{" "}
         <strong>secteur {props.secteur}</strong> ainsi que les lycées de{" "}
         <strong>secteur {props.secteur}</strong> que vous auriez obtenus, ou
         pas, dans les conditions des années précédentes, compte tenu des

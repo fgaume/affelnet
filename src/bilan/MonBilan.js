@@ -136,13 +136,13 @@ const MonBilan = (props) => {
   return (
     <div className="">
       <div className="mx-3 my-3">
-        <ArrowReturnRight /> Saisir ici vos moyennes de chaque matière pour
+        <ArrowReturnRight width="24" height="24" /> Saisir ici vos moyennes de chaque matière pour
         chaque {semestres ? "se" : "tri"}mestre. Seuls les{" "}
         <strong>intervalles</strong> de notes comptent pour votre score
         Affelnet, il est donc inutile de saisir les notes précises.
       </div>
       <div className="mx-3 my-3">
-        <ArrowReturnRight /> Remarque :{" "}
+        <ArrowReturnRight width="24" height="24" /> Remarque :{" "}
         <a
           href="https://affelnet-paris.web.app/doc/prompt.txt"
           aria-label="Lien vers prompt"
