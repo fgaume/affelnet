@@ -10,7 +10,7 @@ import {
 import parent from "../images/parent.png";
 import { useLocalStorage } from "../services/useLocalStorage";
 
-const Title = (props) => {
+const Title = () => {
   const [show, setShow] = useLocalStorage("showInfo", "true");
 
   return (
