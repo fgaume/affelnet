@@ -9,7 +9,7 @@ const MesContributions = (props) => {
     <>
       <div className="mx-auto my-3">
         <Alert variant="success" className="mb-4">
-          <ArrowReturnRight /> Cette section vous permet de{" "}
+          <ArrowReturnRight width="24" height="24" /> Cette section vous permet de{" "}
           <strong>contribuer</strong> à cet outil en saisissant les données
           indispensables à son fonctionnement : les seuils d'admission aux
           lycées et les données statistiques nécessaires au calcul du score
@@ -20,7 +20,7 @@ const MesContributions = (props) => {
             </a>
         </Alert>
         <Alert variant="warning" className="mb-4">
-          <ArrowReturnRight /> Note : Henri IV et Louis le Grand n'ont pas de
+          <ArrowReturnRight width="24" height="24" /> Note : Henri IV et Louis le Grand n'ont pas de
           seuil d'admission unique puisque ils ont des quotas par bonus IPS.
           <div>
             Plus de détails dans{" "}

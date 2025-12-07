@@ -112,7 +112,7 @@ const StatsEditor = (props) => {
               {showConfirm && (
                 <Alert key="confirm" variant="success" className="my-3">
                   Les données ont été ajoutées. Merci de votre contribution{" "}
-                  <EmojiSmile /> !
+                  <EmojiSmile width="24" height="24" /> !
                 </Alert>
               )}
               {showError && (

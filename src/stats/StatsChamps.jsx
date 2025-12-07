@@ -17,7 +17,7 @@ const StatsChamps = (props) => {
   return (
     <>
       <div className="mb-3">
-        <ArrowReturnRight /> L'interface ci-dessous vous permet de saisir les
+        <ArrowReturnRight width="24" height="24" /> L'interface ci-dessous vous permet de saisir les
         données nécessaires au calcul de la moyenne et écarts-types des champs
         disciplinaires. Ces données sont indispensables pour calculer le score
         Affelnet. Deux couples de données différentes par champ disciplinaire

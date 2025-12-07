@@ -12,7 +12,7 @@ jobs:
     
     strategy:
       matrix:
-        node-version: [20.x]
+        node-version: [22.x]
     
     steps:
       - uses: actions/checkout@v4
@@ -23,17 +23,16 @@ jobs:
           node-version: ${{ matrix.node-version }}
       
       - name: build dependencies
-        run: npm config set legacy-peer-deps true && npm install
+        run: npm install
 
-      - name: webpack production build
+      - name: production build
         env:
-          CI: false
-          REACT_APP_FIREBASE_API_KEY: '${{ secrets.REACT_APP_FIREBASE_API_KEY }}'
-          REACT_APP_FIREBASE_APP_ID: '${{ secrets.REACT_APP_FIREBASE_APP_ID }}'
+          VITE_FIREBASE_API_KEY: '${{ secrets.REACT_APP_FIREBASE_API_KEY }}'
+          VITE_FIREBASE_APP_ID: '${{ secrets.REACT_APP_FIREBASE_APP_ID }}'
         run: npm run build
 
       - name: Deploy
-        uses: FirebaseExtended/action-hosting-deploy@v0.7.1
+        uses: FirebaseExtended/action-hosting-deploy@v0.10.0
         with:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
           firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_AFFELNET75 }}'

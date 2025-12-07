@@ -10,7 +10,7 @@ import {
 import parent from "../images/parent.png";
 import { useLocalStorage } from "../services/useLocalStorage";
 
-const Title = (props) => {
+const Title = () => {
   const [show, setShow] = useLocalStorage("showInfo", "true");
 
   return (
@@ -24,7 +24,7 @@ const Title = (props) => {
         />
         <h4>
           <span className="d-flex align-items-center mt-1">
-            <Tools />
+            <Tools width="24" height="24" />
             &nbsp;&nbsp;Affelnet Paris
           </span>
         </h4>
@@ -109,9 +109,9 @@ const Title = (props) => {
           </p>
           <hr />
           <div className="mb-0">
-            <strong>Mise à jour [9.5.4] du 03/10/2025 :</strong>
+            <strong>Mise à jour [9.5.5] du 07/12/2025 :</strong>
             <ul>
-              <li>Mise à jour du lien pour la sectorisation</li>
+              <li>Mise à jour technique (React 19.2.0)</li>
             </ul>
           </div>
         </Alert>

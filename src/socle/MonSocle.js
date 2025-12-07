@@ -82,23 +82,23 @@ const MonSocle = (props) => {
   return (
     <div className="">
       <div className="mx-auto mb-3">
-        <ArrowReturnRight /> Estimez ici les 8 compétences de socle (qui
+        <ArrowReturnRight width="24" height="24" /> Estimez ici les 8 compétences de socle (qui
         comptent également pour le Brevet). Rappel :
       </div>
 
       <Card className="mt-3 mx-2 col-12 col-sm-10 col-md-8 col-lg-6 col-xl-6 col-xxl-6 mx-auto">
         <ul className="mb-2 mt-2">
           <li className="text-success">
-            Très bonne <ArrowRight /> 600 pts
+            Très bonne <ArrowRight width="24" height="24" /> 600 pts
           </li>
           <li className="text-primary">
-            Satisfaisante <ArrowRight /> 480 pts
+            Satisfaisante <ArrowRight width="24" height="24" /> 480 pts
           </li>
           <li className="text-danger">
-            Fragile <ArrowRight /> 300 pts
+            Fragile <ArrowRight width="24" height="24" /> 300 pts
           </li>
           <li className="text-danger">
-            Insuffisante <ArrowRight /> 180 pts
+            Insuffisante <ArrowRight width="24" height="24" /> 180 pts
           </li>
         </ul>
       </Card>

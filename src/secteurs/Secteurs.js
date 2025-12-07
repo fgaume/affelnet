@@ -63,12 +63,12 @@ const Secteurs = (props) => {
   return (
     <div className="mx-auto p-0">
       <div className="mb-3">
-        <ArrowReturnRight /> Cette section estime le nombre d'élèves ayant un
+        <ArrowReturnRight width="24" height="24" /> Cette section estime le nombre d'élèves ayant un
         lycée donné en secteur 1. Les élèves sont regroupés par collège. Les
         collèges sont groupés par bonus IPS.
       </div>
       <div className="mb-3">
-        <ArrowReturnRight /> Les effectifs des collèges sont estimés via leur
+        <ArrowReturnRight width="24" height="24" /> Les effectifs des collèges sont estimés via leur
         nombre d'admis au dernier DNB (source{" "}
         <a target='_blank' rel="noreferrer" href="https://data.education.gouv.fr/explore/embed/dataset/fr-en-indicateurs-valeur-ajoutee-colleges/table/?disjunctive.uai&disjunctive.nom_de_l_etablissement&disjunctive.commune&disjunctive.departement&disjunctive.academie&sort=num_ligne&refine.academie=PARIS&refine.secteur=PU">
           opendata

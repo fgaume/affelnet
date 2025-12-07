@@ -2,9 +2,9 @@
 //$body-bg: #263238;
 
 // Required
-@import "../node_modules/bootstrap/scss/functions";
-@import "../node_modules/bootstrap/scss/variables";
-@import "../node_modules/bootstrap/scss/variables-dark";
+@import "bootstrap/scss/functions";
+@import "bootstrap/scss/variables";
+@import "bootstrap/scss/variables-dark";
 
 //$font-family-base: Oswald;
 $font-family-base: 'Product Sans', sans-serif;
@@ -21,5 +21,10 @@ $form-range-thumb-height:  1.5rem;
 //$form-switch-bg-image:            url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='-5 -5 8 8'><circle r='5' fill='#{$form-switch-color}'/></svg>");
 
 // Import Bootstrap and its default variables
-@import '~bootstrap/scss/bootstrap.scss';
+@import 'bootstrap/scss/bootstrap';
 
+/* src/custom.scss (ajouter à la fin) */
+/* Force l'héritage de couleur pour tous les SVGs qui ne sont pas stylisés */
+svg:not([fill]) {
+  fill: currentColor;
+}

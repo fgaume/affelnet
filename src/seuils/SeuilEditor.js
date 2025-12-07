@@ -36,7 +36,7 @@ const SeuilEditor = (props) => {
   return (
     <Card className="p-1 bg-primary bg-opacity-10">
       <Card.Subtitle className="mx-2 mt-3 mb-0">
-        <ArrowReturnRight /> Ajoutez ici un nouveau seuil d'admission :{" "}
+        <ArrowReturnRight width="24" height="24" /> Ajoutez ici un nouveau seuil d'admission :{" "}
       </Card.Subtitle>
       <Card.Body className="mt-0">
         <Form onSubmit={handleSubmit}>
@@ -72,7 +72,7 @@ const SeuilEditor = (props) => {
             {showConfirm && (
               <Alert key="confirm" variant="success" className="ms-3 my-0">
                 Le seuil a été enregistré, il apparaitra un peu plus tard dans la section "Seuils d'admission" après validation. Merci de votre contribution{" "}
-                <EmojiSmile /> !
+                <EmojiSmile width="24" height="24" /> !
               </Alert>
             )}
           </div>
