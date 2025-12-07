@@ -2,20 +2,13 @@
 
 // This service worker can be customized!
 // See https://developers.google.com/web/tools/workbox/modules
-// for the list of available Workbox modules, or add any other
-// code you'd like.
-// You can also remove this file if you'd prefer not to use a
-// service worker, and the Workbox build step will be skipped.
+// for documentation on customizing the service worker.
 
 import { clientsClaim } from "workbox-core";
 import { ExpirationPlugin } from "workbox-expiration";
 import { precacheAndRoute, createHandlerBoundToURL } from "workbox-precaching";
 import { registerRoute } from "workbox-routing";
-import {
-  CacheFirst,
-  NetworkFirst,
-  StaleWhileRevalidate,
-} from "workbox-strategies";
+import { StaleWhileRevalidate } from "workbox-strategies";
 
 clientsClaim();
 
@@ -47,144 +40,21 @@ registerRoute(
 
     return true;
   },
-  createHandlerBoundToURL(process.env.PUBLIC_URL + "/index.html")
+  createHandlerBoundToURL("/index.html")
 );
 
-// caching route for image requests that aren't handled by the
+// An example runtime caching route for requests that aren't handled by the
 // precache, in this case same-origin .png requests like those from in public/
 registerRoute(
   // Add in any other file extensions or routing criteria as needed.
   ({ url }) =>
-    url.origin === self.location.origin &&
-    (url.pathname.endsWith(".png") || url.pathname.endsWith(".jpg")),
-  new CacheFirst({
-    cacheName: "publicImages",
+    url.origin === self.location.origin && url.pathname.endsWith(".png"), // Customize this strategy as needed, e.g., by changing to CacheFirst.
+  new StaleWhileRevalidate({
+    cacheName: "images",
     plugins: [
       // Ensure that once this runtime cache reaches a maximum size the
-      // least-recently used images are removed.
-      new ExpirationPlugin({
-        maxEntries: 50,
-        maxAgeSeconds: 30 * 24 * 60 * 60,
-      }), // 1 day cache
-    ],
-  })
-);
-
-// APIs education nationale arcgis
-registerRoute(
-  ({ request }) => request.url.includes("arcgis"),
-  new StaleWhileRevalidate({
-    cacheName: "arcgis",
-    plugins: [
-      // Ensure that once this runtime cache reaches a maximum size the
-      // least-recently used are removed.
-      new ExpirationPlugin({
-        maxEntries: 300,
-        maxAgeSeconds: 60 * 60 * 24,
-      }),
-    ],
-  })
-);
-
-// firebase webConfig init call
-registerRoute(
-  ({ request }) => request.url.endsWith("webConfig"),
-  new CacheFirst({
-    cacheName: "firebaseWebConfig",
-    plugins: [
-      // Ensure that once this runtime cache reaches a maximum size the
-      // least-recently used are removed.
-      new ExpirationPlugin({
-        maxEntries: 1,
-        maxAgeSeconds: 24 * 60 * 60, // 1 day
-      }),
-    ],
-  })
-);
-
-registerRoute(
-  ({ request }) => request.url.endsWith("app.json"),
-  new NetworkFirst({
-    cacheName: "app-infos",
-    plugins: [
-      new ExpirationPlugin({
-        maxAgeSeconds: 24 * 60 * 60, // 1 day
-      }),
-    ],
-  })
-);
-
-registerRoute(
-  ({ request }) => request.url.endsWith("statistiques.json"),
-  new StaleWhileRevalidate({
-    cacheName: "statistiques",
-    plugins: [
-      new ExpirationPlugin({
-        maxAgeSeconds: 1 * 24 * 60 * 60,
-      }),
-    ],
-  })
-);
-
-registerRoute(
-  ({ request }) => request.url.endsWith("colleges.json"),
-  new StaleWhileRevalidate({
-    cacheName: "colleges",
-    plugins: [
-      new ExpirationPlugin({
-        maxAgeSeconds: 1 * 24 * 60 * 60,
-      }),
-    ],
-  })
-);
-
-registerRoute(
-  ({ request }) => request.url.endsWith("lycees.json"),
-  new StaleWhileRevalidate({
-    cacheName: "lycees",
-    plugins: [
-      new ExpirationPlugin({
-        maxAgeSeconds: 7 * 24 * 60 * 60,
-      }),
-    ],
-  })
-);
-
-registerRoute(
-  ({ request }) => request.url.endsWith("seuils_recents.json"),
-  new NetworkFirst({
-    cacheName: "seuils_recents",
-    networkTimeoutSeconds: 5, // Délai d'attente de 5 secondes
-    plugins: [
-      new ExpirationPlugin({
-        maxAgeSeconds: 30,
-      }),
-    ],
-  })
-);
-
-registerRoute(
-  ({ request }) => request.url.endsWith("stats_recentes.json"),
-  new NetworkFirst({
-    cacheName: "stats_recentes",
-    networkTimeoutSeconds: 5, // Délai d'attente de 5 secondes
-    plugins: [
-      new ExpirationPlugin({
-        maxAgeSeconds: 30,
-      }),
-    ],
-  })
-);
-
-registerRoute(
-  ({ request }) => request.url.endsWith("notes.json"),
-  new NetworkFirst({
-    cacheName: "notes",
-    networkTimeoutSeconds: 5, // Délai d'attente de 5 secondes
-    plugins: [
-      new ExpirationPlugin({
-        maxAgeSeconds: 30,
-      }),
+      // least-recently-used images are removed.
+      new ExpirationPlugin({ maxEntries: 50 }),
     ],
   })
 );

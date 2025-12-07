@@ -109,9 +109,9 @@ const Title = (props) => {
           </p>
           <hr />
           <div className="mb-0">
-            <strong>Mise à jour [9.5.4] du 03/10/2025 :</strong>
+            <strong>Mise à jour [9.5.5] du 07/12/2025 :</strong>
             <ul>
-              <li>Mise à jour du lien pour la sectorisation</li>
+              <li>Mise à jour technique (React 19.2.0)</li>
             </ul>
           </div>
         </Alert>
