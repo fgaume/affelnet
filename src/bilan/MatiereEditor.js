@@ -39,6 +39,9 @@ const MatiereEditor = forwardRef((props, ref) => {
     if (validNotes.length === 0) {
       return "N/A"; // No valid grades to calculate average
     }
+    if (props.semestres && validNotes.length > 2) {
+      validNotes.pop(); // Remove the last note if in semester mode
+    }
     const sum = validNotes.reduce((acc, current) => acc + current, 0);
     return (sum / validNotes.length).toFixed(2); // Format to 2 decimal places
   };
