@@ -39,7 +39,7 @@ import MonSocle from "./socle/MonSocle";
 import Seuils from "./seuils/Seuils";
 
 const App = () => {
-  const versionLocale = "v9.5.4 03/10/2025";
+  const versionLocale = "v9.5.5 19/01/2026";
 
   const { data } = useContext(SharedContext);
 

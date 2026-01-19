@@ -3,7 +3,7 @@ import { CDs, listeMatieres } from "../data/bilan";
 const computeAverage = (values, semestres) => {
   let average = 0;
   //let notes = [...values];
-  let notes = values.filter(value => value !== 0);
+  let notes = values.filter((value) => value !== 0);
   if (semestres && notes.length === 3) notes.pop();
   if (notes && notes.length > 0) {
     notes.forEach((value) => {
@@ -31,7 +31,7 @@ const computeNoteCDs = (matieres, semestres) => {
         scoresMatieres.push(parseFloat(moyenneMatiere.toFixed(2)));
       }
     });
-    const scoreCD = computeAverage(scoresMatieres, semestres);
+    const scoreCD = computeAverage(scoresMatieres, false);
     scoresCDs.push({
       nom: cd.nom,
       score: scoreCD,
@@ -53,6 +53,9 @@ const computeAvancementNotes = (matieres, semestres) => {
       if (foundMatiere) {
         const notes = foundMatiere.notes;
         const notZeroNotes = notes.filter((value) => value > 0);
+        if (semestres && notZeroNotes.length > 2) {
+          notZeroNotes.pop();
+        }
         avancementCD += notZeroNotes.length;
       }
     });
@@ -60,6 +63,7 @@ const computeAvancementNotes = (matieres, semestres) => {
   });
   const nbExpectedNotes = listeMatieres.length * (semestres ? 2 : 3);
   //et nbExpectedNotes = semestres ? 22 : 33;
+  // console.log("avancement semestres : ", avancement, "/", nbExpectedNotes);
   return Math.round((100 * avancement) / nbExpectedNotes);
 };
 
@@ -91,11 +95,7 @@ const computeBilanPeriodique = (
   return result;
 };
 
-
-const computeBilanPeriodiqueWithNotes = (
-  scoresCD,
-  baremesMap
-) => {
+const computeBilanPeriodiqueWithNotes = (scoresCD, baremesMap) => {
   if (!baremesMap) return 0;
   let score = 0;
   scoresCD.forEach((cd) => {
@@ -208,7 +208,7 @@ function calculerNoteHarmonisee(noteBrute, pointsConnus) {
     return pointsConnus.get(noteBruteArrondie);
   }
   //else {
-   // console.log("note non trouvee : ", noteBruteArrondie);
+  // console.log("note non trouvee : ", noteBruteArrondie);
   //}
 
   // On récupère les notes brutes connues et on les trie par ordre croissant.
@@ -217,7 +217,9 @@ function calculerNoteHarmonisee(noteBrute, pointsConnus) {
 
   // Pour une interpolation/extrapolation, il nous faut au moins 2 points de référence.
   if (notesBrutesTriees.length < 2) {
-    console.error("Le calcul est impossible : au moins deux points de référence sont nécessaires.");
+    console.error(
+      "Le calcul est impossible : au moins deux points de référence sont nécessaires."
+    );
     return null;
   }
 
@@ -230,7 +232,9 @@ function calculerNoteHarmonisee(noteBrute, pointsConnus) {
     x2 = notesBrutesTriees[1];
   }
   // --- Cas 3: Extrapolation (note brute supérieure au maximum connu) ---
-  else if (noteBruteArrondie > notesBrutesTriees[notesBrutesTriees.length - 1]) {
+  else if (
+    noteBruteArrondie > notesBrutesTriees[notesBrutesTriees.length - 1]
+  ) {
     // On prend les deux derniers points de la liste pour définir la droite.
     x1 = notesBrutesTriees[notesBrutesTriees.length - 2];
     x2 = notesBrutesTriees[notesBrutesTriees.length - 1];
@@ -238,7 +242,9 @@ function calculerNoteHarmonisee(noteBrute, pointsConnus) {
   // --- Cas 2: Interpolation (note brute entre deux points connus) ---
   else {
     // On cherche le premier point de la liste qui est juste supérieur à notre note brute.
-    const indexPointSuperieur = notesBrutesTriees.findIndex(n => n > noteBruteArrondie);
+    const indexPointSuperieur = notesBrutesTriees.findIndex(
+      (n) => n > noteBruteArrondie
+    );
     // Le point inférieur est celui qui le précède dans la liste triée.
     x1 = notesBrutesTriees[indexPointSuperieur - 1];
     x2 = notesBrutesTriees[indexPointSuperieur];
@@ -250,7 +256,8 @@ function calculerNoteHarmonisee(noteBrute, pointsConnus) {
 
   // Formule de l'interpolation (et extrapolation) linéaire
   // y = y1 + (x - x1) * (y2 - y1) / (x2 - x1)
-  const noteHarmoniseeCalculee = y1 + (noteBruteArrondie - x1) * (y2 - y1) / (x2 - x1);
+  const noteHarmoniseeCalculee =
+    y1 + ((noteBruteArrondie - x1) * (y2 - y1)) / (x2 - x1);
 
   return noteHarmoniseeCalculee.toFixed(3);
 }
