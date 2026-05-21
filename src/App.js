@@ -1,13 +1,12 @@
-import React, { useContext, useEffect, useState } from "react";
-import SharedContext from "./context";
+import { useContext, useEffect, useState } from "react";
 import {
   Button,
+  ButtonGroup,
+  ButtonToolbar,
+  Modal,
+  Stack,
   Tab,
   Tabs,
-  ButtonToolbar,
-  ButtonGroup,
-  Stack,
-  Modal,
 } from "react-bootstrap";
 import {
   ArrowClockwise,
@@ -21,6 +20,7 @@ import Accordion from "react-bootstrap/Accordion";
 import "./App.css";
 import MonBilan from "./bilan/MonBilan";
 import MesColleges from "./college/MesColleges";
+import SharedContext from "./context";
 import FiltrageSpecialites from "./lycees/FiltrageSpecialites";
 import LyceesSecteur from "./lycees/LyceesSecteur";
 import LoadingScreen from "./main/LoadingScreen";
@@ -64,6 +64,7 @@ const App = () => {
   const [anneeN, setAnneeN] = useState(0);
 
   const [showUpdateModal, setShowUpdateModal] = useState(false);
+  const [showMigrationModal, setShowMigrationModal] = useState(true);
 
   const [updateAttempted, setUpdateAttempted] = useState(false);
 
@@ -432,6 +433,40 @@ const App = () => {
               </a>
             </small>
           </Stack>
+          
+          <Modal 
+            show={showMigrationModal} 
+            onHide={() => setShowMigrationModal(false)} 
+            centered
+          >
+            <Modal.Header closeButton>
+              <Modal.Title className="text-warning fw-bolder">
+                <ExclamationCircle className="me-2" style={{ verticalAlign: "-0.1em" }} />
+                Nouvelle version disponible !
+              </Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+              Pour l'année 2026, la boîte à outils Affelnet déménage. 
+              Les mises à jour de données et les nouvelles fonctionnalités sont désormais publiées sur la nouvelle plateforme.
+              <br /><br />
+              Nous vous invitons à utiliser dès maintenant la nouvelle adresse :
+              <div className="text-center my-3">
+                <a 
+                  href="https://affelnet-paris.vercel.app" 
+                  className="btn btn-primary btn-lg"
+                  rel="noreferrer"
+                >
+                  Accéder à affelnet-paris.vercel.app
+                </a>
+              </div>
+            </Modal.Body>
+            <Modal.Footer>
+              <Button variant="secondary" onClick={() => setShowMigrationModal(false)}>
+                Ignorer et continuer ici
+              </Button>
+            </Modal.Footer>
+          </Modal>
+
           <Modal show={showUpdateModal} onHide={handleCloseModal} centered>
             <Modal.Header closeButton>
               <Modal.Title>Mise à jour disponible</Modal.Title>
